@@ -7,8 +7,8 @@
 | Nome | Experience |
 | Identificador | SPEC-003 |
 | Slug | `003-experience` |
-| Versão | 0.3.0 |
-| Status | Approved (textos da seção 7.1 aprovados em 2026-11-07; pronta para implementação) |
+| Versão | 0.4.0 |
+| Status | In Review (implementada em 2026-11-07; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-07 |
 | Origem | SPEC-003 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -306,6 +306,43 @@ Decisões reversíveis adotadas neste refinamento.
 | 2026-11-07 | O link para estudos de caso (requisito original) passa a Should, sem entrega na v1 por não haver estudos de caso. | Premissa do refinamento, a confirmar |
 | 2026-11-07 | Textos da seção 7.1 aprovados (conteúdo, voz, títulos em pt-BR, descrição da empresa e SEO). Q1 e Q3 resolvidas. | Resposta do usuário |
 
+## 15. Implementação e verificação
+
+Implementada na branch `feat/experience`. Arquivos:
+
+- Novos: `src/components/experience/ExperienceContent.tsx`, `src/components/experience/ExperienceItem.tsx`, `src/config/experience.ts` (períodos e tecnologias, fonte única), `src/lib/utils/format-month.ts` e `e2e/experience.spec.ts`.
+- Alterados: `src/app/[locale]/experience/page.tsx` (substitui a página provisória e passa a ser indexável), `src/lib/seo/metadata.ts` (`buildPageMetadata` aceita `experience.metadata`; "experience" sai do tipo das páginas provisórias), `src/components/sections/PagePlaceholder.tsx`, `e2e/support/content-rules.ts` (nome da empresa e frases de busca de emprego) e os dois `common.json` (nova seção `experience`; chave `pages.experience` removida por ficar sem uso).
+
+Verificação em 2026-11-07:
+
+| Critério | Resultado | Evidência |
+|---|---|---|
+| EXP-CA-01 | Atendido | `e2e/experience.spec.ts`: um `h1` e cinco `h2` na ordem prevista, nos dois idiomas. |
+| EXP-CA-02 | Atendido | Teste dos `<time datetime>` com os valores da seção 7.2; o cargo atual mostra "May 2023 – Present" e "mai. 2023 – atual". |
+| EXP-CA-03 | Atendido | Contagens de responsabilidades (4, 5, 5, 2, 2) e conquistas (3, só no cargo atual); sem rótulo vazio. |
+| EXP-CA-04 | Atendido | As tecnologias de cada entrada coincidem com a seção 7.1; sem indicador de nível. |
+| EXP-CA-05 | Atendido | A conquista do RabbitMQ é atribuída a "my team"/"minha equipe" e cita a medição antes e depois, em produção. Mutação (trocar por "I designed") derruba o teste. |
+| EXP-CA-06 | Atendido | Só "80%" aparece como percentual; "40%" ausente; "200" aparece uma vez. Mutação (inserir "about 40%") derruba o teste. |
+| EXP-CA-07 | Atendido | Texto e metadados sem nome da empresa, expressões proibidas ou frases de busca de emprego. |
+| EXP-CA-08 | Atendido | Todo texto vem de `t()`; os períodos vêm de `src/config/experience.ts`; ver divergências. |
+| EXP-CA-09 | Atendido | `title`, `description`, canonical, `hreflang` (en, pt-BR, x-default), Open Graph e `<html lang>` corretos, sem `noindex`. O domínio dos links ainda é `localhost` até definir `NEXT_PUBLIC_SITE_URL`. |
+| EXP-CA-10 | Atendido em parte | Equipe de cinco e "10+" coincidem com a Home e o About; as datas foram conferidas com o currículo por leitura. A comparação é manual, sem teste automatizado. |
+| EXP-CA-11 | Atendido | Sem links nem botões no `main`. |
+| EXP-CA-12 | Atendido | Sem `<img>`, parallax, classes de animação nem Client Components. |
+| EXP-CA-13 | Atendido | Lista ordenada, `h1` único, `h1` > `h2` > `h3` sem saltos; o teclado passa por skip link, header e footer. Não há elemento focável no `main`. |
+| EXP-CA-14 | Atendido | Sem rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px nos dois idiomas; no máximo 80 caracteres por linha em 1366 px. |
+| EXP-CA-15 | Atendido | `pnpm check`, `pnpm typecheck` e `pnpm test:e2e` (91 testes, 40 novos) sem erros; o build roda como parte do `test:e2e`. |
+
+Também foi conferido no navegador, em `localhost:3000` (servidor de desenvolvimento), a 1440 px e a 375 px, em `/en/experience` e `/pt-BR/experiencia`: linha do tempo legível, marcador preenchido no cargo atual, conquistas com marcador verde-limão e sem rolagem horizontal.
+
+Divergências em relação à SPEC:
+
+- As tecnologias ficam em `src/config/experience.ts`, e não nos arquivos de conteúdo, porque são nomes próprios iguais nos dois idiomas (exceção prevista em EXP-CA-08). Os textos e os rótulos seguem nos `common.json`.
+- A largura de leitura é de 624 px (`max-w-[39rem]`), igual à do About, para ficar abaixo de 80 caracteres por linha.
+- As listas de responsabilidades e conquistas são arrays nos `common.json`. O typecheck compara as chaves entre `en` e `pt-BR`, mas não o número de itens; esse número é verificado pelo E2E.
+- O formato do mês depende do ICU do navegador (`May 2023`, `mai. 2023`).
+- LCP e CLS (EXP-RNF-02) não foram medidos com ferramenta própria; a página é estática e sem imagens.
+
 ## Refinamento
 
 | Data | O que mudou | Motivo |
@@ -317,3 +354,4 @@ Decisões reversíveis adotadas neste refinamento.
 | 2026-11-07 | "Permitir navegação para estudos de caso" virou EXP-RF-13 (Should), sem entrega na v1. | Não há estudos de caso; a Home os exclui até validar as métricas. A confirmar. |
 | 2026-11-07 | Movida de `FEATURES.md` para `.specs/003-experience.md`. | `.specs/README.md` prevê separar por funcionalidade conforme o projeto cresce. |
 | 2026-11-07 | Versão 0.3.0: textos aprovados; Q1 e Q3 resolvidas; status passa a Approved. | Decisão do usuário. |
+| 2026-11-07 | Versão 0.4.0: implementada; seção 15 com a verificação dos critérios e as divergências. | Implementação da SPEC. |

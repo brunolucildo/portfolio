@@ -43,7 +43,7 @@ export async function buildPageMetadata({
 }: {
   locale: string;
   href: AppPathname;
-  namespace: "about.metadata";
+  namespace: "about.metadata" | "experience.metadata";
 }): Promise<Metadata> {
   if (!hasLocale(routing.locales, locale)) {
     return {};
@@ -66,7 +66,7 @@ export async function buildPageMetadata({
   };
 }
 
-type PlaceholderPage = "experience" | "projects" | "aiLab" | "contact";
+type PlaceholderPage = "projects" | "aiLab" | "contact";
 
 /**
  * Metadados das páginas provisórias: título próprio, canonical e `hreflang`,

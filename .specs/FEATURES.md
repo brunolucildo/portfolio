@@ -30,7 +30,7 @@ A seção About apresenta a trajetória, a filosofia profissional e os interesse
 
 # SPEC-003 — Experience
 
-**Status:** Approved. Refinada e movida para [`003-experience.md`](./003-experience.md).
+**Status:** In Review. Refinada, implementada e movida para [`003-experience.md`](./003-experience.md).
 
 A seção Experience apresenta o histórico profissional de Bruno. Os requisitos, os critérios de aceitação, o rascunho dos textos, a validação das métricas, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
