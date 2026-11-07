@@ -90,7 +90,7 @@ Os textos ficam em `src/content/en/common.json` e `src/content/pt-BR/common.json
 ├── .claude/skills/   Skills usadas pelo agente de IA
 ├── public/
 │   ├── documents/    Currículo em PDF
-│   └── images/hero/  Foto do Hero (fora do Git, veja abaixo)
+│   └── images/hero/  Foto do Hero
 └── src/
     ├── app/[locale]/ Páginas e layout por idioma
     ├── components/   ui/, layout/ e sections/
@@ -101,9 +101,9 @@ Os textos ficam em `src/content/en/common.json` e `src/content/pt-BR/common.json
     └── styles/       Tokens de design
 ```
 
-## Ativos fora do Git
+## Foto do Hero
 
-A fotografia do Hero não é versionada. O arquivo esperado é `public/images/hero/bruno-lucildo-hero.png`. Quando ele não existe, a Home omite a foto e o restante do Hero se reorganiza, então o build não quebra. Quem publicar a partir do repositório precisa fornecer o arquivo à hospedagem por outro meio.
+A fotografia do Hero é versionada em `public/images/hero/bruno-lucildo-portrait.png` e configurada em `src/config/site.ts`. Se o arquivo for removido, a Home omite a foto e o restante do Hero se reorganiza, então o build não quebra.
 
 ## Documentação
 

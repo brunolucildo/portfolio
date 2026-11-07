@@ -101,6 +101,133 @@ test.describe("Parallax do Hero", () => {
     await page.waitForTimeout(300);
     expect(await layerOffsets(page)).toEqual([0, 0, 0]);
   });
+
+  test("onde o CSS é suportado, o fallback em JavaScript não é ativado", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/en");
+    await page.waitForTimeout(300);
+
+    await expect(page.locator("[data-parallax-fallback]")).toHaveCount(0);
+  });
+
+  // HOME-CA-18: o Chromium suporta scroll-driven animations, então estes testes
+  // simulam um navegador sem suporte (ex.: Firefox): `CSS.supports` nega
+  // `animation-timeline` e as animações CSS são anuladas, de modo que só o
+  // JavaScript consegue mover as camadas.
+  test.describe("fallback em JavaScript (navegador sem scroll-driven animations)", () => {
+    test.beforeEach(async ({ page }) => {
+      await page.addInitScript(() => {
+        const supports = CSS.supports.bind(CSS);
+        CSS.supports = (property: string, value?: string) => {
+          if (property.includes("animation-timeline")) return false;
+          return value === undefined
+            ? supports(property)
+            : supports(property, value);
+        };
+      });
+    });
+
+    async function openWithoutCssParallax(page: Page, width = 1440) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/en");
+      await page.addStyleTag({
+        content: ".hero-parallax { animation: none !important; }",
+      });
+    }
+
+    /** Rotação (graus) da camada da frente. */
+    async function frontRotation(page: Page): Promise<number> {
+      return page.evaluate(() =>
+        Number.parseFloat(
+          getComputedStyle(
+            document.querySelector('[data-parallax-layer="front"]') as Element,
+          ).rotate,
+        ),
+      );
+    }
+
+    const active = (page: Page) => page.locator("[data-parallax-fallback]");
+
+    test("as camadas se movem e giram com o scroll, como no CSS", async ({
+      page,
+    }) => {
+      await openWithoutCssParallax(page);
+      await expect(active(page)).toHaveCount(1);
+      expect(await layerOffsets(page)).toEqual([0, 0, 0]);
+      expect(await frontRotation(page)).toBeCloseTo(12, 1);
+
+      await page.evaluate(() => window.scrollTo(0, 400));
+      await expect
+        .poll(async () => (await layerOffsets(page))[2])
+        .toBeLessThan(-200);
+
+      const [back = 0, mid = 0, front = 0] = await layerOffsets(page);
+      expect(mid).toBeLessThan(back);
+      expect(front).toBeLessThan(mid);
+      expect(await frontRotation(page)).toBeGreaterThan(40);
+
+      // Após 80vh (720 px) o movimento termina nos valores finais do CSS.
+      await page.evaluate(() => window.scrollTo(0, 2000));
+      await expect
+        .poll(async () => (await layerOffsets(page))[2])
+        .toBeCloseTo(-520, 0);
+      const [endBack = 0, endMid = 0] = await layerOffsets(page);
+      expect(endBack).toBeCloseTo(-140, 0);
+      expect(endMid).toBeCloseTo(-300, 0);
+      expect(await frontRotation(page)).toBeCloseTo(100, 0);
+    });
+
+    test("não é ativado com movimento reduzido", async ({ page }) => {
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await openWithoutCssParallax(page);
+
+      await page.evaluate(() => window.scrollTo(0, 400));
+      await page.waitForTimeout(300);
+      await expect(active(page)).toHaveCount(0);
+      expect(await layerOffsets(page)).toEqual([0, 0, 0]);
+    });
+
+    test("não é ativado abaixo de 1024 px", async ({ page }) => {
+      await openWithoutCssParallax(page, 768);
+
+      await page.evaluate(() => window.scrollTo(0, 400));
+      await page.waitForTimeout(300);
+      await expect(active(page)).toHaveCount(0);
+      expect(await layerOffsets(page)).toEqual([0, 0, 0]);
+    });
+
+    test("liga e desliga ao mudar as condições, sem recarregar a página", async ({
+      page,
+    }) => {
+      await openWithoutCssParallax(page);
+      await expect(active(page)).toHaveCount(1);
+      await page.evaluate(() => window.scrollTo(0, 400));
+      await expect
+        .poll(async () => (await layerOffsets(page))[2])
+        .toBeLessThan(-200);
+
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await expect(active(page)).toHaveCount(0);
+      // A regra global de movimento reduzido deixa uma transição de 0,01 ms ao
+      // devolver as camadas à posição original; por isso a leitura aguarda.
+      await expect.poll(() => layerOffsets(page)).toEqual([0, 0, 0]);
+
+      await page.emulateMedia({ reducedMotion: "no-preference" });
+      await expect(active(page)).toHaveCount(1);
+      await expect
+        .poll(async () => (await layerOffsets(page))[2])
+        .toBeLessThan(-200);
+
+      await page.setViewportSize({ width: 800, height: 900 });
+      await expect(active(page)).toHaveCount(0);
+      expect(await layerOffsets(page)).toEqual([0, 0, 0]);
+
+      await page.setViewportSize({ width: 1440, height: 900 });
+      await expect(active(page)).toHaveCount(1);
+    });
+  });
 });
 
 for (const home of pages) {

@@ -56,27 +56,37 @@
 }
 
 /*
- * Parallax do Hero (SPEC-001, HOME-RF-07): camadas decorativas deslocadas pelo
- * scroll da página, sem JavaScript. Ativo apenas a partir de 1024 px, sem
- * preferência de movimento reduzido e em navegadores com scroll-driven
- * animations; nos demais casos as camadas ficam estáticas.
+ * Parallax do Hero (SPEC-001, HOME-RF-07 e HOME-RF-14): camadas decorativas
+ * deslocadas pelo scroll da página. Ativo apenas a partir de 1024 px e sem
+ * preferência de movimento reduzido. Em navegadores com scroll-driven
+ * animations o movimento é puro CSS, sem JavaScript; nos demais, o componente
+ * HeroParallaxLayers aplica o mesmo movimento por JavaScript. Os valores abaixo
+ * são a fonte única: o fallback em JS os lê destas variáveis.
  */
+:root {
+  --parallax-range-vh: 80;
+  --parallax-shift-back: 140px;
+  --parallax-shift-mid: 300px;
+  --parallax-shift-front: 520px;
+  --parallax-rotate-front: 100deg;
+}
+
 @keyframes hero-parallax-back {
   to {
-    transform: translate3d(0, -140px, 0);
+    transform: translate3d(0, calc(var(--parallax-shift-back) * -1), 0);
   }
 }
 
 @keyframes hero-parallax-mid {
   to {
-    transform: translate3d(0, -300px, 0);
+    transform: translate3d(0, calc(var(--parallax-shift-mid) * -1), 0);
   }
 }
 
 @keyframes hero-parallax-front {
   to {
-    transform: translate3d(0, -520px, 0);
-    rotate: 100deg;
+    transform: translate3d(0, calc(var(--parallax-shift-front) * -1), 0);
+    rotate: var(--parallax-rotate-front);
   }
 }
 
@@ -86,7 +96,7 @@
       animation-timing-function: linear;
       animation-fill-mode: both;
       animation-timeline: scroll(root block);
-      animation-range: 0 80vh;
+      animation-range: 0 calc(var(--parallax-range-vh) * 1vh);
     }
 
     .hero-parallax-back {

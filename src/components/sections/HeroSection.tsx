@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { HeroParallaxLayers } from "@/components/sections/HeroParallaxLayers";
 import { buttonStyles } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { siteConfig } from "@/config/site";
@@ -14,14 +15,7 @@ export async function HeroSection() {
 
   return (
     <section aria-labelledby="hero-title" className="relative overflow-clip">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 hidden lg:block"
-      >
-        <div className="hero-parallax hero-parallax-back absolute -top-32 -right-40 size-[58rem] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--color-primary)_30%,transparent),transparent)]" />
-        <div className="hero-parallax hero-parallax-mid absolute top-8 right-[1%] size-[42rem] rounded-full border-2 border-primary/30" />
-        <div className="hero-parallax hero-parallax-front absolute top-[66%] left-[55%] size-24 rotate-12 rounded-lg border-2 border-primary/70 bg-primary/10" />
-      </div>
+      <HeroParallaxLayers />
 
       <Container
         className={cn(
