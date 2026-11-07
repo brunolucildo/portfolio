@@ -22,7 +22,7 @@ A Home é a principal porta de entrada do portfólio. Os requisitos, os critéri
 
 # SPEC-002 — About
 
-**Status:** Approved. Refinada e movida para [`002-about.md`](./002-about.md).
+**Status:** In Review. Refinada e movida para [`002-about.md`](./002-about.md).
 
 A seção About apresenta a trajetória, a filosofia profissional e os interesses de Bruno. Os requisitos, os critérios de aceitação, o rascunho dos textos, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 

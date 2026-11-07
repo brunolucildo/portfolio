@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 
 type PagePlaceholderProps = {
-  page: "about" | "experience" | "projects" | "aiLab" | "contact";
+  page: "experience" | "projects" | "aiLab" | "contact";
 };
 
 /** Página provisória, substituída quando a SPEC correspondente for implementada. */

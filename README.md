@@ -12,8 +12,10 @@ O site é bilíngue (inglês como padrão e português do Brasil), estático e s
 | Design system (tokens e componentes fundamentais) | Pronto |
 | Layout global (header, menu mobile, troca de idioma, footer) | Pronto |
 | Home (SPEC-001) | Implementada, em revisão de conteúdo |
-| About, Experience, Projects, AI Lab e Contact | Páginas provisórias, ainda sem conteúdo |
-| Technologies, Resume (página), SEO final, testes automatizados | Pendentes |
+| About (SPEC-002) | Implementada, em revisão |
+| Experience, Projects, AI Lab e Contact | Páginas provisórias, ainda sem conteúdo |
+| Testes end-to-end (Playwright) | Configurados; cobrem Home e About |
+| Technologies, Resume (página), SEO final | Pendentes |
 | Hospedagem, domínio e analytics | Pendentes de decisão |
 
 O detalhamento está nas especificações em [`.specs/`](./.specs/).
@@ -53,6 +55,7 @@ npm run dev
 | `pnpm start` | Servidor de produção (após o build) |
 | `pnpm typecheck` | Verificação de tipos |
 | `pnpm check` | Lint e verificação de formatação (Biome) |
+| `pnpm test:e2e` | Testes end-to-end (Playwright): faz o build e sobe o app na porta 3100. Na primeira vez, rode `pnpm exec playwright install chromium` |
 | `pnpm format` | Formata os arquivos |
 
 Ainda não há runner de testes configurado; a estratégia proposta está em [`.docs/QA.md`](./.docs/QA.md).

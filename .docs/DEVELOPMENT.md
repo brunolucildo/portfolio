@@ -77,6 +77,8 @@ pnpm build
 
 Os comandos deverão ser ajustados à configuração efetivamente adotada no projeto.
 
+Estado atual: `pnpm test:e2e` (Playwright) existe e está em uso. `pnpm test` ainda não existe, porque o Vitest não foi adotado (ver `QA.md`, seção 3).
+
 ## 4. Organização do código
 
 A organização deverá seguir a estrutura definida no `ARCHITECTURE.md`.
