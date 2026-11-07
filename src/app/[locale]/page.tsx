@@ -4,7 +4,7 @@ import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { AiLabHighlight } from "@/components/sections/AiLabHighlight";
 import { ExperienceHighlights } from "@/components/sections/ExperienceHighlights";
-import { FeaturedProject } from "@/components/sections/FeaturedProject";
+import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { siteConfig } from "@/config/site";
 import { type Locale, routing } from "@/i18n/routing";
@@ -56,7 +56,7 @@ export default async function HomePage({ params }: Props) {
     <>
       <HeroSection />
       <ExperienceHighlights />
-      <FeaturedProject />
+      <FeaturedProjects />
       <AiLabHighlight />
     </>
   );

@@ -62,13 +62,24 @@
       },
       "link": "View experience"
     },
-    "project": {
-      "title": "Featured project",
-      "name": "Football Stat Analytics",
-      "category": "Academic project",
-      "status": "In development",
-      "description": "Analysis of football athlete performance using AI, conversational interaction and information retrieval.",
-      "link": "View projects"
+    "projects": {
+      "title": "Featured projects",
+      "repository": "View on GitHub",
+      "link": "View projects",
+      "items": {
+        "football": {
+          "name": "Football Stat Analytics",
+          "category": "Academic project",
+          "status": "In development",
+          "description": "Analysis of football athlete performance using AI, conversational interaction and information retrieval."
+        },
+        "reelix": {
+          "name": "Reelix",
+          "category": "Personal project",
+          "status": "In development",
+          "description": "An app to discover and track movies and series, record what you have watched and share authorized activity with friends."
+        }
+      }
     },
     "aiLab": {
       "title": "AI Lab",
