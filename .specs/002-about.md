@@ -7,8 +7,8 @@
 | Nome | About |
 | Identificador | SPEC-002 |
 | Slug | `002-about` |
-| Versão | 0.2.0 |
-| Status | Proposed (aguardando aprovação dos textos e da formação, seção 12) |
+| Versão | 0.3.0 |
+| Status | Approved (textos, formação e SEO aprovados em 2026-11-07; pronta para implementação) |
 | Data | 2026-11-07 |
 | Origem | SPEC-002 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -67,7 +67,7 @@ A página About apresenta a trajetória, a filosofia profissional e os interesse
 | ABOUT-RNF-02 | Desempenho | LCP até 2,5 s e CLS até 0,1 em build de produção. A página não carrega imagens. |
 | ABOUT-RNF-03 | Acessibilidade | WCAG 2.2 AA: contraste, foco visível, hierarquia de títulos sem saltos e alvos de toque de pelo menos 44 px nos links. |
 | ABOUT-RNF-04 | Responsividade | Sem rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px, nos dois idiomas. |
-| ABOUT-RNF-05 | Consistência | Os fatos do About (equipe de cinco desenvolvedores, mais de 8 anos, formação) coincidem com a Home, com Experience e com o currículo. |
+| ABOUT-RNF-05 | Consistência | Os fatos do About (equipe de cinco desenvolvedores, mais de 10 anos, formação) coincidem com a Home, com Experience e com o currículo. |
 | ABOUT-RNF-06 | Tipos e qualidade | TypeScript strict; `pnpm check`, `pnpm typecheck` e `pnpm build` sem erros; paridade de chaves entre `en` e `pt-BR` validada pelo typecheck. |
 
 ## 6. Interface e experiência
@@ -99,27 +99,27 @@ Não há estado de carregamento, vazio ou erro: a página é estática.
 
 ## 7. Conteúdo e dados
 
-Origem: `CONTENT.md` (4.2, 5.1 e 5.3), `BUSINESS.md` (4.1 a 4.3) e o currículo em `public/documents/resume/`. Os textos abaixo são um **rascunho provisório**, escrito apenas com fatos já registrados nesses documentos. Nenhum será publicado sem aprovação (Q2).
+Origem: `CONTENT.md` (4.2, 5.1 e 5.3), `BUSINESS.md` (4.1 a 4.3) e o currículo em `public/documents/resume/`. Os textos abaixo foram escritos apenas com fatos já registrados nesses documentos e **aprovados pelo Bruno em 2026-11-07** (Q1, Q2 e Q3).
 
 ### 7.1. Textos
 
 | Elemento | Inglês (`en`) | Português (`pt-BR`) | Situação |
 |---|---|---|---|
-| `h1` | About | Sobre | Provisório |
-| Abertura | I'm a senior backend developer and technical lead, working mostly with C# and .NET. I design and modernize enterprise systems, and I lead a team of five developers while staying hands-on in architecture and code. | Sou desenvolvedor backend sênior e líder técnico, trabalhando principalmente com C# e .NET. Projeto e modernizo sistemas corporativos e lidero uma equipe de cinco desenvolvedores, sem deixar de atuar na arquitetura e no código. | Provisório |
-| Bloco 1: título | How I got here | Minha trajetória | Provisório |
-| Bloco 1: texto | I started as a full-stack developer maintaining legacy enterprise applications. Over the years I moved into backend architecture for a new platform and, later, into technical leadership. Working with both legacy and modern code shaped how I decide: I weigh business continuity, scalability and maintainability together. | Comecei como desenvolvedor full-stack, mantendo aplicações corporativas legadas. Com os anos, passei à arquitetura backend de uma nova plataforma e, depois, à liderança técnica. Trabalhar com código legado e moderno moldou a forma como decido: pondero continuidade do negócio, escalabilidade e manutenibilidade em conjunto. | Provisório |
-| Bloco 2: título | Development and leadership | Desenvolvimento e liderança | Provisório |
-| Bloco 2: texto | I favor Clean Architecture and SOLID because they keep systems easy to change, and I pick tools for the problem at hand. As a technical lead, I review code, mentor developers and help define the engineering standards the team works by. | Prefiro Clean Architecture e SOLID porque mantêm os sistemas fáceis de evoluir, e escolho as ferramentas pelo problema em questão. Como líder técnico, faço revisões de código, oriento desenvolvedores e ajudo a definir os padrões de engenharia do time. | Provisório |
-| Bloco 3: título | Exploring AI | Explorando IA | Provisório |
-| Bloco 3: texto | I'm studying AI systems development and management, and I use study projects to explore LLMs, AI agents, RAG and prompt engineering, with a focus on validating what the models produce. They are learning projects, and I present them that way in the AI Lab. | Estudo desenvolvimento e gestão de sistemas de IA e uso projetos de estudo para explorar LLMs, agentes de IA, RAG e engenharia de prompts, com foco em validar o que os modelos produzem. São projetos de aprendizado, e é assim que os apresento no AI Lab. | Provisório |
-| Bloco 4: título | Education | Formação | Provisório |
-| Formação 1 | Undergraduate degree in Systems Analysis and Development, Federal Institute of Education, Science and Technology of São Paulo (IFSP), 2009–2013 | Graduação em Análise e Desenvolvimento de Sistemas, Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP), 2009–2013 | Provisório (nome conferido no LinkedIn, Q1) |
-| Formação 2 | Postgraduate degree (Master's program) in AI Systems Development and Management, Coders University, in progress | Pós-graduação (programa Master) em Desenvolvimento e Gestão de Sistemas de IA, Coders University, em andamento | Provisório (rótulo conforme LinkedIn e GitHub, Q1) |
+| `h1` | About | Sobre | Aprovado (2026-11-07) |
+| Abertura | I'm a senior backend developer and technical lead, working mostly with C# and .NET. I design and modernize enterprise systems, and I lead a team of five developers while staying hands-on in architecture and code. | Sou desenvolvedor backend sênior e líder técnico, trabalhando principalmente com C# e .NET. Projeto e modernizo sistemas corporativos e lidero uma equipe de cinco desenvolvedores, sem deixar de atuar na arquitetura e no código. | Aprovado (2026-11-07) |
+| Bloco 1: título | How I got here | Minha trajetória | Aprovado (2026-11-07) |
+| Bloco 1: texto | I started as a full-stack developer maintaining legacy enterprise applications. Over the years I moved into backend architecture for a new platform and, later, into technical leadership. Working with both legacy and modern code shaped how I decide: I weigh business continuity, scalability and maintainability together. | Comecei como desenvolvedor full-stack, mantendo aplicações corporativas legadas. Com os anos, passei à arquitetura backend de uma nova plataforma e, depois, à liderança técnica. Trabalhar com código legado e moderno moldou a forma como decido: pondero continuidade do negócio, escalabilidade e manutenibilidade em conjunto. | Aprovado (2026-11-07) |
+| Bloco 2: título | Development and leadership | Desenvolvimento e liderança | Aprovado (2026-11-07) |
+| Bloco 2: texto | I favor Clean Architecture and SOLID because they keep systems easy to change, and I pick tools for the problem at hand. As a technical lead, I review code, mentor developers and help define the engineering standards the team works by. | Prefiro Clean Architecture e SOLID porque mantêm os sistemas fáceis de evoluir, e escolho as ferramentas pelo problema em questão. Como líder técnico, faço revisões de código, oriento desenvolvedores e ajudo a definir os padrões de engenharia do time. | Aprovado (2026-11-07) |
+| Bloco 3: título | Exploring AI | Explorando IA | Aprovado (2026-11-07) |
+| Bloco 3: texto | I'm studying AI systems development and management, and I use study projects to explore LLMs, AI agents, RAG and prompt engineering, with a focus on validating what the models produce. They are learning projects, and I present them that way in the AI Lab. | Estudo desenvolvimento e gestão de sistemas de IA e uso projetos de estudo para explorar LLMs, agentes de IA, RAG e engenharia de prompts, com foco em validar o que os modelos produzem. São projetos de aprendizado, e é assim que os apresento no AI Lab. | Aprovado (2026-11-07) |
+| Bloco 4: título | Education | Formação | Aprovado (2026-11-07) |
+| Formação 1 | Undergraduate degree in Systems Analysis and Development, Federal Institute of Education, Science and Technology of São Paulo (IFSP), 2009–2013 | Graduação em Análise e Desenvolvimento de Sistemas, Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP), 2009–2013 | Aprovado (nome conferido no LinkedIn, Q1) |
+| Formação 2 | Postgraduate degree (Master's program) in AI Systems Development and Management, Coders University, in progress | Pós-graduação (programa Master) em Desenvolvimento e Gestão de Sistemas de IA, Coders University, em andamento | Aprovado (rótulo conforme LinkedIn e GitHub, Q1) |
 | Link do bloco 1 | View experience | Ver experiência | Reutiliza o texto da Home |
 | Link do bloco 3 | Explore the AI Lab | Explorar o AI Lab | Reutiliza o texto da Home |
-| Title (SEO) | About \| Bruno Lucildo | Sobre \| Bruno Lucildo | Provisório |
-| Description (SEO) | Bruno Lucildo's path from full-stack developer to backend technical lead, how he works, and his study of AI systems. | A trajetória de Bruno Lucildo de desenvolvedor full-stack a líder técnico backend, como ele trabalha e seus estudos em sistemas de IA. | Provisório |
+| Title (SEO) | About \| Bruno Lucildo | Sobre \| Bruno Lucildo | Aprovado (2026-11-07) |
+| Description (SEO) | Bruno Lucildo's path from full-stack developer to backend technical lead, how he works, and his study of AI systems. | A trajetória de Bruno Lucildo de desenvolvedor full-stack a líder técnico backend, como ele trabalha e seus estudos em sistemas de IA. | Aprovado (2026-11-07) |
 
 ### 7.2. Rastreabilidade dos fatos
 
@@ -178,9 +178,9 @@ As afirmações de postura ("prefiro", "escolho as ferramentas pelo problema", "
 
 | ID | Pergunta | Impacto | Dono | Bloqueia |
 |---|---|---|---|---|
-| Q1 | O rótulo "pós-graduação (programa Master)" e os nomes oficiais dos cursos e instituições estão corretos? O LinkedIn escreve "Postgraduate Degree, Master's Program" na Coders University e traz o nome completo do IFSP; o currículo escreve apenas "Master's". | Evita induzir a leitura de mestrado acadêmico; ABOUT-RF-03 e ABOUT-CA-11. | Bruno | Publicação. |
-| Q2 | Os textos do rascunho (seção 7.1), inclusive as frases de postura, estão aprovados ou precisam de ajustes? | Todo o conteúdo do About. | Bruno | Publicação. A implementação segue com os textos provisórios. |
-| Q3 | O título e a descrição de SEO propostos estão aprovados? | ABOUT-RF-06. | Bruno | Publicação. |
+| Q1 | O rótulo "pós-graduação (programa Master)" e os nomes oficiais dos cursos e instituições estão corretos? O LinkedIn escreve "Postgraduate Degree, Master's Program" na Coders University e traz o nome completo do IFSP; o currículo escreve apenas "Master's". | Evita induzir a leitura de mestrado acadêmico; ABOUT-RF-03 e ABOUT-CA-11. | Bruno | **Resolvida (2026-11-07):** rótulo "pós-graduação (programa Master)" aprovado. |
+| Q2 | Os textos do rascunho (seção 7.1), inclusive as frases de postura, estão aprovados ou precisam de ajustes? | Todo o conteúdo do About. | Bruno | **Resolvida (2026-11-07):** textos aprovados sem ajustes. |
+| Q3 | O título e a descrição de SEO propostos estão aprovados? | ABOUT-RF-06. | Bruno | **Resolvida (2026-11-07):** aprovados. |
 
 ## 12. Premissas
 
@@ -200,6 +200,9 @@ Decisões reversíveis adotadas neste refinamento.
 | 2026-11-07 | Sem nome de empresa no About. | Resposta do usuário |
 | 2026-11-07 | Sem fotografia no About; a foto fica no Hero. | Resposta do usuário |
 | 2026-11-07 | O rascunho dos textos é redigido por Claude, com revisão e aprovação do usuário. | Resposta do usuário |
+| 2026-11-07 | Anos de experiência passam de "8+" para "10+" (LinkedIn: desde jul/2016), em todo o site. | Resposta do usuário |
+| 2026-11-07 | Nenhuma métrica de resultado é publicada no About nem na Home; validação fica para a SPEC-003 (Experience). | Resposta do usuário |
+| 2026-11-07 | Textos do About (7.1), rótulo da formação 2 e SEO aprovados sem ajustes (Q1, Q2, Q3). | Resposta do usuário |
 
 ## Refinamento
 
@@ -214,3 +217,4 @@ Decisões reversíveis adotadas neste refinamento.
 | 2026-11-07 | Movida de `FEATURES.md` para `.specs/002-about.md`. | `.specs/README.md` prevê separar por funcionalidade conforme o projeto cresce. |
 | 2026-11-07 | Rótulo da formação 2 trocado para "pós-graduação" e foco em validação incluído no bloco de IA, com base no perfil público do GitHub. O LinkedIn exige login e não pôde ser consultado. | Complemento de informações a pedido do usuário. |
 | 2026-11-07 | Formação atualizada com os nomes do LinkedIn (IFSP; "pós-graduação, programa Master") após leitura do PDF exportado do perfil. | Complemento de informações a pedido do usuário. |
+| 2026-11-07 | Versão 0.3.0: textos, formação e SEO aprovados; Q1 a Q3 resolvidas; "8+" trocado por "10+". | Decisões do usuário na retomada do projeto. |
