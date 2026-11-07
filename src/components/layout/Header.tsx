@@ -1,11 +1,15 @@
+import { hasLocale } from "next-intl";
 import { getLocale } from "next-intl/server";
-import { getResumeHref, siteConfig } from "@/config/site";
+import { getResumeHref, hasLocalizedResume, siteConfig } from "@/config/site";
 import { Link } from "@/i18n/navigation";
-import type { Locale } from "@/i18n/routing";
+import { routing } from "@/i18n/routing";
 import { HeaderNav } from "./HeaderNav";
 
 export async function Header() {
-  const locale = (await getLocale()) as Locale;
+  const current = await getLocale();
+  const locale = hasLocale(routing.locales, current)
+    ? current
+    : routing.defaultLocale;
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
@@ -16,7 +20,10 @@ export async function Header() {
         >
           {siteConfig.name}
         </Link>
-        <HeaderNav resumeHref={getResumeHref(locale)} />
+        <HeaderNav
+          resumeHref={getResumeHref(locale)}
+          resumeLocalized={hasLocalizedResume(locale)}
+        />
       </div>
     </header>
   );

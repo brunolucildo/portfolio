@@ -43,6 +43,65 @@
   }
 }
 
+/* Entrada do Hero: acontece uma única vez, apenas em opacidade e transform. */
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+}
+
+.hero-enter {
+  animation: hero-enter var(--duration-slow) var(--ease-standard) both;
+}
+
+/*
+ * Parallax do Hero (SPEC-001, HOME-RF-07): camadas decorativas deslocadas pelo
+ * scroll da página, sem JavaScript. Ativo apenas a partir de 1024 px, sem
+ * preferência de movimento reduzido e em navegadores com scroll-driven
+ * animations; nos demais casos as camadas ficam estáticas.
+ */
+@keyframes hero-parallax-back {
+  to {
+    transform: translate3d(0, -48px, 0);
+  }
+}
+
+@keyframes hero-parallax-mid {
+  to {
+    transform: translate3d(0, -120px, 0);
+  }
+}
+
+@keyframes hero-parallax-front {
+  to {
+    transform: translate3d(0, -220px, 0);
+  }
+}
+
+@media (width >= 64rem) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .hero-parallax {
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 100vh;
+    }
+
+    .hero-parallax-back {
+      animation-name: hero-parallax-back;
+    }
+
+    .hero-parallax-mid {
+      animation-name: hero-parallax-mid;
+    }
+
+    .hero-parallax-front {
+      animation-name: hero-parallax-front;
+    }
+  }
+}
+
 /* O !important é intencional: a preferência do usuário deve vencer qualquer utilitário. */
 @media (prefers-reduced-motion: reduce) {
   *,

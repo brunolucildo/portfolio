@@ -73,10 +73,11 @@
   --shadow-elevated: 0 8px 24px rgb(0 0 0 / 0.35);
   --shadow-glow: 0 0 32px rgb(183 243 107 / 0.15);
 
-  /* Larguras (max-w-main, max-w-reading) */
+  /* Larguras (max-w-main, max-w-reading, max-w-portrait) */
   --container-*: initial;
   --container-main: 75rem;
   --container-reading: 47.5rem;
+  --container-portrait: 24rem;
 
   /* Motion */
   --duration-fast: 150ms;

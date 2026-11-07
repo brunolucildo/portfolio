@@ -10,6 +10,7 @@
     "closeMenu": "Fechar menu",
     "newTab": "(abre em uma nova aba)",
     "resume": "Currículo",
+    "resumeFallback": "Currículo (EN)",
     "items": {
       "home": "Início",
       "about": "Sobre",
@@ -40,7 +41,39 @@
     "contact": { "title": "Contato" }
   },
   "home": {
-    "headline": "Engenharia além do código.",
-    "subheadline": "Construindo sistemas escaláveis, liderando times de engenharia e explorando o futuro da tecnologia."
+    "metadata": {
+      "title": "Bruno Lucildo | Desenvolvedor Backend Sênior e Líder Técnico",
+      "description": "Conheça o trabalho, a experiência e os projetos técnicos de Bruno Lucildo, desenvolvedor backend e líder técnico com foco em sistemas escaláveis e engenharia de software."
+    },
+    "hero": {
+      "eyebrow": "Desenvolvedor Backend Sênior | Líder Técnico",
+      "headline": "Engenharia além do código.",
+      "subheadline": "Construindo sistemas escaláveis, liderando times de engenharia e explorando o futuro da tecnologia.",
+      "ctaPrimary": "Explorar meu trabalho",
+      "ctaSecondary": "Entrar em contato",
+      "photoAlt": "Retrato de Bruno Lucildo de terno verde de três peças e óculos escuros, apoiado em uma parede terracota."
+    },
+    "experience": {
+      "title": "Experiência",
+      "facts": {
+        "years": "Mais de 8 anos de experiência",
+        "scope": "Desenvolvimento backend e liderança técnica",
+        "team": "Liderando uma equipe de cinco desenvolvedores"
+      },
+      "link": "Ver experiência"
+    },
+    "project": {
+      "title": "Projeto em destaque",
+      "name": "Football Stat Analytics",
+      "category": "Projeto acadêmico",
+      "status": "Em desenvolvimento",
+      "description": "Análise de desempenho de atletas de futebol com IA, interação conversacional e recuperação de informações.",
+      "link": "Ver projetos"
+    },
+    "aiLab": {
+      "title": "AI Lab",
+      "description": "Um espaço para experimentos, estudos e projetos em inteligência artificial: LLMs, agentes de IA, RAG e engenharia de prompts.",
+      "link": "Explorar o AI Lab"
+    }
   }
 }

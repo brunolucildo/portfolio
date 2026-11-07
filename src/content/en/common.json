@@ -10,6 +10,7 @@
     "closeMenu": "Close menu",
     "newTab": "(opens in a new tab)",
     "resume": "Resume",
+    "resumeFallback": "Resume (EN)",
     "items": {
       "home": "Home",
       "about": "About",
@@ -40,7 +41,39 @@
     "contact": { "title": "Contact" }
   },
   "home": {
-    "headline": "Engineering beyond code.",
-    "subheadline": "Building scalable systems, leading engineering teams and exploring the future of technology."
+    "metadata": {
+      "title": "Bruno Lucildo | Senior Backend Developer & Technical Lead",
+      "description": "Explore the work, experience and technical projects of Bruno Lucildo, a backend developer and technical lead focused on scalable systems and software engineering."
+    },
+    "hero": {
+      "eyebrow": "Senior Backend Developer | Technical Lead",
+      "headline": "Engineering beyond code.",
+      "subheadline": "Building scalable systems, leading engineering teams and exploring the future of technology.",
+      "ctaPrimary": "Explore My Work",
+      "ctaSecondary": "Get in Touch",
+      "photoAlt": "Portrait of Bruno Lucildo in a green three-piece suit and sunglasses, leaning against a terracotta wall."
+    },
+    "experience": {
+      "title": "Experience",
+      "facts": {
+        "years": "8+ years of experience",
+        "scope": "Backend development and technical leadership",
+        "team": "Leading a team of five developers"
+      },
+      "link": "View experience"
+    },
+    "project": {
+      "title": "Featured project",
+      "name": "Football Stat Analytics",
+      "category": "Academic project",
+      "status": "In development",
+      "description": "Analysis of football athlete performance using AI, conversational interaction and information retrieval.",
+      "link": "View projects"
+    },
+    "aiLab": {
+      "title": "AI Lab",
+      "description": "A space for experiments, studies and projects in artificial intelligence: LLMs, AI agents, RAG and prompt engineering.",
+      "link": "Explore the AI Lab"
+    }
   }
 }

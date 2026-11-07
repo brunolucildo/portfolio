@@ -39,3 +39,10 @@ Thumbs.db
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Foto pessoal do Hero (mantida fora do controle de versão)
+public/images/hero/
+
+# Página do Instagram salva localmente (mídia de terceiros, não faz parte do projeto)
+Instagram.html
+Instagram_files/

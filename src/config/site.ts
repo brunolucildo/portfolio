@@ -20,9 +20,22 @@ const resume: Partial<Record<Locale, string>> & { en: string } = {
 
 export const siteConfig = {
   name: "Bruno Lucildo",
+  /** URL base usada em canonical e Open Graph. Defina NEXT_PUBLIC_SITE_URL com o domínio definitivo. */
+  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   contact,
   resume,
+  /** Fotografia do Hero. O arquivo fica fora do Git (public/images/hero/). */
+  heroPhoto: {
+    src: "/images/hero/bruno-lucildo-hero.png",
+    width: 574,
+    height: 811,
+  },
 };
+
+/** Indica se existe um currículo no idioma, e não apenas o fallback em inglês. */
+export function hasLocalizedResume(locale: Locale): boolean {
+  return locale in siteConfig.resume;
+}
 
 /** Retorna o currículo do idioma ou, na ausência dele, a versão em inglês. */
 export function getResumeHref(locale: Locale): string {

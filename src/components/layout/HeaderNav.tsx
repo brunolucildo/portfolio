@@ -16,7 +16,13 @@ function isActivePath(current: string, href: string): boolean {
     : current === href || current.startsWith(`${href}/`);
 }
 
-function ResumeLink({ href, className }: { href: string; className?: string }) {
+type ResumeProps = { href: string; localized: boolean };
+
+function ResumeLink({
+  href,
+  localized,
+  className,
+}: ResumeProps & { className?: string }) {
   const t = useTranslations("navigation");
 
   return (
@@ -24,31 +30,35 @@ function ResumeLink({ href, className }: { href: string; className?: string }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      lang={localized ? undefined : "en"}
       className={buttonStyles({ variant: "secondary", size: "sm", className })}
     >
-      {t("resume")}
+      {localized ? t("resume") : t("resumeFallback")}
       <span className="sr-only"> {t("newTab")}</span>
     </a>
   );
 }
 
-export function HeaderNav({ resumeHref }: { resumeHref: string }) {
+export function HeaderNav({
+  resumeHref,
+  resumeLocalized,
+}: {
+  resumeHref: string;
+  resumeLocalized: boolean;
+}) {
   const t = useTranslations("navigation");
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  // Guarda a rota em que o menu foi aberto: ao navegar, ele fecha sem effect.
+  const [openPath, setOpenPath] = useState<string | null>(null);
+  const open = openPath === pathname;
   const buttonRef = useRef<HTMLButtonElement>(null);
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: fecha o menu ao navegar
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        setOpen(false);
+        setOpenPath(null);
         buttonRef.current?.focus();
       }
     }
@@ -86,7 +96,7 @@ export function HeaderNav({ resumeHref }: { resumeHref: string }) {
 
       <div className="hidden items-center gap-4 lg:flex">
         <LanguageSwitcher />
-        <ResumeLink href={resumeHref} />
+        <ResumeLink href={resumeHref} localized={resumeLocalized} />
       </div>
 
       <button
@@ -95,7 +105,7 @@ export function HeaderNav({ resumeHref }: { resumeHref: string }) {
         aria-expanded={open}
         aria-controls={MENU_ID}
         aria-label={open ? t("closeMenu") : t("openMenu")}
-        onClick={() => setOpen((value) => !value)}
+        onClick={() => setOpenPath(open ? null : pathname)}
         className="inline-flex size-11 items-center justify-center rounded-md text-foreground transition-colors duration-(--duration-fast) ease-standard hover:bg-surface-elevated lg:hidden"
       >
         <svg
@@ -126,7 +136,7 @@ export function HeaderNav({ resumeHref }: { resumeHref: string }) {
           </nav>
           <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-6">
             <LanguageSwitcher />
-            <ResumeLink href={resumeHref} />
+            <ResumeLink href={resumeHref} localized={resumeLocalized} />
           </div>
         </div>
       </div>

@@ -14,69 +14,9 @@ As especificações descrevem o comportamento esperado de cada página e funcion
 
 # SPEC-001 — Home
 
-## 1. Contexto
+**Status:** In Review. Refinada, implementada e movida para [`001-home.md`](./001-home.md).
 
-A Home é a principal porta de entrada do portfólio.
-
-Deve apresentar rapidamente a identidade profissional, o posicionamento e os principais caminhos para explorar o conteúdo.
-
-## 2. Objetivo
-
-Transmitir maturidade técnica, experiência em desenvolvimento backend, liderança e interesse por engenharia e novas tecnologias.
-
-## 3. Escopo
-
-- Hero.
-- Apresentação profissional.
-- Resumo de experiência.
-- Destaques de projetos.
-- Destaque do AI Lab.
-- Navegação para outras seções.
-- CTAs principais.
-
-## 4. Conteúdo
-
-Headline inicial:
-
-**Engineering beyond code.**
-
-Subheadline:
-
-**Building scalable systems, leading engineering teams and exploring the future of technology.**
-
-CTAs:
-
-- Explore My Work.
-- Get in Touch.
-
-O conteúdo deverá possuir versão equivalente em português.
-
-## 5. Requisitos funcionais
-
-- Apresentar o posicionamento profissional.
-- Permitir acesso às principais páginas.
-- Destacar projetos selecionados.
-- Direcionar para o AI Lab.
-- Apresentar caminhos de contato.
-- Permitir navegação entre idiomas.
-
-## 6. Requisitos visuais
-
-- Identidade Dark Premium.
-- Hero com tipografia de destaque.
-- Espaço negativo.
-- Parallax controlado.
-- Elementos gráficos discretos.
-- Fotografia profissional opcional, ainda pendente de decisão.
-
-## 7. Critérios de aceitação
-
-- O posicionamento é compreendido rapidamente.
-- Os CTAs funcionam.
-- Os destaques levam aos destinos corretos.
-- A página funciona nos dois idiomas.
-- O Hero é responsivo.
-- O parallax respeita movimento reduzido.
+A Home é a principal porta de entrada do portfólio. Os requisitos, os critérios de aceitação, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
 ---
 
