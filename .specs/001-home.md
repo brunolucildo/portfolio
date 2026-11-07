@@ -7,7 +7,7 @@
 | Nome | Home |
 | Identificador | SPEC-001 |
 | Slug | `001-home` |
-| Versão | 0.5.0 |
+| Versão | 0.6.0 |
 | Status | In Review (implementada; aguardam validação final a revisão de conteúdo provisório, o tratamento da foto e o domínio) |
 | Data | 2026-11-07 |
 | Origem | SPEC-001 de `.specs/FEATURES.md` (v0.1, Draft) |
@@ -107,6 +107,7 @@ Não há estado de carregamento nem de erro: a página é estática e não conso
 - Ativo a partir de 1024 px; desligado em tablet e mobile.
 - Desligado quando `prefers-reduced-motion: reduce`.
 - Sem scroll hijacking, sem dependência do movimento do cursor, sem biblioteca de animação (decisão aprovada em `ARCHITECTURE.md`, seção 17).
+- Intensidade (v0.6.0): deslocamento total de 140, 300 e 520 px (fundo, meio e frente) ao longo dos primeiros 80vh de scroll; a camada da frente também gira de 12° a 100°. Halo a 30% de opacidade e anel e quadrado com contorno de 2 px em verde, posicionados para ficarem visíveis ao redor da fotografia. Cobertos por testes em `e2e/home.spec.ts`.
 
 ## 8. Conteúdo e dados
 
@@ -246,3 +247,4 @@ Decisões reversíveis adotadas neste refinamento. Podem ser alteradas sem refaz
 | 2026-11-07 | Q1 parcialmente respondida: arquivo da foto indicado; texto alternativo e tratamento visual propostos e pendentes de aprovação. | Resposta do usuário. |
 | 2026-11-07 | Implementada (v0.4.0, In Review). Adicionados à seção 8 os títulos de bloco e os rótulos de link criados na implementação, ainda provisórios. | Implementação revelou textos que a SPEC não listava. |
 | 2026-11-07 | v0.5.0: Reelix incluído nos destaques; RF-04 reescrito para dois projetos; novo RF-13 e CA-17 (links para o GitHub); tabela de conteúdo, composição e riscos atualizados. | Informações do perfil público do GitHub e decisão do usuário. |
+| 2026-11-07 | v0.6.0: parallax intensificado (deslocamentos, opacidade e contornos maiores; quadrado girando) e coberto por testes E2E. | Pedido do usuário: o efeito original não era percebido no Chrome nem no Firefox. |

@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import { findPhrases, forbiddenPhrases } from "./support/content-rules";
 
 type HomePage = {
@@ -48,6 +48,59 @@ const repositories = [
 test("a raiz redireciona para o idioma padrão", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveURL(/\/en\/?$/);
+});
+
+test.describe("Parallax do Hero", () => {
+  /** Deslocamento vertical (px) de cada camada, na ordem fundo, meio e frente. */
+  async function layerOffsets(page: Page): Promise<number[]> {
+    return page.evaluate(() =>
+      [...document.querySelectorAll(".hero-parallax")].map((layer) => {
+        const { transform } = getComputedStyle(layer);
+        return transform === "none" ? 0 : new DOMMatrix(transform).m42;
+      }),
+    );
+  }
+
+  test("as camadas se movem com o scroll, mais rápido quanto mais à frente", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/en");
+    expect(await layerOffsets(page)).toEqual([0, 0, 0]);
+
+    await page.evaluate(() => window.scrollTo(0, 400));
+    await expect
+      .poll(async () => (await layerOffsets(page))[0])
+      .toBeLessThan(-60);
+
+    const [back = 0, mid = 0, front = 0] = await layerOffsets(page);
+    expect(mid).toBeLessThan(back);
+    expect(front).toBeLessThan(mid);
+    // Movimento perceptível: a camada da frente sobe mais de 200 px.
+    expect(front).toBeLessThan(-200);
+  });
+
+  test("não há parallax com movimento reduzido", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/en");
+
+    await page.evaluate(() => window.scrollTo(0, 400));
+    await page.waitForTimeout(300);
+    expect(await layerOffsets(page)).toEqual([0, 0, 0]);
+  });
+
+  test("não há parallax abaixo de 1024 px", async ({ page }) => {
+    await page.setViewportSize({ width: 768, height: 1024 });
+    await page.goto("/en");
+
+    for (const layer of await page.locator(".hero-parallax").all()) {
+      await expect(layer).toBeHidden();
+    }
+    await page.evaluate(() => window.scrollTo(0, 400));
+    await page.waitForTimeout(300);
+    expect(await layerOffsets(page)).toEqual([0, 0, 0]);
+  });
 });
 
 for (const home of pages) {

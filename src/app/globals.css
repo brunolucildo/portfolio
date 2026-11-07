@@ -63,19 +63,20 @@
  */
 @keyframes hero-parallax-back {
   to {
-    transform: translate3d(0, -48px, 0);
+    transform: translate3d(0, -140px, 0);
   }
 }
 
 @keyframes hero-parallax-mid {
   to {
-    transform: translate3d(0, -120px, 0);
+    transform: translate3d(0, -300px, 0);
   }
 }
 
 @keyframes hero-parallax-front {
   to {
-    transform: translate3d(0, -220px, 0);
+    transform: translate3d(0, -520px, 0);
+    rotate: 100deg;
   }
 }
 
@@ -85,7 +86,7 @@
       animation-timing-function: linear;
       animation-fill-mode: both;
       animation-timeline: scroll(root block);
-      animation-range: 0 100vh;
+      animation-range: 0 80vh;
     }
 
     .hero-parallax-back {
