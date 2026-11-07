@@ -24,9 +24,9 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   contact,
   resume,
-  /** Fotografia do Hero. O arquivo fica fora do Git (public/images/hero/). */
+  /** Fotografia do Hero, versionada em public/images/hero/. */
   heroPhoto: {
-    src: "/images/hero/bruno-lucildo-hero.png",
+    src: "/images/hero/bruno-lucildo-portrait.png",
     width: 574,
     height: 811,
   },

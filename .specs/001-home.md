@@ -7,8 +7,8 @@
 | Nome | Home |
 | Identificador | SPEC-001 |
 | Slug | `001-home` |
-| Versão | 0.6.0 |
-| Status | In Review (implementada; aguardam validação final a revisão de conteúdo provisório, o tratamento da foto e o domínio) |
+| Versão | 0.7.0 |
+| Status | In Review (v0.7.0 implementada, incluindo o fallback em JavaScript do parallax, HOME-RF-14; aguardam validação final a revisão de conteúdo provisório, o domínio e a conferência visual do fallback em um Firefox real) |
 | Data | 2026-11-07 |
 | Origem | SPEC-001 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -61,6 +61,7 @@ A Home é a principal porta de entrada do portfólio. Deve apresentar rapidament
 | HOME-RF-11 | Should | O Hero tem animação de entrada discreta (fade-in com slide-up curto), sem atrasar o acesso ao conteúdo. |
 | HOME-RF-12 | Must | A página não contém as expressões proibidas da seção 3.2 nem afirma resultados, métricas ou cargos não validados. |
 | HOME-RF-13 | Must | Cada card de projeto tem um link externo "View on GitHub" para o repositório público do projeto, aberto em nova aba com `rel="noopener noreferrer"` e indicação acessível de nova aba. |
+| HOME-RF-14 | Must | Em navegadores sem suporte a scroll-driven animations em CSS (ex.: Firefox), o parallax do Hero funciona por um fallback em JavaScript, com os mesmos deslocamentos, a mesma rotação e as mesmas condições de ativação de HOME-RF-07. Onde o CSS é suportado, o fallback não é ativado. |
 
 ## 5. Requisitos não funcionais
 
@@ -71,7 +72,7 @@ A Home é a principal porta de entrada do portfólio. Deve apresentar rapidament
 | HOME-RNF-03 | Renderização | A Home é gerada estaticamente. O conteúdo essencial está no HTML inicial. Componentes de cliente são usados apenas onde há interação ou movimento. |
 | HOME-RNF-04 | Acessibilidade | Atende a WCAG 2.2 AA: contraste, foco visível, ordem de tabulação lógica, alvos de toque de pelo menos 44 px nos CTAs. |
 | HOME-RNF-05 | Acessibilidade | Camadas decorativas do parallax são ocultas de leitores de tela (`aria-hidden`). A fotografia tem texto alternativo no idioma da página. |
-| HOME-RNF-06 | Movimento | O parallax só usa `transform` e `opacity`, não altera o comportamento natural do scroll e não move o texto principal. |
+| HOME-RNF-06 | Movimento | O parallax (CSS e fallback JS) só usa `transform` e `opacity`, não altera o comportamento natural do scroll e não move o texto principal. O fallback usa listener de scroll passivo, atualiza no máximo uma vez por quadro (`requestAnimationFrame`) e não força leitura de layout a cada evento. |
 | HOME-RNF-07 | Responsividade | Sem rolagem horizontal nas larguras 360, 390, 768, 1366, 1440 e 1920 px (`QA.md`, seção 5). |
 | HOME-RNF-08 | Segurança | Links externos, se houver, usam `rel="noopener noreferrer"`. Nenhum dado pessoal além dos canais públicos aprovados. |
 | HOME-RNF-09 | Tipos e qualidade | TypeScript strict, `pnpm check`, `pnpm typecheck` e `pnpm build` sem erros. |
@@ -94,7 +95,8 @@ A Home é a principal porta de entrada do portfólio. Deve apresentar rapidament
 | Foto ausente | Hero em coluna de texto, sem reserva de espaço vazio. |
 | `prefers-reduced-motion: reduce` | Sem parallax, sem animação de entrada. Todo o conteúdo visível e estático. |
 | Largura abaixo de 1024 px | Sem parallax. Foto abaixo do texto. |
-| JavaScript desabilitado | Todo o texto, os CTAs e os links permanecem visíveis e funcionais. |
+| JavaScript desabilitado | Todo o texto, os CTAs e os links permanecem visíveis e funcionais. O parallax continua ativo onde o CSS o suporta; no restante, as camadas ficam estáticas. |
+| Navegador sem scroll-driven animations | O fallback em JavaScript move as camadas (HOME-RF-14). Se o JavaScript falhar ou estiver desabilitado, as camadas ficam estáticas e a página permanece íntegra. |
 | Texto em pt-BR mais longo | Quebra de linha sem estourar o container nem gerar rolagem horizontal. |
 | Foco por teclado | Anel de foco verde visível em CTAs e links, na ordem visual. |
 
@@ -108,6 +110,19 @@ Não há estado de carregamento nem de erro: a página é estática e não conso
 - Desligado quando `prefers-reduced-motion: reduce`.
 - Sem scroll hijacking, sem dependência do movimento do cursor, sem biblioteca de animação (decisão aprovada em `ARCHITECTURE.md`, seção 17).
 - Intensidade (v0.6.0): deslocamento total de 140, 300 e 520 px (fundo, meio e frente) ao longo dos primeiros 80vh de scroll; a camada da frente também gira de 12° a 100°. Halo a 30% de opacidade e anel e quadrado com contorno de 2 px em verde, posicionados para ficarem visíveis ao redor da fotografia. Cobertos por testes em `e2e/home.spec.ts`.
+
+### 7.1. Fallback em JavaScript (HOME-RF-14, v0.7.0)
+
+Decisão do usuário em 2026-11-07: o efeito deve aparecer também no Firefox, que não suporta `animation-timeline` (scroll-driven animations).
+
+- **Aprimoramento progressivo:** o CSS continua sendo o caminho principal. O fallback só é ativado quando `CSS.supports("animation-timeline: scroll()")` é falso. Onde o CSS funciona, nenhum listener é registrado.
+- **Componente de cliente mínimo**, sem biblioteca, limitado ao Hero. O texto, os CTAs e a foto continuam renderizados no servidor.
+- **Mesmos valores do CSS:** deslocamento de 140, 300 e 520 px (fundo, meio e frente) ao longo dos primeiros 80vh de scroll e rotação de 12° a 100° na camada da frente. O CSS do parallax não anima `opacity`, então o fallback também não. Os números ficam em uma única fonte: as variáveis `--parallax-*` de `globals.css`, usadas pelas keyframes e lidas pelo JavaScript.
+- **Implementação:** `src/components/sections/HeroParallaxLayers.tsx` (componente de cliente com as três camadas). Quando ativo, marca o contêiner com `data-parallax-fallback="active"`, que também serve de gancho para os testes.
+- **Mesmas condições de ativação:** largura mínima de 1024 px e sem `prefers-reduced-motion: reduce`. O fallback observa as duas media queries (`matchMedia` com `change`) e, ao deixarem de valer, remove o listener e devolve as camadas à posição original, sem recarregar a página.
+- **Desempenho e scroll natural:** listener `scroll` com `{ passive: true }`, atualização por `requestAnimationFrame` (no máximo uma por quadro), progresso calculado a partir de `scrollY`, escrevendo só `transform` e `opacity` (ou variáveis CSS que os controlam). Sem `preventDefault`, sem scroll suave simulado e sem leitura de layout a cada evento.
+- **Limpeza:** ao desmontar o componente, remove listeners, observadores e quadros pendentes.
+- **Acessibilidade:** as camadas continuam `aria-hidden`.
 
 ## 8. Conteúdo e dados
 
@@ -142,7 +157,7 @@ Regras de conteúdo:
 - Textos provisórios podem ser implementados e ficam marcados como pendentes de revisão; não podem ser publicados sem aprovação.
 - O estado do projeto usa uma das classificações do `DESIGN_SYSTEM.md` (4.6): Concluído, Em desenvolvimento, Experimental ou Conceitual.
 - Os fatos da faixa de experiência vêm do inventário do `CONTENT.md` (5.1) e devem ser confirmados antes da publicação.
-- Fotografia: `public/images/hero/bruno-lucildo-hero.png`, fora do controle de versão. Texto alternativo proposto, pendente de aprovação (Q1):
+- Fotografia: `public/images/hero/bruno-lucildo-portrait.png`, versionada no Git desde 2026-11-07. Texto alternativo **aprovado** em 2026-11-07 (Q1a), idêntico ao de `common.json` (`photoAlt`):
   - `en`: "Portrait of Bruno Lucildo in a green three-piece suit and sunglasses, leaning against a terracotta wall."
   - `pt-BR`: "Retrato de Bruno Lucildo de terno verde de três peças e óculos escuros, apoiado em uma parede terracota."
 
@@ -166,6 +181,7 @@ Regras de conteúdo:
 | HOME-CA-14 | RNF-04 | **Given** navegação apenas por teclado **When** o usuário percorre a Home **Then** a ordem é skip link, header, CTAs, link de experiência, card do projeto, link do AI Lab, footer, com foco visível em cada item. |
 | HOME-CA-15 | RNF-07 | **Given** as larguras 360, 390, 768, 1366, 1440 e 1920 px **Then** `scrollWidth` é igual a `innerWidth` em ambos os idiomas. |
 | HOME-CA-17 | RF-13 | **Given** os cards de projeto **When** o usuário ativa "View on GitHub" **Then** o repositório correspondente (`brunolucildo/football-stat-analytics-cli` ou `brunolucildo/reelix`) abre em nova aba, o link tem `rel="noopener noreferrer"` e um leitor de tela anuncia a nova aba. |
+| HOME-CA-18 | RF-14, RNF-06 | **Given** um navegador sem `animation-timeline` (ex.: Firefox) e largura ≥1024 px **When** o usuário rola **Then** as camadas se movem com os mesmos deslocamentos e a mesma rotação de HOME-RF-07 e o texto principal não se move. **Given** `prefers-reduced-motion: reduce` ou largura <1024 px **Then** nenhuma camada se move e nenhum listener de scroll fica registrado. **Given** a mudança dessas condições com a página aberta **Then** o movimento é ligado ou desligado sem recarregar. **Given** um navegador com `animation-timeline` **Then** o fallback não registra listener algum. **Given** JavaScript desabilitado **Then** a página permanece íntegra, com as camadas estáticas onde o CSS não é suportado. |
 | HOME-CA-16 | RNF-09 | **Given** o código da Home **Then** `pnpm check`, `pnpm typecheck` e `pnpm build` terminam sem erros. |
 
 ## 10. Dependências
@@ -185,8 +201,10 @@ Regras de conteúdo:
 | Risco | Mitigação |
 |---|---|
 | Foto de baixa qualidade ou com fundo incoerente prejudica o Hero | Aprovar a foto antes de fechar HOME-CA-06 e definir tratamento visual discreto. |
-| A foto está no `.gitignore`: um deploy a partir do repositório publica o site sem ela, e o build quebraria se importasse o arquivo estaticamente | Verificar a existência do arquivo em tempo de build (premissa 7) e definir como a foto chega à hospedagem antes do deploy. |
+| ~~A foto fica fora do Git e um deploy publica o site sem ela~~ | Resolvido em 2026-11-07: a foto passou a ser versionada. A verificação de existência do arquivo (premissa 7) permanece como proteção do build. |
+| A foto é uma captura de tela de baixa resolução (574×811 px) e entra no histórico do Git | Aceito pelo usuário. Substituir pelo original, se surgir, adiciona outro binário ao histórico; avaliar antes de trocar. |
 | Parallax prejudica desempenho ou leitura | Limitar a 3 camadas, usar apenas `transform`/`opacity`, validar INP e CLS (HOME-CA-07, HOME-CA-13). |
+| O fallback em JavaScript piora INP, causa jank ou diverge do efeito em CSS | Listener passivo com `requestAnimationFrame`, valores numéricos em fonte única, ativação só onde o CSS não é suportado e teste E2E no Firefox (HOME-CA-18). |
 | Fatos de experiência divergentes do currículo ou do Experience | Confirmar os três fatos antes de publicar e manter uma única fonte de conteúdo. |
 | Publicação de texto provisório em pt-BR | Marcar como pendente e bloquear o checklist de publicação até a revisão. |
 | Exposição de dado confidencial ou de terceiros ao apontar para os repositórios | Usar apenas as descrições aprovadas. O repositório do Football Stat Analytics versiona bancos `.db` com trechos indexados de relatórios; conferir se esse conteúdo pode ficar público antes de promover o link. |
@@ -196,7 +214,7 @@ Regras de conteúdo:
 
 | ID | Pergunta | Situação | Impacto | Bloqueia |
 |---|---|---|---|---|
-| Q1 | Qual é a fotografia do Hero (arquivo, enquadramento, texto alternativo em EN e pt-BR)? | **Arquivo definido:** `public/images/hero/bruno-lucildo-hero.png` (retrato vertical, 574×811 px, ignorado pelo Git). **Aberto:** (a) aprovar o texto alternativo da seção 8; (b) o arquivo é uma captura de tela, com uma faixa clara no canto superior esquerdo e resolução baixa para telas de alta densidade, então convém substituí-lo pelo original ou recortá-lo; (c) a parede terracota destoa do fundo escuro, e o tratamento visual (máscara com degradê para o fundo, ajuste de cor) precisa ser aprovado. | Define HOME-RF-06, HOME-CA-06 e o LCP do Hero. | Aceite visual de RF-06. A implementação segue com o arquivo atual. |
+| Q1 | Qual é a fotografia do Hero (arquivo, enquadramento, texto alternativo em EN e pt-BR)? | **Arquivo definido:** `public/images/hero/bruno-lucildo-portrait.png` (retrato vertical, 574×811 px, versionado; antes `bruno-lucildo-hero.png`). **Respondido em 2026-11-07:** (a) texto alternativo da seção 8 aprovado; (b) e (c) mantida a captura atual (574×811 px, com a faixa clara no canto) e aprovado o tratamento visual implementado. **Também decidido:** a foto passa a ser versionada no Git e o arquivo foi renomeado para `bruno-lucildo-portrait.png`; substituir pelo original, se surgir, não exige nova aprovação do tratamento. | Define HOME-RF-06, HOME-CA-06 e o LCP do Hero. | Não bloqueia. |
 | Q2 | Qual é o estado do Football Stat Analytics? | **Respondida:** Em desenvolvimento. | HOME-RF-04. | Não bloqueia mais. |
 | Q3 | Os textos provisórios em pt-BR (título, CTAs, mensagem complementar) e os três fatos de experiência estão aprovados? | **Respondida:** aprovados como estão. | Seção 8. | Não bloqueia mais. |
 | Q4 | Qual será o domínio `.dev` e a imagem Open Graph? | **Respondida:** ainda não definidos. A implementação usa uma URL base central em `config/site.ts` e deixa a imagem Open Graph para depois. | Canonical e Open Graph absolutos (HOME-RF-09). | Publicação. |
@@ -212,7 +230,7 @@ Decisões reversíveis adotadas neste refinamento. Podem ser alteradas sem refaz
 4. Os canais de contato completos permanecem no footer (SPEC-010). Não há bloco de contato adicional na Home.
 5. A SPEC passa a viver em `.specs/001-home.md`, conforme o `.specs/README.md` permite. A seção SPEC-001 de `FEATURES.md` aponta para este arquivo.
 6. Como o domínio não está definido, o canonical e o Open Graph usam uma URL base central configurável, sem imagem Open Graph por enquanto.
-7. O build não pode depender da foto: como o arquivo fica fora do Git, a Home verifica a existência do arquivo e omite o espaço da foto quando ele não existe.
+7. O build não pode depender da foto: a Home verifica a existência do arquivo e omite o espaço da foto quando ele não existe.
 8. O estado do Reelix vem do README e do PROJECT_STATUS do repositório (fotografia do código em 04/11/2026), que descreve implementação e não confirma produção.
 
 ## 14. Decisões registradas
@@ -231,6 +249,9 @@ Decisões reversíveis adotadas neste refinamento. Podem ser alteradas sem refaz
 | 2026-11-07 | Football Stat Analytics permanece "Em desenvolvimento" (o README do projeto o chama de "experimental"). | Resposta do usuário |
 | 2026-11-07 | Reelix entra na Home como projeto pessoal em desenvolvimento. | Resposta do usuário |
 | 2026-11-07 | Cards de projeto com link externo para o repositório no GitHub. | Resposta do usuário |
+| 2026-11-07 | Parallax ganha fallback em JavaScript para navegadores sem scroll-driven animations (Firefox), mantendo o CSS como caminho principal. Substitui a decisão "em CSS" sem JS apenas para esses navegadores; segue sem biblioteca. | Resposta do usuário (retomada) |
+| 2026-11-07 | Texto alternativo da foto aprovado; mantidos a captura atual e o tratamento visual implementado. | Resposta do usuário (Q1) |
+| 2026-11-07 | A foto do Hero passa a ser versionada no Git (revoga "fora do Git") e o arquivo é renomeado de `bruno-lucildo-hero.png` para `bruno-lucildo-portrait.png`. | Resposta do usuário (retomada) |
 
 ## Refinamento
 
@@ -248,3 +269,4 @@ Decisões reversíveis adotadas neste refinamento. Podem ser alteradas sem refaz
 | 2026-11-07 | Implementada (v0.4.0, In Review). Adicionados à seção 8 os títulos de bloco e os rótulos de link criados na implementação, ainda provisórios. | Implementação revelou textos que a SPEC não listava. |
 | 2026-11-07 | v0.5.0: Reelix incluído nos destaques; RF-04 reescrito para dois projetos; novo RF-13 e CA-17 (links para o GitHub); tabela de conteúdo, composição e riscos atualizados. | Informações do perfil público do GitHub e decisão do usuário. |
 | 2026-11-07 | v0.6.0: parallax intensificado (deslocamentos, opacidade e contornos maiores; quadrado girando) e coberto por testes E2E. | Pedido do usuário: o efeito original não era percebido no Chrome nem no Firefox. |
+| 2026-11-07 | v0.7.0: novo HOME-RF-14, seção 7.1 e HOME-CA-18 (fallback em JavaScript do parallax); RNF-06, estados e riscos ajustados; Q1 atualizada e texto alternativo da foto aprovado. Foto do Hero passa a ser versionada e renomeada para `bruno-lucildo-portrait.png` (riscos, premissa 7 e Q1 ajustados). Fallback implementado (`HeroParallaxLayers.tsx`, variáveis `--parallax-*`) e coberto por 5 testes E2E em `e2e/home.spec.ts` (CA-18; o Chromium é forçado ao caminho do fallback; mutação confirmada). Não foi verificado em um Firefox real. | Decisões do usuário na retomada: o efeito deve aparecer também no Firefox; a foto entra no Git. |
