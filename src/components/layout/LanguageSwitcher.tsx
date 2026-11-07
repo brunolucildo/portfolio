@@ -1,6 +1,8 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import type { ComponentProps } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils/cn";
@@ -9,6 +11,13 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   const t = useTranslations("languageSwitcher");
   const activeLocale = useLocale();
   const pathname = usePathname();
+  const { slug } = useParams<{ slug?: string }>();
+
+  // Em rotas com parâmetro (detalhe de projeto), o slug é o mesmo nos dois idiomas.
+  const href: ComponentProps<typeof Link>["href"] =
+    pathname === "/projects/[slug]"
+      ? { pathname, params: { slug: slug ?? "" } }
+      : pathname;
 
   return (
     <ul
@@ -21,7 +30,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
         return (
           <li key={locale}>
             <Link
-              href={pathname}
+              href={href}
               locale={locale}
               lang={locale}
               hrefLang={locale}

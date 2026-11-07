@@ -7,8 +7,8 @@
 | Nome | Projects |
 | Identificador | SPEC-004 |
 | Slug | `004-projects` |
-| Versão | 0.4.0 |
-| Status | Approved (textos, textos alternativos e imagens aprovados em 2026-11-07; pronta para implementação) |
+| Versão | 0.5.0 |
+| Status | In Review (implementada em 2026-11-07; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-07 |
 | Origem | SPEC-004 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -309,6 +309,47 @@ Decisões reversíveis adotadas neste refinamento.
 | 2026-11-07 | Football Stat Analytics é só "projeto acadêmico", sem citar curso ou instituição. | Resposta do usuário |
 | 2026-11-07 | Estudos de caso profissionais ficam fora da v1. | Premissa herdada das SPEC-001 e SPEC-003 |
 
+## 15. Implementação e verificação
+
+Implementada na branch `feat/projects`. Arquivos:
+
+- Novos: `src/config/projects.ts` (fonte única: slug, repositório, tecnologias e imagens), `src/components/projects/` (`ProjectsContent`, `ProjectEntry`, `ProjectDetail`, `ProjectFigure`, `ProjectTechnologies` e `layout.ts`), `src/app/[locale]/projects/[slug]/page.tsx` e `e2e/projects.spec.ts`.
+- Alterados: `src/app/[locale]/projects/page.tsx` (substitui a página provisória e passa a ser indexável), `src/i18n/routing.ts` (rota `/projects/[slug]` e `/projetos/[slug]`), `src/config/navigation.ts` (`AppPathname` exclui rotas com parâmetro), `src/lib/seo/metadata.ts` (`AppHref` e metadados dos detalhes), `src/components/layout/LanguageSwitcher.tsx` (mantém o slug ao trocar de idioma), `src/components/sections/FeaturedProjects.tsx` (três destaques, lendo a fonte única), `src/components/sections/PagePlaceholder.tsx`, `e2e/home.spec.ts` e os dois `common.json` (nova seção `projects`; `home.projects.items` e `pages.projects` removidos).
+
+Verificação em 2026-11-07:
+
+| Critério | Resultado | Evidência |
+|---|---|---|
+| PROJ-CA-01 | Atendido | `e2e/projects.spec.ts`: um `h1` e três `h2` na ordem Football, Reelix, FintaLab, nos dois idiomas. |
+| PROJ-CA-02 | Atendido | Categoria, estado, descrição, tecnologias e links por entrada; "View details" só no Football e no Reelix. |
+| PROJ-CA-03 | Atendido | Estados da lista, dos detalhes e da Home; sem "launched"/"lançado". |
+| PROJ-CA-04 | Atendido | Os quatro detalhes (dois por idioma) respondem 200; `/en/projects/nao-existe`, `/pt-BR/projetos/nao-existe` e `/en/projects/fintalab` respondem 404. |
+| PROJ-CA-05 | Atendido | Um `h1` e sete `h2` na ordem prevista; nenhum "Results"/"Resultados". |
+| PROJ-CA-06 | Atendido | Tecnologias idênticas à seção 7.1; Next.js e Supabase não aparecem como tecnologias do FintaLab. |
+| PROJ-CA-07 | Atendido | Nenhum "%" nas páginas; o Football traz "109 automated tests" como único número de qualidade. Mutação (inserir "80%") derruba o teste. |
+| PROJ-CA-08 | Atendido | Sem "Coders" nem "University" nas páginas de projeto. |
+| PROJ-CA-09 | Atendido | Links para os três repositórios, em nova aba, com `rel="noopener noreferrer"` e indicação acessível. |
+| PROJ-CA-10 | Atendido | Todo texto vem de `t()`; os nomes das tecnologias vêm de `src/config/projects.ts` (nomes próprios). |
+| PROJ-CA-11 | Atendido | `title`, `description`, canonical, `hreflang` (`/projects/<slug>` ↔ `/projetos/<slug>`), Open Graph e `<html lang>`, sem `noindex`. O domínio dos links ainda é `localhost` até definir `NEXT_PUBLIC_SITE_URL`. |
+| PROJ-CA-12 | Atendido | Sem expressões proibidas nem frases de busca de emprego, no texto e no título. |
+| PROJ-CA-13 | Atendido | Home com três destaques; nome, categoria, estado e descrição idênticos aos da lista. Mutação (trocar o estado do FintaLab) derruba o teste. |
+| PROJ-CA-14 | Atendido | Imagens da lista, do detalhe e legendas conferidas; Football sem imagem; arquivos de até 250 KB. As telas ficam lado a lado a partir de 768 px e empilhadas abaixo, medido no E2E. |
+| PROJ-CA-15 | Atendido | Páginas estáticas, sem Client Components nas páginas de projeto e sem classes de animação. O seletor de idioma, já cliente, passou a usar `useParams`. |
+| PROJ-CA-16 | Atendido | O teclado percorre skip link, header, "View details" e GitHub de cada entrada e o footer; títulos sem saltos. |
+| PROJ-CA-17 | Atendido | Sem rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px, na lista e nos detalhes, nos dois idiomas; no máximo 80 caracteres por linha em 1366 px. |
+| PROJ-CA-18 | Atendido | `pnpm check`, `pnpm typecheck` e `pnpm test:e2e` (195 testes; o build roda como parte do `test:e2e`) sem erros. |
+| PROJ-CA-19 | Atendido por revisão | Imagens revisadas uma a uma antes de entrar: nenhuma mostra e-mail, nome de terceiros ou dado de amigos; a legenda do Reelix credita o TMDB. |
+
+Também conferido no navegador, em `localhost:3000`, a 1440 px e a 375 px: lista, detalhe do Reelix (as três telas lado a lado no desktop e empilhadas no mobile), entrada do FintaLab com as três telas e Home com os três cards.
+
+Divergências em relação à SPEC e achados:
+
+- **Breakpoint:** a primeira versão da galeria usou `sm:`, que o design system não tem (só `md`, `lg` e `xl`); as telas do Reelix ficaram empilhadas no desktop e os testes de DOM não pegaram. Corrigido para `md:` e acrescentado teste que mede a posição das imagens.
+- **Largura do texto:** o texto da razão de cada decisão técnica ficou em 34 rem (e não nos 39 rem do restante) para não passar de 80 caracteres por linha em fonte de 16 px.
+- **Tipos:** `AppPathname` passou a excluir rotas com parâmetro; o tipo das traduções não alcança o namespace dos detalhes, então `pageTexts` em `metadata.ts` usa um `switch` com chaves verificadas.
+- **Lista de decisões:** `t.raw()` devolve o array de decisões, cujo número de itens o typecheck não compara entre idiomas; o E2E confere os quatro itens.
+- LCP e CLS (PROJ-RNF-02) não foram medidos com ferramenta própria; as imagens têm largura e altura declaradas, o que evita deslocamento de layout.
+
 ## Refinamento
 
 | Data | O que mudou | Motivo |
@@ -320,5 +361,6 @@ Decisões reversíveis adotadas neste refinamento.
 | 2026-11-07 | Estrutura de detalhe reduzida de nove para sete seções, com Implementation dentro de Architecture. | Decisão do usuário. |
 | 2026-11-07 | Rascunho dos textos nos dois idiomas, com tecnologias conferidas nos repositórios e rastreabilidade de cada fato. | Os textos não existiam e o conteúdo precisa refletir o estado real dos projetos. |
 | 2026-11-07 | Movida de `FEATURES.md` para `.specs/004-projects.md`. | `.specs/README.md` prevê separar por funcionalidade conforme o projeto cresce. |
+| 2026-11-07 | Versão 0.5.0: implementada; seção 15 com a verificação dos critérios, as divergências e os achados. | Implementação da SPEC. |
 | 2026-11-07 | Versão 0.4.0: textos e imagens aprovados (Q1, Q4 e Q5); home do Reelix incluída como terceira imagem (JPEG), capa do Reelix e legenda com crédito ao TMDB; status passa a Approved. | Decisão do usuário. |
 | 2026-11-07 | Versão 0.3.0: imagens do Reelix e do FintaLab (seção 7.6), PROJ-RF-15 passa a Must, novos PROJ-RF-16 e PROJ-CA-19, riscos, perguntas Q4 e Q5. As cinco imagens foram capturadas e estão em `public/images/projects/`. | Pedido do usuário para usar capturas do app Reelix e do protótipo do FintaLab. |

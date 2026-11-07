@@ -38,7 +38,7 @@ A seção Experience apresenta o histórico profissional de Bruno. Os requisitos
 
 # SPEC-004 — Projects
 
-**Status:** Approved. Refinada e movida para [`004-projects.md`](./004-projects.md).
+**Status:** In Review. Refinada, implementada e movida para [`004-projects.md`](./004-projects.md).
 
 A seção Projects apresenta os projetos pessoais, acadêmicos e conceituais de Bruno, com uma página de detalhe para os mais desenvolvidos. Os requisitos, os critérios de aceitação, o rascunho dos textos, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 

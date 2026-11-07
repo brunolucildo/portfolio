@@ -9,6 +9,10 @@ export const routing = defineRouting({
     "/about": { en: "/about", "pt-BR": "/sobre" },
     "/experience": { en: "/experience", "pt-BR": "/experiencia" },
     "/projects": { en: "/projects", "pt-BR": "/projetos" },
+    "/projects/[slug]": {
+      en: "/projects/[slug]",
+      "pt-BR": "/projetos/[slug]",
+    },
     "/ai-lab": "/ai-lab",
     "/contact": { en: "/contact", "pt-BR": "/contato" },
   },

@@ -14,8 +14,9 @@ O site é bilíngue (inglês como padrão e português do Brasil), estático e s
 | Home (SPEC-001) | Implementada, em revisão de conteúdo |
 | About (SPEC-002) | Implementada, em revisão |
 | Experience (SPEC-003) | Implementada, em revisão |
-| Projects, AI Lab e Contact | Páginas provisórias, ainda sem conteúdo |
-| Testes end-to-end (Playwright) | Configurados; cobrem Home, About e Experience |
+| Projects (SPEC-004) | Implementada, em revisão |
+| AI Lab e Contact | Páginas provisórias, ainda sem conteúdo |
+| Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience e Projects |
 | Technologies, Resume (página), SEO final | Pendentes |
 | Hospedagem, domínio e analytics | Pendentes de decisão |
 
@@ -91,7 +92,7 @@ Os textos ficam em `src/content/en/common.json` e `src/content/pt-BR/common.json
 ├── .claude/skills/   Skills usadas pelo agente de IA
 ├── public/
 │   ├── documents/    Currículo em PDF
-│   └── images/hero/  Foto do Hero
+│   └── images/       Foto do Hero (hero/) e capturas dos projetos (projects/)
 └── src/
     ├── app/[locale]/ Páginas e layout por idioma
     ├── components/   ui/, layout/ e sections/

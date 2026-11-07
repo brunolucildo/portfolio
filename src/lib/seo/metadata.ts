@@ -6,15 +6,18 @@ import { siteConfig } from "@/config/site";
 import { getPathname } from "@/i18n/navigation";
 import { type Locale, routing } from "@/i18n/routing";
 
+/** Destino de uma página: caminho fixo ou rota dinâmica com seus parâmetros. */
+export type AppHref = Parameters<typeof getPathname>[0]["href"];
+
 /** Caminho público da página no idioma informado (ex.: `/pt-BR/sobre`). */
-export function localizedPath(locale: Locale, href: AppPathname): string {
+export function localizedPath(locale: Locale, href: AppHref): string {
   return getPathname({ locale, href });
 }
 
 /** Canonical e `hreflang` da página equivalente em cada idioma. */
 export function localizedAlternates(
   locale: Locale,
-  href: AppPathname,
+  href: AppHref,
 ): NonNullable<Metadata["alternates"]> {
   return {
     canonical: localizedPath(locale, href),
@@ -32,6 +35,58 @@ const openGraphLocale: Record<Locale, string> = {
   "pt-BR": "pt_BR",
 };
 
+type PageMetadataNamespace =
+  | "about.metadata"
+  | "experience.metadata"
+  | "projects.metadata"
+  | "projects.detail.football.metadata"
+  | "projects.detail.reelix.metadata";
+
+/**
+ * Título e descrição de cada página, lidos do conteúdo. O `switch` mantém as
+ * chaves verificadas pelo TypeScript, já que o tipo das traduções não alcança
+ * namespaces tão profundos como os dos detalhes de projeto.
+ */
+async function pageTexts(
+  locale: Locale,
+  namespace: PageMetadataNamespace,
+): Promise<{ title: string; description: string }> {
+  switch (namespace) {
+    case "about.metadata": {
+      const t = await getTranslations({ locale, namespace });
+      return { title: t("title"), description: t("description") };
+    }
+    case "experience.metadata": {
+      const t = await getTranslations({ locale, namespace });
+      return { title: t("title"), description: t("description") };
+    }
+    case "projects.metadata": {
+      const t = await getTranslations({ locale, namespace });
+      return { title: t("title"), description: t("description") };
+    }
+    case "projects.detail.football.metadata": {
+      const t = await getTranslations({
+        locale,
+        namespace: "projects.detail.football",
+      });
+      return {
+        title: t("metadata.title"),
+        description: t("metadata.description"),
+      };
+    }
+    case "projects.detail.reelix.metadata": {
+      const t = await getTranslations({
+        locale,
+        namespace: "projects.detail.reelix",
+      });
+      return {
+        title: t("metadata.title"),
+        description: t("metadata.description"),
+      };
+    }
+  }
+}
+
 /**
  * Metadados de uma página implementada: título e descrição do conteúdo,
  * canonical, `hreflang` e Open Graph, indexável.
@@ -42,31 +97,31 @@ export async function buildPageMetadata({
   namespace,
 }: {
   locale: string;
-  href: AppPathname;
-  namespace: "about.metadata" | "experience.metadata";
+  href: AppHref;
+  namespace: PageMetadataNamespace;
 }): Promise<Metadata> {
   if (!hasLocale(routing.locales, locale)) {
     return {};
   }
 
-  const t = await getTranslations({ locale, namespace });
+  const { title, description } = await pageTexts(locale, namespace);
 
   return {
-    title: t("title"),
-    description: t("description"),
+    title,
+    description,
     alternates: localizedAlternates(locale, href),
     openGraph: {
       type: "website",
       siteName: siteConfig.name,
-      title: t("title"),
-      description: t("description"),
+      title,
+      description,
       url: localizedPath(locale, href),
       locale: openGraphLocale[locale],
     },
   };
 }
 
-type PlaceholderPage = "projects" | "aiLab" | "contact";
+type PlaceholderPage = "aiLab" | "contact";
 
 /**
  * Metadados das páginas provisórias: título próprio, canonical e `hreflang`,
