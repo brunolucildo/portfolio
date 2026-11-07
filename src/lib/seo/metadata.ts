@@ -27,12 +27,46 @@ export function localizedAlternates(
   };
 }
 
-type PlaceholderPage =
-  | "about"
-  | "experience"
-  | "projects"
-  | "aiLab"
-  | "contact";
+const openGraphLocale: Record<Locale, string> = {
+  en: "en_US",
+  "pt-BR": "pt_BR",
+};
+
+/**
+ * Metadados de uma página implementada: título e descrição do conteúdo,
+ * canonical, `hreflang` e Open Graph, indexável.
+ */
+export async function buildPageMetadata({
+  locale,
+  href,
+  namespace,
+}: {
+  locale: string;
+  href: AppPathname;
+  namespace: "about.metadata";
+}): Promise<Metadata> {
+  if (!hasLocale(routing.locales, locale)) {
+    return {};
+  }
+
+  const t = await getTranslations({ locale, namespace });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: localizedAlternates(locale, href),
+    openGraph: {
+      type: "website",
+      siteName: siteConfig.name,
+      title: t("title"),
+      description: t("description"),
+      url: localizedPath(locale, href),
+      locale: openGraphLocale[locale],
+    },
+  };
+}
+
+type PlaceholderPage = "experience" | "projects" | "aiLab" | "contact";
 
 /**
  * Metadados das páginas provisórias: título próprio, canonical e `hreflang`,

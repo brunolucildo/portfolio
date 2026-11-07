@@ -52,7 +52,18 @@ Validar:
 
 ### 3.3. Testes end-to-end
 
-Ferramenta proposta: Playwright.
+Ferramenta adotada: Playwright (`@playwright/test`), somente com Chromium.
+
+Estado atual (2026-11-07):
+
+- Comando: `pnpm test:e2e`. A configuração em `playwright.config.ts` faz o build de produção e sobe o app na porta 3100, sempre testando um build novo; o relatório HTML fica em `playwright-report/`.
+- Primeira instalação do navegador: `pnpm exec playwright install chromium`.
+- Os testes ficam em `e2e/`, um arquivo por página (`home.spec.ts`, `about.spec.ts`), com regras de conteúdo compartilhadas em `e2e/support/content-rules.ts`.
+- Cobertura atual: estrutura de títulos, metadados (`title`, descrição, canonical, `hreflang`, Open Graph, `noindex`), links e rotas por idioma, troca de idioma, expressões proibidas, ordem e foco do teclado, alvos de toque, largura de leitura e rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px.
+- Cada nova página implementada ganha seu `*.spec.ts` na mesma entrega, cobrindo os critérios de aceitação verificáveis pelo navegador da sua SPEC.
+- Não cobrem: contraste, leitores de tela, LCP e CLS, que continuam em verificação manual ou com ferramenta própria.
+
+Vitest e React Testing Library (3.1 e 3.2) ainda não foram adotados: entram quando houver lógica própria para testar, como a validação do formulário de contato.
 
 Validar fluxos completos:
 

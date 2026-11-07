@@ -7,8 +7,8 @@
 | Nome | About |
 | Identificador | SPEC-002 |
 | Slug | `002-about` |
-| Versão | 0.3.0 |
-| Status | Approved (textos, formação e SEO aprovados em 2026-11-07; pronta para implementação) |
+| Versão | 0.4.0 |
+| Status | In Review (implementada em 2026-11-07; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-07 |
 | Origem | SPEC-002 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -204,6 +204,32 @@ Decisões reversíveis adotadas neste refinamento.
 | 2026-11-07 | Nenhuma métrica de resultado é publicada no About nem na Home; validação fica para a SPEC-003 (Experience). | Resposta do usuário |
 | 2026-11-07 | Textos do About (7.1), rótulo da formação 2 e SEO aprovados sem ajustes (Q1, Q2, Q3). | Resposta do usuário |
 
+## 14. Implementação e verificação
+
+Implementada na branch `feat/about`. Arquivos: `src/components/sections/AboutContent.tsx` (novo), `src/app/[locale]/about/page.tsx`, `src/lib/seo/metadata.ts` (novo `buildPageMetadata`; "about" sai do tipo das páginas provisórias), `src/components/sections/PagePlaceholder.tsx` e os dois `common.json` (nova seção `about`; chave `pages.about` removida por ficar sem uso).
+
+Verificação em build de produção (`pnpm build` + `pnpm start`), em 2026-11-07:
+
+| Critério | Resultado | Evidência |
+|---|---|---|
+| ABOUT-CA-01 | Atendido | HTML de `/en/about` e `/pt-BR/sobre`: 1 `h1` e 4 `h2` na ordem prevista. |
+| ABOUT-CA-02 | Atendido | Busca no `main` dos dois idiomas: nenhuma ocorrência dos termos proibidos nem de "Açovisa". |
+| ABOUT-CA-03 | Atendido | Cada curso mostra nome, instituição e período; o curso em andamento exibe "In progress" / "Em andamento". |
+| ABOUT-CA-04 | Atendido | Links do `main`: `/en/experience` e `/en/ai-lab`; `/pt-BR/experiencia` e `/pt-BR/ai-lab`. |
+| ABOUT-CA-05 | Atendido | Todo texto vem de `t()`; o componente não tem texto fixo nem condicional de idioma. |
+| ABOUT-CA-06 | Atendido | `title`, `description`, canonical, `hreflang` (en, pt-BR, x-default), Open Graph e `<html lang>` corretos, sem `noindex`. O domínio dos links ainda é `localhost` até definir `NEXT_PUBLIC_SITE_URL`. |
+| ABOUT-CA-07 | Atendido | Coluna de texto com 624 px (limite de 760 px) e no máximo 73 caracteres por linha em 1366 px (en e pt-BR). |
+| ABOUT-CA-08 | Atendido em parte | Sem `<img>`, parallax nem classes de animação; o conteúdo está no HTML inicial. A navegação com JavaScript desabilitado não foi exercitada num navegador. |
+| ABOUT-CA-09 | Atendido | Ordem no DOM: skip link, header, link de experiência, link do AI Lab, footer; sem `tabindex` positivo; foco visível confirmado com a tecla Tab (outline de 2 px). |
+| ABOUT-CA-10 | Atendido | Sem rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px, nos dois idiomas. |
+| ABOUT-CA-11 | Atendido | Equipe de cinco e "10+" coincidem com a Home e com o currículo; Experience ainda é provisória. |
+| ABOUT-CA-12 | Atendido | `pnpm check`, `pnpm typecheck` (inclui a paridade en/pt-BR) e `pnpm build` sem erros. |
+
+Divergências em relação à SPEC:
+
+- A largura de leitura foi fixada em 624 px (`max-w-[39rem]`), abaixo dos 760 px do container de leitura, porque 760 px passava de 80 caracteres por linha na abertura (86 medidos).
+- A verificação inicial foi manual (build, inspeção do HTML e medições no navegador); em seguida foi adicionado o Playwright e `e2e/about.spec.ts` passou a automatizar CA-01 a CA-04 e CA-06 a CA-10 (CA-05 e CA-11 seguem por revisão; a navegação sem JavaScript não é exercitada). LCP e CLS (RNF-02) não foram medidos com ferramenta própria.
+
 ## Refinamento
 
 | Data | O que mudou | Motivo |
@@ -218,3 +244,4 @@ Decisões reversíveis adotadas neste refinamento.
 | 2026-11-07 | Rótulo da formação 2 trocado para "pós-graduação" e foco em validação incluído no bloco de IA, com base no perfil público do GitHub. O LinkedIn exige login e não pôde ser consultado. | Complemento de informações a pedido do usuário. |
 | 2026-11-07 | Formação atualizada com os nomes do LinkedIn (IFSP; "pós-graduação, programa Master") após leitura do PDF exportado do perfil. | Complemento de informações a pedido do usuário. |
 | 2026-11-07 | Versão 0.3.0: textos, formação e SEO aprovados; Q1 a Q3 resolvidas; "8+" trocado por "10+". | Decisões do usuário na retomada do projeto. |
+| 2026-11-07 | Versão 0.4.0: implementada; seção 14 com a verificação dos critérios e as divergências. | Implementação da SPEC. |

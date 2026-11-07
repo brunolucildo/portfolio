@@ -34,11 +34,47 @@
   },
   "pages": {
     "placeholder": "This section is under construction.",
-    "about": { "title": "About" },
     "experience": { "title": "Experience" },
     "projects": { "title": "Projects" },
     "aiLab": { "title": "AI Lab" },
     "contact": { "title": "Contact" }
+  },
+  "about": {
+    "metadata": {
+      "title": "About | Bruno Lucildo",
+      "description": "Bruno Lucildo's path from full-stack developer to backend technical lead, how he works, and his study of AI systems."
+    },
+    "title": "About",
+    "intro": "I'm a senior backend developer and technical lead, working mostly with C# and .NET. I design and modernize enterprise systems, and I lead a team of five developers while staying hands-on in architecture and code.",
+    "journey": {
+      "title": "How I got here",
+      "text": "I started as a full-stack developer maintaining legacy enterprise applications. Over the years I moved into backend architecture for a new platform and, later, into technical leadership. Working with both legacy and modern code shaped how I decide: I weigh business continuity, scalability and maintainability together.",
+      "link": "View experience"
+    },
+    "craft": {
+      "title": "Development and leadership",
+      "text": "I favor Clean Architecture and SOLID because they keep systems easy to change, and I pick tools for the problem at hand. As a technical lead, I review code, mentor developers and help define the engineering standards the team works by."
+    },
+    "ai": {
+      "title": "Exploring AI",
+      "text": "I'm studying AI systems development and management, and I use study projects to explore LLMs, AI agents, RAG and prompt engineering, with a focus on validating what the models produce. They are learning projects, and I present them that way in the AI Lab.",
+      "link": "Explore the AI Lab"
+    },
+    "education": {
+      "title": "Education",
+      "items": {
+        "undergraduate": {
+          "course": "Undergraduate degree in Systems Analysis and Development",
+          "institution": "Federal Institute of Education, Science and Technology of São Paulo (IFSP)",
+          "period": "2009–2013"
+        },
+        "postgraduate": {
+          "course": "Postgraduate degree (Master's program) in AI Systems Development and Management",
+          "institution": "Coders University",
+          "period": "In progress"
+        }
+      }
+    }
   },
   "home": {
     "metadata": {

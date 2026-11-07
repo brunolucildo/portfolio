@@ -34,11 +34,47 @@
   },
   "pages": {
     "placeholder": "Esta seção está em construção.",
-    "about": { "title": "Sobre" },
     "experience": { "title": "Experiência" },
     "projects": { "title": "Projetos" },
     "aiLab": { "title": "AI Lab" },
     "contact": { "title": "Contato" }
+  },
+  "about": {
+    "metadata": {
+      "title": "Sobre | Bruno Lucildo",
+      "description": "A trajetória de Bruno Lucildo de desenvolvedor full-stack a líder técnico backend, como ele trabalha e seus estudos em sistemas de IA."
+    },
+    "title": "Sobre",
+    "intro": "Sou desenvolvedor backend sênior e líder técnico, trabalhando principalmente com C# e .NET. Projeto e modernizo sistemas corporativos e lidero uma equipe de cinco desenvolvedores, sem deixar de atuar na arquitetura e no código.",
+    "journey": {
+      "title": "Minha trajetória",
+      "text": "Comecei como desenvolvedor full-stack, mantendo aplicações corporativas legadas. Com os anos, passei à arquitetura backend de uma nova plataforma e, depois, à liderança técnica. Trabalhar com código legado e moderno moldou a forma como decido: pondero continuidade do negócio, escalabilidade e manutenibilidade em conjunto.",
+      "link": "Ver experiência"
+    },
+    "craft": {
+      "title": "Desenvolvimento e liderança",
+      "text": "Prefiro Clean Architecture e SOLID porque mantêm os sistemas fáceis de evoluir, e escolho as ferramentas pelo problema em questão. Como líder técnico, faço revisões de código, oriento desenvolvedores e ajudo a definir os padrões de engenharia do time."
+    },
+    "ai": {
+      "title": "Explorando IA",
+      "text": "Estudo desenvolvimento e gestão de sistemas de IA e uso projetos de estudo para explorar LLMs, agentes de IA, RAG e engenharia de prompts, com foco em validar o que os modelos produzem. São projetos de aprendizado, e é assim que os apresento no AI Lab.",
+      "link": "Explorar o AI Lab"
+    },
+    "education": {
+      "title": "Formação",
+      "items": {
+        "undergraduate": {
+          "course": "Graduação em Análise e Desenvolvimento de Sistemas",
+          "institution": "Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP)",
+          "period": "2009–2013"
+        },
+        "postgraduate": {
+          "course": "Pós-graduação (programa Master) em Desenvolvimento e Gestão de Sistemas de IA",
+          "institution": "Coders University",
+          "period": "Em andamento"
+        }
+      }
+    }
   },
   "home": {
     "metadata": {
