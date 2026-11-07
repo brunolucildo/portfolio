@@ -278,7 +278,7 @@ Informações já identificadas:
 |---|---|
 | Nome | Bruno Lucildo |
 | Posicionamento | Desenvolvedor Backend Sênior / Líder Técnico |
-| Experiência | Mais de 8 anos |
+| Experiência | Mais de 10 anos |
 | Atuação | Desenvolvimento backend e liderança técnica |
 | Equipe | Liderança de cinco desenvolvedores |
 | Idioma padrão do portfólio | Inglês |
@@ -340,15 +340,16 @@ Projeto de análise de desempenho de atletas de futebol utilizando técnicas de 
 - Memória conversacional utilizando SQLite.
 - Recuperação de informações.
 - Avaliação de modelos.
-- 14 testes automatizados.
+- Testes automatizados (109 no repositório público, conforme conferido em 2026-11-07; o número antigo, 14, correspondia a um único arquivo de testes).
+
+**Estado:** Em desenvolvimento (decisão do Bruno em 2026-11-07, embora o README do projeto o chame de "experimental").
 
 **Informações pendentes:**
 
-- Links públicos do projeto.
 - Tecnologias e arquitetura finais.
 - Evidências visuais.
 - Resultados e limitações.
-- Estado atual da implementação.
+- Revisão dos bancos `.db` versionados no repositório (a cargo do Bruno).
 
 ### 6.2. Reelix
 
@@ -356,7 +357,9 @@ Projeto de análise de desempenho de atletas de futebol utilizando técnicas de 
 
 **Descrição inicial:**
 
-Aplicação planejada para acompanhamento de filmes e séries, com recursos de catálogo, organização pessoal e funcionalidades sociais.
+Aplicação em desenvolvimento para descobrir e acompanhar filmes e séries, registrar o que foi assistido e compartilhar atividades autorizadas com amigos. O repositório público contém um aplicativo React Native/Expo e uma API ASP.NET Core.
+
+**Estado:** Em desenvolvimento. Não apresentar como produto lançado; o README do projeto não confirma implantação.
 
 **Pontos que podem ser apresentados:**
 
@@ -369,11 +372,8 @@ Aplicação planejada para acompanhamento de filmes e séries, com recursos de c
 
 **Informações pendentes:**
 
-- Estado real da implementação.
-- Arquitetura efetivamente adotada.
 - Funcionalidades concluídas.
 - Evidências visuais.
-- Links públicos, caso existam.
 
 ### 6.3. Modernização de Sistemas Profissionais
 

@@ -119,7 +119,7 @@ Origem: `CONTENT.md`, `BUSINESS.md`, `SEO.md` e `.specs/FEATURES.md`. A coluna S
 | Mensagem complementar | Building scalable systems, leading engineering teams and exploring the future of technology. | Construindo sistemas escaláveis, liderando times de engenharia e explorando o futuro da tecnologia. | SPEC-001 original | Aprovado |
 | CTA principal | Explore My Work | Explorar meu trabalho | CONTENT 4.1 | Aprovado |
 | CTA secundário | Get in Touch | Entrar em contato | CONTENT 4.1 | Aprovado |
-| Fato 1 | 8+ years of experience | Mais de 8 anos de experiência | CONTENT 5.1 | Aprovado |
+| Fato 1 | 10+ years of experience | Mais de 10 anos de experiência | CONTENT 5.1; LinkedIn (desde jul/2016) | Aprovado (atualizado de 8+ em 2026-11-07) |
 | Fato 2 | Backend development and technical leadership | Desenvolvimento backend e liderança técnica | CONTENT 5.1 | Aprovado |
 | Fato 3 | Leading a team of five developers | Liderando uma equipe de cinco desenvolvedores | CONTENT 5.1 e BUSINESS 4.2 | Aprovado |
 | Football: nome | Football Stat Analytics | Football Stat Analytics | CONTENT 6.1 | Aprovado |
