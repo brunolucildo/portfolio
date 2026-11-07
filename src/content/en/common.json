@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "title": "Bruno Lucildo",
+    "description": "Backend engineering, technical leadership and software architecture."
+  },
+  "navigation": {
+    "label": "Main navigation",
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "newTab": "(opens in a new tab)",
+    "resume": "Resume",
+    "items": {
+      "home": "Home",
+      "about": "About",
+      "experience": "Experience",
+      "projects": "Projects",
+      "aiLab": "AI Lab",
+      "contact": "Contact"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "options": {
+      "en": "English",
+      "pt-BR": "Português"
+    }
+  },
+  "footer": {
+    "navigationLabel": "Footer navigation",
+    "contactLabel": "Contact channels",
+    "rights": "All rights reserved."
+  },
+  "pages": {
+    "placeholder": "This section is under construction.",
+    "about": { "title": "About" },
+    "experience": { "title": "Experience" },
+    "projects": { "title": "Projects" },
+    "aiLab": { "title": "AI Lab" },
+    "contact": { "title": "Contact" }
+  },
+  "home": {
+    "headline": "Engineering beyond code.",
+    "subheadline": "Building scalable systems, leading engineering teams and exploring the future of technology."
+  }
+}

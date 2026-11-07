@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "title": "Bruno Lucildo",
+    "description": "Desenvolvimento backend, liderança técnica e arquitetura de software."
+  },
+  "navigation": {
+    "label": "Navegação principal",
+    "skipToContent": "Ir para o conteúdo",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "newTab": "(abre em uma nova aba)",
+    "resume": "Currículo",
+    "items": {
+      "home": "Início",
+      "about": "Sobre",
+      "experience": "Experiência",
+      "projects": "Projetos",
+      "aiLab": "AI Lab",
+      "contact": "Contato"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Idioma",
+    "options": {
+      "en": "English",
+      "pt-BR": "Português"
+    }
+  },
+  "footer": {
+    "navigationLabel": "Navegação do rodapé",
+    "contactLabel": "Canais de contato",
+    "rights": "Todos os direitos reservados."
+  },
+  "pages": {
+    "placeholder": "Esta seção está em construção.",
+    "about": { "title": "Sobre" },
+    "experience": { "title": "Experiência" },
+    "projects": { "title": "Projetos" },
+    "aiLab": { "title": "AI Lab" },
+    "contact": { "title": "Contato" }
+  },
+  "home": {
+    "headline": "Engenharia além do código.",
+    "subheadline": "Construindo sistemas escaláveis, liderando times de engenharia e explorando o futuro da tecnologia."
+  }
+}
