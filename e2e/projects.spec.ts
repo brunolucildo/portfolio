@@ -32,6 +32,7 @@ type ProjectsPage = {
   otherLanguage: { name: string; path: string };
   projects: ProjectExpectation[];
   captions: { reelix: string; fintalab: string };
+  reelixAlts: string[];
   sectionTitles: string[];
   detailTitles: { football: string; reelix: string };
   detailDescriptions: { football: string; reelix: string };
@@ -62,6 +63,32 @@ const fintalabImages = (locale: string) =>
   ["landing", "evaluation", "roster"].map(
     (screen) => `/images/projects/fintalab-${screen}.${locale}.png`,
   );
+
+/** Textos alternativos das nove telas do Reelix, na ordem do detalhe. */
+const reelixAltsEn: string[] = [
+  'Reelix home screen on a phone: the Series tab with "Continue watching" and "Start watching" rows of series posters and the start of the release calendar. The app interface is in Portuguese.',
+  'Reelix home screen on a phone, Movies tab: a "Quero assistir" row with one movie poster, a row of featured movies and the start of the favorites row. The app interface is in Portuguese.',
+  'Reelix catalog search on a phone: the Movies and Series tabs, a search field with "Interestelar" and two results with poster and year. The app interface is in Portuguese.',
+  "Reelix title screen for the series Breaking Bad on a phone: a backdrop image, the release date, action buttons, the synopsis and the seasons and episodes tabs with watched progress. The app interface is in Portuguese.",
+  "Reelix reviews and comments section on a phone: a half-star rating control with a private or public choice, and a comment box with a spoiler checkbox and a visibility choice. The app interface is in Portuguese.",
+  "Reelix watchlist screen on a phone: tabs for favorites, watchlist and my lists, a catalog search field, a sort option and two titles with poster, type, year and genre. The app interface is in Portuguese.",
+  "Reelix profile screen on a phone: avatar choices (initials and illustrated characters) and a row of achievement badges with a link to progress and statistics. The app interface is in Portuguese.",
+  "Reelix achievements and statistics screen on a phone: totals of episodes, series, movies and records, estimated viewing time and the current month's activity. The app interface is in Portuguese.",
+  'Reelix sign-in screen on a phone: the reelix logo, the headline "Suas histórias começam aqui." and e-mail and password fields. The app interface is in Portuguese.',
+];
+
+/** Textos alternativos das nove telas do Reelix, na ordem do detalhe. */
+const reelixAltsPt: string[] = [
+  'Tela inicial do Reelix no celular: a aba Séries com as fileiras "Continuar Assistindo" e "Começar a Assistir", com pôsteres de séries, e o início do calendário de estreias.',
+  'Tela inicial do Reelix no celular, aba Filmes: a fileira "Quero assistir" com um pôster de filme, a fileira de filmes em destaque e o início dos favoritos.',
+  'Pesquisa no catálogo do Reelix no celular: as abas Filmes e Séries, o campo de busca com "Interestelar" e dois resultados com pôster e ano.',
+  "Tela de título do Reelix no celular, para a série Breaking Bad: uma imagem de fundo, a data de lançamento, botões de ação, a sinopse e as abas de temporadas e episódios com o progresso assistido.",
+  "Seção de avaliações e comentários do Reelix no celular: o controle de nota em meia estrela com a escolha entre privado e público, e a caixa de comentário com a opção de marcar como spoiler e a escolha de visibilidade.",
+  "Tela de watchlist do Reelix no celular: abas de favoritos, watchlist e minhas listas, campo de busca no catálogo, opção de ordenação e dois títulos com pôster, tipo, ano e gênero.",
+  "Tela de perfil do Reelix no celular: opções de avatar (iniciais e personagens ilustrados) e uma fileira de medalhas de conquistas com um link para progresso e estatísticas.",
+  "Tela de conquistas e estatísticas do Reelix no celular: totais de episódios, séries, filmes e registros, tempo estimado de exibição e a atividade do mês.",
+  'Tela de entrada do Reelix no celular: o logotipo do reelix, o título "Suas histórias começam aqui." e os campos de e-mail e senha.',
+];
 
 const pages: ProjectsPage[] = [
   {
@@ -124,6 +151,7 @@ const pages: ProjectsPage[] = [
       fintalab:
         "Screens from the static concept prototype. All people, clubs and numbers are fictional.",
     },
+    reelixAlts: reelixAltsEn,
     sectionTitles: [
       "Overview",
       "Challenge",
@@ -204,6 +232,7 @@ const pages: ProjectsPage[] = [
       fintalab:
         "Telas do protótipo conceitual estático. Todas as pessoas, clubes e números são fictícios.",
     },
+    reelixAlts: reelixAltsPt,
     sectionTitles: [
       "Visão geral",
       "Desafio",
@@ -345,6 +374,12 @@ for (const projects of pages) {
     test("os arquivos de imagem existem e têm até 250 KB", () => {
       const files = [
         "reelix-home.jpg",
+        "reelix-movies.jpg",
+        "reelix-search.jpg",
+        "reelix-title.jpg",
+        "reelix-reviews.png",
+        "reelix-watchlist.jpg",
+        "reelix-profile.png",
         "reelix-stats.png",
         "reelix-login.png",
         ...["landing", "evaluation", "roster"].map(
@@ -588,7 +623,7 @@ for (const projects of pages) {
           return;
         }
 
-        await expect(images).toHaveCount(3);
+        await expect(images).toHaveCount(9);
         const sources = await images.evaluateAll((els) =>
           els.map((el) => {
             const url = new URL(
@@ -600,9 +635,24 @@ for (const projects of pages) {
         );
         expect(sources).toEqual([
           "/images/projects/reelix-home.jpg",
+          "/images/projects/reelix-movies.jpg",
+          "/images/projects/reelix-search.jpg",
+          "/images/projects/reelix-title.jpg",
+          "/images/projects/reelix-reviews.png",
+          "/images/projects/reelix-watchlist.jpg",
+          "/images/projects/reelix-profile.png",
           "/images/projects/reelix-stats.png",
           "/images/projects/reelix-login.png",
         ]);
+        expect(
+          await images.evaluateAll((els) =>
+            els.map((el) => el.getAttribute("alt")),
+          ),
+        ).toEqual(projects.reelixAlts);
+        for (const image of await images.all()) {
+          expect(await image.getAttribute("width")).not.toBeNull();
+          expect(await image.getAttribute("height")).not.toBeNull();
+        }
         await expect(page.locator("main figcaption")).toHaveText(
           projects.captions.reelix,
         );
@@ -705,43 +755,68 @@ for (const projects of pages) {
   }
 }
 
-// As telas ficam lado a lado a partir de 768 px (breakpoint `md` do projeto) e
-// empilhadas abaixo disso. O design system não tem o breakpoint `sm`.
-for (const target of [
-  {
-    name: "detalhe do Reelix",
-    path: "/en/projects/reelix",
-    selector: "main figure img",
-  },
-  {
-    name: "entrada do FintaLab na lista",
-    path: "/en/projects",
-    selector: "#projects-list > li:nth-child(3) img",
-  },
-]) {
-  test(`as imagens ficam lado a lado em 1440 px e empilhadas em 390 px: ${target.name}`, async ({
+// As telas do FintaLab ficam lado a lado a partir de 768 px (breakpoint `md` do
+// projeto) e empilhadas abaixo disso. O design system não tem o breakpoint `sm`.
+test("as telas do FintaLab ficam lado a lado em 1440 px e empilhadas em 390 px", async ({
+  page,
+}) => {
+  const tops = async () =>
+    page
+      .locator("#projects-list > li:nth-child(3) img")
+      .evaluateAll((els) =>
+        els.map((el) =>
+          Math.round(el.getBoundingClientRect().top + window.scrollY),
+        ),
+      );
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/en/projects");
+  const wide = await tops();
+  expect(wide).toHaveLength(3);
+  expect(new Set(wide).size).toBe(1);
+
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.goto("/en/projects");
+  const narrow = await tops();
+  expect(narrow).toHaveLength(3);
+  expect(new Set(narrow).size).toBe(3);
+});
+
+// As nove telas do Reelix ficam em uma única fileira rolável, em qualquer largura,
+// e a fileira recebe foco para ser operada pelo teclado.
+for (const width of [1440, 390]) {
+  test(`as telas do Reelix ficam em uma fileira rolável e focável com ${width} px`, async ({
     page,
   }) => {
-    const tops = async () =>
-      page
-        .locator(target.selector)
-        .evaluateAll((els) =>
-          els.map((el) =>
-            Math.round(el.getBoundingClientRect().top + window.scrollY),
-          ),
-        );
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/en/projects/reelix");
+    const gallery = page.getByRole("region", { name: "Screens" });
 
-    await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto(target.path);
-    const wide = await tops();
-    expect(wide).toHaveLength(3);
-    expect(new Set(wide).size).toBe(1);
+    await expect(gallery).toHaveCount(1);
+    await expect(gallery).toHaveAttribute("tabindex", "0");
+    const tops = await gallery
+      .locator("img")
+      .evaluateAll((els) =>
+        els.map((el) =>
+          Math.round(el.getBoundingClientRect().top + window.scrollY),
+        ),
+      );
+    expect(tops).toHaveLength(9);
+    expect(new Set(tops).size).toBe(1);
 
-    await page.setViewportSize({ width: 390, height: 900 });
-    await page.goto(target.path);
-    const narrow = await tops();
-    expect(narrow).toHaveLength(3);
-    expect(new Set(narrow).size).toBe(3);
+    const scrolls = await gallery.evaluate(
+      (el) => el.scrollWidth > el.clientWidth,
+    );
+    expect(scrolls).toBe(true);
+    const pageOverflow = await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    );
+    expect(pageOverflow).toBeLessThanOrEqual(0);
+
+    await gallery.focus();
+    await expect(gallery).toBeFocused();
   });
 }
 

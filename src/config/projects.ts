@@ -15,6 +15,12 @@ export type ProjectImage = {
   /** Chave do texto alternativo em `projects.images`. */
   alt:
     | "reelixHome"
+    | "reelixMovies"
+    | "reelixSearch"
+    | "reelixTitle"
+    | "reelixReviews"
+    | "reelixWatchlist"
+    | "reelixProfile"
     | "reelixStats"
     | "reelixLogin"
     | "fintalabLanding"
@@ -46,6 +52,48 @@ const reelixHome: ProjectImage = {
   src: "/images/projects/reelix-home.jpg",
   width: 830,
   height: 1800,
+};
+
+const reelixMovies: ProjectImage = {
+  alt: "reelixMovies",
+  src: "/images/projects/reelix-movies.jpg",
+  width: 860,
+  height: 1800,
+};
+
+const reelixSearch: ProjectImage = {
+  alt: "reelixSearch",
+  src: "/images/projects/reelix-search.jpg",
+  width: 860,
+  height: 1800,
+};
+
+const reelixTitle: ProjectImage = {
+  alt: "reelixTitle",
+  src: "/images/projects/reelix-title.jpg",
+  width: 860,
+  height: 1800,
+};
+
+const reelixReviews: ProjectImage = {
+  alt: "reelixReviews",
+  src: "/images/projects/reelix-reviews.png",
+  width: 860,
+  height: 1800,
+};
+
+const reelixWatchlist: ProjectImage = {
+  alt: "reelixWatchlist",
+  src: "/images/projects/reelix-watchlist.jpg",
+  width: 860,
+  height: 1800,
+};
+
+const reelixProfile: ProjectImage = {
+  alt: "reelixProfile",
+  src: "/images/projects/reelix-profile.png",
+  width: 860,
+  height: 1340,
 };
 
 const reelixStats: ProjectImage = {
@@ -119,7 +167,17 @@ export const projects: readonly ProjectConfig[] = [
       "TMDB",
     ],
     listImages: [reelixHome],
-    detailImages: [reelixHome, reelixStats, reelixLogin],
+    detailImages: [
+      reelixHome,
+      reelixMovies,
+      reelixSearch,
+      reelixTitle,
+      reelixReviews,
+      reelixWatchlist,
+      reelixProfile,
+      reelixStats,
+      reelixLogin,
+    ],
     caption: "reelix",
   },
   {

@@ -154,7 +154,8 @@
       "viewDetails": "Ver detalhes",
       "repository": "Ver no GitHub",
       "back": "Voltar para projetos",
-      "technologies": "Tecnologias"
+      "technologies": "Tecnologias",
+      "screens": "Telas"
     },
     "items": {
       "football": {
@@ -182,6 +183,12 @@
     },
     "images": {
       "reelixHome": "Tela inicial do Reelix no celular: a aba Séries com as fileiras \"Continuar Assistindo\" e \"Começar a Assistir\", com pôsteres de séries, e o início do calendário de estreias.",
+      "reelixMovies": "Tela inicial do Reelix no celular, aba Filmes: a fileira \"Quero assistir\" com um pôster de filme, a fileira de filmes em destaque e o início dos favoritos.",
+      "reelixSearch": "Pesquisa no catálogo do Reelix no celular: as abas Filmes e Séries, o campo de busca com \"Interestelar\" e dois resultados com pôster e ano.",
+      "reelixTitle": "Tela de título do Reelix no celular, para a série Breaking Bad: uma imagem de fundo, a data de lançamento, botões de ação, a sinopse e as abas de temporadas e episódios com o progresso assistido.",
+      "reelixReviews": "Seção de avaliações e comentários do Reelix no celular: o controle de nota em meia estrela com a escolha entre privado e público, e a caixa de comentário com a opção de marcar como spoiler e a escolha de visibilidade.",
+      "reelixWatchlist": "Tela de watchlist do Reelix no celular: abas de favoritos, watchlist e minhas listas, campo de busca no catálogo, opção de ordenação e dois títulos com pôster, tipo, ano e gênero.",
+      "reelixProfile": "Tela de perfil do Reelix no celular: opções de avatar (iniciais e personagens ilustrados) e uma fileira de medalhas de conquistas com um link para progresso e estatísticas.",
       "reelixStats": "Tela de conquistas e estatísticas do Reelix no celular: totais de episódios, séries, filmes e registros, tempo estimado de exibição e a atividade do mês.",
       "reelixLogin": "Tela de entrada do Reelix no celular: o logotipo do reelix, o título \"Suas histórias começam aqui.\" e os campos de e-mail e senha.",
       "fintalabLanding": "Protótipo conceitual do FintaLab, tela inicial: o título \"Cada partida pode levar você mais longe.\" ao lado de uma ilustração de campo de futebol, com o aviso de que pessoas, clubes e números são fictícios.",

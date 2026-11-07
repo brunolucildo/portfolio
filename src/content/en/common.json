@@ -154,7 +154,8 @@
       "viewDetails": "View details",
       "repository": "View on GitHub",
       "back": "Back to projects",
-      "technologies": "Technologies"
+      "technologies": "Technologies",
+      "screens": "Screens"
     },
     "items": {
       "football": {
@@ -182,6 +183,12 @@
     },
     "images": {
       "reelixHome": "Reelix home screen on a phone: the Series tab with \"Continue watching\" and \"Start watching\" rows of series posters and the start of the release calendar. The app interface is in Portuguese.",
+      "reelixMovies": "Reelix home screen on a phone, Movies tab: a \"Quero assistir\" row with one movie poster, a row of featured movies and the start of the favorites row. The app interface is in Portuguese.",
+      "reelixSearch": "Reelix catalog search on a phone: the Movies and Series tabs, a search field with \"Interestelar\" and two results with poster and year. The app interface is in Portuguese.",
+      "reelixTitle": "Reelix title screen for the series Breaking Bad on a phone: a backdrop image, the release date, action buttons, the synopsis and the seasons and episodes tabs with watched progress. The app interface is in Portuguese.",
+      "reelixReviews": "Reelix reviews and comments section on a phone: a half-star rating control with a private or public choice, and a comment box with a spoiler checkbox and a visibility choice. The app interface is in Portuguese.",
+      "reelixWatchlist": "Reelix watchlist screen on a phone: tabs for favorites, watchlist and my lists, a catalog search field, a sort option and two titles with poster, type, year and genre. The app interface is in Portuguese.",
+      "reelixProfile": "Reelix profile screen on a phone: avatar choices (initials and illustrated characters) and a row of achievement badges with a link to progress and statistics. The app interface is in Portuguese.",
       "reelixStats": "Reelix achievements and statistics screen on a phone: totals of episodes, series, movies and records, estimated viewing time and the current month's activity. The app interface is in Portuguese.",
       "reelixLogin": "Reelix sign-in screen on a phone: the reelix logo, the headline \"Suas histórias começam aqui.\" and e-mail and password fields. The app interface is in Portuguese.",
       "fintalabLanding": "FintaLab concept prototype, home screen: the headline \"Every match can take you further.\" next to a football pitch illustration, with a notice that people, clubs and numbers are fictional.",
