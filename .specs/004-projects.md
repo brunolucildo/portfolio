@@ -7,8 +7,8 @@
 | Nome | Projects |
 | Identificador | SPEC-004 |
 | Slug | `004-projects` |
-| Versão | 0.3.0 |
-| Status | Proposed (refinada; os textos da seção 7 são provisórios e aguardam aprovação do usuário) |
+| Versão | 0.4.0 |
+| Status | Approved (textos, textos alternativos e imagens aprovados em 2026-11-07; pronta para implementação) |
 | Data | 2026-11-07 |
 | Origem | SPEC-004 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -31,7 +31,7 @@ A página Projects apresenta projetos pessoais, acadêmicos e conceituais de Bru
 3. Em cada entrada: nome, categoria, estado explícito, descrição curta, tecnologias e links.
 4. Em cada detalhe, sete seções: Overview, Challenge, Solution, Architecture (com a implementação), Technical Decisions, Current State e Links.
 5. Terceiro destaque na Home: o FintaLab entra ao lado do Football Stat Analytics e do Reelix, com a mesma fonte de dados da lista (atualiza a SPEC-001 para v0.8.0).
-6. Imagens capturadas dos próprios projetos: duas telas do app Reelix e três telas do protótipo do FintaLab (em cada idioma). O Football Stat Analytics não tem imagens.
+6. Imagens capturadas dos próprios projetos: três telas do app Reelix (home, estatísticas e entrada) e três telas do protótipo do FintaLab (em cada idioma). O Football Stat Analytics não tem imagens.
 7. Metadados da lista e de cada detalhe nos dois idiomas, substituindo o `noindex` provisório.
 
 ### 3.2. Fora do escopo
@@ -42,7 +42,7 @@ A página Projects apresenta projetos pessoais, acadêmicos e conceituais de Bru
 - Filtros, busca e ordenação por categoria (são três projetos).
 - Citar o programa de pós-graduação ou a instituição como contexto do Football Stat Analytics (decisão do usuário: só "projeto acadêmico").
 - Mensagens de disponibilidade profissional ("Open to Work", "Available for Opportunities", "Hire Me" e equivalentes) e qualquer indício de produto lançado.
-- Imagens do Football Stat Analytics; telas do Reelix com pôsteres de filmes ou dados de terceiros (home, listas, social, perfil e notificações); parallax e animação de entrada.
+- Imagens do Football Stat Analytics; telas do Reelix de listas, detalhe de título, social, perfil de amigos, notificações e acompanhamento; parallax e animação de entrada.
 - Header, footer, menu e Language Switcher (SPEC-010, já implementados).
 
 ## 4. Requisitos funcionais
@@ -63,8 +63,8 @@ A página Projects apresenta projetos pessoais, acadêmicos e conceituais de Bru
 | PROJ-RF-12 | Must | A lista e cada detalhe definem `title`, `description`, canonical, `hreflang` e Open Graph por idioma, são indexáveis e têm a rota equivalente no outro idioma. |
 | PROJ-RF-13 | Must | As páginas não contêm as expressões proibidas do `CLAUDE.md` (seção 7), mensagens de disponibilidade profissional nem frases do `CONTENT.md` (seção 9) como "paixão por tecnologia". |
 | PROJ-RF-14 | Must | A Home mostra três destaques (Football Stat Analytics, Reelix e FintaLab). Nome, categoria, estado, descrição curta e repositório vêm da mesma fonte da lista, e os textos coincidem nas duas páginas. |
-| PROJ-RF-15 | Must | As imagens da seção 7.6 aparecem na lista (capa do Reelix; três telas do FintaLab no idioma ativo) e no detalhe do Reelix (duas telas), cada uma com texto alternativo e legenda no idioma da página. O Football Stat Analytics não tem imagem e a página não reserva espaço para ela. |
-| PROJ-RF-16 | Must | As imagens das telas do Reelix não mostram pôsteres de filmes, e-mails, nomes de terceiros nem dados de amigos. As imagens do FintaLab mostram só dados fictícios do próprio protótipo. |
+| PROJ-RF-15 | Must | As imagens da seção 7.6 aparecem na lista (capa do Reelix, que é a home do app; três telas do FintaLab no idioma ativo) e no detalhe do Reelix (as três telas), cada uma com texto alternativo e legenda no idioma da página. O Football Stat Analytics não tem imagem e a página não reserva espaço para ela. |
+| PROJ-RF-16 | Must | As imagens das telas do Reelix não mostram e-mails, nomes de terceiros nem dados de amigos. A home do Reelix mostra pôsteres de séries obtidos do TMDB, aprovada pelo usuário, e a legenda do Reelix credita o TMDB. As imagens do FintaLab mostram só dados fictícios do próprio protótipo. |
 
 ## 5. Requisitos não funcionais
 
@@ -93,7 +93,7 @@ Layout editorial, sem cards na lista de Projects; os cards seguem apenas na Home
 - Tecnologias em uma linha de texto discreta, como em Experience, sem níveis de proficiência.
 - A seção Technical decisions é uma lista curta, cada item com uma frase de decisão em destaque e a razão.
 - Na Home, o terceiro card segue o `Card` já usado, em coluna única abaixo de 1024 px e três colunas a partir de 1024 px.
-- Imagens: na lista, a capa do Reelix (tela de entrada, em formato de celular) fica na coluna larga, acima da descrição; o FintaLab mostra suas três telas em fileira, que quebra em coluna abaixo de 768 px. No detalhe do Reelix, as duas telas aparecem lado a lado, abaixo do cabeçalho. Toda imagem tem legenda visível (seção 7.6) e cantos discretos, sem moldura de aparelho.
+- Imagens: na lista, a capa do Reelix (a home do app, em formato de celular) fica na coluna larga, acima da descrição; o FintaLab mostra suas três telas em fileira, que quebra em coluna abaixo de 768 px. No detalhe do Reelix, as três telas aparecem lado a lado, abaixo do cabeçalho (em coluna abaixo de 768 px). Toda imagem tem legenda visível (seção 7.6) e cantos discretos, sem moldura de aparelho.
 - Sem animação de entrada, sem parallax e sem hover decorativo.
 
 ### 6.2. Estados
@@ -111,7 +111,7 @@ Não há estado de carregamento, vazio ou erro de dados: o conteúdo é estátic
 
 ## 7. Conteúdo e dados
 
-Origem: os READMEs, `PROJECT_STATUS.md` e `docs/architecture.md` do Reelix, o README do Football Stat Analytics e o README e `planning/` do FintaLab (repositórios públicos, lidos em 2026-11-07), mais `CONTENT.md` (4.4 e 6) e as respostas do usuário. Os textos abaixo usam apenas fatos desses documentos e são **provisórios até a aprovação do usuário** (Q1).
+Origem: os READMEs, `PROJECT_STATUS.md` e `docs/architecture.md` do Reelix, o README do Football Stat Analytics e o README e `planning/` do FintaLab (repositórios públicos, lidos em 2026-11-07), mais `CONTENT.md` (4.4 e 6) e as respostas do usuário. Os textos abaixo usam apenas fatos desses documentos e foram **aprovados pelo usuário em 2026-11-07** (Q1).
 
 ### 7.1. Dados por projeto
 
@@ -188,12 +188,13 @@ As tecnologias do FintaLab são as do código que existe hoje (um chatbot de ter
 
 ### 7.6. Imagens
 
-Origem: capturas feitas em 2026-11-07 dos próprios projetos. As do Reelix vêm do app web em modo de desenvolvimento, em viewport de celular (430 px de largura, escala 2), com a conta de desenvolvimento do usuário, e foram revisadas para excluir pôsteres, e-mails e dados de terceiros. As do FintaLab vêm do protótipo estático (`planning/wireframes/index.html`), em 1440×900 (escala 1,5), nos dois idiomas que o protótipo oferece. Ficam em `public/images/projects/`, versionadas, e os textos alternativos e as legendas abaixo são **provisórios até a aprovação do usuário** (Q4).
+Origem: capturas feitas em 2026-11-07 dos próprios projetos. As do Reelix vêm do app web em modo de desenvolvimento, em viewport de celular (430 px de largura, escala 2), com a conta de desenvolvimento do usuário, e foram revisadas para excluir e-mails e dados de terceiros. As do FintaLab vêm do protótipo estático (`planning/wireframes/index.html`), em 1440×900 (escala 1,5), nos dois idiomas que o protótipo oferece. Ficam em `public/images/projects/`, versionadas, e os textos alternativos e as legendas abaixo foram **aprovados pelo usuário em 2026-11-07** (Q4), com uma adição minha à legenda do Reelix (crédito ao TMDB).
 
 | Arquivo | Dimensões | Onde aparece |
 |---|---|---|
-| `reelix-login.png` | 860×1800 | Capa do Reelix na lista; detalhe do Reelix |
-| `reelix-stats.png` | 830×1800 | Detalhe do Reelix |
+| `reelix-home.jpg` | 830×1800 | Capa do Reelix na lista; detalhe do Reelix (primeira tela) |
+| `reelix-stats.png` | 830×1800 | Detalhe do Reelix (segunda tela) |
+| `reelix-login.png` | 860×1800 | Detalhe do Reelix (terceira tela) |
 | `fintalab-landing.<idioma>.png` | 2160×1350 | Lista (FintaLab), primeira tela |
 | `fintalab-evaluation.<idioma>.png` | 2160×1350 | Lista (FintaLab), segunda tela |
 | `fintalab-roster.<idioma>.png` | 2160×1350 | Lista (FintaLab), terceira tela |
@@ -202,6 +203,7 @@ Origem: capturas feitas em 2026-11-07 dos próprios projetos. As do Reelix vêm 
 
 | Imagem | Texto alternativo (`en`) | Texto alternativo (`pt-BR`) |
 |---|---|---|
+| `reelix-home` | Reelix home screen on a phone: the Series tab with "Continue watching" and "Start watching" rows of series posters and the start of the release calendar. The app interface is in Portuguese. | Tela inicial do Reelix no celular: a aba Séries com as fileiras "Continuar Assistindo" e "Começar a Assistir", com pôsteres de séries, e o início do calendário de estreias. |
 | `reelix-login` | Reelix sign-in screen on a phone: the reelix logo, the headline "Suas histórias começam aqui." and e-mail and password fields. The app interface is in Portuguese. | Tela de entrada do Reelix no celular: o logotipo do reelix, o título "Suas histórias começam aqui." e os campos de e-mail e senha. |
 | `reelix-stats` | Reelix achievements and statistics screen on a phone: totals of episodes, series, movies and records, estimated viewing time and the current month's activity. The app interface is in Portuguese. | Tela de conquistas e estatísticas do Reelix no celular: totais de episódios, séries, filmes e registros, tempo estimado de exibição e a atividade do mês. |
 | `fintalab-landing` | FintaLab concept prototype, home screen: the headline "Every match can take you further." next to a football pitch illustration, with a notice that people, clubs and numbers are fictional. | Protótipo conceitual do FintaLab, tela inicial: o título "Cada partida pode levar você mais longe." ao lado de uma ilustração de campo de futebol, com o aviso de que pessoas, clubes e números são fictícios. |
@@ -210,10 +212,12 @@ Origem: capturas feitas em 2026-11-07 dos próprios projetos. As do Reelix vêm 
 
 | Legenda | Inglês (`en`) | Português (`pt-BR`) |
 |---|---|---|
-| Reelix | Screens from the development build. The app interface is in Portuguese. | Telas da versão de desenvolvimento. A interface do app está em português. |
+| Reelix | Screens from the development build. The app interface is in Portuguese. Movie and series data and images from TMDB; this product is not endorsed or certified by TMDB. | Telas da versão de desenvolvimento. A interface do app está em português. Dados e imagens de filmes e séries do TMDB; este produto não é endossado nem certificado pelo TMDB. |
 | FintaLab | Screens from the static concept prototype. All people, clubs and numbers are fictional. | Telas do protótipo conceitual estático. Todas as pessoas, clubes e números são fictícios. |
 
-Capturas deixadas de fora de propósito: home, listas e detalhes de título do Reelix (mostram pôsteres de filmes e o que o usuário assiste, Q5); social, perfil de amigos e notificações (dados de terceiros); e a tela de acompanhamento, que exibe a barra de voltar e início duplicada.
+A home do Reelix mostra o que o usuário está assistindo e pôsteres de séries do TMDB (artes dos estúdios, e um deles traz o rosto de uma pessoa real). O usuário aprovou o uso em 2026-11-07 (Q5); a legenda credita o TMDB.
+
+Capturas deixadas de fora de propósito: listas e detalhes de título do Reelix (mais pôsteres e dados pessoais); social, perfil de amigos e notificações (dados de terceiros); e a tela de acompanhamento, que exibe a barra de voltar e início duplicada.
 
 ## 8. Critérios de aceitação
 
@@ -232,8 +236,8 @@ Capturas deixadas de fora de propósito: home, listas e detalhes de título do R
 | PROJ-CA-11 | RF-12 | **Given** o HTML da lista e dos detalhes **Then** cada um tem `title`, `description`, canonical, `hreflang` para as duas versões (com os caminhos `/projects/<slug>` e `/projetos/<slug>`) e Open Graph próprios, `<html lang>` correto e nenhuma meta `robots` com `noindex`. |
 | PROJ-CA-12 | RF-13 | **Given** o conteúdo e os metadados dos dois idiomas **When** buscados por "Open to Work", "Available for Opportunities", "Available for Hire", "Looking for a New Job", "Hire Me", "paixão por tecnologia" e "passion for technology" **Then** não há ocorrências. |
 | PROJ-CA-13 | RF-14, RNF-06 | **Given** a Home **Then** há três destaques, com o FintaLab em terceiro, e o nome, a categoria, o estado e a descrição de cada um são idênticos aos da lista. |
-| PROJ-CA-14 | RF-15 | **Given** a lista **Then** a entrada do Reelix mostra `reelix-login`, a do FintaLab mostra as três telas no idioma ativo e a do Football não tem imagem nem reserva espaço; **Given** o detalhe do Reelix **Then** mostra `reelix-login` e `reelix-stats`; o detalhe do Football não tem imagem. **Given** cada imagem **Then** tem `alt` e legenda no idioma da página (seção 7.6), largura e altura declaradas e arquivo de até 250 KB, e as que ficam abaixo da primeira dobra carregam sob demanda. |
-| PROJ-CA-19 | RF-16 | **Given** as imagens de `public/images/projects/` **When** revisadas visualmente **Then** as do Reelix não mostram pôsteres, e-mails, nomes de terceiros nem dados de amigos, e as do FintaLab mostram só dados fictícios. |
+| PROJ-CA-14 | RF-15 | **Given** a lista **Then** a entrada do Reelix mostra `reelix-home`, a do FintaLab mostra as três telas no idioma ativo e a do Football não tem imagem nem reserva espaço; **Given** o detalhe do Reelix **Then** mostra `reelix-home`, `reelix-stats` e `reelix-login`, nessa ordem; o detalhe do Football não tem imagem. **Given** cada imagem **Then** tem `alt` e legenda no idioma da página (seção 7.6), largura e altura declaradas e arquivo de até 250 KB, e as que ficam abaixo da primeira dobra carregam sob demanda. |
+| PROJ-CA-19 | RF-16 | **Given** as imagens de `public/images/projects/` **When** revisadas visualmente **Then** as do Reelix não mostram e-mails, nomes de terceiros nem dados de amigos, e as do FintaLab mostram só dados fictícios; **Given** a legenda do Reelix **Then** credita o TMDB. |
 | PROJ-CA-15 | RNF-01, RNF-02 | **Given** o HTML das páginas **Then** o conteúdo está no HTML inicial, não há Client Components nem classes de animação, e as páginas funcionam sem JavaScript. |
 | PROJ-CA-16 | RNF-03 | **Given** navegação apenas por teclado **When** o usuário percorre a lista **Then** a ordem é skip link, header, links de cada entrada na ordem visual e footer, com foco visível; a árvore de acessibilidade não pula níveis de título. |
 | PROJ-CA-17 | RNF-04, RNF-05 | **Given** as larguras 360, 390, 768, 1366, 1440 e 1920 px **Then** `scrollWidth` não excede `innerWidth`, em ambos os idiomas; **Given** largura ≥1024 px **Then** nenhuma linha de texto corrido passa de 80 caracteres. |
@@ -262,7 +266,8 @@ Capturas deixadas de fora de propósito: home, listas e detalhes de título do R
 | Texto do detalhe virar cópia do README | Texto próprio, em português e inglês, só com fatos documentados; aprovação do usuário (Q1). |
 | Contexto acadêmico atribuído a um curso sem confirmação | Só "projeto acadêmico" (PROJ-RF-09). |
 | Divergência entre Home, lista e detalhe | Fonte única de dados e PROJ-CA-13. |
-| Captura do app mostrar dado pessoal ou de terceiros, ou pôsteres de filmes (arte de estúdio, via TMDB) | Revisão visual de cada imagem (PROJ-CA-19), telas com pôsteres e sociais fora da v1 e decisão do usuário sobre a home do Reelix (Q5). |
+| Captura do app mostrar dado pessoal ou de terceiros | Revisão visual de cada imagem (PROJ-CA-19) e telas sociais, de perfil e de notificações fora da v1. |
+| A home do Reelix traz pôsteres de séries (arte de estúdio, via TMDB, com o rosto de uma pessoa real num deles) e o que o usuário assiste | Uso aprovado pelo usuário (Q5), crédito ao TMDB na legenda, uma única tela com pôsteres e substituição por uma captura sem pôsteres se algum titular reclamar. |
 | Imagens do Reelix ficarem desatualizadas quando o app mudar, e a interface estar em português nas duas versões | Legenda explícita ("versão de desenvolvimento", "interface em português"); atualizar as capturas quando a interface mudar de forma visível. |
 | Imagens do FintaLab serem tomadas como produto real | Legenda "protótipo conceitual estático", dados fictícios e os avisos que o próprio protótipo exibe nas telas. |
 
@@ -270,11 +275,11 @@ Capturas deixadas de fora de propósito: home, listas e detalhes de título do R
 
 | ID | Pergunta | Impacto | Dono | Bloqueia |
 |---|---|---|---|---|
-| Q1 | Os textos das seções 7.2 a 7.4 (lista, Football e Reelix, em inglês e português) estão aprovados ou precisam de ajustes? Em especial, as frases de desafio e de decisão técnica, que reescrevem a motivação documentada nos repositórios. | Todo o conteúdo das páginas. | Bruno | Implementação do conteúdo final. A estrutura pode ser implementada antes. |
+| Q1 | Os textos das seções 7.2 a 7.4 (lista, Football e Reelix, em inglês e português) estão aprovados ou precisam de ajustes? Em especial, as frases de desafio e de decisão técnica, que reescrevem a motivação documentada nos repositórios. | Todo o conteúdo das páginas. | Bruno | **Resolvida (2026-11-07):** textos aprovados. |
 | Q2 | A categoria "Product concept"/"Conceito de produto" e o estado "Conceptual"/"Conceitual" servem ao FintaLab? | PROJ-RF-04 e a Home. | Bruno | Não bloqueia (reversível). |
 | Q3 | A ordem Football, Reelix, FintaLab está correta na lista e na Home? | PROJ-RF-01 e PROJ-RF-14. | Bruno | Não bloqueia (reversível). |
-| Q4 | Os textos alternativos e as legendas das imagens (seção 7.6) estão aprovados? A interface do Reelix, em português, aparece nas duas versões do site. | PROJ-RF-15. | Bruno | Implementação do conteúdo final das imagens. |
-| Q5 | A home do Reelix (com pôsteres de séries e o que você assiste) pode entrar como imagem? Ela é a tela principal do app, mas mostra arte de estúdio e o rosto de uma pessoa real num pôster. Há captura pronta, fora do repositório. | PROJ-RF-16 e PROJ-CA-19. | Bruno | Não bloqueia: a v1 sai sem ela. |
+| Q4 | Os textos alternativos e as legendas das imagens (seção 7.6) estão aprovados? A interface do Reelix, em português, aparece nas duas versões do site. | PROJ-RF-15. | Bruno | **Resolvida (2026-11-07):** aprovados. |
+| Q5 | A home do Reelix (com pôsteres de séries e o que você assiste) pode entrar como imagem? Ela é a tela principal do app, mas mostra arte de estúdio e o rosto de uma pessoa real num pôster. Há captura pronta, fora do repositório. | PROJ-RF-16 e PROJ-CA-19. | Bruno | **Resolvida (2026-11-07):** a home entra (`reelix-home.jpg`), com crédito ao TMDB na legenda. |
 
 ## 12. Premissas
 
@@ -297,7 +302,10 @@ Decisões reversíveis adotadas neste refinamento.
 | 2026-11-07 | O FintaLab entra também na Home, como terceiro destaque. | Resposta do usuário |
 | 2026-11-07 | Detalhes sem Results; Implementation dentro de Architecture. | Resposta do usuário |
 | 2026-11-07 | Imagens: inicialmente a v1 sairia sem imagens; depois o usuário pediu que o app do Reelix e o protótipo do FintaLab fossem capturados e usados. A v1 passa a ter imagens dos dois (Football sem imagem). | Respostas do usuário |
-| 2026-11-07 | Capturas feitas com a conta de desenvolvimento do usuário, que entrou sozinho no app; telas com pôsteres, sociais e perfil de terceiros ficam fora da v1. | Decisão tomada na captura, a confirmar (Q5) |
+| 2026-11-07 | Capturas feitas com a conta de desenvolvimento do usuário, que entrou sozinho no app; telas sociais, de perfil de amigos, de notificações, listas e detalhe de título ficam fora da v1. | Decisão tomada na captura |
+| 2026-11-07 | Textos das seções 7.2 a 7.4, textos alternativos e legendas das imagens aprovados (Q1 e Q4). | Resposta do usuário |
+| 2026-11-07 | A home do Reelix, com pôsteres de séries do TMDB, entra como imagem (capa do Reelix e primeira tela do detalhe); a legenda do Reelix credita o TMDB. | Resposta do usuário (Q5); o crédito é adição do agente |
+| 2026-11-07 | A home do Reelix é guardada em JPEG (196 KB) porque o PNG tinha 613 KB, acima do limite de 250 KB. | Decisão técnica do agente |
 | 2026-11-07 | Football Stat Analytics é só "projeto acadêmico", sem citar curso ou instituição. | Resposta do usuário |
 | 2026-11-07 | Estudos de caso profissionais ficam fora da v1. | Premissa herdada das SPEC-001 e SPEC-003 |
 
@@ -312,4 +320,5 @@ Decisões reversíveis adotadas neste refinamento.
 | 2026-11-07 | Estrutura de detalhe reduzida de nove para sete seções, com Implementation dentro de Architecture. | Decisão do usuário. |
 | 2026-11-07 | Rascunho dos textos nos dois idiomas, com tecnologias conferidas nos repositórios e rastreabilidade de cada fato. | Os textos não existiam e o conteúdo precisa refletir o estado real dos projetos. |
 | 2026-11-07 | Movida de `FEATURES.md` para `.specs/004-projects.md`. | `.specs/README.md` prevê separar por funcionalidade conforme o projeto cresce. |
+| 2026-11-07 | Versão 0.4.0: textos e imagens aprovados (Q1, Q4 e Q5); home do Reelix incluída como terceira imagem (JPEG), capa do Reelix e legenda com crédito ao TMDB; status passa a Approved. | Decisão do usuário. |
 | 2026-11-07 | Versão 0.3.0: imagens do Reelix e do FintaLab (seção 7.6), PROJ-RF-15 passa a Must, novos PROJ-RF-16 e PROJ-CA-19, riscos, perguntas Q4 e Q5. As cinco imagens foram capturadas e estão em `public/images/projects/`. | Pedido do usuário para usar capturas do app Reelix e do protótipo do FintaLab. |
