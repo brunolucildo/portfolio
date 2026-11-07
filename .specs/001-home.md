@@ -7,7 +7,7 @@
 | Nome | Home |
 | Identificador | SPEC-001 |
 | Slug | `001-home` |
-| Versão | 0.4.0 |
+| Versão | 0.5.0 |
 | Status | In Review (implementada; aguardam validação final a revisão de conteúdo provisório, o tratamento da foto e o domínio) |
 | Data | 2026-11-07 |
 | Origem | SPEC-001 de `.specs/FEATURES.md` (v0.1, Draft) |
@@ -28,7 +28,7 @@ A Home é a principal porta de entrada do portfólio. Deve apresentar rapidament
 
 1. **Hero:** posicionamento profissional, mensagem principal, mensagem complementar, CTAs, fotografia e parallax.
 2. **Faixa de experiência:** três fatos verificáveis, com link para Experience.
-3. **Projeto em destaque:** Football Stat Analytics, identificado como projeto acadêmico.
+3. **Projetos em destaque:** Football Stat Analytics (projeto acadêmico) e Reelix (projeto pessoal), ambos com estado explícito e link para o repositório público.
 4. **Destaque do AI Lab:** bloco de chamada com link para a página AI Lab.
 5. **Caminhos de contato:** CTA "Get in Touch" no Hero. Os canais completos ficam no footer (SPEC-010).
 6. **Metadados** da Home nos dois idiomas.
@@ -37,7 +37,7 @@ A Home é a principal porta de entrada do portfólio. Deve apresentar rapidament
 
 - Formulário de contato (SPEC-007).
 - Seção de tecnologias na Home.
-- Reelix e estudos de caso profissionais na Home, até o estado e as métricas serem validados.
+- Estudos de caso profissionais na Home, até o estado e as métricas serem validados.
 - A métrica "redução de 80% no tempo de inclusão de itens em pedidos de venda": não validada (`CONTENT.md`, 6.3).
 - Nome de empresa, cargos anteriores e linha do tempo (pertencem a Experience, SPEC-003).
 - Mensagens de disponibilidade profissional ("Open to Work", "Available for Opportunities", "Hire Me" e equivalentes).
@@ -51,7 +51,7 @@ A Home é a principal porta de entrada do portfólio. Deve apresentar rapidament
 | HOME-RF-01 | Must | O Hero exibe, nesta ordem: identificação de posicionamento, título principal (`h1`) e mensagem complementar, com os textos da seção 8. |
 | HOME-RF-02 | Must | O Hero oferece dois CTAs: "Explore My Work" (principal) para a página Projects e "Get in Touch" (secundário) para a página Contact. |
 | HOME-RF-03 | Must | A faixa de experiência exibe os três fatos da seção 8, com um link para Experience. |
-| HOME-RF-04 | Must | O destaque de projeto apresenta o Football Stat Analytics com nome, descrição curta, categoria "projeto acadêmico", estado atual explícito e link para Projects. |
+| HOME-RF-04 | Must | O destaque de projetos apresenta o Football Stat Analytics e o Reelix, cada um com nome, descrição curta, categoria, estado atual explícito e link para o repositório (HOME-RF-13). Um link para Projects aparece abaixo dos cards. |
 | HOME-RF-05 | Should | O destaque do AI Lab apresenta uma descrição do escopo da seção e um link para a página AI Lab, sem citar experimentos ou resultados específicos. |
 | HOME-RF-06 | Must | O Hero possui um espaço para fotografia profissional: à direita do texto a partir de 1024 px e abaixo do texto em larguras menores. Sem o arquivo da foto, o Hero se apresenta apenas com texto, sem espaço vazio. |
 | HOME-RF-07 | Must | O Hero aplica parallax em 2 a 3 camadas decorativas, ativo somente a partir de 1024 px e sem `prefers-reduced-motion: reduce`. |
@@ -60,6 +60,7 @@ A Home é a principal porta de entrada do portfólio. Deve apresentar rapidament
 | HOME-RF-10 | Must | A página tem um único `h1`, um `h2` por bloco abaixo do Hero e usa os landmarks do layout global (`header`, `main`, `footer`). |
 | HOME-RF-11 | Should | O Hero tem animação de entrada discreta (fade-in com slide-up curto), sem atrasar o acesso ao conteúdo. |
 | HOME-RF-12 | Must | A página não contém as expressões proibidas da seção 3.2 nem afirma resultados, métricas ou cargos não validados. |
+| HOME-RF-13 | Must | Cada card de projeto tem um link externo "View on GitHub" para o repositório público do projeto, aberto em nova aba com `rel="noopener noreferrer"` e indicação acessível de nova aba. |
 
 ## 5. Requisitos não funcionais
 
@@ -83,7 +84,7 @@ A Home é a principal porta de entrada do portfólio. Deve apresentar rapidament
 |---|---|---|
 | Hero | Texto à esquerda, fotografia à direita (≥1024 px). Coluna única em larguras menores, com a foto abaixo do texto. | Título em `text-display`. Muito espaço negativo. |
 | Faixa de experiência | Três itens em linha (≥768 px) ou em coluna (<768 px), com link para Experience. | Sem cards idênticos: apresentada como faixa tipográfica. |
-| Projeto em destaque | Um card de projeto com categoria, estado e link. | Usa `Card interactive` e `Badge`. |
+| Projetos em destaque | Dois cards lado a lado (≥768 px) ou empilhados (<768 px), cada um com categoria, estado, descrição e link para o GitHub; link para Projects abaixo. | Usa `Card` (sem hover, pois o card não é clicável) e `Badge`. |
 | AI Lab | Bloco de chamada com título, texto curto e link. | Visual coerente com o restante, sem criar nova identidade. |
 
 ### 6.2. Estados
@@ -121,13 +122,17 @@ Origem: `CONTENT.md`, `BUSINESS.md`, `SEO.md` e `.specs/FEATURES.md`. A coluna S
 | Fato 1 | 8+ years of experience | Mais de 8 anos de experiência | CONTENT 5.1 | Aprovado |
 | Fato 2 | Backend development and technical leadership | Desenvolvimento backend e liderança técnica | CONTENT 5.1 | Aprovado |
 | Fato 3 | Leading a team of five developers | Liderando uma equipe de cinco desenvolvedores | CONTENT 5.1 e BUSINESS 4.2 | Aprovado |
-| Projeto: nome | Football Stat Analytics | Football Stat Analytics | CONTENT 6.1 | Aprovado |
-| Projeto: categoria | Academic project | Projeto acadêmico | CONTENT 6.1 | Aprovado |
-| Projeto: descrição | Analysis of football athlete performance using AI, conversational interaction and information retrieval. | Análise de desempenho de atletas de futebol com IA, interação conversacional e recuperação de informações. | CONTENT 6.1 | Provisório |
-| Projeto: estado | In development | Em desenvolvimento | Resposta do usuário (Q2) | Aprovado |
+| Football: nome | Football Stat Analytics | Football Stat Analytics | CONTENT 6.1 | Aprovado |
+| Football: categoria | Academic project | Projeto acadêmico | CONTENT 6.1 | Aprovado |
+| Football: descrição | Analysis of football athlete performance using AI, conversational interaction and information retrieval. | Análise de desempenho de atletas de futebol com IA, interação conversacional e recuperação de informações. | CONTENT 6.1 | Provisório |
+| Football: estado | In development | Em desenvolvimento | Resposta do usuário (Q2, reconfirmada) | Aprovado |
+| Reelix: nome | Reelix | Reelix | CONTENT 6.2 | Aprovado |
+| Reelix: categoria | Personal project | Projeto pessoal | CONTENT 6.2 | Provisório |
+| Reelix: descrição | An app to discover and track movies and series, record what you have watched and share authorized activity with friends. | Aplicativo para descobrir e acompanhar filmes e séries, registrar o que você assistiu e compartilhar atividades autorizadas com amigos. | README do repositório `reelix` (04/11/2026) | `pt-BR` do README; `en` provisório |
+| Reelix: estado | In development | Em desenvolvimento | README e PROJECT_STATUS do repositório; resposta do usuário | Aprovado |
 | AI Lab | Texto de chamada sobre o escopo (LLMs, agentes, RAG, engenharia de prompts) | Equivalente | SPEC-006 e BUSINESS 7.2 | Provisório |
-| Título dos blocos | Experience; Featured project; AI Lab | Experiência; Projeto em destaque; AI Lab | Criado na implementação | Provisório |
-| Rótulos dos links | View experience; View projects; Explore the AI Lab | Ver experiência; Ver projetos; Explorar o AI Lab | Criado na implementação | Provisório |
+| Título dos blocos | Experience; Featured projects; AI Lab | Experiência; Projetos em destaque; AI Lab | Criado na implementação | Provisório |
+| Rótulos dos links | View experience; View projects; View on GitHub; Explore the AI Lab | Ver experiência; Ver projetos; Ver no GitHub; Explorar o AI Lab | Criado na implementação | Provisório |
 | Title (SEO) | Bruno Lucildo \| Senior Backend Developer & Technical Lead | Tradução natural a revisar | SEO 4.1 | `en` aprovado; `pt-BR` provisório |
 | Description (SEO) | Explore the work, experience and technical projects of Bruno Lucildo, a backend developer and technical lead focused on scalable systems and software engineering. | Tradução natural a revisar | SEO 4.1 | `en` aprovado; `pt-BR` provisório |
 
@@ -147,7 +152,7 @@ Regras de conteúdo:
 | HOME-CA-01 | RF-01 | **Given** a Home em `/en` **When** a página carrega **Then** o `h1` é "Engineering beyond code." e a identificação e a mensagem complementar aparecem acima da dobra em 1366×768. |
 | HOME-CA-02 | RF-02 | **Given** a Home em `/en` **When** o usuário ativa "Explore My Work" **Then** navega para `/en/projects`; **When** ativa "Get in Touch" **Then** navega para `/en/contact`. Em `/pt-BR` os destinos são `/pt-BR/projetos` e `/pt-BR/contato`. |
 | HOME-CA-03 | RF-03 | **Given** a Home **When** renderizada **Then** exibe exatamente os três fatos da seção 8 e um link para Experience que leva à rota do idioma ativo. |
-| HOME-CA-04 | RF-04 | **Given** a Home **When** renderizada **Then** o card mostra "Football Stat Analytics", a categoria "Academic project" e um estado da lista permitida; o card não apresenta o projeto como produto lançado. O link leva a Projects. |
+| HOME-CA-04 | RF-04 | **Given** a Home **When** renderizada **Then** há dois cards (Football Stat Analytics e Reelix), cada um com categoria e estado de lista permitida; nenhum card apresenta o projeto como produto lançado. O link abaixo dos cards leva a Projects. |
 | HOME-CA-05 | RF-05 | **Given** a Home **When** renderizada **Then** o bloco do AI Lab tem link para a rota AI Lab do idioma e não contém alegações de resultado nem nomes de experimentos específicos. |
 | HOME-CA-06 | RF-06 | **Given** largura ≥1024 px e arquivo de foto presente **Then** a foto fica à direita do texto. **Given** largura <1024 px **Then** fica abaixo do texto. **Given** arquivo ausente **Then** o Hero não reserva espaço para a foto. |
 | HOME-CA-07 | RF-07, RNF-06 | **Given** largura ≥1024 px **When** o usuário rola **Then** as camadas decorativas se movem em velocidades diferentes e o texto principal não se move. **Given** `prefers-reduced-motion: reduce` **Then** nenhuma camada se move. **Given** largura <1024 px **Then** nenhuma camada se move. |
@@ -159,6 +164,7 @@ Regras de conteúdo:
 | HOME-CA-13 | RNF-01 | **Given** build de produção em perfil mobile **When** medido com Lighthouse **Then** LCP ≤2,5 s e CLS ≤0,1. |
 | HOME-CA-14 | RNF-04 | **Given** navegação apenas por teclado **When** o usuário percorre a Home **Then** a ordem é skip link, header, CTAs, link de experiência, card do projeto, link do AI Lab, footer, com foco visível em cada item. |
 | HOME-CA-15 | RNF-07 | **Given** as larguras 360, 390, 768, 1366, 1440 e 1920 px **Then** `scrollWidth` é igual a `innerWidth` em ambos os idiomas. |
+| HOME-CA-17 | RF-13 | **Given** os cards de projeto **When** o usuário ativa "View on GitHub" **Then** o repositório correspondente (`brunolucildo/football-stat-analytics-cli` ou `brunolucildo/reelix`) abre em nova aba, o link tem `rel="noopener noreferrer"` e um leitor de tela anuncia a nova aba. |
 | HOME-CA-16 | RNF-09 | **Given** o código da Home **Then** `pnpm check`, `pnpm typecheck` e `pnpm build` terminam sem erros. |
 
 ## 10. Dependências
@@ -182,7 +188,8 @@ Regras de conteúdo:
 | Parallax prejudica desempenho ou leitura | Limitar a 3 camadas, usar apenas `transform`/`opacity`, validar INP e CLS (HOME-CA-07, HOME-CA-13). |
 | Fatos de experiência divergentes do currículo ou do Experience | Confirmar os três fatos antes de publicar e manter uma única fonte de conteúdo. |
 | Publicação de texto provisório em pt-BR | Marcar como pendente e bloquear o checklist de publicação até a revisão. |
-| Exposição de dado confidencial ao descrever o projeto | Usar apenas a descrição aprovada do Football Stat Analytics, que é acadêmico. |
+| Exposição de dado confidencial ou de terceiros ao apontar para os repositórios | Usar apenas as descrições aprovadas. O repositório do Football Stat Analytics versiona bancos `.db` com trechos indexados de relatórios; conferir se esse conteúdo pode ficar público antes de promover o link. |
+| Estado do Reelix indicar produto pronto | Rótulo "Em desenvolvimento" e descrição sem afirmar produção ou lançamento; o README do projeto diz que o status não confirma implantação. |
 
 ## 12. Perguntas abertas
 
@@ -205,6 +212,7 @@ Decisões reversíveis adotadas neste refinamento. Podem ser alteradas sem refaz
 5. A SPEC passa a viver em `.specs/001-home.md`, conforme o `.specs/README.md` permite. A seção SPEC-001 de `FEATURES.md` aponta para este arquivo.
 6. Como o domínio não está definido, o canonical e o Open Graph usam uma URL base central configurável, sem imagem Open Graph por enquanto.
 7. O build não pode depender da foto: como o arquivo fica fora do Git, a Home verifica a existência do arquivo e omite o espaço da foto quando ele não existe.
+8. O estado do Reelix vem do README e do PROJECT_STATUS do repositório (fotografia do código em 04/11/2026), que descreve implementação e não confirma produção.
 
 ## 14. Decisões registradas
 
@@ -219,6 +227,9 @@ Decisões reversíveis adotadas neste refinamento. Podem ser alteradas sem refaz
 | 2026-11-07 | Domínio ainda não definido; URL base central e sem imagem Open Graph por ora. | Resposta do usuário (Q4) |
 | 2026-11-07 | Foto do Hero fica fora do Git (`public/images/hero/` no `.gitignore`). | Resposta do usuário (Q1) |
 | 2026-11-07 | Arquivo da foto indicado e movido para `public/images/hero/bruno-lucildo-hero.png`. | Resposta do usuário (Q1) |
+| 2026-11-07 | Football Stat Analytics permanece "Em desenvolvimento" (o README do projeto o chama de "experimental"). | Resposta do usuário |
+| 2026-11-07 | Reelix entra na Home como projeto pessoal em desenvolvimento. | Resposta do usuário |
+| 2026-11-07 | Cards de projeto com link externo para o repositório no GitHub. | Resposta do usuário |
 
 ## Refinamento
 
@@ -234,3 +245,4 @@ Decisões reversíveis adotadas neste refinamento. Podem ser alteradas sem refaz
 | 2026-11-07 | Q2 a Q5 respondidas; textos aprovados; estado do projeto definido; Q1 mantida aberta; premissas 6 e 7 e novo risco da foto fora do Git; status passa a Approved (v0.3.0). | Respostas do usuário às perguntas abertas. |
 | 2026-11-07 | Q1 parcialmente respondida: arquivo da foto indicado; texto alternativo e tratamento visual propostos e pendentes de aprovação. | Resposta do usuário. |
 | 2026-11-07 | Implementada (v0.4.0, In Review). Adicionados à seção 8 os títulos de bloco e os rótulos de link criados na implementação, ainda provisórios. | Implementação revelou textos que a SPEC não listava. |
+| 2026-11-07 | v0.5.0: Reelix incluído nos destaques; RF-04 reescrito para dois projetos; novo RF-13 e CA-17 (links para o GitHub); tabela de conteúdo, composição e riscos atualizados. | Informações do perfil público do GitHub e decisão do usuário. |

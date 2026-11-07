@@ -22,45 +22,9 @@ A Home é a principal porta de entrada do portfólio. Os requisitos, os critéri
 
 # SPEC-002 — About
 
-## 1. Contexto
+**Status:** Proposed. Refinada e movida para [`002-about.md`](./002-about.md).
 
-A seção About apresenta a trajetória, filosofia profissional e interesses de Bruno.
-
-## 2. Objetivo
-
-Humanizar a marca pessoal e contextualizar a experiência profissional além da lista de tecnologias.
-
-## 3. Escopo
-
-- Apresentação pessoal.
-- Trajetória profissional.
-- Filosofia de engenharia.
-- Formação acadêmica.
-- Interesses tecnológicos.
-- Fotografia profissional, caso aprovada.
-
-## 4. Requisitos funcionais
-
-- Apresentar a trajetória em primeira pessoa.
-- Destacar a experiência em backend e liderança.
-- Contextualizar a formação.
-- Apresentar interesses em engenharia de software e IA.
-- Disponibilizar informações nas duas línguas.
-
-## 5. Regras de conteúdo
-
-- Tom humano e direto.
-- Não utilizar linguagem excessivamente promocional.
-- Não inventar experiências.
-- Diferenciar experiência profissional de estudos acadêmicos.
-
-## 6. Critérios de aceitação
-
-- Informações profissionais revisadas.
-- Formação apresentada corretamente.
-- Conteúdo traduzido.
-- Layout responsivo.
-- Hierarquia visual consistente.
+A seção About apresenta a trajetória, a filosofia profissional e os interesses de Bruno. Os requisitos, os critérios de aceitação, o rascunho dos textos, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
 ---
 

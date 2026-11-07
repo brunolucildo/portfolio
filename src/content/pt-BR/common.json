@@ -62,13 +62,24 @@
       },
       "link": "Ver experiência"
     },
-    "project": {
-      "title": "Projeto em destaque",
-      "name": "Football Stat Analytics",
-      "category": "Projeto acadêmico",
-      "status": "Em desenvolvimento",
-      "description": "Análise de desempenho de atletas de futebol com IA, interação conversacional e recuperação de informações.",
-      "link": "Ver projetos"
+    "projects": {
+      "title": "Projetos em destaque",
+      "repository": "Ver no GitHub",
+      "link": "Ver projetos",
+      "items": {
+        "football": {
+          "name": "Football Stat Analytics",
+          "category": "Projeto acadêmico",
+          "status": "Em desenvolvimento",
+          "description": "Análise de desempenho de atletas de futebol com IA, interação conversacional e recuperação de informações."
+        },
+        "reelix": {
+          "name": "Reelix",
+          "category": "Projeto pessoal",
+          "status": "Em desenvolvimento",
+          "description": "Aplicativo para descobrir e acompanhar filmes e séries, registrar o que você assistiu e compartilhar atividades autorizadas com amigos."
+        }
+      }
     },
     "aiLab": {
       "title": "AI Lab",
