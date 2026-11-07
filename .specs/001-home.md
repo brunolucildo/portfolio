@@ -8,7 +8,7 @@
 | Identificador | SPEC-001 |
 | Slug | `001-home` |
 | Versão | 0.7.0 |
-| Status | In Review (v0.7.0 implementada, incluindo o fallback em JavaScript do parallax, HOME-RF-14; aguardam validação final a revisão de conteúdo provisório, o domínio e a conferência visual do fallback em um Firefox real) |
+| Status | In Review (v0.7.0 implementada, incluindo o fallback em JavaScript do parallax, HOME-RF-14; fallback confirmado visualmente no Firefox pelo usuário em 2026-11-07; aguardam validação final a revisão de conteúdo provisório e o domínio) |
 | Data | 2026-11-07 |
 | Origem | SPEC-001 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -269,4 +269,4 @@ Decisões reversíveis adotadas neste refinamento. Podem ser alteradas sem refaz
 | 2026-11-07 | Implementada (v0.4.0, In Review). Adicionados à seção 8 os títulos de bloco e os rótulos de link criados na implementação, ainda provisórios. | Implementação revelou textos que a SPEC não listava. |
 | 2026-11-07 | v0.5.0: Reelix incluído nos destaques; RF-04 reescrito para dois projetos; novo RF-13 e CA-17 (links para o GitHub); tabela de conteúdo, composição e riscos atualizados. | Informações do perfil público do GitHub e decisão do usuário. |
 | 2026-11-07 | v0.6.0: parallax intensificado (deslocamentos, opacidade e contornos maiores; quadrado girando) e coberto por testes E2E. | Pedido do usuário: o efeito original não era percebido no Chrome nem no Firefox. |
-| 2026-11-07 | v0.7.0: novo HOME-RF-14, seção 7.1 e HOME-CA-18 (fallback em JavaScript do parallax); RNF-06, estados e riscos ajustados; Q1 atualizada e texto alternativo da foto aprovado. Foto do Hero passa a ser versionada e renomeada para `bruno-lucildo-portrait.png` (riscos, premissa 7 e Q1 ajustados). Fallback implementado (`HeroParallaxLayers.tsx`, variáveis `--parallax-*`) e coberto por 5 testes E2E em `e2e/home.spec.ts` (CA-18; o Chromium é forçado ao caminho do fallback; mutação confirmada). Não foi verificado em um Firefox real. | Decisões do usuário na retomada: o efeito deve aparecer também no Firefox; a foto entra no Git. |
+| 2026-11-07 | v0.7.0: novo HOME-RF-14, seção 7.1 e HOME-CA-18 (fallback em JavaScript do parallax); RNF-06, estados e riscos ajustados; Q1 atualizada e texto alternativo da foto aprovado. Foto do Hero passa a ser versionada e renomeada para `bruno-lucildo-portrait.png` (riscos, premissa 7 e Q1 ajustados). Fallback implementado (`HeroParallaxLayers.tsx`, variáveis `--parallax-*`) e coberto por 5 testes E2E em `e2e/home.spec.ts` (CA-18; o Chromium é forçado ao caminho do fallback; mutação confirmada). Confirmado no Firefox real pelo usuário. | Decisões do usuário na retomada: o efeito deve aparecer também no Firefox; a foto entra no Git. |

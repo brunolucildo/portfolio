@@ -15,6 +15,15 @@ export const forbiddenPhrases = [
 /** Informações profissionais que não entram no About nem na Home (SPEC-002). */
 export const withheldFromAbout = ["Açovisa", "80%"] as const;
 
+/**
+ * Nome da empresa: não aparece na página Experience, que a descreve sem citar o
+ * nome (SPEC-003, EXP-RF-08). O "80%" é permitido ali, com o contexto aprovado.
+ */
+export const companyNames = ["Açovisa", "Acovisa"] as const;
+
+/** Frases de busca de emprego do currículo, fora do site (SPEC-003, EXP-CA-07). */
+export const jobSeekingPhrases = ["Seeking", "relocation"] as const;
+
 export function findPhrases(
   text: string,
   phrases: readonly string[],

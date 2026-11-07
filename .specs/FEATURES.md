@@ -30,53 +30,9 @@ A seção About apresenta a trajetória, a filosofia profissional e os interesse
 
 # SPEC-003 — Experience
 
-## 1. Contexto
+**Status:** In Review. Refinada, implementada e movida para [`003-experience.md`](./003-experience.md).
 
-A seção Experience apresenta o histórico profissional.
-
-## 2. Objetivo
-
-Demonstrar evolução profissional, responsabilidades, atuação técnica e resultados.
-
-## 3. Estrutura de cada experiência
-
-- Empresa.
-- Cargo.
-- Período.
-- Contexto.
-- Responsabilidades.
-- Conquistas.
-- Tecnologias.
-
-## 4. Requisitos funcionais
-
-- Exibir experiências em ordem cronológica.
-- Apresentar cargo e período.
-- Diferenciar responsabilidades individuais e coletivas.
-- Destacar resultados relevantes.
-- Permitir navegação para estudos de caso relacionados, quando disponíveis.
-
-## 5. Requisitos de conteúdo
-
-- Utilizar informações verificáveis.
-- Não divulgar dados confidenciais.
-- Validar métricas antes da publicação.
-- Manter consistência entre os idiomas.
-
-## 6. Requisitos visuais
-
-- Timeline ou composição cronológica.
-- Hierarquia clara.
-- Boa leitura em telas pequenas.
-- Destaques discretos para conquistas.
-
-## 7. Critérios de aceitação
-
-- Experiências ordenadas corretamente.
-- Cargos e períodos revisados.
-- Resultados apresentados com contexto.
-- Layout responsivo.
-- Links relacionados funcionando.
+A seção Experience apresenta o histórico profissional de Bruno. Os requisitos, os critérios de aceitação, o rascunho dos textos, a validação das métricas, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
 ---
 

@@ -34,7 +34,6 @@
   },
   "pages": {
     "placeholder": "Esta seção está em construção.",
-    "experience": { "title": "Experiência" },
     "projects": { "title": "Projetos" },
     "aiLab": { "title": "AI Lab" },
     "contact": { "title": "Contato" }
@@ -73,6 +72,75 @@
           "institution": "Coders University",
           "period": "Em andamento"
         }
+      }
+    }
+  },
+  "experience": {
+    "metadata": {
+      "title": "Experiência | Bruno Lucildo",
+      "description": "A trajetória profissional de Bruno Lucildo de desenvolvedor full stack a líder técnico backend: cargos, responsabilidades e resultados em mais de dez anos de software corporativo."
+    },
+    "title": "Experiência",
+    "intro": "Mais de dez anos em uma empresa de distribuição de aço e soluções industriais, de desenvolvedor full stack a líder técnico da equipe que constrói sua nova plataforma de ERP.",
+    "present": "atual",
+    "labels": {
+      "responsibilities": "Responsabilidades",
+      "achievements": "Conquistas",
+      "technologies": "Tecnologias"
+    },
+    "roles": {
+      "techLead": {
+        "title": "Líder Técnico",
+        "context": "Lidero a equipe de cinco engenheiros de software que desenvolve e moderniza a nova plataforma de ERP da empresa, sem deixar de atuar na arquitetura e no desenvolvimento.",
+        "responsibilities": [
+          "Dou direção técnica, mentoria e orientação de arquitetura a uma equipe de cinco engenheiros de software.",
+          "Defino a arquitetura de software e os padrões de engenharia da nova plataforma de ERP; os padrões foram adotados por várias equipes.",
+          "Faço revisão de código e acompanhamento técnico dos desenvolvedores, com mais de 200 pull requests revisados.",
+          "Conduzo decisões técnicas entre componentes modernos e legados, equilibrando continuidade do negócio, escalabilidade e manutenibilidade."
+        ],
+        "achievements": [
+          "Liderei a modernização de mais de cinco serviços críticos para o negócio, incluindo cadastro e acesso de usuários e operações de vendas, migrando módulos legados para serviços .NET.",
+          "Sob minha liderança técnica, minha equipe projetou e implementou soluções distribuídas com RabbitMQ que reduziram em 80% o tempo para incluir itens em pedidos de venda, medido antes e depois da mudança, em produção.",
+          "Melhorei o desempenho do backend com a otimização de consultas PostgreSQL e melhorias nos serviços."
+        ]
+      },
+      "seniorBackend": {
+        "title": "Engenheiro Backend Sênior",
+        "context": "Fui responsável pela arquitetura e pela implementação do backend do ERP de nova geração da empresa.",
+        "responsibilities": [
+          "Projetei e desenvolvi APIs REST escaláveis com ASP.NET Core.",
+          "Projetei modelos de dados relacionais e otimizei consultas no SQL Server e no PostgreSQL para melhorar o desempenho das APIs.",
+          "Implementei busca com MongoDB Atlas Search e introduzi o Redis para cache distribuído e gerenciamento de sessão.",
+          "Desenvolvi integrações assíncronas com RabbitMQ e autenticação e autorização baseadas em JWT.",
+          "Construí camadas de acesso a dados com Entity Framework e Dapper."
+        ]
+      },
+      "fullStack2020": {
+        "title": "Engenheiro de Software Full Stack",
+        "context": "Construí e mantive aplicações corporativas, business intelligence e integrações de dados para a empresa.",
+        "responsibilities": [
+          "Desenvolvi aplicações web corporativas que sustentam processos centrais do negócio.",
+          "Projetei e implementei a plataforma de Balanced Scorecard da empresa.",
+          "Construí dashboards de Business Intelligence para relatórios operacionais e gerenciais.",
+          "Desenvolvi processos de ETL com Azure Data Factory.",
+          "Desenvolvi aplicações e integrações com Node.js e JavaScript e mantive aplicações legadas em InterSystems Caché."
+        ]
+      },
+      "fullStack2018": {
+        "title": "Engenheiro de Software Full Stack",
+        "context": "Desenvolvi e mantive aplicações web corporativas internas.",
+        "responsibilities": [
+          "Implementei novas funcionalidades e melhorias em sistemas críticos para o negócio.",
+          "Mantive e evoluí aplicações legadas dentro das iniciativas de desenvolvimento de software da empresa."
+        ]
+      },
+      "fullStack2016": {
+        "title": "Engenheiro de Software Full Stack",
+        "context": "Comecei a carreira apoiando o desenvolvimento e a manutenção de aplicações corporativas internas.",
+        "responsibilities": [
+          "Implementei novas funcionalidades e melhorias em sistemas do negócio.",
+          "Construí minha base de engenharia de software trabalhando com aplicações corporativas e tecnologias legadas."
+        ]
       }
     }
   },

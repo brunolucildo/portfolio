@@ -34,7 +34,6 @@
   },
   "pages": {
     "placeholder": "This section is under construction.",
-    "experience": { "title": "Experience" },
     "projects": { "title": "Projects" },
     "aiLab": { "title": "AI Lab" },
     "contact": { "title": "Contact" }
@@ -73,6 +72,75 @@
           "institution": "Coders University",
           "period": "In progress"
         }
+      }
+    }
+  },
+  "experience": {
+    "metadata": {
+      "title": "Experience | Bruno Lucildo",
+      "description": "Bruno Lucildo's career path from full-stack developer to backend technical lead: roles, responsibilities and results across more than ten years of enterprise software."
+    },
+    "title": "Experience",
+    "intro": "Ten-plus years at a steel distribution and industrial solutions company, from full-stack developer to technical lead of the team building its new ERP platform.",
+    "present": "Present",
+    "labels": {
+      "responsibilities": "Responsibilities",
+      "achievements": "Achievements",
+      "technologies": "Technologies"
+    },
+    "roles": {
+      "techLead": {
+        "title": "Technical Lead",
+        "context": "I lead the team of five software engineers who develop and modernize the company's new ERP platform, while staying hands-on in architecture and development.",
+        "responsibilities": [
+          "Provide technical direction, mentoring and architectural guidance to a team of five software engineers.",
+          "Define the software architecture and engineering standards for the new ERP platform; the standards have been adopted across multiple teams.",
+          "Review code and coach developers, with more than 200 pull requests reviewed.",
+          "Drive technical decisions across modern and legacy components, balancing business continuity, scalability and maintainability."
+        ],
+        "achievements": [
+          "Led the modernization of more than five business-critical services, including user registration and access and sales operations, migrating legacy modules to .NET services.",
+          "Under my technical leadership, my team designed and implemented distributed solutions with RabbitMQ that cut the time to add items to sales orders by 80%, measured before and after the change in production.",
+          "Improved backend performance through PostgreSQL query optimization and service-level improvements."
+        ]
+      },
+      "seniorBackend": {
+        "title": "Senior Backend Engineer",
+        "context": "I was responsible for the backend architecture and implementation of the company's next-generation ERP.",
+        "responsibilities": [
+          "Designed and developed scalable REST APIs with ASP.NET Core.",
+          "Designed relational data models and optimized queries across SQL Server and PostgreSQL to improve API performance.",
+          "Implemented search with MongoDB Atlas Search and introduced Redis for distributed caching and session management.",
+          "Developed asynchronous integrations with RabbitMQ and JWT-based authentication and authorization.",
+          "Built data access layers with Entity Framework and Dapper."
+        ]
+      },
+      "fullStack2020": {
+        "title": "Full Stack Software Engineer",
+        "context": "I built and maintained enterprise applications, business intelligence and data integrations for the company.",
+        "responsibilities": [
+          "Developed enterprise web applications supporting core business processes.",
+          "Designed and implemented the company's Balanced Scorecard platform.",
+          "Built Business Intelligence dashboards for operational and management reporting.",
+          "Developed ETL processes with Azure Data Factory.",
+          "Developed applications and integrations with Node.js and JavaScript, and maintained legacy applications built on InterSystems Caché."
+        ]
+      },
+      "fullStack2018": {
+        "title": "Full Stack Software Engineer",
+        "context": "I developed and maintained internal enterprise web applications.",
+        "responsibilities": [
+          "Implemented new features and enhancements for business-critical systems.",
+          "Maintained and evolved legacy applications as part of the company's software development initiatives."
+        ]
+      },
+      "fullStack2016": {
+        "title": "Full Stack Software Engineer",
+        "context": "I started my career supporting the development and maintenance of internal enterprise applications.",
+        "responsibilities": [
+          "Implemented new features and enhancements for business systems.",
+          "Built my software engineering foundations working with enterprise applications and legacy technologies."
+        ]
       }
     }
   },
