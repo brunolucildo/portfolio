@@ -62,46 +62,9 @@ A seção AI Lab apresenta experimentos, estudos e provas de conceito com inteli
 
 # SPEC-007 — Contact
 
-## 1. Contexto
+**Status:** Proposed. Refinada e movida para [`007-contact.md`](./007-contact.md).
 
-A seção Contact oferece meios de comunicação e conexão profissional.
-
-## 2. Objetivo
-
-Facilitar o contato sem posicionar o portfólio exclusivamente como uma página de procura por emprego.
-
-## 3. Canais previstos
-
-- E-mail.
-- LinkedIn.
-- GitHub, quando definido.
-
-## 4. Requisitos funcionais
-
-- Exibir canais disponíveis.
-- Permitir abrir os destinos corretamente.
-- Apresentar feedback visual.
-- Funcionar em dispositivos móveis.
-
-Um formulário de contato poderá ser avaliado posteriormente, mas não é requisito da primeira versão.
-
-## 5. Comunicação
-
-CTAs permitidos:
-
-- Get in Touch.
-- Connect with Me.
-- Send a Message.
-
-Não utilizar mensagens de disponibilidade profissional.
-
-## 6. Critérios de aceitação
-
-- Links revisados.
-- Endereço de e-mail válido.
-- Navegação acessível.
-- Layout responsivo.
-- Conteúdo traduzido.
+A seção Contact reúne os canais de comunicação profissional: e-mail com botão de copiar, LinkedIn, GitHub e currículo. Os requisitos, os critérios de aceitação, o rascunho dos textos, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
 ---
 
