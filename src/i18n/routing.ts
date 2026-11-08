@@ -4,6 +4,9 @@ export const routing = defineRouting({
   locales: ["en", "pt-BR"],
   defaultLocale: "en",
   localePrefix: "always",
+  // O hreflang tem uma única fonte, o HTML (metadata.ts): sem o cabeçalho HTTP
+  // `Link`, que trazia um x-default sem prefixo de idioma (I18N-RF-07).
+  alternateLinks: false,
   pathnames: {
     "/": "/",
     "/about": { en: "/about", "pt-BR": "/sobre" },

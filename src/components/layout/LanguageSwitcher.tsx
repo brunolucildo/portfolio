@@ -7,18 +7,40 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils/cn";
 
+type Href = ComponentProps<typeof Link>["href"];
+
+/**
+ * Destino do seletor. Nas rotas com parâmetro (detalhe de projeto e de
+ * experimento) o slug é o mesmo nos dois idiomas. Na 404 não há slug válido: o
+ * seletor leva à lista da seção no outro idioma e, para um caminho sem rota, à
+ * Home dele (I18N-RF-12).
+ */
+function targetHref(
+  pathname: ReturnType<typeof usePathname>,
+  slug: string | undefined,
+): Href {
+  if (!(pathname in routing.pathnames)) {
+    return "/";
+  }
+
+  if (pathname === "/projects/[slug]") {
+    return slug ? { pathname, params: { slug } } : "/projects";
+  }
+
+  if (pathname === "/ai-lab/[slug]") {
+    return slug ? { pathname, params: { slug } } : "/ai-lab";
+  }
+
+  return pathname;
+}
+
 export function LanguageSwitcher({ className }: { className?: string }) {
   const t = useTranslations("languageSwitcher");
   const activeLocale = useLocale();
   const pathname = usePathname();
   const { slug } = useParams<{ slug?: string }>();
 
-  // Em rotas com parâmetro (detalhe de projeto e de experimento), o slug é o
-  // mesmo nos dois idiomas.
-  const href: ComponentProps<typeof Link>["href"] =
-    pathname === "/projects/[slug]" || pathname === "/ai-lab/[slug]"
-      ? { pathname, params: { slug: slug ?? "" } }
-      : pathname;
+  const href = targetHref(pathname, slug);
 
   return (
     <ul

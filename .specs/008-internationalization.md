@@ -7,8 +7,8 @@
 | Nome | Internationalization |
 | Identificador | SPEC-008 |
 | Slug | `008-internationalization` |
-| Versão | 0.1.0 |
-| Status | Proposed (rascunho de 2026-11-08; aguardando aprovação dos textos da 404) |
+| Versão | 0.2.0 |
+| Status | In Review (textos aprovados e implementada em 2026-11-08; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-008 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -79,7 +79,7 @@ Lacunas encontradas:
 | I18N-RF-09 | Must | Os dois arquivos de conteúdo têm as mesmas chaves (já garantido no typecheck) e nenhum texto é igual nos dois idiomas, salvo os da lista de exceções da seção 7.4. Um texto novo igual ao inglês faz o teste falhar. |
 | I18N-RF-10 | Must | Uma página não mistura idiomas: o texto visível das páginas pt-BR não contém palavras funcionais do inglês (`the`, `and`, `with`, `for`) e o das páginas `en` não contém as do português (`de`, `para`, `com`, `uma`, `não`), fora nomes próprios, tecnologias e a lista da seção 7.4. |
 | I18N-RF-11 | Must | Datas e meses saem de `Intl` no idioma da página, sem nomes de mês escritos no conteúdo ("May 2023" em en e "mai. 2023" em pt-BR). |
-| I18N-RF-12 | Must | A 404 é localizada: qualquer rota inexistente sob um idioma válido, e qualquer `notFound()` (slug inexistente de projeto ou de experimento), responde 404 com a identidade do site (cabeçalho, skip link, rodapé), `<html lang>` do idioma, um `h1`, um texto curto, um link para a Home do mesmo idioma e `noindex`. O seletor de idioma da 404 leva à Home do outro idioma. |
+| I18N-RF-12 | Must | A 404 é localizada: qualquer rota inexistente sob um idioma válido, e qualquer `notFound()` (slug inexistente de projeto ou de experimento), responde 404 com a identidade do site (cabeçalho, skip link, rodapé), `<html lang>` do idioma, um `h1`, um texto curto, um link para a Home do mesmo idioma e `noindex`. O seletor de idioma da 404 leva à lista da seção no outro idioma quando a 404 vem de um slug inexistente de projeto ou de experimento, e à Home dele nos demais casos. |
 | I18N-RF-13 | Must | Um caminho sem idioma válido (`/nao-existe`, `/fr/about`) é redirecionado para o idioma detectado e cai na 404 localizada desse idioma. |
 | I18N-RF-14 | Must | As exceções da seção 7.4 estão documentadas e cada uma tem teste ou verificação: currículo só em inglês, slug `/ai-lab` igual nos dois idiomas e a lista de nomes próprios. |
 
@@ -100,7 +100,7 @@ A única interface nova é a **página 404** (I18N-RF-12). Ela segue o padrão e
 
 - Dentro do layout do idioma: skip link, cabeçalho com o menu e o seletor de idioma, conteúdo e rodapé.
 - Conteúdo: `h1` ("Page not found" / "Página não encontrada"), um parágrafo curto e o link de texto para a Home. Sem cards, sem botão de destaque e sem código de erro decorativo.
-- O seletor de idioma da 404 leva à Home do outro idioma, porque a rota atual não existe no outro.
+- O seletor de idioma da 404 não pode levar à mesma URL, que também seria uma 404: leva à lista da seção no outro idioma quando o slug de projeto ou de experimento não existe, e à Home dele quando o caminho não tem rota.
 
 ### 6.1. Estados
 
@@ -171,7 +171,7 @@ Textos permitidos como iguais nos dois idiomas (por chave): `metadata.title`, `n
 | I18N-CA-07 | **Given** os dois `common.json`, **when** o teste compara as folhas, **then** os textos idênticos são exatamente os da lista da seção 7.4, e um texto novo idêntico faz o teste falhar. |
 | I18N-CA-08 | **Given** o texto visível das treze páginas, **when** é lido, **then** as páginas pt-BR não têm palavras funcionais do inglês e as `en` não têm as do português (fora a lista de exceções), e a página Experience mostra "May 2023" em en e "mai. 2023" em pt-BR. |
 | I18N-CA-09 | **Given** `/pt-BR/nao-existe`, `/en/nao-existe`, `/en/ai-lab/zzz` e `/pt-BR/projetos/zzz`, **when** são abertas, **then** respondem 404 com cabeçalho, skip link e rodapé, `<html lang>` do idioma, um `h1` com o texto da seção 7.2, o link para a Home do mesmo idioma e `noindex`. |
-| I18N-CA-10 | **Given** a 404, **when** o seletor de idioma é usado, **then** abre a Home do outro idioma. |
+| I18N-CA-10 | **Given** a 404, **when** o seletor de idioma é usado, **then** abre a Home do outro idioma (caminho sem rota) ou a lista da seção no outro idioma (slug inexistente em `/projects/<slug>` ou `/ai-lab/<slug>`). |
 | I18N-CA-11 | **Given** `/nao-existe` e `/fr/about`, **when** são abertas, **then** terminam na 404 localizada do idioma detectado (`/en/...` ou `/pt-BR/...`). |
 | I18N-CA-12 | **Given** a navegação por todas as páginas, **when** os cookies são lidos, **then** o único cookie é `NEXT_LOCALE`. |
 | I18N-CA-13 | **Given** o repositório, **when** `pnpm typecheck` e `pnpm test:e2e` rodam, **then** passam, e `e2e/i18n.spec.ts` cobre os critérios acima. |
@@ -192,13 +192,14 @@ Textos permitidos como iguais nos dois idiomas (por chave): `metadata.title`, `n
 | Redirecionamento por `Accept-Language` levar um visitante ao idioma que ele não quer. | Frustração | O seletor de idioma está em toda página e grava a escolha no cookie. |
 | O teste de mistura de idiomas (palavras funcionais) dar falso positivo com um nome próprio ou termo técnico. | Teste instável | Lista explícita de exceções e palavras escolhidas por não colidirem com nomes de tecnologia. |
 | A 404 em rota dinâmica com `dynamicParams = false` não usar o layout do idioma. | 404 sem identidade | Critérios I18N-CA-09 cobrem `/en/ai-lab/zzz` e `/pt-BR/projetos/zzz`. |
+| `experimental.globalNotFound` (recurso experimental do Next) mudar ou sair em uma atualização. | A 404 volta ao shell vazio ou o build quebra | Versão do Next fixada no lockfile; os testes de 404 (status, `lang`, `h1`, título, `noindex`, sem JavaScript) falham se o comportamento mudar; revisar a cada atualização do Next. |
 | Remover o cabeçalho `Link` e o Google deixar de ler o `hreflang`. | Idiomas sem associação | O HTML já traz os `hreflang` e é a fonte recomendada; I18N-CA-04 garante a reciprocidade. |
 
 ## 11. Perguntas abertas
 
 | ID | Pergunta | Bloqueia? | Default adotado se não houver resposta |
 |---|---|---|---|
-| Q1 | Os textos da 404 (seção 7.2) podem ser publicados? | Sim | Nenhum: implementação só depois da aprovação. |
+| Q1 | Os textos da 404 (seção 7.2) podem ser publicados? | Resolvida em 2026-11-08: aprovados pelo Bruno | Nenhum: implementação só depois da aprovação. |
 | Q2 | Aceita `og:locale:alternate` (Should) nas páginas? | Não | Sim. |
 | Q3 | O currículo em português entra com a SPEC-009 ou o PDF só em inglês é definitivo? | Não | Segue só em inglês, como exceção documentada. |
 
@@ -217,7 +218,52 @@ Textos permitidos como iguais nos dois idiomas (por chave): `metadata.title`, `n
 |---|---|---|
 | 2026-11-08 | Manter a detecção do idioma pelo navegador na raiz (cookie e `Accept-Language`). | Bruno |
 | 2026-11-08 | Incluir nesta SPEC uma página 404 localizada, com a identidade do site. | Bruno |
+| 2026-11-08 | Textos da 404 aprovados e implementação autorizada (Q1). Q2 e Q3 seguem como premissas reversíveis (`og:locale:alternate` incluído; currículo só em inglês). | Bruno |
 
 ## Refinamento
 
+- 2026-11-08, v0.2.0: textos da 404 aprovados (Q1) e SPEC implementada; a seção 15 registra a entrega, as divergências (404 por `global-not-found` e destino do seletor na 404) e a verificação.
 - 2026-11-08, v0.1.0: SPEC criada a partir do rascunho de `FEATURES.md` (Draft v0.1), do `ARCHITECTURE.md` (7), do `SEO.md` (6), do `CONTENT.md` (3), do `DEVELOPMENT.md` (8) e do `QA.md`, com uma auditoria do código e do comportamento real do servidor (redirecionamentos, 404, cabeçalhos e cookies). Duas decisões do Bruno registradas na seção 13; os textos da 404 aguardam a aprovação (Q1).
+
+## 15. Implementação e verificação
+
+Implementada na branch `feat/i18n` em 2026-11-08, depois da aprovação dos textos da 404 (Q1).
+
+- Novos: `src/app/global-not-found.tsx` (404 de todo o site), `src/app/fonts.ts` (fontes, compartilhadas), `src/components/layout/SiteShell.tsx` (`html`, cabeçalho, conteúdo e rodapé, usado pelo layout do idioma e pela 404), `src/components/layout/NotFoundContent.tsx` e `e2e/i18n.spec.ts`.
+- Alterados: `next.config.ts` (`experimental.globalNotFound`), `src/app/[locale]/layout.tsx` (passa a usar o `SiteShell`), `src/i18n/routing.ts` (`alternateLinks: false`), `src/lib/seo/metadata.ts` (função `openGraphLocales`, com `og:locale:alternate`), `src/app/[locale]/page.tsx` (a Home usa a mesma função), `src/components/layout/LanguageSwitcher.tsx` (destino na 404), `src/content/{en,pt-BR}/common.json` (bloco `notFound`) e `README.md`.
+
+Decisões de implementação:
+
+- **A 404 usa `global-not-found`, e não `[locale]/not-found.tsx` com rota catch-all** (o plano da seção 3.1). Com o layout raiz em um segmento dinâmico (`app/[locale]/layout.tsx`), o Next 16 respondia 404 com um shell vazio (`<html id="__next_error__">`, sem `lang`, sem `h1` e com o título padrão) e só montava a página no cliente. Isso valia até para um componente estático e persistiu com uma camada raiz que repassa os filhos e sem o `revalidate` do layout. A documentação do Next indica `global-not-found` para esse caso. O idioma vem da requisição (middleware do `next-intl`), então cada 404 sai renderizada no servidor, com o `lang`, o título e o `h1` do idioma.
+- `SiteShell` e `fonts.ts` existem para que o layout e a 404 tenham exatamente o mesmo documento (mesmas fontes, skip link, cabeçalho e rodapé).
+- O destino do seletor na 404 (I18N-RF-12 e I18N-CA-10) foi detalhado: um caminho sem rota leva à Home do outro idioma e um slug inexistente de projeto ou de experimento leva à lista da seção no outro idioma. A primeira versão da SPEC dizia "Home" nos dois casos; a lista da seção preserva mais o contexto.
+- O teste de mistura de idiomas ignora endereços de e-mail e URLs (`.com` não é a palavra "com") e usa `innerText` de propósito, para manter o espaço entre os elementos.
+
+Divergências em relação à SPEC:
+
+- O plano de usar `[locale]/not-found.tsx` e `[locale]/[...rest]` foi trocado por `global-not-found` (acima); o requisito I18N-RF-12 foi atendido sem mudança de comportamento.
+- I18N-RF-12 e I18N-CA-10 mudaram de texto (destino do seletor), conforme acima.
+
+| Critério | Resultado | Evidência |
+|---|---|---|
+| I18N-CA-01 | Atendido | As treze rotas respondem 200 com `lang` correto nos dois idiomas; `/pt-BR/about`, `/en/sobre`, `/EN/about`, `/pt-br/sobre` e a barra final redirecionam para a URL equivalente. |
+| I18N-CA-02 | Atendido | A raiz responde 307 para `/pt-BR` (navegador em português) e `/en` (francês, inglês ou sem cabeçalho), e o cookie vence o cabeçalho nos dois sentidos. |
+| I18N-CA-03 | Atendido | O seletor troca e volta em todas as treze rotas (inclusive com slug) e, partindo de um navegador em inglês, escolher pt-BR grava `NEXT_LOCALE=pt-BR` e a raiz passa a levar a `/pt-BR`. |
+| I18N-CA-04 | Atendido | Título e descrição únicos entre as páginas de cada idioma, `canonical` próprio, `hreflang` `en`, `pt-BR` e `x-default` recíprocos (o `x-default` aponta para `en`), `og:locale` do idioma e nenhum `noindex`. |
+| I18N-CA-05 | Atendido | Nenhuma das 26 respostas traz cabeçalho `Link` com `hreflang`. Mutação (`alternateLinks: true`) derruba o teste. |
+| I18N-CA-06 | Atendido | `og:locale:alternate` é o do outro idioma nas 26 páginas. |
+| I18N-CA-07 | Atendido | Os 20 textos iguais são exatamente a lista da seção 7.4. Mutação (texto da 404 em inglês no pt-BR) derruba o teste. |
+| I18N-CA-08 | Atendido | As 26 páginas passam na busca de palavras do outro idioma; "May 2023" em en e "mai. 2023" em pt-BR. |
+| I18N-CA-09 | Atendido | Seis URLs de 404 (rotas inexistentes e slugs inexistentes, nos dois idiomas) respondem 404 com skip link, cabeçalho, rodapé, `lang`, título, `h1`, link para a Home e `noindex`. Mutação (`lang` fixo em `en`) derruba os testes em pt-BR. |
+| I18N-CA-10 | Atendido | O seletor leva à Home do outro idioma (caminho sem rota) ou à lista da seção (slug inexistente), nas seis URLs. |
+| I18N-CA-11 | Atendido | `/nao-existe` e `/fr/about` terminam em `/en/...` ou em `/pt-BR/...` conforme o navegador, com a 404 localizada. |
+| I18N-CA-12 | Atendido | Depois de navegar por todas as páginas nos dois idiomas, o único cookie é `NEXT_LOCALE`. |
+| I18N-CA-13 | Atendido | `pnpm typecheck` sem erros; `pnpm test:e2e` com 575 testes passando (125 novos). |
+
+Verificação adicional:
+
+- Mutação: três defeitos introduzidos de propósito (cabeçalho `Link` de volta, texto em inglês no pt-BR e `lang` fixo na 404) derrubaram oito testes; os arquivos foram restaurados e a suíte voltou a passar.
+- Navegador: 404 conferida em 1440 px, em pt-BR (`/pt-BR/nao-existe`) e em en (`/en/ai-lab/zzz`).
+- `pnpm check` passa nos arquivos novos e alterados; na árvore inteira falha só nos arquivos que não foram tocados, por causa do CRLF do checkout no Windows (problema já conhecido).
+
+Não verificado: a 404 no modo de desenvolvimento (`next dev`), que precisa ser reiniciado para ler o novo `next.config.ts`; o contraste com ferramenta; LCP e CLS. Observação fora do escopo: o navegador pede `/favicon.ico`, que cai em `[locale]` e responde 404; o site não tem favicon, e isso fica para a etapa de SEO.
