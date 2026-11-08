@@ -16,8 +16,9 @@ O site é bilíngue (inglês como padrão e português do Brasil), estático e s
 | Experience (SPEC-003) | Implementada, em revisão |
 | Projects (SPEC-004) | Implementada, em revisão |
 | AI Lab e Contact | Páginas provisórias, ainda sem conteúdo |
-| Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience e Projects |
-| Technologies, Resume (página), SEO final | Pendentes |
+| Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience, Projects e Technologies |
+| Technologies (SPEC-005) | Implementada, em revisão |
+| Resume (página), SEO final | Pendentes |
 | Hospedagem, domínio e analytics | Pendentes de decisão |
 
 O detalhamento está nas especificações em [`.specs/`](./.specs/).

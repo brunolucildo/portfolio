@@ -11,7 +11,14 @@ export type AppPathname = Exclude<
 
 type NavigationItem = {
   /** Chave da tradução em `navigation.items`. */
-  key: "home" | "about" | "experience" | "projects" | "aiLab" | "contact";
+  key:
+    | "home"
+    | "about"
+    | "experience"
+    | "projects"
+    | "technologies"
+    | "aiLab"
+    | "contact";
   href: AppPathname;
 };
 
@@ -20,6 +27,7 @@ export const mainNavigation: readonly NavigationItem[] = [
   { key: "about", href: "/about" },
   { key: "experience", href: "/experience" },
   { key: "projects", href: "/projects" },
+  { key: "technologies", href: "/technologies" },
   { key: "aiLab", href: "/ai-lab" },
   { key: "contact", href: "/contact" },
 ];

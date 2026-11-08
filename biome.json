@@ -12,7 +12,8 @@
       "!.specs",
       "!.claude",
       "!**/*.md",
-      "!pnpm-lock.yaml"
+      "!pnpm-lock.yaml",
+      "!public/images/technologies"
     ]
   },
   "css": {

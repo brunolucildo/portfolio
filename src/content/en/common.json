@@ -16,6 +16,7 @@
       "about": "About",
       "experience": "Experience",
       "projects": "Projects",
+      "technologies": "Technologies",
       "aiLab": "AI Lab",
       "contact": "Contact"
     }
@@ -34,8 +35,12 @@
   },
   "pages": {
     "placeholder": "This section is under construction.",
-    "aiLab": { "title": "AI Lab" },
-    "contact": { "title": "Contact" }
+    "aiLab": {
+      "title": "AI Lab"
+    },
+    "contact": {
+      "title": "Contact"
+    }
   },
   "about": {
     "metadata": {
@@ -263,6 +268,26 @@
         ],
         "state": "In development. The code covers accounts, onboarding, discovery, tracking, lists, ratings and comments, friends, notifications and achievements, but the repository itself states that this describes the implementation and does not confirm a production deployment. Remote push notifications are disabled, the Android widget is not implemented and the mobile app has no automated tests yet."
       }
+    }
+  },
+  "technologies": {
+    "metadata": {
+      "title": "Technologies | Bruno Lucildo",
+      "description": "Technologies and engineering practices Bruno Lucildo works with, from .NET and PostgreSQL to RabbitMQ and AI, grouped by category and linked to where they were used."
+    },
+    "title": "Technologies",
+    "intro": "The languages, frameworks, data stores and practices I work with, by category, with where each one was used.",
+    "note": "\"Experience\" refers to my professional work. The other names are personal, academic and conceptual projects.",
+    "experience": "Experience",
+    "categories": {
+      "languages": "Languages",
+      "backend": "Backend",
+      "databases": "Databases",
+      "messaging": "Messaging and Caching",
+      "architecture": "Architecture",
+      "ai": "AI and Machine Learning",
+      "frontend": "Frontend and Mobile",
+      "tools": "Tools and Infrastructure"
     }
   },
   "home": {

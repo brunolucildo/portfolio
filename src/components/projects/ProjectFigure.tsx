@@ -16,8 +16,9 @@ const maxGridPhones = 3;
 
 /**
  * Imagens de um projeto com a legenda visível (PROJ-RF-15). Telas de celular
- * (retrato) ficam estreitas, em grade ou, quando são muitas, em uma fileira
- * rolável; telas de computador (paisagem) dividem a largura. Largura e altura
+ * (retrato) ficam estreitas, três lado a lado em qualquer largura ou, quando
+ * são muitas, em uma fileira rolável; telas de computador (paisagem) dividem a
+ * largura a partir de 768 px e se empilham abaixo disso. Largura e altura
  * declaradas evitam deslocamento de layout, e as imagens carregam sob demanda.
  */
 export async function ProjectFigure({
@@ -35,11 +36,7 @@ export async function ProjectFigure({
   const single = images.length === 1;
   const gallery = portrait && images.length > maxGridPhones;
 
-  const renderImage = (
-    image: ProjectImage,
-    sizes: string,
-    imgClass: string,
-  ) => (
+  const renderImage = (image: ProjectImage, sizes: string) => (
     <Image
       key={image.alt}
       src={imageSource(image, locale)}
@@ -47,7 +44,7 @@ export async function ProjectFigure({
       width={image.width}
       height={image.height}
       sizes={sizes}
-      className={cn("h-auto w-full rounded-lg border border-border", imgClass)}
+      className="h-auto w-full rounded-lg border border-border"
     />
   );
 
@@ -62,26 +59,25 @@ export async function ProjectFigure({
         >
           {images.map((image) => (
             <div key={image.alt} className="w-56 shrink-0 snap-start">
-              {renderImage(image, "224px", "")}
+              {renderImage(image, "224px")}
             </div>
           ))}
         </section>
       ) : (
         <div
           className={cn(
-            "grid gap-4",
+            "grid",
             portrait && single && "max-w-60",
-            portrait && !single && "max-w-[46rem] md:grid-cols-3",
-            !portrait && "md:grid-cols-3",
+            portrait && !single && "max-w-[46rem] grid-cols-3 gap-2 md:gap-4",
+            !portrait && "gap-4 md:grid-cols-3",
           )}
         >
           {images.map((image) =>
             renderImage(
               image,
               portrait
-                ? "(min-width: 768px) 245px, 240px"
+                ? "(min-width: 768px) 245px, 33vw"
                 : "(min-width: 1024px) 300px, (min-width: 768px) 30vw, 100vw",
-              portrait && !single ? "max-w-60 md:max-w-none" : "",
             ),
           )}
         </div>

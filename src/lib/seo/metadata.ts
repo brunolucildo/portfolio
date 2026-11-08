@@ -39,6 +39,7 @@ type PageMetadataNamespace =
   | "about.metadata"
   | "experience.metadata"
   | "projects.metadata"
+  | "technologies.metadata"
   | "projects.detail.football.metadata"
   | "projects.detail.reelix.metadata";
 
@@ -61,6 +62,10 @@ async function pageTexts(
       return { title: t("title"), description: t("description") };
     }
     case "projects.metadata": {
+      const t = await getTranslations({ locale, namespace });
+      return { title: t("title"), description: t("description") };
+    }
+    case "technologies.metadata": {
       const t = await getTranslations({ locale, namespace });
       return { title: t("title"), description: t("description") };
     }
