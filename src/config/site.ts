@@ -1,4 +1,5 @@
 import type { Locale } from "@/i18n/routing";
+import { normalizeSiteUrl } from "@/lib/seo/indexing";
 
 export type ContactChannels = {
   email?: string;
@@ -32,7 +33,7 @@ const resume: Partial<Record<Locale, ResumeFile>> & { en: ResumeFile } = {
 export const siteConfig = {
   name: "Bruno Lucildo",
   /** URL base usada em canonical e Open Graph. Defina NEXT_PUBLIC_SITE_URL com o domínio definitivo. */
-  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  url: normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
   contact,
   resume,
   /** Fotografia do Hero, versionada em public/images/hero/. */

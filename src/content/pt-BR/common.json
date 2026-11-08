@@ -73,7 +73,7 @@
   "experience": {
     "metadata": {
       "title": "Experiência | Bruno Lucildo",
-      "description": "A trajetória profissional de Bruno Lucildo de desenvolvedor full stack a líder técnico backend: cargos, responsabilidades e resultados em mais de dez anos de software corporativo."
+      "description": "A trajetória de Bruno Lucildo de desenvolvedor full stack a líder técnico backend: cargos, responsabilidades e resultados em 10+ anos de software corporativo."
     },
     "title": "Experiência",
     "intro": "Mais de dez anos em uma empresa de distribuição de aço e soluções industriais, de desenvolvedor full stack a líder técnico da equipe que constrói sua nova plataforma de ERP.",
@@ -142,7 +142,7 @@
   "projects": {
     "metadata": {
       "title": "Projetos | Bruno Lucildo",
-      "description": "Projetos acadêmicos, pessoais e conceituais de Bruno Lucildo, cada um com seu estado atual: análise de futebol com IA, um aplicativo de acompanhamento de filmes e séries e um conceito de produto de retorno de desempenho."
+      "description": "Projetos de Bruno Lucildo e o estado atual de cada um: análise de futebol com IA (acadêmico), app de filmes e séries (pessoal) e um conceito de produto."
     },
     "title": "Projetos",
     "intro": "Projetos acadêmicos, pessoais e conceituais, cada um com seu estado atual e um link para o repositório público.",
@@ -204,7 +204,7 @@
       "football": {
         "metadata": {
           "title": "Football Stat Analytics | Bruno Lucildo",
-          "description": "Um projeto acadêmico que analisa o desempenho de atletas de futebol com IA, recuperação de informações e verificação de respostas em camadas: arquitetura, decisões técnicas e estado atual."
+          "description": "Projeto acadêmico de análise de desempenho de atletas de futebol com IA, recuperação e checagem de respostas em camadas: arquitetura, decisões e estado atual."
         },
         "overview": "O Football Stat Analytics é uma aplicação de linha de comando que analisa o desempenho de atletas de futebol com IA. Ela indexa relatórios de observação, responde perguntas fundamentadas nesses relatórios e oferece um chat interativo com personas de analista. É um projeto acadêmico.",
         "challenge": "Modelos de linguagem produzem com facilidade afirmações que parecem corretas, mas não têm suporte: números inventados, ações que os dados nunca citaram e adjetivos elogiosos. Na análise esportiva isso é pior do que não responder. O desafio foi manter cada resposta ligada à evidência fornecida pelo usuário ou aos relatórios indexados.",
@@ -233,7 +233,7 @@
       "reelix": {
         "metadata": {
           "title": "Reelix | Bruno Lucildo",
-          "description": "Um aplicativo pessoal de acompanhamento de filmes e séries, com compartilhamento que prioriza a privacidade e controle de spoilers: arquitetura, decisões técnicas e estado atual."
+          "description": "Aplicativo de acompanhamento de filmes e séries, com compartilhamento que prioriza a privacidade e controle de spoilers: arquitetura, decisões e estado atual."
         },
         "overview": "O Reelix é um aplicativo para descobrir e acompanhar filmes e séries, registrar o que você assistiu e compartilhar atividades autorizadas com amigos. O repositório reúne um app mobile em React Native e uma API em ASP.NET Core. É um projeto pessoal.",
         "challenge": "Um diário do que se assiste é dado pessoal. Compartilhá-lo com amigos só funciona se cada pessoa controla o que é compartilhado, e comentários e avaliações não podem estragar um enredo para quem ainda não assistiu. O desafio foi construir os recursos sociais sobre isso, com privacidade e controle de spoilers como regras do produto, e não como remendos.",
@@ -284,7 +284,7 @@
   "aiLab": {
     "metadata": {
       "title": "AI Lab | Bruno Lucildo",
-      "description": "Experimentos de IA aplicada: respostas com recuperação de informação, validação de saída com um modelo juiz, testes de consistência, desenho de prompts, ajuste fino e métodos de teste, com resultados e limitações."
+      "description": "Experimentos de IA aplicada: respostas fundamentadas, validação com modelo juiz, consistência, prompts e ajuste fino, com resultados e limitações."
     },
     "title": "AI Lab",
     "intro": "Estudo desenvolvimento e gestão de sistemas de IA e uso projetos de estudo para explorar modelos de linguagem. Cada experimento diz o que eu queria descobrir, como abordei, o que medi e onde ele falha. São projetos de aprendizado, não produtos.",
@@ -364,6 +364,7 @@
     "experiments": {
       "ragGrounding": {
         "name": "Respostas fundamentadas em relatórios (RAG)",
+        "metaTitle": "Respostas fundamentadas (RAG)",
         "summary": "Responder perguntas sobre relatórios de observação usando só os trechos recuperados, mostrando quanto de cada resposta pode ser rastreado até eles.",
         "objective": "Responder perguntas sobre relatórios de observação usando só o que os relatórios dizem, e deixar visível quanto de cada resposta tem suporte de fato.",
         "problem": "Um modelo perguntado sobre relatórios que não leu inventa detalhes plausíveis: números, fontes e ações. Citar uma fonte não prova que a fonte diga aquilo.",
@@ -374,6 +375,7 @@
       },
       "outputValidation": {
         "name": "Validação da saída do modelo com regras e um modelo juiz",
+        "metaTitle": "Validação de saída com modelo juiz",
         "summary": "Checar o que um modelo de linguagem diz com regras em código e um segundo modelo que precisa citar a evidência.",
         "objective": "Manter cada afirmação de uma persona de analista ligada à evidência que o usuário forneceu.",
         "problem": "Instruções no prompt, sozinhas, não garantem que o modelo siga uma política. Nos primeiros testes ao vivo ele produziu adjetivos elogiosos, ações que os dados nunca citaram e notas para atributos sem evidência.",
@@ -384,6 +386,7 @@
       },
       "scoreConsistency": {
         "name": "Mediana de três amostras para notas estáveis",
+        "metaTitle": "Notas estáveis com mediana de três",
         "summary": "Testar se responder com a mediana de três amostras torna estáveis as notas de um modelo.",
         "objective": "Descobrir se algum modo torna confiáveis, de uma execução para outra, as notas para a mesma entrada.",
         "problem": "A mesma entrada pode gerar notas diferentes do mesmo modelo, mesmo com temperatura 0, o que enfraquece uma nota na qual alguém poderia se basear.",
@@ -394,6 +397,7 @@
       },
       "analystPersonas": {
         "name": "Personas de analista construídas com prompts",
+        "metaTitle": "Personas de analista com prompts",
         "summary": "Desenhar personas de analista com prompts, histórico de conversa e checagens simples de entrada e saída.",
         "objective": "Explorar até onde só os prompts conseguem moldar um assistente para análise de futebol.",
         "problem": "O mesmo modelo deve se comportar de forma diferente ao avaliar o desempenho de um jogador, uma proposta de transferência ou uma leitura tática, e cada tarefa precisa das suas regras sobre o que conta como evidência.",
@@ -404,6 +408,7 @@
       },
       "approachAndModelChoice": {
         "name": "Escolha de abordagem e de modelo",
+        "metaTitle": "Escolha de abordagem e de modelo",
         "summary": "Comparar regras, aprendizado de máquina, modelos de linguagem e uma abordagem híbrida, e três modelos, para decidir como automatizar a análise de atletas.",
         "objective": "Decidir, antes de construir qualquer coisa, que tipo de tecnologia serve a cada parte de uma análise de desempenho no futebol e com qual modelo de linguagem começar.",
         "problem": "Cada opção tem forças e custos: regras fixas são previsíveis, mas rígidas; modelos de linguagem leem texto livre bem, mas podem ser inconsistentes ou errar; e custo e latência variam entre modelos. Escolher por hábito ou por moda deixa essas trocas sem registro.",
@@ -414,6 +419,7 @@
       },
       "promptTestFramework": {
         "name": "Um framework de testes para prompts",
+        "metaTitle": "Um framework de testes para prompts",
         "summary": "Um método para testar um prompt como se testa software: casos fixos, execuções repetidas, critérios com nota, falhas ligadas a causas e reteste a cada correção.",
         "objective": "Definir uma forma repetível de julgar se um prompt que transforma dados de atletas em atributos com nota é preciso, consistente e honesto quando faltam dados.",
         "problem": "Uma resposta que apenas parece certa não é evidência. O mesmo prompt pode inventar uma estatística, supervalorizar volume sobre eficiência ou dar respostas diferentes ao mesmo caso, e um ajuste no prompt pode resolver um problema e causar outro.",
@@ -424,6 +430,7 @@
       },
       "loraFineTuning": {
         "name": "Ajuste fino de um modelo pequeno para classificar avaliações (LoRA)",
+        "metaTitle": "Ajuste fino de um modelo (LoRA)",
         "summary": "Ajustar um modelo de 1,5 bilhão de parâmetros com LoRA para classificar avaliações curtas de desempenho no futebol, e o que a avaliação mostra e não mostra.",
         "objective": "Descobrir se um adaptador LoRA deixa um modelo aberto e pequeno melhor em rotular uma avaliação de desempenho como positiva, neutra ou negativa, e em responder no formato que um programa consegue ler.",
         "problem": "Modelos pequenos costumam ignorar o formato de resposta exigido ou pender para o rótulo errado, e classificar avaliações à mão não escala. O ajuste fino é uma correção candidata, mas só uma avaliação justa diz se ele ajuda.",
@@ -534,7 +541,7 @@
   "home": {
     "metadata": {
       "title": "Bruno Lucildo | Desenvolvedor Backend Sênior e Líder Técnico",
-      "description": "Conheça o trabalho, a experiência e os projetos técnicos de Bruno Lucildo, desenvolvedor backend e líder técnico com foco em sistemas escaláveis e engenharia de software."
+      "description": "Conheça o trabalho, a experiência e os projetos de Bruno Lucildo, desenvolvedor backend e líder técnico focado em sistemas escaláveis e engenharia de software."
     },
     "hero": {
       "eyebrow": "Desenvolvedor Backend Sênior | Líder Técnico",

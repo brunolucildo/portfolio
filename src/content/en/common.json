@@ -73,7 +73,7 @@
   "experience": {
     "metadata": {
       "title": "Experience | Bruno Lucildo",
-      "description": "Bruno Lucildo's career path from full-stack developer to backend technical lead: roles, responsibilities and results across more than ten years of enterprise software."
+      "description": "Bruno Lucildo's career from full-stack developer to backend technical lead: roles, responsibilities and results across 10+ years of enterprise software."
     },
     "title": "Experience",
     "intro": "Ten-plus years at a steel distribution and industrial solutions company, from full-stack developer to technical lead of the team building its new ERP platform.",
@@ -142,7 +142,7 @@
   "projects": {
     "metadata": {
       "title": "Projects | Bruno Lucildo",
-      "description": "Academic, personal and conceptual projects by Bruno Lucildo, each with its current state: AI-assisted football analysis, a movie and series tracking app and a performance-feedback product concept."
+      "description": "Projects by Bruno Lucildo and their current state: AI football analysis (academic), a movie and series tracking app (personal) and a product concept."
     },
     "title": "Projects",
     "intro": "Academic, personal and conceptual projects, each with its current state and a link to its public repository.",
@@ -204,7 +204,7 @@
       "football": {
         "metadata": {
           "title": "Football Stat Analytics | Bruno Lucildo",
-          "description": "An academic project that analyzes football athlete performance with AI, retrieval and layered answer verification: architecture, technical decisions and current state."
+          "description": "An academic project that analyzes football athlete performance with AI, retrieval and layered answer checks: architecture, decisions and current state."
         },
         "overview": "Football Stat Analytics is a command-line application that analyzes football athlete performance with AI. It indexes scouting reports, answers questions grounded in those reports and offers an interactive chat with analyst personas. It is an academic project.",
         "challenge": "Language models readily produce statements that sound right but have no support: invented numbers, actions the data never mentioned and flattering adjectives. In sports analysis that is worse than no answer. The challenge was to keep every answer tied to the evidence the user supplies or to the reports that were indexed.",
@@ -264,7 +264,7 @@
   "technologies": {
     "metadata": {
       "title": "Technologies | Bruno Lucildo",
-      "description": "Technologies and engineering practices Bruno Lucildo works with, from .NET and PostgreSQL to RabbitMQ and AI, grouped by category and linked to where they were used."
+      "description": "Technologies and practices Bruno Lucildo works with, from .NET and PostgreSQL to RabbitMQ and AI, grouped by category and linked to where they were used."
     },
     "title": "Technologies",
     "intro": "The languages, frameworks, data stores and practices I work with, by category, with where each one was used.",
@@ -284,7 +284,7 @@
   "aiLab": {
     "metadata": {
       "title": "AI Lab | Bruno Lucildo",
-      "description": "Experiments in applied AI: retrieval-augmented answers, output validation with a judge model, consistency tests, prompt design, fine-tuning and test methods, with results and limitations."
+      "description": "Applied AI experiments by Bruno Lucildo: grounded answers, judge-model validation, consistency tests, prompts and fine-tuning, with results and limitations."
     },
     "title": "AI Lab",
     "intro": "I'm studying AI systems development and management, and I use study projects to explore language models. Each experiment states what I wanted to find out, how I approached it, what I measured and where it falls short. They are learning projects, not products.",
@@ -364,6 +364,7 @@
     "experiments": {
       "ragGrounding": {
         "name": "Grounded answers over reports (RAG)",
+        "metaTitle": "Grounded answers over reports (RAG)",
         "summary": "Answering questions about scouting reports using only retrieved excerpts, and showing how much of each answer can be traced back to them.",
         "objective": "Answer questions about scouting reports using only what the reports say, and make it visible how much of each answer is actually supported.",
         "problem": "A model asked about reports it has not read invents plausible details: numbers, sources and actions. Citing a source does not prove that the source says it.",
@@ -374,6 +375,7 @@
       },
       "outputValidation": {
         "name": "Validating model output with rules and a judge model",
+        "metaTitle": "Judge-model output validation",
         "summary": "Checking what a language model says with rules in code and a second model that has to quote the evidence.",
         "objective": "Keep every statement an analyst persona makes tied to the evidence the user supplied.",
         "problem": "Prompt instructions alone do not guarantee that a model follows a policy. In the first live tests it produced flattering adjectives, actions the data never mentioned and scores for attributes without evidence.",
@@ -384,6 +386,7 @@
       },
       "scoreConsistency": {
         "name": "Median of three samples for stable scores",
+        "metaTitle": "Median of three for stable scores",
         "summary": "Testing whether answering with the median of three samples makes a model's scores stable.",
         "objective": "Find out whether any mode makes the scores for the same input reliable from one run to the next.",
         "problem": "The same input can produce different scores from the same model, even at temperature 0, which undermines a score that people might act on.",
@@ -394,6 +397,7 @@
       },
       "analystPersonas": {
         "name": "Analyst personas built with prompts",
+        "metaTitle": "Analyst personas built with prompts",
         "summary": "Designing analyst personas with prompts, conversation history and simple input and output checks.",
         "objective": "Explore how far prompts alone can shape an assistant for football analysis.",
         "problem": "The same model should behave differently when it assesses a player's performance, a transfer proposal or a tactical reading, and each task needs its own rules about what counts as evidence.",
@@ -404,6 +408,7 @@
       },
       "approachAndModelChoice": {
         "name": "Choosing an approach and a model",
+        "metaTitle": "Choosing an approach and a model",
         "summary": "Comparing rules, machine learning, language models and a hybrid design, then three models, to decide how to automate football performance analysis.",
         "objective": "Decide, before building anything, which kind of technology fits each part of a football performance analysis, and which language model to start with.",
         "problem": "Every option has strengths and costs: fixed rules are predictable but rigid, language models read free text well but can be inconsistent or wrong, and cost and delay differ between models. Choosing by habit or by hype leaves those trade-offs unrecorded.",
@@ -414,6 +419,7 @@
       },
       "promptTestFramework": {
         "name": "A test framework for prompts",
+        "metaTitle": "A test framework for prompts",
         "summary": "A method to test a prompt like software: fixed cases, repeated runs, scored criteria, failures traced to causes and a retest after each fix.",
         "objective": "Define a repeatable way to judge whether a prompt that turns athlete data into scored attributes is accurate, consistent and honest when data is missing.",
         "problem": "A response that merely looks right is not evidence. The same prompt can invent a statistic, overvalue volume over efficiency or give different answers to the same case, and an edit to the prompt can fix one problem and cause another.",
@@ -424,6 +430,7 @@
       },
       "loraFineTuning": {
         "name": "Fine-tuning a small model to classify reviews (LoRA)",
+        "metaTitle": "Fine-tuning a small model (LoRA)",
         "summary": "Fine-tuning a 1.5-billion-parameter model with LoRA to classify short football performance reviews, and what the evaluation does and does not show.",
         "objective": "Find out whether a LoRA adapter makes a small open model better at labelling a performance review as positive, neutral or negative, and at answering in a format a program can read.",
         "problem": "Small models often ignore the required answer format or lean toward the wrong label, and classifying reviews by hand does not scale. Fine-tuning is a candidate fix, but only a fair evaluation can say whether it helps.",
@@ -534,7 +541,7 @@
   "home": {
     "metadata": {
       "title": "Bruno Lucildo | Senior Backend Developer & Technical Lead",
-      "description": "Explore the work, experience and technical projects of Bruno Lucildo, a backend developer and technical lead focused on scalable systems and software engineering."
+      "description": "Explore the work, experience and projects of Bruno Lucildo, a backend developer and technical lead focused on scalable systems and software engineering."
     },
     "hero": {
       "eyebrow": "Senior Backend Developer | Technical Lead",

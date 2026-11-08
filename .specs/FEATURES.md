@@ -108,6 +108,14 @@ A SPEC reformula a página de lista do AI Lab como um ambiente imersivo de pesqu
 
 ---
 
+# SPEC-013 — SEO Final
+
+**Status:** In Review (2026-11-08). Implementada e verificada; especificação em [`013-seo.md`](./013-seo.md).
+
+A SPEC fecha o SEO técnico para a publicação: `robots.txt`, `sitemap.xml` com as 34 páginas e `hreflang`, guarda contra indexação de ambientes não públicos, validação de `NEXT_PUBLIC_SITE_URL`, dados estruturados (`WebSite`, `Person`, `ProfilePage`), limites de 60 e 160 caracteres para título e descrição (com textos reescritos para aprovação) e testes de auditoria. Hospedagem, domínio, Search Console e Lighthouse em produção ficam fora e seguem para o QA final.
+
+---
+
 ## 2. Dependências entre funcionalidades
 
 | Funcionalidade | Dependências principais |

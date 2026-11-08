@@ -54,7 +54,7 @@ Cada página deverá possuir:
 - Open Graph image.
 - Idioma correspondente.
 
-Os títulos e descrições deverão ser únicos e representar corretamente o conteúdo da página.
+Os títulos e descrições deverão ser únicos e representar corretamente o conteúdo da página. Limites (SPEC-013): título com até 60 caracteres e descrição com até 160, nos dois idiomas, protegidos por teste.
 
 ### 4.1. Home
 
@@ -64,7 +64,7 @@ Título sugerido:
 
 Descrição sugerida:
 
-`Explore the work, experience and technical projects of Bruno Lucildo, a backend developer and technical lead focused on scalable systems and software engineering.`
+`Explore the work, experience and projects of Bruno Lucildo, a backend developer and technical lead focused on scalable systems and software engineering.`
 
 As versões em português deverão receber traduções naturais.
 
@@ -92,11 +92,11 @@ Estrutura sugerida:
 /pt-BR/sobre
 /pt-BR/experiencia
 /pt-BR/projetos
-/pt-BR/laboratorio-ia
+/pt-BR/ai-lab
 /pt-BR/contato
 ```
 
-Os caminhos definitivos deverão ser definidos na implementação.
+Caminhos definitivos (implementados): além dos acima, `/technologies` (`/tecnologias`), `/resume` (`/curriculo`), `/projects/[slug]` (`/projetos/[slug]`) e `/ai-lab/[slug]`. A tabela completa está no README. O AI Lab mantém o mesmo caminho nos dois idiomas, por ser um nome próprio.
 
 ## 6. Internacionalização e SEO
 
@@ -135,7 +135,9 @@ Regras:
 
 ## 8. Dados estruturados
 
-Avaliar a utilização de JSON-LD para:
+Implementado (SPEC-013): `WebSite` e `Person` na Home e `ProfilePage` com `Person` no About, com nome, cargo (o do Hero), descrição da página e perfis do LinkedIn e do GitHub; a foto do Hero entra só na Home. Sem empresa, e-mail, telefone, métricas, `knowsAbout`, `SoftwareSourceCode` ou `BreadcrumbList` (a Home e o About não mostram tecnologias, e só o que está visível pode ser marcado). Avaliados e deixados de fora por ora.
+
+Tipos considerados originalmente:
 
 - Person.
 - WebSite.
@@ -172,6 +174,10 @@ Implementar:
 O sitemap deverá conter apenas URLs canônicas e indexáveis.
 
 Páginas inexistentes, previews e ambientes não públicos não deverão ser indexados.
+
+Implementação (SPEC-013): o sitemap lista as 34 páginas públicas (17 por idioma) com as alternativas `hreflang` (`en`, `pt-BR` e `x-default`), sem `lastmod`, montado das mesmas fontes das rotas. O `robots.txt` libera tudo e aponta o sitemap, sem bloquear `/documents/` (o PDF do currículo sai com `X-Robots-Tag: noindex`, e bloquear o caminho impediria o robô de ler esse cabeçalho).
+
+**Guarda de indexação.** O padrão é bloquear: sem `SITE_INDEXING=allow`, o `robots.txt` diz `Disallow: /` e toda resposta sai com `X-Robots-Tag: noindex, nofollow`. A variável só vale com `NEXT_PUBLIC_SITE_URL` em `https` fora de `localhost`; do contrário o build falha. O passo a passo de publicação está no README.
 
 ## 11. Links internos e externos
 

@@ -8,6 +8,7 @@ import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { siteConfig } from "@/config/site";
 import { routing } from "@/i18n/routing";
+import { buildHomeJsonLd, JsonLd } from "@/lib/seo/jsonLd";
 import {
   localizedAlternates,
   localizedPath,
@@ -62,6 +63,7 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={await buildHomeJsonLd(locale)} />
       <HeroSection />
       <ExperienceHighlights />
       <FeaturedProjects />
