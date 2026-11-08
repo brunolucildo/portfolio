@@ -86,50 +86,9 @@ A seção Resume dá ao currículo em PDF uma página própria (`/resume`), com 
 
 # SPEC-010 — Global Layout and Navigation
 
-## 1. Contexto
+**Status:** Proposed. Refinada e movida para [`010-global-layout.md`](./010-global-layout.md).
 
-O layout global estabelece a estrutura compartilhada entre todas as páginas.
-
-## 2. Objetivo
-
-Garantir consistência de navegação, identidade visual e comportamento.
-
-## 3. Elementos
-
-- Header.
-- Navegação principal.
-- Language Switcher.
-- Conteúdo principal.
-- Footer.
-- Elementos compartilhados de layout.
-
-## 4. Requisitos funcionais
-
-- Navegar entre páginas.
-- Indicar a localização atual.
-- Alternar idiomas.
-- Adaptar navegação ao mobile.
-- Disponibilizar acesso ao currículo.
-- Exibir links de contato no footer.
-
-## 5. Requisitos não funcionais
-
-- HTML semântico.
-- Navegação por teclado.
-- Responsividade.
-- Contraste adequado.
-- Foco visível.
-- Ausência de scroll horizontal.
-- Carregamento eficiente.
-
-## 6. Critérios de aceitação
-
-- Layout consistente em todas as páginas.
-- Menu desktop funcional.
-- Menu mobile funcional.
-- Links corretos.
-- Idioma preservado.
-- Navegação acessível.
+O layout global reúne cabeçalho, navegação, seletor de idioma, rodapé e o atalho para o conteúdo. A SPEC formaliza o que já foi implementado, registra a auditoria em build de produção e fecha as lacunas encontradas (menu mobile, foco atrás do cabeçalho fixo, alvos de toque, estado ativo do botão Resume e link do currículo no rodapé). Os requisitos, os critérios de aceitação, a auditoria, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
 ---
 
