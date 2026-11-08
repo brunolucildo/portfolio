@@ -8,7 +8,7 @@
 | Identificador | SPEC-010 |
 | Slug | `010-global-layout` |
 | Versão | 0.2.0 |
-| Status | In Review (implementada em 2026-11-08; aguardando a revisão do usuário e do PR) |
+| Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, implementada em 2026-11-08; aguardando a revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-010 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -168,9 +168,9 @@ Feita em um build de produção, com Playwright (Chromium), nos dois idiomas.
 | ID | Pergunta | Bloqueia? | Default adotado se não houver resposta |
 |---|---|---|---|
 | Q1 | Posso implementar as correções da seção 7 e criar `e2e/layout.spec.ts`? | Resolvida em 2026-11-08: autorizado pelo Bruno | Nenhum: implementação só depois do OK. |
-| Q2 | O menu mobile deve fechar também ao clicar fora dele? | Não | Não fecha (premissa 3). |
-| Q3 | O botão Resume e o nome do site passam a 44 px de altura (hoje 36 px e 26 px)? | Não | Sim (LAY-RF-12), como as demais páginas. |
-| Q4 | O fechamento do menu ao passar de 1024 px (LAY-RF-07) entra na v1? | Não | Entra, como Should. |
+| Q2 | O menu mobile deve fechar também ao clicar fora dele? | Não | Não fecha (premissa 3). **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q3 | O botão Resume e o nome do site passam a 44 px de altura (hoje 36 px e 26 px)? | Não | Sim (LAY-RF-12), como as demais páginas. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q4 | O fechamento do menu ao passar de 1024 px (LAY-RF-07) entra na v1? | Não | Entra, como Should. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
 
 ## 12. Premissas
 

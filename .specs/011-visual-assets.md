@@ -8,7 +8,7 @@
 | Identificador | SPEC-011 |
 | Slug | `011-visual-assets` |
 | Versão | 0.2.0 |
-| Status | In Review (textos aprovados e implementada em 2026-11-08; aguardando a revisão do usuário e do PR) |
+| Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, textos aprovados e implementada em 2026-11-08; aguardando a revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-011 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -210,9 +210,9 @@ Só a legenda do Reelix tem texto novo. O cartão reutiliza o nome, o posicionam
 | ID | Pergunta | Bloqueia? | Default adotado se não houver resposta |
 |---|---|---|---|
 | Q1 | A legenda do Reelix da seção 7.3 (frase dos termos do TMDB) e o `alt` do cartão podem ser publicados? | Resolvida em 2026-11-08: aprovados pelo Bruno | Nenhum: implementação só depois da aprovação. |
-| Q2 | O cartão leva só o texto aprovado da Home (nome, posicionamento e título), ou prefere outra frase? | Não | Os textos da Home. |
-| Q3 | O monograma é "BL" em verde-limão sobre o fundo escuro, como na seção 6.1? | Não | Sim. |
-| Q4 | Os limites de peso da seção VIS-RF-06 (600 KB, 300 KB, 15 KB) estão bons? | Não | Sim. |
+| Q2 | O cartão leva só o texto aprovado da Home (nome, posicionamento e título), ou prefere outra frase? | Não | Os textos da Home. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q3 | O monograma é "BL" em verde-limão sobre o fundo escuro, como na seção 6.1? | Não | Sim. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q4 | Os limites de peso da seção VIS-RF-06 (600 KB, 300 KB, 15 KB) estão bons? | Não | Sim. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
 
 ## 12. Premissas
 

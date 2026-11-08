@@ -8,7 +8,7 @@
 | Identificador | SPEC-004 |
 | Slug | `004-projects` |
 | Versão | 0.8.0 |
-| Status | In Review (implementada em 2026-11-07; aguardando revisão do usuário e do PR) |
+| Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, implementada em 2026-11-07; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-07 |
 | Origem | SPEC-004 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -265,8 +265,8 @@ Capturas deixadas de fora de propósito: minhas listas (traz uma lista de teste 
 | SPEC-008 Internationalization | Implementada na base | Rotas localizadas e conteúdo `en`/`pt-BR`; exige rota dinâmica localizada (`/projects/[slug]` e `/projetos/[slug]`). |
 | SPEC-001 Home | Implementada (v0.7.0) | Passa a v0.8.0: terceiro destaque, `HOME-RF-04`, `HOME-CA-04`, `HOME-CA-17` e testes de `e2e/home.spec.ts`. |
 | SPEC-002 About e SPEC-003 Experience | Implementadas | Sem dependência direta; mantêm o mesmo padrão editorial e de testes. |
-| SPEC-011 Fotografia e ativos visuais | Pendente | Trata dos ativos visuais do site; as imagens desta SPEC são capturas dos próprios projetos e já estão em `public/images/projects/`. |
-| Revisão dos bancos `.db` do repositório do Football | Em aberto (a cargo do usuário) | O link do projeto aparece na Home e aqui; a revisão decide se o repositório pode seguir público. |
+| SPEC-011 Fotografia e ativos visuais | Implementada | Trata dos ativos visuais do site; as imagens desta SPEC são capturas dos próprios projetos, estão em `public/images/projects/` e têm origem e direitos em `public/images/CREDITS.md`. |
+| Revisão dos bancos `.db` do repositório do Football | Decidido em 2026-11-08: os arquivos ficam públicos (Bruno) | O link do projeto aparece na Home e aqui; nada muda no site. |
 
 ## 10. Riscos
 
@@ -291,8 +291,8 @@ Capturas deixadas de fora de propósito: minhas listas (traz uma lista de teste 
 | ID | Pergunta | Impacto | Dono | Bloqueia |
 |---|---|---|---|---|
 | Q1 | Os textos das seções 7.2 a 7.4 (lista, Football e Reelix, em inglês e português) estão aprovados ou precisam de ajustes? Em especial, as frases de desafio e de decisão técnica, que reescrevem a motivação documentada nos repositórios. | Todo o conteúdo das páginas. | Bruno | **Resolvida (2026-11-07):** textos aprovados. |
-| Q2 | A categoria "Product concept"/"Conceito de produto" e o estado "Conceptual"/"Conceitual" servem ao FintaLab? | PROJ-RF-04 e a Home. | Bruno | Não bloqueia (reversível). |
-| Q3 | A ordem Football, Reelix, FintaLab está correta na lista e na Home? | PROJ-RF-01 e PROJ-RF-14. | Bruno | Não bloqueia (reversível). |
+| Q2 | A categoria "Product concept"/"Conceito de produto" e o estado "Conceptual"/"Conceitual" servem ao FintaLab? | PROJ-RF-04 e a Home. | Bruno | Não bloqueia (reversível). **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q3 | A ordem Football, Reelix, FintaLab está correta na lista e na Home? | PROJ-RF-01 e PROJ-RF-14. | Bruno | Não bloqueia (reversível). **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
 | Q4 | Os textos alternativos e as legendas das imagens (seção 7.6) estão aprovados? A interface do Reelix, em português, aparece nas duas versões do site. | PROJ-RF-15. | Bruno | **Resolvida (2026-11-07):** aprovados. |
 | Q6 | As seis telas novas do Reelix (home de filmes, busca, detalhe de série, avaliações e comentários, watchlist e topo do perfil) e seus textos alternativos estão aprovados? O detalhe de série mostra a imagem de fundo de uma série com atores reais, como a home mostra pôsteres. | PROJ-RF-15 e PROJ-RF-16. | Bruno | **Resolvida (2026-11-07):** telas e textos alternativos aprovados. |
 | Q5 | A home do Reelix (com pôsteres de séries e o que você assiste) pode entrar como imagem? Ela é a tela principal do app, mas mostra arte de estúdio e o rosto de uma pessoa real num pôster. Há captura pronta, fora do repositório. | PROJ-RF-16 e PROJ-CA-19. | Bruno | **Resolvida (2026-11-07):** a home entra (`reelix-home.jpg`), com crédito ao TMDB na legenda. |

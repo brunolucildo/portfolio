@@ -8,7 +8,7 @@
 | Identificador | SPEC-003 |
 | Slug | `003-experience` |
 | Versão | 0.4.0 |
-| Status | In Review (implementada em 2026-11-07; aguardando revisão do usuário e do PR) |
+| Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, implementada em 2026-11-07; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-07 |
 | Origem | SPEC-003 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -240,8 +240,8 @@ As afirmações em primeira pessoa e a atribuição "minha equipe" seguem o prin
 | SPEC-008 Internationalization | Implementada na base | Rotas `/experience` e `/experiencia`, conteúdo `en`/`pt-BR` e metadados. |
 | Design system | Implementado | Tipografia, container de leitura e `Badge`; o item de experiência (4.7) é novo. |
 | SPEC-001 Home e SPEC-002 About | Implementadas | Já apontam para a rota de Experience; os fatos devem coincidir. |
-| SPEC-009 Resume | Pendente | O currículo é a fonte principal e deve ficar consistente com a página. |
-| SPEC-004 Projects | Pendente | Origem dos estudos de caso de EXP-RF-13. |
+| SPEC-009 Resume | Implementada | O currículo (PDF) é a fonte principal; a SPEC-009 (seção 7.5) registra as divergências aprovadas em relação a esta página. |
+| SPEC-004 Projects | Implementada | Origem dos estudos de caso de EXP-RF-13; os links para estudos de caso ficaram fora da v1. |
 | Testes E2E | Implementados | Cada página nova ganha o seu `*.spec.ts`. |
 
 ## 10. Riscos
@@ -276,7 +276,7 @@ Como a página publica itens que o currículo não traz (200+, migração para .
 | ID | Pergunta | Impacto | Dono | Bloqueia |
 |---|---|---|---|---|
 | Q1 | Os textos da seção 7.1 (inclusive a voz em primeira pessoa, a atribuição à equipe e os títulos dos cargos em pt-BR) estão aprovados ou precisam de ajustes? | Todo o conteúdo da página. | Bruno | **Resolvida (2026-11-07):** textos aprovados sem ajustes. |
-| Q2 | A ordem do mais recente ao mais antigo está correta? A SPEC original dizia apenas "ordem cronológica". | EXP-RF-01 e EXP-CA-01. | Bruno | Não bloqueia (reversível). Segue como premissa até ser revista na validação visual. |
+| Q2 | A ordem do mais recente ao mais antigo está correta? A SPEC original dizia apenas "ordem cronológica". | EXP-RF-01 e EXP-CA-01. | Bruno | Não bloqueia (reversível). Segue como premissa até ser revista na validação visual. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
 | Q3 | O título, a descrição de SEO e a descrição da empresa na abertura (seção 7.1) estão aprovados? | EXP-RF-10 e EXP-RF-08. | Bruno | **Resolvida (2026-11-07):** aprovados. |
 
 ## 13. Premissas

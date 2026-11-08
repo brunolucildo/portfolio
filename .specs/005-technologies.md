@@ -8,7 +8,7 @@
 | Identificador | SPEC-005 |
 | Slug | `005-technologies` |
 | Versão | 0.3.0 |
-| Status | In Review (implementada em 2026-11-08; aguardando revisão do usuário e do PR) |
+| Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, implementada em 2026-11-08; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-005 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -240,9 +240,9 @@ Regras:
 |---|---|---|---|---|
 | Q1 | Os textos das seções 7.2 e 7.3 e os rótulos de contexto estão aprovados? | Conteúdo da página. | Bruno | **Resolvida (2026-11-08):** aprovados. |
 | Q2 | A regra de ícones da seção 7.5 serve: ícone oficial (devicon, MIT) quando existir e monograma de 1 a 2 letras, **sem imitar o logotipo**, quando não existir? Você pediu um ícone "próximo" ao inexistente; recriar um logotipo seria imitar a marca, então proponho o monograma. | TECH-RF-09, aparência da lista. | Bruno | **Resolvida (2026-11-08):** aprovada (monograma sem imitar logotipos). |
-| Q3 | A categoria "Frontend and Mobile" (React Native e Expo) e a inclusão de Supabase Auth e TMDB em "Tools and Infrastructure" estão corretas? Elas existem para a página ficar consistente com Projects, mas ampliam as categorias iniciais da `FEATURES.md`. | Seção 7.1. | Bruno | Não bloqueia (reversível). Implementada com a categoria nova. |
-| Q4 | **Azure Service Bus** consta no currículo (Skills), mas em nenhum cargo. Entra na lista sem linha de contexto, ou prefere dizer onde usou ("Experience")? | Seção 7.1. | Bruno | Não bloqueia. Implementada com o default (sem contexto). |
-| Q5 | **Domain-Driven Design** consta em `BUSINESS.md` e `CONTENT.md`, mas não no currículo nem em nenhum cargo. Pode entrar em Architecture com o contexto "Experience"? Git, Docker e CI/CD entram? Se sim, com qual contexto? | Seção 7.1. | Bruno | Não bloqueia. Implementada com o default (fora). |
+| Q3 | A categoria "Frontend and Mobile" (React Native e Expo) e a inclusão de Supabase Auth e TMDB em "Tools and Infrastructure" estão corretas? Elas existem para a página ficar consistente com Projects, mas ampliam as categorias iniciais da `FEATURES.md`. | Seção 7.1. | Bruno | Não bloqueia (reversível). Implementada com a categoria nova. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q4 | **Azure Service Bus** consta no currículo (Skills), mas em nenhum cargo. Entra na lista sem linha de contexto, ou prefere dizer onde usou ("Experience")? | Seção 7.1. | Bruno | Não bloqueia. Implementada com o default (sem contexto). **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q5 | **Domain-Driven Design** consta em `BUSINESS.md` e `CONTENT.md`, mas não no currículo nem em nenhum cargo. Pode entrar em Architecture com o contexto "Experience"? Git, Docker e CI/CD entram? Se sim, com qual contexto? | Seção 7.1. | Bruno | Não bloqueia. Implementada com o default (fora). **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
 
 ## 12. Premissas
 
