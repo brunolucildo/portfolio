@@ -100,6 +100,14 @@ A SPEC reúne a fotografia do Hero, as telas dos projetos e os ícones de tecnol
 
 ---
 
+# SPEC-012 — AI Lab: Neural Intelligence Environment
+
+**Status:** Done (2026-11-08). Implementada e verificada; especificação em [`012-ai-lab-neural.md`](./012-ai-lab-neural.md).
+
+A SPEC reformula a página de lista do AI Lab como um ambiente imersivo de pesquisa em IA: rede neural em Canvas 2D, filosofia do laboratório, experimentos em destaque com filtros, linha de pesquisa e encerramento visual, sem dependência nova. Os requisitos, os critérios de aceitação, os textos para aprovação, o impacto nos testes, as perguntas abertas e as decisões estão no arquivo dedicado.
+
+---
+
 ## 2. Dependências entre funcionalidades
 
 | Funcionalidade | Dependências principais |

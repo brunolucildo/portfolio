@@ -33,12 +33,15 @@ export type AiLabExperiment = {
   technologies: readonly string[];
   /** Projeto de onde o experimento saiu; `null` quando não há página de origem. */
   origin: Extract<ProjectKey, "football" | "fintalab"> | null;
+  /** Experimento em destaque na lista (SPEC-012, NEU-RF-13). */
+  featured?: boolean;
 };
 
 export const aiLabExperiments: readonly AiLabExperiment[] = [
   {
     key: "ragGrounding",
     slug: "rag-grounding",
+    featured: true,
     type: "proofOfConcept",
     state: "inDevelopment",
     model: "gpt-4o-mini, OpenAI embeddings",
@@ -126,4 +129,28 @@ export function findExperimentBySlug(
   slug: string,
 ): DetailExperiment | undefined {
   return experimentsWithDetail.find((experiment) => experiment.slug === slug);
+}
+
+/** Filtros da lista do AI Lab (SPEC-012, NEU-RF-16). */
+export type ExperimentFilter = "experiments" | "research" | "projects";
+
+/**
+ * Filtro de cada tipo: prova de conceito é "Experiments", estudo é "Research"
+ * e projeto concluído é "Projects" (nenhum na v1).
+ */
+export function filterOf(type: ExperimentType): ExperimentFilter {
+  switch (type) {
+    case "proofOfConcept":
+      return "experiments";
+    case "study":
+      return "research";
+    case "completed":
+      return "projects";
+  }
+}
+
+/** Identificador do experimento, pela posição na lista: `EXP / 001`. */
+export function experimentNumber(key: AiLabExperimentKey): string {
+  const index = aiLabExperiments.findIndex((item) => item.key === key);
+  return `EXP / ${String(index + 1).padStart(3, "0")}`;
 }
