@@ -7,8 +7,8 @@
 | Nome | Contact |
 | Identificador | SPEC-007 |
 | Slug | `007-contact` |
-| Versão | 0.1.0 |
-| Status | Proposed (rascunho de 2026-11-08; aguardando aprovação dos textos) |
+| Versão | 0.2.0 |
+| Status | In Review (textos aprovados e implementada em 2026-11-08; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-007 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -198,7 +198,7 @@ As rotas e o item de menu já existem (`routing.ts`, `navigation.ts`); nada novo
 
 | ID | Pergunta | Bloqueia? | Default adotado se não houver resposta |
 |---|---|---|---|
-| Q1 | Os textos da seção 7.2 e o SEO da seção 7.3 podem ser publicados? | Sim | Nenhum: implementação só depois da aprovação. |
+| Q1 | Os textos da seção 7.2 e o SEO da seção 7.3 podem ser publicados? | Resolvida em 2026-11-08: aprovados pelo Bruno | Nenhum: implementação só depois da aprovação. |
 | Q2 | O rótulo "Email" fica igual nos dois idiomas (como no rodapé) ou prefere "E-mail" em pt-BR? | Não | "Email" nos dois, como no rodapé. |
 | Q3 | A abertura cita os temas de conversa (backend, liderança técnica, sistemas distribuídos, IA aplicada). Prefere uma frase mais neutra, sem temas? | Não | A frase do rascunho. |
 
@@ -218,7 +218,54 @@ As rotas e o item de menu já existem (`routing.ts`, `navigation.ts`); nada novo
 | 2026-11-08 | Sem formulário de mensagem na v1: só canais diretos. | Bruno |
 | 2026-11-08 | E-mail com endereço visível, link `mailto:` e botão Copiar com confirmação. | Bruno |
 | 2026-11-08 | A página inclui um link "View Resume". | Bruno |
+| 2026-11-08 | Textos e SEO da seção 7 aprovados e implementação autorizada (Q1). Q2 e Q3 seguem como premissas reversíveis ("Email" igual nos dois idiomas e a abertura com os temas de conversa). | Bruno |
 
 ## Refinamento
 
+- 2026-11-08, v0.2.0: textos aprovados (Q1) e página implementada; a seção 15 registra a entrega, as divergências e a verificação.
 - 2026-11-08, v0.1.0: SPEC criada a partir do rascunho de `FEATURES.md` (Draft v0.1), do `BUSINESS.md`, do `CONTENT.md` (4.7), do `DESIGN.md` (6.7), do `DESIGN_SYSTEM.md` (4.10), da `ARCHITECTURE.md` (3.4) e do código de `siteConfig`, do rodapé e do menu. Canais conferidos com o currículo público e com o perfil do GitHub. Três decisões do Bruno registradas na seção 13; textos aguardam a aprovação (Q1).
+
+## 15. Implementação e verificação
+
+Implementada na branch `feat/contact` em 2026-11-08, depois da aprovação dos textos (Q1).
+
+- Novos: `src/components/contact/` (`ContactContent`, `ContactChannelSection`, `CopyEmailButton`, `channels.ts`) e `e2e/contact.spec.ts`.
+- Alterados: `src/app/[locale]/contact/page.tsx` (deixa de ser provisória e `noindex`), `src/lib/seo/metadata.ts` (namespace `contact.metadata`; removido `buildPlaceholderMetadata`), `src/config/site.ts` (o tipo `ContactChannels` passa a ser exportado), `src/content/{en,pt-BR}/common.json` (novo bloco `contact`; removido `pages`) e `README.md`.
+- Removido: `src/components/sections/PagePlaceholder.tsx`.
+
+Decisões de implementação:
+
+- `buildContactChannels` (função pura em `channels.ts`) monta os canais a partir de `siteConfig.contact`, na ordem Email, LinkedIn e GitHub, e só inclui os definidos. O endereço exibido dos perfis sai da URL, sem protocolo, `www` nem barra final.
+- O botão Copiar é o único Client Component da página. Os três textos dele (botão, confirmação e falha) chegam por props, porque o provedor de mensagens do layout só envia ao navegador os namespaces `navigation` e `languageSwitcher`. A primeira versão lia `contact` no cliente e a hidratação falhava com `MISSING_MESSAGE`, deixando o botão fora da página; os testes pegaram o erro.
+- A região `role="status"` ocupa a linha de baixo da barra de ações com altura mínima reservada (24 px), então o aviso não desloca o conteúdo.
+
+Divergências em relação à SPEC:
+
+- **Seção 6.2:** o rótulo do botão não muda para "Address copied". Só a região de status mostra a confirmação, para o leitor de tela não anunciar a mesma frase duas vezes.
+- **CON-RF-03:** a mensagem de falha também volta ao estado inicial depois de 3 segundos, como a de sucesso (a SPEC só definia isso para o sucesso).
+- **Conteúdo:** o bloco `contact.channels.resume.actionFallback` existe também em en ("View Resume (EN)"), sem uso, só para a paridade de chaves entre os idiomas que o typecheck exige.
+- **CON-CA-08:** é verificado na função `buildContactChannels` (sem e-mail, só com GitHub e sem canal nenhum), e não renderizando a página com a configuração alterada.
+
+| Critério | Resultado | Evidência |
+|---|---|---|
+| CON-CA-01 | Atendido | `h1`, abertura e quatro `h2` na ordem Email, LinkedIn, GitHub e Resume (Currículo em pt-BR), sem `noindex` e sem o texto de página em construção. |
+| CON-CA-02 | Atendido | Endereço em texto, link "Send a Message" com `mailto:` e botão "Copy address". |
+| CON-CA-03 | Atendido | Com a permissão concedida, a área de transferência recebe o endereço, o status mostra "Address copied" e volta a vazio em até 6 s. |
+| CON-CA-04 | Atendido | Com `writeText` recusando, o status mostra a mensagem de falha e o endereço tem `user-select: all`. |
+| CON-CA-05 | Atendido | Com JavaScript desabilitado e sem Clipboard API, o endereço e o `mailto:` estão presentes e não há botão nem região de status. |
+| CON-CA-06 | Atendido | URLs de LinkedIn e GitHub, `target`, `rel` e o nome acessível "ação — canal (abre em uma nova aba)" conferidos. |
+| CON-CA-07 | Atendido | PDF em `/documents/resume/bruno-lucildo-resume-en.pdf` (responde 200, `application/pdf`), nova aba; en sem `lang`, pt-BR com "Ver currículo (EN)" e `lang="en"`. |
+| CON-CA-08 | Atendido (função) | Ver a divergência acima. |
+| CON-CA-09 | Atendido | Sem `%`, telefone, cidade, empresa, curso, instituição, expressões proibidas nem frases de busca de emprego. |
+| CON-CA-10 | Atendido | Os cinco alvos (três links, link do currículo e botão) têm 44 px ou mais e contorno de foco; a tabulação segue a ordem visual (e-mail, Copiar, LinkedIn, GitHub, currículo). |
+| CON-CA-11 | Atendido | Sem rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px, nos dois idiomas; a abertura tem até 80 caracteres por linha em 1366 px. |
+| CON-CA-12 | Atendido | Título, descrição, `lang`, Open Graph, canonical e `hreflang` (`en`, `pt-BR`, `x-default`) conferidos; sem `noindex`. |
+| CON-CA-13 | Atendido | `PagePlaceholder`, `buildPlaceholderMetadata` e o bloco `pages` não existem mais (teste lê o código e os dois `common.json`); `pnpm typecheck` sem erros e `pnpm test:e2e` com 450 testes passando (50 novos). |
+
+Verificação adicional:
+
+- Mutação: três defeitos introduzidos de propósito (aviso que só volta depois de 12 s, botão exibido mesmo sem Clipboard API e endereço sem `select-all`) derrubaram seis testes; os arquivos foram restaurados e a suíte voltou a passar.
+- Navegador: página conferida em 1440 px (en) e 375 px (pt-BR). No painel do app a cópia foi recusada (o navegador embutido não libera a área de transferência), e o caminho de falha apareceu como especificado; o caminho de sucesso foi conferido pelo Playwright.
+- `pnpm check` passa nos arquivos novos e alterados; na árvore inteira falha em 48 arquivos que não foram tocados, por causa do CRLF do checkout no Windows (problema já conhecido).
+
+Não verificado: se o link `mailto:` abre um aplicativo de e-mail real, o comportamento do Copiar em um Chrome comum com a política de permissões do usuário, o contraste com ferramenta (usa os tokens do site) e LCP e CLS.

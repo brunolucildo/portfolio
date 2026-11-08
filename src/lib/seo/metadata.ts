@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { DetailExperiment } from "@/config/aiLab";
-import type { AppPathname } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { getPathname } from "@/i18n/navigation";
 import { type Locale, routing } from "@/i18n/routing";
@@ -48,6 +47,7 @@ type PageMetadataNamespace =
   | "projects.metadata"
   | "technologies.metadata"
   | "aiLab.metadata"
+  | "contact.metadata"
   | AiLabExperimentNamespace
   | "projects.detail.football.metadata"
   | "projects.detail.reelix.metadata";
@@ -87,6 +87,10 @@ async function pageTexts(
   }
 
   switch (namespace) {
+    case "contact.metadata": {
+      const t = await getTranslations({ locale, namespace });
+      return { title: t("title"), description: t("description") };
+    }
     case "aiLab.metadata": {
       const t = await getTranslations({ locale, namespace });
       return { title: t("title"), description: t("description") };
@@ -161,33 +165,5 @@ export async function buildPageMetadata({
       url: localizedPath(locale, href),
       locale: openGraphLocale[locale],
     },
-  };
-}
-
-type PlaceholderPage = "contact";
-
-/**
- * Metadados das páginas provisórias: título próprio, canonical e `hreflang`,
- * e fora dos índices de busca até a SPEC correspondente ser implementada.
- */
-export async function buildPlaceholderMetadata({
-  locale,
-  href,
-  page,
-}: {
-  locale: string;
-  href: AppPathname;
-  page: PlaceholderPage;
-}): Promise<Metadata> {
-  if (!hasLocale(routing.locales, locale)) {
-    return {};
-  }
-
-  const t = await getTranslations({ locale, namespace: "pages" });
-
-  return {
-    title: `${t(`${page}.title`)} | ${siteConfig.name}`,
-    alternates: localizedAlternates(locale, href),
-    robots: { index: false, follow: true },
   };
 }

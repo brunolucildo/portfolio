@@ -33,12 +33,6 @@
     "contactLabel": "Contact channels",
     "rights": "All rights reserved."
   },
-  "pages": {
-    "placeholder": "This section is under construction.",
-    "contact": {
-      "title": "Contact"
-    }
-  },
   "about": {
     "metadata": {
       "title": "About | Bruno Lucildo",
@@ -362,6 +356,40 @@
       "analyticsPersonas": {
         "name": "Analytics Personas",
         "summary": "A platform to create and run experts: AI agents specialized in the functions of a football club, fed by connected data sources, with answers traceable to them. The technical foundation exists; product features do not."
+      }
+    }
+  },
+  "contact": {
+    "metadata": {
+      "title": "Contact | Bruno Lucildo",
+      "description": "How to reach Bruno Lucildo: email, LinkedIn and GitHub, plus the resume."
+    },
+    "title": "Contact",
+    "intro": "I enjoy talking about backend engineering, technical leadership, distributed systems and applied AI. These are the best ways to reach me.",
+    "channels": {
+      "email": {
+        "title": "Email",
+        "description": "A direct message, for anything that needs detail.",
+        "action": "Send a Message",
+        "copy": "Copy address",
+        "copied": "Address copied",
+        "copyFailed": "Could not copy. Select the address instead."
+      },
+      "linkedin": {
+        "title": "LinkedIn",
+        "description": "For professional connections.",
+        "action": "Connect with Me"
+      },
+      "github": {
+        "title": "GitHub",
+        "description": "Code and projects, in public repositories.",
+        "action": "View on GitHub"
+      },
+      "resume": {
+        "title": "Resume",
+        "description": "A PDF with my professional history.",
+        "action": "View Resume",
+        "actionFallback": "View Resume (EN)"
       }
     }
   },
