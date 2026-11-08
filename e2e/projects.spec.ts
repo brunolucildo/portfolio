@@ -151,7 +151,7 @@ const pages: ProjectsPage[] = [
     ],
     captions: {
       reelix:
-        "Screens from the development build. The app interface is in Portuguese. Movie and series data and images from TMDB; this product is not endorsed or certified by TMDB.",
+        "Screens from the development build. The app interface is in Portuguese. Movie and series data and images from TMDB. This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.",
       fintalab:
         "Screens from the static concept prototype. All people, clubs and numbers are fictional.",
     },
@@ -236,7 +236,7 @@ const pages: ProjectsPage[] = [
     ],
     captions: {
       reelix:
-        "Telas da versão de desenvolvimento. A interface do app está em português. Dados e imagens de filmes e séries do TMDB; este produto não é endossado nem certificado pelo TMDB.",
+        "Telas da versão de desenvolvimento. A interface do app está em português. Dados e imagens de filmes e séries do TMDB. Este produto usa o TMDB e as APIs do TMDB, mas não é endossado, certificado nem aprovado de outra forma pelo TMDB.",
       fintalab:
         "Telas do protótipo conceitual estático. Todas as pessoas, clubes e números são fictícios.",
     },

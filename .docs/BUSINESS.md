@@ -434,7 +434,7 @@ Nenhuma meta numérica está definida neste momento.
 | Qual será o nome completo do domínio? | Em aberto |
 | Quais conquistas profissionais poderão ser divulgadas? | Em aberto |
 | Quais projetos estarão na primeira versão? | Em aberto |
-| A fotografia ficará no Hero ou na seção Sobre? | Em aberto |
+| A fotografia ficará no Hero ou na seção Sobre? | Definido: no Hero, com o tratamento aprovado (SPEC-001 e SPEC-011) |
 | A primeira versão terá ferramentas de analytics? | Em aberto |
 
 ---

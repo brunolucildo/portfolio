@@ -445,7 +445,7 @@ Evitar:
 
 ## 9. Fotografia
 
-A utilização de uma fotografia profissional está prevista, mas ainda depende da definição da imagem.
+A fotografia profissional foi definida e está no Hero (SPEC-001 e SPEC-011): retrato do Bruno em `public/images/hero/`, com saturação reduzida e esmaecimento na base.
 
 Direção:
 
@@ -455,7 +455,7 @@ Direção:
 - Composição limpa.
 - Tratamento visual discreto.
 
-A fotografia poderá ser utilizada no Hero ou na seção Sobre.
+A fotografia fica só no Hero; a seção Sobre não tem imagem.
 
 Não utilizar imagens genéricas de pessoas como substitutas da fotografia pessoal.
 

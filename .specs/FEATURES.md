@@ -94,45 +94,9 @@ O layout global reúne cabeçalho, navegação, seletor de idioma, rodapé e o a
 
 # SPEC-011 — Photography and Visual Assets
 
-## 1. Contexto
+**Status:** In Review. Refinada, implementada e movida para [`011-visual-assets.md`](./011-visual-assets.md).
 
-O projeto poderá utilizar fotografia profissional e imagens de projetos para reforçar a identidade visual.
-
-## 2. Objetivo
-
-Utilizar elementos visuais autênticos e relevantes, sem comprometer o estilo Dark Premium.
-
-## 3. Escopo
-
-- Fotografia profissional.
-- Imagem de apresentação.
-- Imagens de projetos.
-- Imagens de compartilhamento.
-- Ícones e ilustrações.
-
-## 4. Requisitos
-
-- Utilizar imagens autorizadas.
-- Otimizar dimensões e formatos.
-- Preservar qualidade visual.
-- Garantir contraste com o fundo.
-- Utilizar texto alternativo quando necessário.
-- Evitar imagens genéricas sem relação com o conteúdo.
-
-## 5. Decisões pendentes
-
-- Utilização de fotografia pessoal.
-- Posição da fotografia no Hero ou About.
-- Tratamento visual.
-- Seleção das imagens de projetos.
-
-## 6. Critérios de aceitação
-
-- Imagens aprovadas.
-- Arquivos otimizados.
-- Direitos de uso verificados.
-- Apresentação responsiva.
-- Textos alternativos adequados.
+A SPEC reúne a fotografia do Hero, as telas dos projetos e os ícones de tecnologias já aprovados, e cria o ícone do site e a imagem de compartilhamento. Os requisitos, os critérios de aceitação, a auditoria, o inventário de direitos, o rascunho dos textos, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
 ---
 

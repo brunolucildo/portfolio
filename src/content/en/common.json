@@ -1,7 +1,8 @@
 {
   "metadata": {
     "title": "Bruno Lucildo",
-    "description": "Backend engineering, technical leadership and software architecture."
+    "description": "Backend engineering, technical leadership and software architecture.",
+    "ogImageAlt": "Bruno Lucildo, Senior Backend Developer | Technical Lead. Engineering beyond code."
   },
   "navigation": {
     "label": "Main navigation",
@@ -173,7 +174,7 @@
       }
     },
     "captions": {
-      "reelix": "Screens from the development build. The app interface is in Portuguese. Movie and series data and images from TMDB; this product is not endorsed or certified by TMDB.",
+      "reelix": "Screens from the development build. The app interface is in Portuguese. Movie and series data and images from TMDB. This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.",
       "fintalab": "Screens from the static concept prototype. All people, clubs and numbers are fictional."
     },
     "images": {

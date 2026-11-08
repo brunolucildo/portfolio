@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { DetailExperiment } from "@/config/aiLab";
+import { socialImageSize } from "@/config/brand";
 import { siteConfig } from "@/config/site";
 import { getPathname } from "@/i18n/navigation";
 import { type Locale, routing } from "@/i18n/routing";
@@ -27,6 +28,22 @@ export function localizedAlternates(
       ),
       "x-default": localizedPath(routing.defaultLocale, href),
     },
+  };
+}
+
+/**
+ * Imagem de compartilhamento do idioma (SPEC-011): o cartão gerado em
+ * `[locale]/opengraph-image`, com `alt` traduzido, para `og:image` e para o
+ * cartão grande do Twitter. O `metadataBase` do layout torna a URL absoluta.
+ */
+export async function socialImage(locale: Locale) {
+  const t = await getTranslations({ locale, namespace: "metadata" });
+
+  return {
+    url: `${localizedPath(locale, "/")}/opengraph-image`,
+    width: socialImageSize.width,
+    height: socialImageSize.height,
+    alt: t("ogImageAlt"),
   };
 }
 
@@ -170,6 +187,7 @@ export async function buildPageMetadata({
   }
 
   const { title, description } = await pageTexts(locale, namespace);
+  const image = await socialImage(locale);
 
   return {
     title,
@@ -181,7 +199,14 @@ export async function buildPageMetadata({
       title,
       description,
       url: localizedPath(locale, href),
+      images: [image],
       ...openGraphLocales(locale),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
     },
   };
 }

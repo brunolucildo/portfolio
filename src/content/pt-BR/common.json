@@ -1,7 +1,8 @@
 {
   "metadata": {
     "title": "Bruno Lucildo",
-    "description": "Desenvolvimento backend, liderança técnica e arquitetura de software."
+    "description": "Desenvolvimento backend, liderança técnica e arquitetura de software.",
+    "ogImageAlt": "Bruno Lucildo, Desenvolvedor Backend Sênior | Líder Técnico. Engenharia além do código."
   },
   "navigation": {
     "label": "Navegação principal",
@@ -173,7 +174,7 @@
       }
     },
     "captions": {
-      "reelix": "Telas da versão de desenvolvimento. A interface do app está em português. Dados e imagens de filmes e séries do TMDB; este produto não é endossado nem certificado pelo TMDB.",
+      "reelix": "Telas da versão de desenvolvimento. A interface do app está em português. Dados e imagens de filmes e séries do TMDB. Este produto usa o TMDB e as APIs do TMDB, mas não é endossado, certificado nem aprovado de outra forma pelo TMDB.",
       "fintalab": "Telas do protótipo conceitual estático. Todas as pessoas, clubes e números são fictícios."
     },
     "images": {
