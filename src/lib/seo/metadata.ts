@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import type { DetailExperiment } from "@/config/aiLab";
 import type { AppPathname } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { getPathname } from "@/i18n/navigation";
@@ -35,13 +36,39 @@ const openGraphLocale: Record<Locale, string> = {
   "pt-BR": "pt_BR",
 };
 
+const aiLabExperimentPrefix = "aiLab.experiments.";
+
+/** Namespace de um experimento do AI Lab com página de detalhe. */
+type AiLabExperimentNamespace =
+  `${typeof aiLabExperimentPrefix}${DetailExperiment["key"]}`;
+
 type PageMetadataNamespace =
   | "about.metadata"
   | "experience.metadata"
   | "projects.metadata"
   | "technologies.metadata"
+  | "aiLab.metadata"
+  | AiLabExperimentNamespace
   | "projects.detail.football.metadata"
   | "projects.detail.reelix.metadata";
+
+function isAiLabExperimentNamespace(
+  namespace: PageMetadataNamespace,
+): namespace is AiLabExperimentNamespace {
+  return namespace.startsWith(aiLabExperimentPrefix);
+}
+
+/** Título e descrição de um experimento: o resumo de uma frase vira a descrição. */
+async function aiLabExperimentTexts(
+  locale: Locale,
+  key: DetailExperiment["key"],
+): Promise<{ title: string; description: string }> {
+  const t = await getTranslations({ locale, namespace: "aiLab" });
+  return {
+    title: `${t(`experiments.${key}.name`)} | ${t("title")} | ${siteConfig.name}`,
+    description: t(`experiments.${key}.summary`),
+  };
+}
 
 /**
  * Título e descrição de cada página, lidos do conteúdo. O `switch` mantém as
@@ -52,7 +79,18 @@ async function pageTexts(
   locale: Locale,
   namespace: PageMetadataNamespace,
 ): Promise<{ title: string; description: string }> {
+  if (isAiLabExperimentNamespace(namespace)) {
+    return aiLabExperimentTexts(
+      locale,
+      namespace.slice(aiLabExperimentPrefix.length) as DetailExperiment["key"],
+    );
+  }
+
   switch (namespace) {
+    case "aiLab.metadata": {
+      const t = await getTranslations({ locale, namespace });
+      return { title: t("title"), description: t("description") };
+    }
     case "about.metadata": {
       const t = await getTranslations({ locale, namespace });
       return { title: t("title"), description: t("description") };
@@ -126,7 +164,7 @@ export async function buildPageMetadata({
   };
 }
 
-type PlaceholderPage = "aiLab" | "contact";
+type PlaceholderPage = "contact";
 
 /**
  * Metadados das páginas provisórias: título próprio, canonical e `hreflang`,

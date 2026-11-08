@@ -7,8 +7,8 @@
 | Nome | AI Lab |
 | Identificador | SPEC-006 |
 | Slug | `006-ai-lab` |
-| Versão | 0.2.0 |
-| Status | Proposed (rascunho de 2026-11-08; aguardando aprovação dos textos, das premissas e do material adicional da seção 7.6) |
+| Versão | 0.3.0 |
+| Status | In Review (textos aprovados e implementada em 2026-11-08; aguardando revisão do usuário e do PR; material adicional da seção 7.6 segue em aberto) |
 | Data | 2026-11-08 |
 | Origem | SPEC-006 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -279,7 +279,7 @@ Se o Bruno aprovar algum candidato, ele entra por nova versão desta SPEC (slug,
 
 | ID | Pergunta | Bloqueia? | Default adotado se não houver resposta |
 |---|---|---|---|
-| Q1 | Os textos, os números e as ressalvas da seção 7.3 estão corretos e podem ser publicados (incluindo a seção "O que aprendi", que é síntese minha)? | Sim | Nenhum: implementação só depois da aprovação. |
+| Q1 | Os textos, os números e as ressalvas da seção 7.3 estão corretos e podem ser publicados (incluindo a seção "O que aprendi", que é síntese minha)? | Resolvida em 2026-11-08: aprovados pelo Bruno | Nenhum: implementação só depois da aprovação. |
 | Q2 | Tipo e estado da seção 7.1 estão certos? Em especial: "Concluído" para o experimento de consistência e para as personas, e "Em desenvolvimento" para RAG e validação (como o Football em Projects). | Não | Os da tabela. |
 | Q3 | O card do Analytics Personas, sem modelo e sem tecnologias, e a frase da seção 7.3 estão bons? Quer outro nome público? | Não | O da tabela. |
 | Q4 | O elemento gráfico do AI Lab fica estático na v1 (premissa) ou já quer um movimento sutil por camadas? | Não | Estático. |
@@ -306,8 +306,54 @@ Se o Bruno aprovar algum candidato, ele entra por nova versão desta SPEC (slug,
 | 2026-11-08 | Estrutura: lista em `/ai-lab` e página de detalhe por experimento (`/ai-lab/[slug]`), como em Projects. | Bruno |
 | 2026-11-08 | Números de avaliação publicados como contagens, com ressalvas; sem percentuais. | Bruno |
 | 2026-11-08 | Analytics Personas entra como card "Em planejamento", sem página de detalhe. | Bruno |
+| 2026-11-08 | Textos, números e ressalvas da seção 7.3 aprovados e implementação autorizada (Q1). Q2 a Q5 seguem como premissas reversíveis (tipo e estado em `aiLab.ts`, gráfico estático, ordem da tabela). | Bruno |
 
 ## Refinamento
 
+- 2026-11-08, v0.3.0: textos aprovados (Q1) e página implementada; seção 15 registra a entrega, as divergências e a verificação.
 - 2026-11-08, v0.1.0: SPEC criada a partir do ponteiro de `FEATURES.md` (Draft v0.1), do `BUSINESS.md` (7), do `CONTENT.md` (4.6), do `DESIGN.md` (6.6) e do `DESIGN_SYSTEM.md` (4.9). Conteúdo levantado nos README públicos de `football-stat-analytics-cli`, `fintalab` e `analytics-personas`. Quatro decisões do Bruno registradas na seção 13. Textos, estados e premissas aguardam a aprovação (Q1 a Q5).
 - 2026-11-08, v0.2.0: o Bruno apontou os documentos das pastas Módulo 1, 2 e 3. Levantados três candidatos (seção 7.6), nenhum incluído na v1. Achado relevante: o notebook de fine-tuning avalia no mesmo arquivo usado no treino, o que contradiz o PDF (Q6). Perguntas Q6 a Q8 abertas, não bloqueantes.
+
+## 15. Implementação e verificação
+
+Implementada na branch `feat/ai-lab` em 2026-11-08, depois da aprovação dos textos (Q1).
+
+- Novos: `src/config/aiLab.ts` (fonte única: slug, tipo, estado, modelo, tecnologias e projeto de origem), `src/components/ai-lab/` (`AiLabContent`, `ExperimentCard`, `ExperimentDetail`, `ExperimentMeta`, `AiLabGraphic`), `src/app/[locale]/ai-lab/[slug]/page.tsx` e `e2e/ai-lab.spec.ts`.
+- Alterados: `src/app/[locale]/ai-lab/page.tsx` (deixa de ser provisória e `noindex`), `src/i18n/routing.ts` (`/ai-lab/[slug]`), `src/lib/seo/metadata.ts` (namespaces `aiLab.metadata` e `aiLab.experiments.<chave>`; o texto provisório só serve a Contact), `src/components/layout/LanguageSwitcher.tsx` (o slug também vale em `/ai-lab/[slug]`), `src/components/sections/PagePlaceholder.tsx`, `src/content/{en,pt-BR}/common.json` (novo bloco `aiLab`; removido `pages.aiLab`), `README.md` e `.docs/CONTENT.md` (estado do AI Lab).
+
+Decisões de implementação:
+
+- Título e descrição do detalhe saem do nome e do resumo do experimento, sem campo extra de metadados: título `<Nome> | AI Lab | Bruno Lucildo` e descrição igual ao resumo (todos com até 160 caracteres, conferido por teste).
+- O card é um único link (o nome, com `after:absolute after:inset-0`), com foco desenhado no card inteiro. Modelo e tecnologias ficam no rodapé do card, para alinhar cards vizinhos de títulos com tamanhos diferentes (conferido medindo as posições no navegador).
+- Reaproveita `ProjectTechnologies` e `layout.ts` de Projects, como Technologies já faz.
+- O gráfico é um SVG estático, decorativo e visível só a partir de 1024 px (premissa Q4).
+
+Divergências em relação à SPEC:
+
+- **AIL-RF-13 (sitemap):** o projeto ainda não tem sitemap para nenhuma página; o que depende desta SPEC (metadados, canonical, `hreflang`, Open Graph, sem `noindex`) foi entregue. O sitemap fica para a etapa de SEO.
+- **AIL-RF-16 (Should), não entregue:** navegação para o experimento anterior e o seguinte. Com quatro experimentos, o link "Todos os experimentos" no topo basta.
+- **Seção 6.1, Resultados:** saem como parágrafo (o texto aprovado), e não como lista com as contagens em destaque tipográfico. O parágrafo de Resultados da validação é denso; dividi-lo por assunto, sem mudar palavras, é uma sugestão para a revisão.
+- **AIL-RF-10:** "Parte de" leva à página de detalhe do Football Stat Analytics e, no caso do FintaLab (sem detalhe), à lista de Projects.
+
+| Critério | Resultado | Evidência |
+|---|---|---|
+| AIL-CA-01 | Atendido | `h1`, abertura e cinco cards (quatro com um único link, um "Em planejamento" sem link), sem `noindex`, nos dois idiomas. |
+| AIL-CA-02 | Atendido | Tipo, estado, resumo, modelo e tecnologias conferidos card a card; o card em planejamento não tem modelo, lista nem link. |
+| AIL-CA-03 | Atendido | Cada link aponta para `/ai-lab/<slug>` no mesmo idioma. |
+| AIL-CA-04 | Atendido | `h1` e seis `h2` na ordem Objective, Problem investigated, Approach, Results, Limitations e What I learned (e equivalentes em pt-BR), para os quatro slugs. |
+| AIL-CA-05 | Atendido | Slug inexistente e `analytics-personas` respondem 404, nos dois idiomas. |
+| AIL-CA-06 | Atendido | Sem `%`, empresa, curso, instituição, nomes de atletas, expressões proibidas nem frases de busca de emprego, na lista e nos quatro detalhes. |
+| AIL-CA-07 | Atendido | Contagens "X de Y" e as ressalvas de amostra presentes (conferidas por trecho em cada experimento). |
+| AIL-CA-08 | Atendido | Teste compara `aiLab.ts` com `technologies.ts` e `projects.ts`: toda tecnologia existe em Technologies e a origem existe em Projects. |
+| AIL-CA-09 | Atendido | A troca de idioma em cada detalhe abre o mesmo experimento no outro idioma. |
+| AIL-CA-10 | Atendido | Sem rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px, lista e detalhes, nos dois idiomas. |
+| AIL-CA-11 | Atendido | A tabulação passa uma vez por card, na ordem visual; links com alvo de pelo menos 44 px. |
+| AIL-CA-12 | Parcial | Título, descrição, canonical, `hreflang` e Open Graph por idioma conferidos; sem sitemap (ver divergências). |
+| AIL-CA-13 | Atendido com ressalva | `pnpm typecheck` sem erros; `pnpm test:e2e` com 400 testes passando (162 novos). `pnpm check` passa nos arquivos novos e alterados; na árvore inteira falha em 38 arquivos que não foram tocados, por causa do CRLF do checkout no Windows (problema já conhecido, o Git guarda LF). |
+
+Verificação adicional:
+
+- Mutação: três defeitos introduzidos de propósito (número de resultado trocado, gráfico visível abaixo de 1024 px e alvo de toque reduzido) derrubaram quatro testes; os arquivos foram restaurados e a suíte voltou a passar.
+- Navegador: lista e detalhe conferidos em 1440 px (en) e em 375 px (pt-BR). A pasta `.next` precisou ser apagada uma vez por causa de um `EPERM` do build.
+
+Não verificado: o contraste não foi medido com ferramenta (usa os mesmos tokens do restante do site), e LCP e CLS não foram medidos.

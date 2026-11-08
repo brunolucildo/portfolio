@@ -35,9 +35,6 @@
   },
   "pages": {
     "placeholder": "This section is under construction.",
-    "aiLab": {
-      "title": "AI Lab"
-    },
     "contact": {
       "title": "Contact"
     }
@@ -288,6 +285,84 @@
       "ai": "AI and Machine Learning",
       "frontend": "Frontend and Mobile",
       "tools": "Tools and Infrastructure"
+    }
+  },
+  "aiLab": {
+    "metadata": {
+      "title": "AI Lab | Bruno Lucildo",
+      "description": "Experiments in applied AI: retrieval-augmented answers, output validation with a judge model, consistency tests and prompt design, with results and limitations."
+    },
+    "title": "AI Lab",
+    "intro": "I'm studying AI systems development and management, and I use study projects to explore language models. Each experiment states what I wanted to find out, how I approached it, what I measured and where it falls short. They are learning projects, not products.",
+    "labels": {
+      "objective": "Objective",
+      "problem": "Problem investigated",
+      "approach": "Approach",
+      "results": "Results",
+      "limitations": "Limitations",
+      "learned": "What I learned",
+      "model": "Model",
+      "technologies": "Technologies",
+      "partOf": "Part of",
+      "repository": "Repository",
+      "back": "All experiments",
+      "experiments": "Experiments"
+    },
+    "types": {
+      "study": "Study",
+      "proofOfConcept": "Proof of concept",
+      "completed": "Completed project"
+    },
+    "states": {
+      "inDevelopment": "In development",
+      "concluded": "Concluded",
+      "planning": "Planning"
+    },
+    "experiments": {
+      "ragGrounding": {
+        "name": "Grounded answers over reports (RAG)",
+        "summary": "Answering questions about scouting reports using only retrieved excerpts, and showing how much of each answer can be traced back to them.",
+        "objective": "Answer questions about scouting reports using only what the reports say, and make it visible how much of each answer is actually supported.",
+        "problem": "A model asked about reports it has not read invents plausible details: numbers, sources and actions. Citing a source does not prove that the source says it.",
+        "approach": "Report PDFs are turned into text, translated from Spanish to Brazilian Portuguese, split into chunks and stored with embeddings in SQLite. A question retrieves the five most relevant chunks, ranked by a hybrid score that combines embedding similarity with keyword overlap and discards weak matches. The prompt requires a source after each statement and runs at temperature 0. Every answer then ends with a grounding report: a lexical check of how many statements, numbers and cited sources appear in the retrieved text, followed by a semantic check made by a second model call.",
+        "results": "In the evaluation, a question supported by the reports was answered with the semantic check passing, and questions the reports could not answer (a past tournament winner, a player's salary) were declined as expected. One question written afterwards failed: retrieval ranked the right report first but filled the other four slots with excerpts about other athletes, and the model declined. Only a handful of RAG questions were tested, so this shows behavior, not a failure rate.",
+        "limitations": "The index has no athlete metadata to filter on, so a question about one athlete can retrieve excerpts about others. PDF extraction does not use OCR, so scanned reports may yield no text. The relevance score ranks excerpts; it does not measure confidence or truth. The lexical check is not semantic, and answers are not compared with official statistics.",
+        "learned": "A citation proves nothing by itself: what helped was showing, next to the answer, what could and could not be traced. A retrieval failure looks like a model failure, so the two are worth measuring apart."
+      },
+      "outputValidation": {
+        "name": "Validating model output with rules and a judge model",
+        "summary": "Checking what a language model says with rules in code and a second model that has to quote the evidence.",
+        "objective": "Keep every statement an analyst persona makes tied to the evidence the user supplied.",
+        "problem": "Prompt instructions alone do not guarantee that a model follows a policy. In the first live tests it produced flattering adjectives, actions the data never mentioned and scores for attributes without evidence.",
+        "approach": "Deterministic rules enforce the answer format and reject numbers, adjectives and actions that are not in the user's input. A semantic verifier, a second model, judges each remaining statement and must quote the evidence; a quote that is not in the evidence is rejected, and if the verifier itself fails, the answer is accepted with a warning. A rejected answer gets one automatic correction attempt that lists the violated rules. A live evaluation harness runs the real model on fixed cases and on cases written afterwards, and reports how many answers pass.",
+        "results": "On the cases that guided the fixes, answers valid on the first attempt went from 0 of 15 to 12 of 15 over four runs, and 14 of 15 after the correction attempt; that last figure is optimistic, because the fixes were made on those same cases. On a second round written afterwards, 43 of 48 answers were valid on the first attempt and 48 of 48 after the correction (22 of 24 and 24 of 24 on those cases alone). An embedded instruction to give every attribute 99 did not change the scores. Calibrating the verifier on 30 statements labelled by the author, over three repetitions it rejected 41 of 45 unsupported statements and accepted 42 of 45 supported ones.",
+        "limitations": "The rules are lexical, check number words only up to fifty and cannot prove that every sentence is correct. The judge is itself a model: it consistently accepted one false claim of missing data. The labels were set by the author alone, and 30 statements and 15 answers per run are small samples that describe this setup, not a general error rate. The model is not fully deterministic: one score varied by ten points between runs at temperature 0. None of this replaces human review.",
+        "learned": "Measure with cases written after the fixes, or the numbers flatter the work. A verifier should not be trusted blindly: requiring a quote made it checkable. The check costs an extra request per answer, the price of fewer unsupported statements."
+      },
+      "scoreConsistency": {
+        "name": "Median of three samples for stable scores",
+        "summary": "Testing whether answering with the median of three samples makes a model's scores stable.",
+        "objective": "Find out whether any mode makes the scores for the same input reliable from one run to the next.",
+        "problem": "The same input can produce different scores from the same model, even at temperature 0, which undermines a score that people might act on.",
+        "approach": "Each of six athlete cases was answered eight times per mode (temperature 0 with and without a seed, and the median of three samples at two temperatures), and the score vectors were compared. Only the deterministic validation was applied. The experiment ran twice, with 48 answers per mode and run.",
+        "results": "No mode made the scores reliably stable: the case that varied changed between runs, and the same mode went from a largest spread of 1 point to 8 between two executions. The seed did not help consistently. The median vote was the only mode in which every answer was valid, because it discards invalid samples.",
+        "limitations": "Six cases and two runs are a small sample. The variation comes from the model, so tuning these settings cannot remove it. The median costs three times the generation. Computing the scores in code from the cited indicators would remove the variation, but it would turn qualitative judgments into a formula, so it was not done.",
+        "learned": "A negative result is still a result: it settled the decision to keep the consensus available but off by default. Consistency is something to measure, not to assume."
+      },
+      "analystPersonas": {
+        "name": "Analyst personas built with prompts",
+        "summary": "Designing analyst personas with prompts, conversation history and simple input and output checks.",
+        "objective": "Explore how far prompts alone can shape an assistant for football analysis.",
+        "problem": "The same model should behave differently when it assesses a player's performance, a transfer proposal or a tactical reading, and each task needs its own rules about what counts as evidence.",
+        "approach": "A terminal chatbot in TypeScript sends messages to the OpenAI API and streams the answer. Three personas carry their own instructions: sports analysis, transfer-proposal analysis and tactical analysis. The conversation is stored in SQLite, with utilities to limit or summarize the history, and simple checks screen input and output.",
+        "results": "No formal evaluation was done in this experiment: the checks are textual heuristics and the repository has no test suite. The same personas are part of Football Stat Analytics, where validation and measurement were built.",
+        "limitations": "The checks do not guarantee that an answer is correct or safe. The repository has no install or run instructions yet, so the experiment cannot be reproduced from it, and it is separate from the future FintaLab product.",
+        "learned": "Without tests or measurements there is no way to tell whether a persona follows its instructions, which is the gap the validation and evaluation experiments address."
+      },
+      "analyticsPersonas": {
+        "name": "Analytics Personas",
+        "summary": "A platform to create and run experts: AI agents specialized in the functions of a football club, fed by connected data sources, with answers traceable to them. The technical foundation exists; product features do not."
+      }
     }
   },
   "home": {

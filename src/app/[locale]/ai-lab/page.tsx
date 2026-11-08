@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { PagePlaceholder } from "@/components/sections/PagePlaceholder";
+import { AiLabContent } from "@/components/ai-lab/AiLabContent";
 import { requireLocale } from "@/i18n/locale";
-import { buildPlaceholderMetadata } from "@/lib/seo/metadata";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return buildPlaceholderMetadata({ locale, href: "/ai-lab", page: "aiLab" });
+  return buildPageMetadata({
+    locale,
+    href: "/ai-lab",
+    namespace: "aiLab.metadata",
+  });
 }
 
 export default async function AiLabPage({ params }: Props) {
   setRequestLocale(requireLocale((await params).locale));
-  return <PagePlaceholder page="aiLab" />;
+  return <AiLabContent />;
 }
