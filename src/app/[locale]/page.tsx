@@ -7,16 +7,15 @@ import { ExperienceHighlights } from "@/components/sections/ExperienceHighlights
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { siteConfig } from "@/config/site";
-import { type Locale, routing } from "@/i18n/routing";
-import { localizedAlternates, localizedPath } from "@/lib/seo/metadata";
+import { routing } from "@/i18n/routing";
+import {
+  localizedAlternates,
+  localizedPath,
+  openGraphLocales,
+} from "@/lib/seo/metadata";
 
 type Props = {
   params: Promise<{ locale: string }>;
-};
-
-const openGraphLocale: Record<Locale, string> = {
-  en: "en_US",
-  "pt-BR": "pt_BR",
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -38,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t("title"),
       description: t("description"),
       url: localizedPath(locale, "/"),
-      locale: openGraphLocale[locale],
+      ...openGraphLocales(locale),
     },
   };
 }

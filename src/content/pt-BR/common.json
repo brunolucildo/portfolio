@@ -393,6 +393,12 @@
       }
     }
   },
+  "notFound": {
+    "title": "Página não encontrada",
+    "description": "A página que você procura não existe ou mudou de endereço.",
+    "home": "Voltar para o início",
+    "documentTitle": "Página não encontrada | Bruno Lucildo"
+  },
   "home": {
     "metadata": {
       "title": "Bruno Lucildo | Desenvolvedor Backend Sênior e Líder Técnico",

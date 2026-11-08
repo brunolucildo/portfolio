@@ -35,6 +35,19 @@ const openGraphLocale: Record<Locale, string> = {
   "pt-BR": "pt_BR",
 };
 
+/**
+ * `og:locale` do idioma da página e `og:locale:alternate` com os demais
+ * (I18N-RF-06 e I18N-RF-08).
+ */
+export function openGraphLocales(locale: Locale) {
+  return {
+    locale: openGraphLocale[locale],
+    alternateLocale: routing.locales
+      .filter((other) => other !== locale)
+      .map((other) => openGraphLocale[other]),
+  };
+}
+
 const aiLabExperimentPrefix = "aiLab.experiments.";
 
 /** Namespace de um experimento do AI Lab com página de detalhe. */
@@ -163,7 +176,7 @@ export async function buildPageMetadata({
       title,
       description,
       url: localizedPath(locale, href),
-      locale: openGraphLocale[locale],
+      ...openGraphLocales(locale),
     },
   };
 }
