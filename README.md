@@ -11,17 +11,19 @@ O site é bilíngue (inglês como padrão e português do Brasil), estático e s
 | Base do projeto (Next.js, TypeScript, Tailwind, Biome, i18n) | Pronta |
 | Design system (tokens e componentes fundamentais) | Pronto |
 | Layout global (header, menu mobile, troca de idioma, footer) | Pronto |
-| Home (SPEC-001) | Implementada, em revisão de conteúdo |
-| About (SPEC-002) | Implementada, em revisão |
-| Experience (SPEC-003) | Implementada, em revisão |
-| Projects (SPEC-004) | Implementada, em revisão |
-| Technologies (SPEC-005) | Implementada, em revisão |
-| AI Lab (SPEC-006) | Implementada, em revisão |
-| Contact (SPEC-007) | Implementada, em revisão |
-| Internationalization (SPEC-008) | Implementada, em revisão |
-| Resume (SPEC-009) | Implementada, em revisão. PDF ajustado entregue (formação e autor); título do arquivo em branco, aceito |
-| Layout global (SPEC-010) | Implementada, em revisão |
-| Fotografia e assets (SPEC-011) | Implementada, em revisão: ícone do site, imagem de compartilhamento e créditos das imagens |
+| Home (SPEC-001) | Concluída |
+| About (SPEC-002) | Concluída |
+| Experience (SPEC-003) | Concluída |
+| Projects (SPEC-004) | Concluída |
+| Technologies (SPEC-005) | Concluída |
+| AI Lab (SPEC-006) | Concluída |
+| Contact (SPEC-007) | Concluída |
+| Internationalization (SPEC-008) | Concluída |
+| Resume (SPEC-009) | Concluída. PDF ajustado entregue (formação e autor); título do arquivo em branco, aceito |
+| Layout global (SPEC-010) | Concluída |
+| Fotografia e assets (SPEC-011) | Concluída: ícone do site, imagem de compartilhamento e créditos das imagens |
+| Links de contexto em Technologies (TECH-RF-10) e anterior/seguinte no AI Lab (AIL-RF-16) | A fazer |
+| AI Lab: fine-tuning, método de testes e escolha de modelo (SPEC-006 v0.4.0) | A fazer, depende da aprovação dos textos |
 | Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience, Projects, Technologies, AI Lab, Contact, Internationalization, Resume, Layout global e Assets (imagens, ícone e compartilhamento) |
 | SEO final | Pendente |
 | Hospedagem, domínio e analytics | Pendentes de decisão |

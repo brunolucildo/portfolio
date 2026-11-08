@@ -8,7 +8,7 @@
 | Identificador | SPEC-007 |
 | Slug | `007-contact` |
 | Versão | 0.2.0 |
-| Status | In Review (textos aprovados e implementada em 2026-11-08; aguardando revisão do usuário e do PR) |
+| Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, textos aprovados e implementada em 2026-11-08; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-007 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -199,8 +199,8 @@ As rotas e o item de menu já existem (`routing.ts`, `navigation.ts`); nada novo
 | ID | Pergunta | Bloqueia? | Default adotado se não houver resposta |
 |---|---|---|---|
 | Q1 | Os textos da seção 7.2 e o SEO da seção 7.3 podem ser publicados? | Resolvida em 2026-11-08: aprovados pelo Bruno | Nenhum: implementação só depois da aprovação. |
-| Q2 | O rótulo "Email" fica igual nos dois idiomas (como no rodapé) ou prefere "E-mail" em pt-BR? | Não | "Email" nos dois, como no rodapé. |
-| Q3 | A abertura cita os temas de conversa (backend, liderança técnica, sistemas distribuídos, IA aplicada). Prefere uma frase mais neutra, sem temas? | Não | A frase do rascunho. |
+| Q2 | O rótulo "Email" fica igual nos dois idiomas (como no rodapé) ou prefere "E-mail" em pt-BR? | Não | "Email" nos dois, como no rodapé. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q3 | A abertura cita os temas de conversa (backend, liderança técnica, sistemas distribuídos, IA aplicada). Prefere uma frase mais neutra, sem temas? | Não | A frase do rascunho. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
 
 ## 12. Premissas
 

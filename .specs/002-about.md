@@ -8,7 +8,7 @@
 | Identificador | SPEC-002 |
 | Slug | `002-about` |
 | Versão | 0.4.0 |
-| Status | In Review (implementada em 2026-11-07; aguardando revisão do usuário e do PR) |
+| Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, implementada em 2026-11-07; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-07 |
 | Origem | SPEC-002 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -161,8 +161,8 @@ As afirmações de postura ("prefiro", "escolho as ferramentas pelo problema", "
 | SPEC-008 Internationalization | Implementada na base | Rotas, conteúdo `en`/`pt-BR` e metadados. |
 | Design system | Implementado | Container de leitura, tipografia e botão `text`. |
 | SPEC-001 Home | Implementada | Reutiliza os textos dos links e os fatos já aprovados. |
-| SPEC-003 Experience | Pendente | Destino do link de experiência (hoje página provisória) e fonte única dos cargos e datas. |
-| SPEC-006 AI Lab | Pendente | Destino do link do AI Lab. |
+| SPEC-003 Experience | Implementada | Destino do link "Ver experiência" e fonte única dos cargos e datas. |
+| SPEC-006 AI Lab | Implementada | Destino do link do AI Lab. |
 
 ## 10. Riscos
 

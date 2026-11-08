@@ -8,7 +8,7 @@
 | Identificador | SPEC-006 |
 | Slug | `006-ai-lab` |
 | Versão | 0.3.0 |
-| Status | In Review (textos aprovados e implementada em 2026-11-08; aguardando revisão do usuário e do PR; material adicional da seção 7.6 segue em aberto) |
+| Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, textos aprovados e implementada em 2026-11-08; aguardando revisão do usuário e do PR; material adicional da seção 7.6 segue em aberto) |
 | Data | 2026-11-08 |
 | Origem | SPEC-006 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -280,13 +280,13 @@ Se o Bruno aprovar algum candidato, ele entra por nova versão desta SPEC (slug,
 | ID | Pergunta | Bloqueia? | Default adotado se não houver resposta |
 |---|---|---|---|
 | Q1 | Os textos, os números e as ressalvas da seção 7.3 estão corretos e podem ser publicados (incluindo a seção "O que aprendi", que é síntese minha)? | Resolvida em 2026-11-08: aprovados pelo Bruno | Nenhum: implementação só depois da aprovação. |
-| Q2 | Tipo e estado da seção 7.1 estão certos? Em especial: "Concluído" para o experimento de consistência e para as personas, e "Em desenvolvimento" para RAG e validação (como o Football em Projects). | Não | Os da tabela. |
-| Q3 | O card do Analytics Personas, sem modelo e sem tecnologias, e a frase da seção 7.3 estão bons? Quer outro nome público? | Não | O da tabela. |
-| Q4 | O elemento gráfico do AI Lab fica estático na v1 (premissa) ou já quer um movimento sutil por camadas? | Não | Estático. |
-| Q5 | A ordem da lista da seção 7.1 serve, ou prefere o Football primeiro por ser o mais conhecido? | Não | A da tabela. |
-| Q6 | Fine-tuning (seção 7.6): publicar como estudo com enquadramento honesto (resultados medidos nos próprios dados de treino, e a falha de avaliação como aprendizado), refazer no Colab com separação treino/teste real e publicar os números válidos, ou deixar fora da v1? O PDF também precisa ser corrigido, se for entregue de novo. | Não (os outros quatro não dependem) | Fora da v1. |
-| Q7 | As 30 execuções do framework de testes (M2D4) foram reais ou ilustrativas? Se ilustrativas, publico só o método. | Não | Só o método, sem resultados, se o candidato entrar. |
-| Q8 | A escolha de abordagem e de modelo do Módulo 1 entra em algum formato? | Não | Fora da v1. |
+| Q2 | Tipo e estado da seção 7.1 estão certos? Em especial: "Concluído" para o experimento de consistência e para as personas, e "Em desenvolvimento" para RAG e validação (como o Football em Projects). | Não | Os da tabela. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q3 | O card do Analytics Personas, sem modelo e sem tecnologias, e a frase da seção 7.3 estão bons? Quer outro nome público? | Não | O da tabela. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q4 | O elemento gráfico do AI Lab fica estático na v1 (premissa) ou já quer um movimento sutil por camadas? | Não | Estático. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q5 | A ordem da lista da seção 7.1 serve, ou prefere o Football primeiro por ser o mais conhecido? | Não | A da tabela. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q6 | Fine-tuning (seção 7.6): publicar como estudo com enquadramento honesto (resultados medidos nos próprios dados de treino, e a falha de avaliação como aprendizado), refazer no Colab com separação treino/teste real e publicar os números válidos, ou deixar fora da v1? O PDF também precisa ser corrigido, se for entregue de novo. | Não (os outros quatro não dependem) | Fora da v1. **Decidido em 2026-11-08 (Bruno): publicar com enquadramento honesto**, dizendo que os números vêm dos dados de treino e que a falha de avaliação foi o aprendizado. Exige nova rodada de textos (v0.4.0). |
+| Q7 | As 30 execuções do framework de testes (M2D4) foram reais ou ilustrativas? Se ilustrativas, publico só o método. | Não | Só o método, sem resultados, se o candidato entrar. **Decidido em 2026-11-08 (Bruno): as 30 execuções foram ilustrativas; entra só o método, sem resultados numéricos.** |
+| Q8 | A escolha de abordagem e de modelo do Módulo 1 entra em algum formato? | Não | Fora da v1. **Decidido em 2026-11-08 (Bruno): entra como estudo**, com texto novo para aprovação (v0.4.0). |
 
 ## 12. Premissas
 

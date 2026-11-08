@@ -8,7 +8,7 @@
 | Identificador | SPEC-009 |
 | Slug | `009-resume` |
 | Versão | 0.4.0 |
-| Status | In Review (implementada e com o PDF ajustado entregue em 2026-11-08; aguardando a revisão do usuário e do PR) |
+| Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, implementada e com o PDF ajustado entregue em 2026-11-08; aguardando a revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-009 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -256,9 +256,9 @@ O rótulo segue o do site e o do LinkedIn ("Postgraduate Degree, Master's Progra
 |---|---|---|---|
 | Q1 | Os textos das seções 7.2 e 7.3 podem ser publicados? | Resolvida em 2026-11-08: aprovados pelo Bruno | Nenhum: implementação só depois da aprovação. |
 | Q2 | A formação no PDF fica como na seção 7.7, e o título e o autor do arquivo são "Bruno Lucildo — Resume" e "Bruno Lucildo"? O Bruno ajusta no Word e envia o PDF novo. | Resolvida em 2026-11-08: formação e autor entregues; o título ficou de fora por escolha dele | A página é implementada com o PDF atual; os dois critérios ficam pendentes até o arquivo chegar. |
-| Q3 | A seção Resume de Contact continua com o link direto para o PDF ou passa a levar à página `/resume`? | Não | Continua com o link direto (RES-RF-08). |
-| Q4 | A página mostra a data da última atualização e o tamanho do arquivo? | Não | Mostra os dois: a data é obrigatória (RES-RF-03) e o tamanho é Should (RES-RF-15). |
-| Q5 | O nome completo "Bruno Lucildo da Silva" no PDF, contra "Bruno Lucildo" no site, fica assim? | Não | Fica (seção 7.5). |
+| Q3 | A seção Resume de Contact continua com o link direto para o PDF ou passa a levar à página `/resume`? | Não | Continua com o link direto (RES-RF-08). **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q4 | A página mostra a data da última atualização e o tamanho do arquivo? | Não | Mostra os dois: a data é obrigatória (RES-RF-03) e o tamanho é Should (RES-RF-15). **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q5 | O nome completo "Bruno Lucildo da Silva" no PDF, contra "Bruno Lucildo" no site, fica assim? | Não | Fica (seção 7.5). **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
 
 ## 12. Premissas
 

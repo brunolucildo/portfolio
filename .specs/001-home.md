@@ -8,7 +8,7 @@
 | Identificador | SPEC-001 |
 | Slug | `001-home` |
 | Versão | 0.8.0 |
-| Status | In Review (v0.8.0 implementada: três projetos em destaque, com o FintaLab; inclui o fallback em JavaScript do parallax, HOME-RF-14, confirmado no Firefox pelo usuário em 2026-11-07; aguardam validação final a revisão de conteúdo provisório e o domínio) |
+| Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, v0.8.0 implementada: três projetos em destaque, com o FintaLab; inclui o fallback em JavaScript do parallax, HOME-RF-14, confirmado no Firefox pelo usuário em 2026-11-07; aguardam validação final a revisão de conteúdo provisório e o domínio) |
 | Data | 2026-11-07 |
 | Origem | SPEC-001 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -192,10 +192,10 @@ Regras de conteúdo:
 | SPEC-010 Global Layout | Implementada | Header, footer, skip link, `main` e Language Switcher. |
 | SPEC-008 Internationalization | Implementada na base | Rotas, conteúdo `en`/`pt-BR`, metadados por idioma. |
 | Design system | Implementado | Tokens e componentes Button, Container, Section, Card, Badge. |
-| SPEC-011 Fotografia | Pendente | Arquivo e tratamento da foto (Q1). |
+| SPEC-011 Fotografia | Implementada | Foto no Hero com o tratamento aprovado; a SPEC-011 também criou o ícone do site e a imagem de compartilhamento. |
 | SPEC-004 Projects | Implementada | Fonte única dos projetos e dos textos dos cards; o link abaixo dos cards leva à lista. |
-| SPEC-006 AI Lab | Pendente | Destino do destaque e texto de escopo. |
-| Domínio definitivo | Pendente | Canonical e URLs absolutas do Open Graph (Q4). |
+| SPEC-006 AI Lab | Implementada | O destaque da Home leva à página `/ai-lab`. |
+| Domínio definitivo | Pendente | Canonical e URLs absolutas do Open Graph (Q4). A imagem de compartilhamento já existe (SPEC-011); falta o domínio para a URL ficar absoluta. |
 
 ## 11. Riscos
 

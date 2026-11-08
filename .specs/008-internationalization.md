@@ -8,7 +8,7 @@
 | Identificador | SPEC-008 |
 | Slug | `008-internationalization` |
 | Versão | 0.2.0 |
-| Status | In Review (textos aprovados e implementada em 2026-11-08; aguardando revisão do usuário e do PR) |
+| Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, textos aprovados e implementada em 2026-11-08; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-008 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -200,8 +200,8 @@ Textos permitidos como iguais nos dois idiomas (por chave): `metadata.title`, `n
 | ID | Pergunta | Bloqueia? | Default adotado se não houver resposta |
 |---|---|---|---|
 | Q1 | Os textos da 404 (seção 7.2) podem ser publicados? | Resolvida em 2026-11-08: aprovados pelo Bruno | Nenhum: implementação só depois da aprovação. |
-| Q2 | Aceita `og:locale:alternate` (Should) nas páginas? | Não | Sim. |
-| Q3 | O currículo em português entra com a SPEC-009 ou o PDF só em inglês é definitivo? | Não | Segue só em inglês, como exceção documentada. |
+| Q2 | Aceita `og:locale:alternate` (Should) nas páginas? | Não | Sim. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
+| Q3 | O currículo em português entra com a SPEC-009 ou o PDF só em inglês é definitivo? | Não | Segue só em inglês, como exceção documentada. **Resolvida em 2026-11-08: default aceito pelo Bruno.** |
 
 ## 12. Premissas
 
@@ -266,4 +266,4 @@ Verificação adicional:
 - Navegador: 404 conferida em 1440 px, em pt-BR (`/pt-BR/nao-existe`) e em en (`/en/ai-lab/zzz`).
 - `pnpm check` passa nos arquivos novos e alterados; na árvore inteira falha só nos arquivos que não foram tocados, por causa do CRLF do checkout no Windows (problema já conhecido).
 
-Não verificado: a 404 no modo de desenvolvimento (`next dev`), que precisa ser reiniciado para ler o novo `next.config.ts`; o contraste com ferramenta; LCP e CLS. Observação fora do escopo: o navegador pede `/favicon.ico`, que cai em `[locale]` e responde 404; o site não tem favicon, e isso fica para a etapa de SEO.
+Não verificado: a 404 no modo de desenvolvimento (`next dev`), que precisa ser reiniciado para ler o novo `next.config.ts`; o contraste com ferramenta; LCP e CLS. Observação fora do escopo: o navegador pede `/favicon.ico`, que cai em `[locale]` e responde 404; o site não tinha favicon. Resolvido na SPEC-011 (ícone do site e `/favicon.ico`).
