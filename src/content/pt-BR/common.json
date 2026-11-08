@@ -300,6 +300,9 @@
       "partOf": "Parte de",
       "repository": "Repositório",
       "back": "Todos os experimentos",
+      "experimentNavigation": "Navegação entre experimentos",
+      "previousExperiment": "Experimento anterior",
+      "nextExperiment": "Próximo experimento",
       "experiments": "Experimentos"
     },
     "types": {

@@ -86,6 +86,9 @@ type AiLabPage = {
     partOf: string;
     repository: string;
     back: string;
+    experimentNavigation: string;
+    previousExperiment: string;
+    nextExperiment: string;
   };
   alternates: Record<string, string>;
   otherLanguage: { name: string; path: string };
@@ -125,6 +128,9 @@ const pages: AiLabPage[] = [
       partOf: "Part of",
       repository: "Repository",
       back: "All experiments",
+      experimentNavigation: "Experiment navigation",
+      previousExperiment: "Previous experiment",
+      nextExperiment: "Next experiment",
     },
     alternates: {
       en: "/en/ai-lab",
@@ -231,6 +237,9 @@ const pages: AiLabPage[] = [
       partOf: "Parte de",
       repository: "Repositório",
       back: "Todos os experimentos",
+      experimentNavigation: "Navegação entre experimentos",
+      previousExperiment: "Experimento anterior",
+      nextExperiment: "Próximo experimento",
     },
     alternates: {
       en: "/en/ai-lab",
@@ -690,6 +699,78 @@ for (const lab of pages) {
           await page.goto(detailPath);
           await page.getByRole("link", { name: lab.labels.back }).click();
           await expect(page).toHaveURL(new RegExp(`${lab.path}/?$`));
+        });
+
+        test("a navegação oferece o experimento anterior e o seguinte, na ordem da lista", async ({
+          page,
+        }) => {
+          await page.goto(detailPath);
+          const index = slugs.indexOf(slug);
+          const before = slugs[index - 1];
+          const after = slugs[index + 1];
+          const nav = page.getByRole("navigation", {
+            name: lab.labels.experimentNavigation,
+          });
+
+          await expect(nav).toHaveCount(1);
+          const links = nav.getByRole("link");
+          await expect(links).toHaveCount(Number(!!before) + Number(!!after));
+
+          if (before) {
+            const previous = nav.getByRole("link", {
+              name: `${lab.labels.previousExperiment} ${lab.experiments[before].name}`,
+            });
+            await expect(previous).toHaveAttribute(
+              "href",
+              lab.detailPath(before),
+            );
+          } else {
+            await expect(
+              nav.getByText(lab.labels.previousExperiment),
+            ).toHaveCount(0);
+          }
+
+          if (after) {
+            const next = nav.getByRole("link", {
+              name: `${lab.labels.nextExperiment} ${lab.experiments[after].name}`,
+            });
+            await expect(next).toHaveAttribute("href", lab.detailPath(after));
+          } else {
+            await expect(nav.getByText(lab.labels.nextExperiment)).toHaveCount(
+              0,
+            );
+          }
+        });
+
+        test("os links dos vizinhos têm 44 px, foco visível e levam ao experimento", async ({
+          page,
+        }) => {
+          await page.goto(detailPath);
+          const index = slugs.indexOf(slug);
+          const target = slugs[index + 1] ?? slugs[index - 1];
+          const nav = page.getByRole("navigation", {
+            name: lab.labels.experimentNavigation,
+          });
+
+          for (const link of await nav.getByRole("link").all()) {
+            const box = await link.boundingBox();
+            expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
+
+            await link.focus();
+            const outline = await link.evaluate(
+              (element) => getComputedStyle(element).outlineStyle,
+            );
+            expect(outline).not.toBe("none");
+          }
+
+          const destination = nav.getByRole("link").last();
+          await destination.click();
+          await expect(page).toHaveURL(
+            new RegExp(`${lab.detailPath(target ?? slug)}/?$`),
+          );
+          await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+            lab.experiments[target ?? slug].name,
+          );
         });
 
         test("os títulos não pulam níveis", async ({ page }) => {

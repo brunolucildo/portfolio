@@ -7,7 +7,7 @@
 | Nome | AI Lab |
 | Identificador | SPEC-006 |
 | Slug | `006-ai-lab` |
-| Versão | 0.3.0 |
+| Versão | 0.4.0 |
 | Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, textos aprovados e implementada em 2026-11-08; aguardando revisão do usuário e do PR; material adicional da seção 7.6 segue em aberto) |
 | Data | 2026-11-08 |
 | Origem | SPEC-006 de `.specs/FEATURES.md` (v0.1, Draft) |
@@ -69,7 +69,7 @@ O AI Lab é a seção do portfólio dedicada a experimentos, estudos e provas de
 | AIL-RF-13 | Must | Há metadados indexáveis em cada idioma, na lista e em cada detalhe (título, descrição, canonical, `hreflang`, Open Graph), sem `noindex`, e as páginas entram no sitemap. |
 | AIL-RF-14 | Must | O Language Switcher de uma página de detalhe leva ao mesmo experimento no outro idioma. |
 | AIL-RF-15 | Must | Nomes de tecnologia, de modelo e de comandos permanecem na grafia original nos dois idiomas; só os rótulos, os títulos de seção e os textos corridos são traduzidos. |
-| AIL-RF-16 | Should | A página de detalhe oferece navegação para o experimento anterior e o seguinte. |
+| AIL-RF-16 | Should (entregue em 2026-11-08, v0.4.0) | A página de detalhe oferece navegação para o experimento anterior e o seguinte. |
 
 ## 5. Requisitos não funcionais
 
@@ -252,6 +252,7 @@ Se o Bruno aprovar algum candidato, ele entra por nova versão desta SPEC (slug,
 | AIL-CA-10 | **Given** as larguras 360, 390, 768, 1366, 1440 e 1920 px, **when** a lista e cada detalhe são abertos nos dois idiomas, **then** não há rolagem horizontal. |
 | AIL-CA-11 | **Given** a navegação só por teclado, **when** o usuário percorre a lista, **then** cada card é um único alvo com nome acessível e foco visível. |
 | AIL-CA-12 | **Given** qualquer página do AI Lab, **when** os metadados são lidos, **then** há título, descrição, canonical, `hreflang` e Open Graph únicos por idioma, e as rotas estão no sitemap. |
+| AIL-CA-14 | **Given** cada página de detalhe, **when** a navegação é lida, **then** há um `nav` com o experimento anterior e o seguinte na ordem da lista (só um dos dois nas pontas), com nome acessível, alvo de 44 px, foco visível e destino no mesmo idioma. (Should.) |
 | AIL-CA-13 | **Given** o repositório, **when** `pnpm typecheck`, `pnpm check` e `pnpm test:e2e` rodam, **then** os três passam, e `e2e/ai-lab.spec.ts` cobre os critérios acima. |
 
 ## 9. Dependências
@@ -310,6 +311,7 @@ Se o Bruno aprovar algum candidato, ele entra por nova versão desta SPEC (slug,
 
 ## Refinamento
 
+- 2026-11-08, v0.4.0: AIL-RF-16 entregue por decisão do Bruno, com o critério AIL-CA-14 e os rótulos provisórios da navegação (a aprovar). O link de projeto de origem passou a usar o helper `projectHref`, compartilhado com Technologies.
 - 2026-11-08, v0.3.0: textos aprovados (Q1) e página implementada; seção 15 registra a entrega, as divergências e a verificação.
 - 2026-11-08, v0.1.0: SPEC criada a partir do ponteiro de `FEATURES.md` (Draft v0.1), do `BUSINESS.md` (7), do `CONTENT.md` (4.6), do `DESIGN.md` (6.6) e do `DESIGN_SYSTEM.md` (4.9). Conteúdo levantado nos README públicos de `football-stat-analytics-cli`, `fintalab` e `analytics-personas`. Quatro decisões do Bruno registradas na seção 13. Textos, estados e premissas aguardam a aprovação (Q1 a Q5).
 - 2026-11-08, v0.2.0: o Bruno apontou os documentos das pastas Módulo 1, 2 e 3. Levantados três candidatos (seção 7.6), nenhum incluído na v1. Achado relevante: o notebook de fine-tuning avalia no mesmo arquivo usado no treino, o que contradiz o PDF (Q6). Perguntas Q6 a Q8 abertas, não bloqueantes.
@@ -331,7 +333,7 @@ Decisões de implementação:
 Divergências em relação à SPEC:
 
 - **AIL-RF-13 (sitemap):** o projeto ainda não tem sitemap para nenhuma página; o que depende desta SPEC (metadados, canonical, `hreflang`, Open Graph, sem `noindex`) foi entregue. O sitemap fica para a etapa de SEO.
-- **AIL-RF-16 (Should), não entregue:** navegação para o experimento anterior e o seguinte. Com quatro experimentos, o link "Todos os experimentos" no topo basta.
+- **AIL-RF-16 (Should), entregue na v0.4.0 (2026-11-08):** navegação para o experimento anterior e o seguinte, no fim da página de detalhe, na ordem da lista e só entre experimentos com página (o primeiro não tem anterior, o último não tem seguinte; o card "Em planejamento" fica de fora). Na v0.3.0 não havia, porque o link "Todos os experimentos" bastava com quatro experimentos; o Bruno decidiu entregá-la. Rótulos provisórios (a aprovar): "Previous experiment", "Next experiment" e "Experiment navigation" (pt-BR: "Experimento anterior", "Próximo experimento" e "Navegação entre experimentos").
 - **Seção 6.1, Resultados:** saem como parágrafo (o texto aprovado), e não como lista com as contagens em destaque tipográfico. O parágrafo de Resultados da validação é denso; dividi-lo por assunto, sem mudar palavras, é uma sugestão para a revisão.
 - **AIL-RF-10:** "Parte de" leva à página de detalhe do Football Stat Analytics e, no caso do FintaLab (sem detalhe), à lista de Projects.
 
@@ -349,6 +351,7 @@ Divergências em relação à SPEC:
 | AIL-CA-10 | Atendido | Sem rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px, lista e detalhes, nos dois idiomas. |
 | AIL-CA-11 | Atendido | A tabulação passa uma vez por card, na ordem visual; links com alvo de pelo menos 44 px. |
 | AIL-CA-12 | Parcial | Título, descrição, canonical, `hreflang` e Open Graph por idioma conferidos; sem sitemap (ver divergências). |
+| AIL-CA-14 | Atendido (v0.4.0, 2026-11-08) | Quatro detalhes em dois idiomas: o primeiro só com o seguinte, os do meio com os dois, o último só com o anterior; nomes acessíveis "rótulo + nome do experimento", hrefs na ordem da lista, links com 44 px ou mais e contorno de foco; o clique leva ao experimento certo. |
 | AIL-CA-13 | Atendido com ressalva | `pnpm typecheck` sem erros; `pnpm test:e2e` com 400 testes passando (162 novos). `pnpm check` passa nos arquivos novos e alterados; na árvore inteira falha em 38 arquivos que não foram tocados, por causa do CRLF do checkout no Windows (problema já conhecido, o Git guarda LF). |
 
 Verificação adicional:

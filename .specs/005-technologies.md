@@ -7,7 +7,7 @@
 | Nome | Technologies |
 | Identificador | SPEC-005 |
 | Slug | `005-technologies` |
-| Versão | 0.3.0 |
+| Versão | 0.4.0 |
 | Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, implementada em 2026-11-08; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-005 de `.specs/FEATURES.md` (v0.1, Draft) |
@@ -57,7 +57,7 @@ A página Technologies apresenta as tecnologias, os frameworks, os bancos de dad
 | TECH-RF-07 | Must | A página não cita o nome da empresa, o curso nem a instituição da pós-graduação, e não publica percentuais. |
 | TECH-RF-08 | Must | Toda tecnologia exibida em Experience (`experience.ts`) e em Projects (`projects.ts`) existe também em Technologies, e toda tecnologia de Technologies com contexto está de fato em Experience, em Projects ou no currículo. Variações de nome (por exemplo, "Entity Framework" e "Entity Framework Core") ficam em uma única entrada. |
 | TECH-RF-09 | Must | Cada tecnologia tem um ícone: o da fonte licenciada quando existir, ou um monograma próprio quando não existir (seção 7.5). Todos têm o mesmo tamanho, usam `currentColor` e não usam cores de marca. |
-| TECH-RF-10 | Should (não entregue na v1; ver seção 15) | Cada nome de projeto na linha de contexto leva à página de detalhe do projeto (ou à lista, quando não há detalhe), e "Experience" leva a `/experience`. |
+| TECH-RF-10 | Should (entregue em 2026-11-08, v0.4.0; ver seção 15) | Cada nome de projeto na linha de contexto leva à página de detalhe do projeto (ou à lista, quando não há detalhe), e "Experience" leva a `/experience`. |
 | TECH-RF-11 | Must | A página tem metadados indexáveis em cada idioma (título, descrição, canonical, `hreflang`, Open Graph), sem `noindex`. |
 | TECH-RF-12 | Must | Os nomes de tecnologia ficam na nomenclatura original nos dois idiomas; só títulos de categoria, abertura e rótulos de contexto são traduzidos (`CONTENT.md`, 3.3). |
 
@@ -270,6 +270,7 @@ Decisões reversíveis adotadas neste refinamento.
 
 ## Refinamento
 
+- 2026-11-08, v0.4.0: TECH-RF-10 entregue por decisão do Bruno. As linhas de contexto passam a ter links (Experience e projetos); o teste que garantia a lista sem links foi trocado pelos testes de TECH-CA-08. Os links ficam como texto sublinhado discreto, sem alvo de 44 px (são links dentro de linha de texto).
 | Data | O que mudou | Motivo |
 |---|---|---|
 | 2026-11-08 | Versão 0.2.0: SPEC reescrita a partir do rascunho da `FEATURES.md` (v0.1) com requisitos numerados, rota, categorias com tecnologias, ícones, textos, SEO, critérios Given/When/Then, riscos e perguntas abertas. | Rascunho sem rota, sem itens e sem critérios verificáveis. |
@@ -298,7 +299,7 @@ Decisões de implementação:
 | TECH-CA-05 | Atendido | Linha de contexto igual à da seção 7.1 em 29 itens, nos dois idiomas. |
 | TECH-CA-06 | Atendido | Quatro testes comparam `experience.ts`, `projects.ts` e `technologies.ts`. Mutação (marcar TypeScript como Experience) derruba três deles. |
 | TECH-CA-07 | Atendido | Ícones de 24 px na cor do texto secundário; nenhum item de Architecture tem ícone nem espaço reservado. Mutação (`bg-primary`) derruba o teste de cor. |
-| TECH-CA-08 | Não entregue (Should) | Sem links nas linhas de contexto: seriam cerca de 35 links repetidos ("Experience", nomes de projetos), que alongam a tabulação e poluem a página. Um teste garante que a lista não tem links nem botões. |
+| TECH-CA-08 | Atendido (v0.4.0, 2026-11-08) | Cada item da linha de contexto é um link: "Experience" leva a `/experience` (pt-BR: `/pt-BR/experiencia`) e cada projeto, ao detalhe, ou à lista no caso do FintaLab. Na v0.3.0 não havia links, porque seriam cerca de 35 repetidos que alongam a tabulação; o Bruno decidiu entregá-los (2026-11-08). Testes: links, rótulos e destinos de todos os itens, nos dois idiomas; a lista só tem esses links e nenhum botão; foco visível; clique leva ao detalhe do Reelix. |
 | TECH-CA-09 | Atendido | Título, descrição, `lang`, Open Graph, canonical e `hreflang` (`en`, `pt-BR`, `x-default`) conferidos; sem `noindex`. |
 | TECH-CA-10 | Atendido | Nomes de tecnologia na grafia original; só títulos, abertura, nota e rótulos traduzidos. |
 | TECH-CA-11 | Atendido | Títulos sem pular nível; ordem de tabulação segue o DOM (a lista não tem elementos focáveis). Contraste dos ícones igual ao do texto secundário do site. |
