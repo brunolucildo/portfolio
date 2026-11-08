@@ -54,70 +54,9 @@ A seção Technologies apresenta as tecnologias e ferramentas utilizadas profiss
 
 # SPEC-006 — AI Lab
 
-## 1. Contexto
+**Status:** Proposed. Refinada e movida para [`006-ai-lab.md`](./006-ai-lab.md).
 
-O AI Lab é uma seção própria para experimentos, estudos e projetos relacionados à inteligência artificial.
-
-## 2. Objetivo
-
-Demonstrar exploração técnica, aprendizado e aplicação prática de IA, sem transformar o portfólio em um blog técnico.
-
-## 3. Escopo
-
-- Experimentos com LLMs.
-- Agentes de IA.
-- RAG.
-- Prompt Engineering.
-- Fine-tuning.
-- Avaliação de modelos.
-- Estudos acadêmicos.
-- Provas de conceito.
-
-## 4. Estrutura de cada experimento
-
-- Nome.
-- Objetivo.
-- Contexto.
-- Modelo utilizado.
-- Tecnologias.
-- Abordagem.
-- Implementação.
-- Resultados.
-- Limitações.
-- Aprendizados.
-- Estado atual.
-
-## 5. Requisitos funcionais
-
-- Apresentar experimentos.
-- Permitir visualizar detalhes.
-- Identificar tecnologias e modelos.
-- Exibir estado atual.
-- Diferenciar estudo, PoC e projeto concluído.
-
-## 6. Regras de conteúdo
-
-- Não afirmar resultados não comprovados.
-- Informar limitações relevantes.
-- Não apresentar experimentos como produtos comerciais.
-- Explicar abordagens de maneira compreensível.
-- Priorizar aprendizado e decisões técnicas.
-
-## 7. Requisitos visuais
-
-- Identidade consistente com o restante do site.
-- Composição visual própria, mas sem criar outra identidade.
-- Cards específicos para experimentos.
-- Elementos gráficos discretos.
-- Animações moderadas.
-
-## 8. Critérios de aceitação
-
-- Experimentos classificados corretamente.
-- Modelos e tecnologias identificados.
-- Resultados e limitações documentados.
-- Layout responsivo.
-- Conteúdo traduzido.
+A seção AI Lab apresenta experimentos, estudos e provas de conceito com inteligência artificial, cada um com problema, abordagem, resultados observados e limitações. Os requisitos, os critérios de aceitação, o rascunho dos textos, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
 ---
 
