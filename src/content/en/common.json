@@ -10,7 +10,6 @@
     "closeMenu": "Close menu",
     "newTab": "(opens in a new tab)",
     "resume": "Resume",
-    "resumeFallback": "Resume (EN)",
     "items": {
       "home": "Home",
       "about": "About",
@@ -391,6 +390,59 @@
         "action": "View Resume",
         "actionFallback": "View Resume (EN)"
       }
+    }
+  },
+  "resume": {
+    "metadata": {
+      "title": "Resume | Bruno Lucildo",
+      "description": "View or download Bruno Lucildo's resume (PDF, in English): professional experience, education, skills and languages."
+    },
+    "title": "Resume",
+    "intro": "The formal version of my professional history, in a single document. The Experience page tells the same story with more context.",
+    "actions": {
+      "view": "View Resume",
+      "download": "Download PDF"
+    },
+    "languageNotice": "The resume is available in English only.",
+    "details": {
+      "format": "Format",
+      "formatValue": "PDF",
+      "language": "File language",
+      "updated": "Last updated",
+      "size": "Size"
+    },
+    "fileLanguage": {
+      "en": "English",
+      "pt-BR": "Portuguese"
+    },
+    "inside": {
+      "title": "What's inside",
+      "items": {
+        "summary": {
+          "title": "Summary",
+          "text": "a profile of my background and focus."
+        },
+        "experience": {
+          "title": "Professional experience",
+          "text": "roles, periods and responsibilities."
+        },
+        "education": {
+          "title": "Education",
+          "text": "degrees and postgraduate studies."
+        },
+        "skills": {
+          "title": "Skills",
+          "text": "languages, frameworks, databases, messaging and architecture."
+        },
+        "languages": {
+          "title": "Languages",
+          "text": "spoken languages and proficiency."
+        }
+      }
+    },
+    "links": {
+      "experience": "View experience",
+      "contact": "Get in Touch"
     }
   },
   "notFound": {

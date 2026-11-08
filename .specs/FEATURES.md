@@ -78,7 +78,7 @@ A seção de internacionalização formaliza o inglês (padrão) e o português 
 
 # SPEC-009 — Resume
 
-**Status:** Approved. Refinada e movida para [`009-resume.md`](./009-resume.md).
+**Status:** In Review. Refinada, implementada e movida para [`009-resume.md`](./009-resume.md).
 
 A seção Resume dá ao currículo em PDF uma página própria (`/resume`), com ações para abrir e baixar o arquivo, e define a consistência do documento com o site, o idioma do arquivo e o procedimento de atualização. Os requisitos, os critérios de aceitação, o rascunho dos textos, o mapa de consistência, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 

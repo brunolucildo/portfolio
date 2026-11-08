@@ -152,7 +152,7 @@ São treze URLs por idioma: Home, About, Experience, Projects, dois detalhes de 
 
 | Exceção | Motivo | Verificação |
 |---|---|---|
-| Currículo em PDF só em inglês | Não há versão em português (SPEC-009) | Rótulo "(EN)" e `lang="en"` no link em pt-BR (menu e Contact) |
+| Currículo em PDF só em inglês | Não há versão em português (SPEC-009) | Rótulo "(EN)" e `lang="en"` no link em pt-BR, em Contact; na página `/curriculo`, aviso "O currículo está disponível apenas em inglês." e `hreflang="en"` nos links. O botão do menu leva à página e não leva mais o "(EN)" (SPEC-009) |
 | Slug `/ai-lab` igual nos dois idiomas | "AI Lab" é um nome próprio | Mapa de rotas e teste de URLs |
 | Textos iguais nos dois idiomas (20) | Nomes próprios, marcas e termos técnicos | Lista explícita no teste (abaixo) |
 

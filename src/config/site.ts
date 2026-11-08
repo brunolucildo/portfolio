@@ -13,9 +13,20 @@ const contact: ContactChannels = {
   github: "https://github.com/brunolucildo",
 };
 
-/** Currículos em PDF disponíveis, por idioma. */
-const resume: Partial<Record<Locale, string>> & { en: string } = {
-  en: "/documents/resume/bruno-lucildo-resume-en.pdf",
+/** Um currículo em PDF e o mês em que o arquivo foi atualizado. */
+export type ResumeFile = {
+  /** Caminho público do PDF, dentro de `public/`. */
+  href: string;
+  /** Mês da última atualização do arquivo, no formato `AAAA-MM`. Revisar a cada troca do PDF. */
+  updatedAt: string;
+};
+
+/** Currículos em PDF disponíveis, por idioma (SPEC-009). */
+const resume: Partial<Record<Locale, ResumeFile>> & { en: ResumeFile } = {
+  en: {
+    href: "/documents/resume/bruno-lucildo-resume-en.pdf",
+    updatedAt: "2026-11",
+  },
 };
 
 export const siteConfig = {
@@ -38,6 +49,11 @@ export function hasLocalizedResume(locale: Locale): boolean {
 }
 
 /** Retorna o currículo do idioma ou, na ausência dele, a versão em inglês. */
-export function getResumeHref(locale: Locale): string {
+export function getResumeFile(locale: Locale): ResumeFile {
   return siteConfig.resume[locale] ?? siteConfig.resume.en;
+}
+
+/** Caminho público do PDF do idioma ou, na ausência dele, o da versão em inglês. */
+export function getResumeHref(locale: Locale): string {
+  return getResumeFile(locale).href;
 }

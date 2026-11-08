@@ -61,6 +61,7 @@ type PageMetadataNamespace =
   | "technologies.metadata"
   | "aiLab.metadata"
   | "contact.metadata"
+  | "resume.metadata"
   | AiLabExperimentNamespace
   | "projects.detail.football.metadata"
   | "projects.detail.reelix.metadata";
@@ -101,6 +102,10 @@ async function pageTexts(
 
   switch (namespace) {
     case "contact.metadata": {
+      const t = await getTranslations({ locale, namespace });
+      return { title: t("title"), description: t("description") };
+    }
+    case "resume.metadata": {
       const t = await getTranslations({ locale, namespace });
       return { title: t("title"), description: t("description") };
     }

@@ -16,36 +16,22 @@ function isActivePath(current: string, href: string): boolean {
     : current === href || current.startsWith(`${href}/`);
 }
 
-type ResumeProps = { href: string; localized: boolean };
-
-function ResumeLink({
-  href,
-  localized,
-  className,
-}: ResumeProps & { className?: string }) {
+/** Botão secundário que leva à página do currículo (SPEC-009, RES-RF-07). */
+function ResumeLink({ active }: { active: boolean }) {
   const t = useTranslations("navigation");
 
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      lang={localized ? undefined : "en"}
-      className={buttonStyles({ variant: "secondary", size: "sm", className })}
+    <Link
+      href="/resume"
+      aria-current={active ? "page" : undefined}
+      className={buttonStyles({ variant: "secondary", size: "sm" })}
     >
-      {localized ? t("resume") : t("resumeFallback")}
-      <span className="sr-only"> {t("newTab")}</span>
-    </a>
+      {t("resume")}
+    </Link>
   );
 }
 
-export function HeaderNav({
-  resumeHref,
-  resumeLocalized,
-}: {
-  resumeHref: string;
-  resumeLocalized: boolean;
-}) {
+export function HeaderNav() {
   const t = useTranslations("navigation");
   const pathname = usePathname();
   // Guarda a rota em que o menu foi aberto: ao navegar, ele fecha sem effect.
@@ -66,6 +52,8 @@ export function HeaderNav({
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open]);
+
+  const resumeActive = isActivePath(pathname, "/resume");
 
   const links = mainNavigation.map(({ key, href }) => {
     const active = isActivePath(pathname, href);
@@ -96,7 +84,7 @@ export function HeaderNav({
 
       <div className="hidden items-center gap-4 lg:flex">
         <LanguageSwitcher />
-        <ResumeLink href={resumeHref} localized={resumeLocalized} />
+        <ResumeLink active={resumeActive} />
       </div>
 
       <button
@@ -136,7 +124,7 @@ export function HeaderNav({
           </nav>
           <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-6">
             <LanguageSwitcher />
-            <ResumeLink href={resumeHref} localized={resumeLocalized} />
+            <ResumeLink active={resumeActive} />
           </div>
         </div>
       </div>

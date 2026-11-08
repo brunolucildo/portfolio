@@ -7,8 +7,8 @@
 | Nome | Resume |
 | Identificador | SPEC-009 |
 | Slug | `009-resume` |
-| Versão | 0.2.0 |
-| Status | Approved (textos aprovados em 2026-11-08; o PDF ajustado, Q2, segue pendente) |
+| Versão | 0.3.0 |
+| Status | In Review (implementada em 2026-11-08; aguardando o PDF ajustado, Q2, e a revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-009 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -287,5 +287,59 @@ O rótulo segue o do site e o do LinkedIn ("Postgraduate Degree, Master's Progra
 
 ## Refinamento
 
+- 2026-11-08, v0.3.0: página, botão do header, `noindex` e testes implementados; a seção 15 registra a entrega, as divergências e a verificação. A SPEC-008 (seção 7.4) foi atualizada para o novo comportamento do botão do menu.
 - 2026-11-08, v0.2.0: textos e SEO aprovados (Q1); status passa a Approved. Q2 (PDF ajustado) segue pendente e só afeta RES-RF-12 e RES-CA-14.
 - 2026-11-08, v0.1.0: SPEC criada a partir do rascunho de `FEATURES.md` (Draft v0.1), do `BUSINESS.md`, do `CONTENT.md` (4.8), do `DESIGN.md`, do `DESIGN_SYSTEM.md` (4.2), do `QA.md`, do código (`site.ts`, header, Contact, rotas), dos testes existentes e da leitura do PDF atual. Rascunho original preservado: PDF, abrir ou baixar, idioma por versão, documento atualizado e acesso pelo menu como ação secundária. Detalhado: o que é "atualizado" virou procedimento e critério (RES-RF-13/14); "abrir ou baixar" virou dois botões; "versão por idioma" virou regra com aviso; "dados pessoais desnecessários" virou decisão registrada (telefone e cidade no PDF) com `noindex`; "integrar ao menu" virou o botão levando à página. Seis decisões do Bruno de 2026-11-08 e duas anteriores registradas na seção 13; textos aguardavam a aprovação (Q1).
+
+## 15. Implementação e verificação
+
+Implementada na branch `docs/spec-009-resume` em 2026-11-08, depois da aprovação dos textos (Q1).
+
+- Novos: `src/app/[locale]/resume/page.tsx`, `src/components/resume/` (`ResumeContent`, `format.ts`) e `e2e/resume.spec.ts` (50 testes).
+- Alterados: `src/i18n/routing.ts` (rota `/resume` ↔ `/curriculo`), `src/config/site.ts`, `src/lib/seo/metadata.ts` (namespace `resume.metadata`), `src/components/layout/Header.tsx` e `HeaderNav.tsx`, `next.config.ts` (`X-Robots-Tag`), `src/content/{en,pt-BR}/common.json` (bloco `resume`; removido `navigation.resumeFallback`), `e2e/i18n.spec.ts`, `e2e/contact.spec.ts`, `.specs/008-internationalization.md` e `README.md`.
+
+Decisões de implementação:
+
+- `siteConfig.resume` guarda, por idioma, `{ href, updatedAt }`, e não um `updatedAt` único. Assim um PDF em pt-BR futuro tem a própria data. `getResumeFile(locale)` devolve a entrada e `getResumeHref` continua devolvendo só o caminho.
+- A formatação (mês por `Intl`, tamanho em KB ou MB, nome do arquivo) fica em `format.ts`, em funções puras testadas sem navegador. O tamanho é lido de `public/` no servidor; se a leitura falhar, a linha Tamanho some.
+- `Header` deixou de ser assíncrono e de ler o idioma: o botão agora é um `Link` interno e não precisa mais do caminho do PDF.
+- O aviso de arquivo em inglês depende só de `hasLocalizedResume(locale)`: em en o PDF é do próprio idioma, então não há aviso.
+
+Divergências em relação à SPEC:
+
+- **RES-RF-14 e seção 7.1:** a data está em `siteConfig.resume.en.updatedAt` (por arquivo), e não em `siteConfig.resume.updatedAt`.
+- **Seção 6.1:** o bloco de ações e dados do arquivo fica no cabeçalho da página, sem `h2` próprio (a SPEC previa uma seção com rótulo na coluna estreita). Só "O que o documento traz" usa as duas colunas. O texto aprovado não previa um título para esse bloco, e criar um exigiria texto novo.
+- **RES-CA-06:** verificado nas funções `hasLocalizedResume` e `getResumeHref` com a configuração alterada, e não renderizando a página com ela (a página é gerada no servidor).
+- **Header:** o botão não ganhou indicador visual de página ativa, só `aria-current="page"`, como a SPEC pede.
+
+| Critério | Resultado | Evidência |
+|---|---|---|
+| RES-CA-01 | Atendido | `h1`, abertura, `h2` "What's inside"/"O que o documento traz" e cinco itens, sem `noindex`. |
+| RES-CA-02 | Atendido | "View Resume" com `href`, `target`, `rel`, `hreflang="en"` e nome acessível com o aviso de nova aba; "Download PDF" com o `download` do arquivo. |
+| RES-CA-03 | Atendido | "Ver currículo" e "Baixar PDF", sem "(EN)" e sem `lang`. |
+| RES-CA-04 | Atendido | `dl` com Formato, Idioma do arquivo, Última atualização ("November 2026"/"novembro de 2026") e Tamanho igual ao do arquivo. |
+| RES-CA-05 | Atendido | Aviso só em pt-BR. |
+| RES-CA-06 | Atendido (função) | Ver a divergência acima. |
+| RES-CA-07 | Atendido | Os cinco itens, sem cargo, data, empresa, métrica, curso nem tecnologia. |
+| RES-CA-08 | Atendido | Links finais levam a Experience e Contact na mesma aba. |
+| RES-CA-09 | Atendido | Header em 1440 px e menu mobile em 375 px: link interno, sem `target`, `aria-current="page"` na página, menu fecha ao navegar. |
+| RES-CA-10 | Atendido | `e2e/contact.spec.ts` segue passando; em pt-BR, Contact mantém "Ver currículo (EN)" e `lang="en"`. |
+| RES-CA-11 | Atendido | PDF com 200, `application/pdf`, `X-Robots-Tag: noindex`, `%PDF-` e menos de 1 MB; as páginas `/resume` e `/curriculo` sem `noindex`. |
+| RES-CA-12 | Atendido | Título, descrição, canonical, `hreflang` (`en`, `pt-BR`, `x-default`, com as rotas localizadas) e Open Graph. |
+| RES-CA-13 | Atendido | Sem `%`, telefone, cidade, empresa, expressões proibidas nem frases de busca de emprego. |
+| RES-CA-14 | **Pendente** | Depende do PDF ajustado pelo Bruno (Q2). O arquivo atual ainda tem autor "User", sem título, e a formação "Master's in…". |
+| RES-CA-15 | Atendido | Seção 7.5 conferida por leitura do PDF em 2026-11-08; as linhas "A alinhar" e "A corrigir" dependem da Q2. |
+| RES-CA-16 | Atendido | Formato `AAAA-MM`, não está no futuro e não é anterior ao mês de geração do PDF (`/CreationDate`). |
+| RES-CA-17 | Atendido | Os quatro alvos da página têm 44 px ou mais e contorno de foco; a tabulação segue a ordem visual. |
+| RES-CA-18 | Atendido | Sem rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px, nos dois idiomas; a abertura tem até 80 caracteres por linha em 1366 px. |
+| RES-CA-19 | Atendido | `resumeHref`, `resumeLocalized` e `resumeFallback` não existem mais (teste lê o código e os dois `common.json`); `tsc --noEmit` sem erros e suíte E2E com 625 testes passando. |
+| RES-CA-20 | Atendido | A linha Tamanho mostra o tamanho real do PDF ("358 KB"). |
+
+Verificação adicional:
+
+- Mutação: três defeitos introduzidos de propósito. Remover o `noindex` e fazer o botão do header abrir em nova aba derrubaram cinco testes. O terceiro (aviso de idioma em inglês) era um mutante equivalente, porque a condição `locale !== defaultLocale` era redundante; a condição foi simplificada para `!localized` e uma mutação nova (aviso sempre visível) derrubou o teste de en. Arquivos restaurados e suíte completa verde depois.
+- Navegador: página conferida em 1440 px (en) e 375 px (pt-BR), com o servidor de produção da porta 3200, já encerrado.
+- Problema encontrado e corrigido nos testes: o teste de teclado contava o link "Experience" do menu do header; passou a contar só os da página. A chave `resume.details.formatValue` ("PDF") entrou na lista de textos iguais nos dois idiomas de `e2e/i18n.spec.ts`.
+- `pnpm check` equivalente (Biome) passa nos arquivos novos e alterados; na árvore inteira ainda falha em arquivos não tocados, por causa do CRLF do checkout no Windows. Os quatro arquivos em que rodei `biome check --write` (`site.ts`, `format.ts`, `resume.spec.ts` e `contact.spec.ts`) passaram para LF, como o Git guarda.
+
+Não verificado: o download real pelo atributo `download` em um navegador de uso comum (só os atributos foram conferidos), se o `X-Robots-Tag` chega ao cliente na hospedagem final (ainda não decidida), o contraste com ferramenta (usa os tokens do site) e LCP e CLS.

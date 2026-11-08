@@ -88,6 +88,7 @@ const allowedIdentical = [
   "projects.items.fintalab.name",
   "projects.items.football.name",
   "projects.items.reelix.name",
+  "resume.details.formatValue",
   "technologies.categories.backend",
 ].sort();
 
@@ -469,17 +470,26 @@ test.describe("sem mistura de idiomas", () => {
     expect(portuguese).not.toContain("May 2023");
   });
 
-  test("o currículo em inglês é marcado em pt-BR e não em en", async ({
+  test("o currículo em inglês é marcado em pt-BR, em Contact, e não em en", async ({
     page,
   }) => {
+    // O botão do header leva à página /curriculo, sem "(EN)" (SPEC-009).
     await page.goto("/pt-BR");
+    const header = page.getByRole("banner");
+    await expect(header).not.toContainText("(EN)");
     await expect(
-      page.getByRole("link", { name: /^Currículo \(EN\)/ }).first(),
+      header.getByRole("link", { name: "Currículo", exact: true }),
+    ).not.toHaveAttribute("lang", /.*/);
+
+    // O link direto para o PDF continua na página Contact, com a exceção documentada.
+    await page.goto("/pt-BR/contato");
+    await expect(
+      page.getByRole("link", { name: /^Ver currículo \(EN\)/ }),
     ).toHaveAttribute("lang", "en");
 
-    await page.goto("/en");
+    await page.goto("/en/contact");
     await expect(
-      page.getByRole("link", { name: /^Resume/ }).first(),
+      page.getByRole("link", { name: /^View Resume/ }),
     ).not.toHaveAttribute("lang", /.*/);
   });
 });
