@@ -46,47 +46,9 @@ A seção Projects apresenta os projetos pessoais, acadêmicos e conceituais de 
 
 # SPEC-005 — Technologies
 
-## 1. Contexto
+**Status:** Proposed. Refinada e movida para [`005-technologies.md`](./005-technologies.md); aguarda aprovação do usuário.
 
-A seção Technologies apresenta as tecnologias e ferramentas utilizadas profissionalmente ou exploradas em projetos.
-
-## 2. Objetivo
-
-Demonstrar familiaridade com o ecossistema técnico sem criar classificações artificiais de proficiência.
-
-## 3. Categorias
-
-Categorias iniciais:
-
-- Languages.
-- Backend.
-- Databases.
-- Messaging and Caching.
-- Architecture.
-- AI and Machine Learning.
-- Tools and Infrastructure.
-
-## 4. Requisitos funcionais
-
-- Apresentar tecnologias por categoria.
-- Utilizar ícones quando disponíveis.
-- Manter organização visual consistente.
-- Permitir relacionar tecnologias a projetos e experiências quando fizer sentido.
-
-## 5. Regras
-
-- Não inventar níveis de domínio.
-- Não apresentar tecnologias apenas por tendência.
-- Diferenciar experiência profissional de estudos.
-- Não transformar a seção em uma lista excessiva de badges.
-
-## 6. Critérios de aceitação
-
-- Categorias coerentes.
-- Tecnologias revisadas.
-- Identidade visual respeitada.
-- Layout responsivo.
-- Informações consistentes nos idiomas.
+A seção Technologies apresenta as tecnologias e ferramentas utilizadas profissionalmente ou exploradas em projetos, por categoria e com o contexto em que cada uma foi usada. Os requisitos, os critérios de aceitação, o rascunho dos textos, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
 ---
 
