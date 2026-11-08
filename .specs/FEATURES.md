@@ -78,36 +78,9 @@ A seção de internacionalização formaliza o inglês (padrão) e o português 
 
 # SPEC-009 — Resume
 
-## 1. Contexto
+**Status:** Approved. Refinada e movida para [`009-resume.md`](./009-resume.md).
 
-O currículo disponibiliza uma versão formal e resumida da trajetória profissional.
-
-## 2. Objetivo
-
-Permitir acesso rápido ao histórico profissional em formato de documento.
-
-## 3. Requisitos funcionais
-
-- Disponibilizar currículo em PDF.
-- Permitir abrir ou baixar o arquivo.
-- Disponibilizar versões em inglês e português quando aprovadas.
-- Manter o documento atualizado.
-- Integrar o acesso ao menu principal como ação secundária.
-
-## 4. Regras
-
-- Não utilizar o currículo como conteúdo principal da Home.
-- Não apresentar informações divergentes do site.
-- Validar datas, cargos e tecnologias.
-- Não publicar dados pessoais desnecessários.
-
-## 5. Critérios de aceitação
-
-- Arquivo acessível.
-- PDF válido.
-- Versão correta por idioma.
-- Conteúdo atualizado.
-- Link funcionando em desktop e mobile.
+A seção Resume dá ao currículo em PDF uma página própria (`/resume`), com ações para abrir e baixar o arquivo, e define a consistência do documento com o site, o idioma do arquivo e o procedimento de atualização. Os requisitos, os critérios de aceitação, o rascunho dos textos, o mapa de consistência, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
 ---
 
