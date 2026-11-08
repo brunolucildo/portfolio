@@ -1,6 +1,6 @@
 import type { Locale } from "@/i18n/routing";
 
-type ContactChannels = {
+export type ContactChannels = {
   email?: string;
   linkedin?: string;
   github?: string;
