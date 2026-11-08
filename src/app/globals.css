@@ -14,6 +14,8 @@
 
   html {
     -webkit-text-size-adjust: 100%;
+    /* O cabeçalho fixo tem 64 px: o foco e as âncoras param abaixo dele. */
+    scroll-padding-top: 5rem;
   }
 
   body {

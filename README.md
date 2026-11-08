@@ -19,8 +19,11 @@ O site é bilíngue (inglês como padrão e português do Brasil), estático e s
 | AI Lab (SPEC-006) | Implementada, em revisão |
 | Contact (SPEC-007) | Implementada, em revisão |
 | Internationalization (SPEC-008) | Implementada, em revisão |
-| Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience, Projects, Technologies, AI Lab, Contact e Internationalization |
-| Resume (página), SEO final | Pendentes |
+| Resume (SPEC-009) | Implementada, em revisão. PDF ajustado entregue (formação e autor); título do arquivo em branco, aceito |
+| Layout global (SPEC-010) | Implementada, em revisão |
+| Fotografia e assets (SPEC-011) | Implementada, em revisão: ícone do site, imagem de compartilhamento e créditos das imagens |
+| Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience, Projects, Technologies, AI Lab, Contact, Internationalization, Resume, Layout global e Assets (imagens, ícone e compartilhamento) |
+| SEO final | Pendente |
 | Hospedagem, domínio e analytics | Pendentes de decisão |
 
 O detalhamento está nas especificações em [`.specs/`](./.specs/).
@@ -63,7 +66,7 @@ npm run dev
 | `pnpm test:e2e` | Testes end-to-end (Playwright): faz o build e sobe o app na porta 3100. Na primeira vez, rode `pnpm exec playwright install chromium` |
 | `pnpm format` | Formata os arquivos |
 
-Ainda não há runner de testes configurado; a estratégia proposta está em [`.docs/QA.md`](./.docs/QA.md).
+A estratégia de testes está em [`.docs/QA.md`](./.docs/QA.md).
 
 ### Variáveis de ambiente
 
@@ -83,6 +86,7 @@ Copie `.env.example` para `.env.local` se precisar definir valores locais.
 | Projects | `/en/projects` | `/pt-BR/projetos` |
 | AI Lab | `/en/ai-lab` | `/pt-BR/ai-lab` |
 | Contact | `/en/contact` | `/pt-BR/contato` |
+| Resume | `/en/resume` | `/pt-BR/curriculo` |
 
 Os textos ficam em `src/content/en/common.json` e `src/content/pt-BR/common.json`. As duas estruturas precisam ter as mesmas chaves, e o `pnpm typecheck` falha quando divergem.
 

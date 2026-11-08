@@ -12,6 +12,7 @@ import {
   localizedAlternates,
   localizedPath,
   openGraphLocales,
+  socialImage,
 } from "@/lib/seo/metadata";
 
 type Props = {
@@ -26,6 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const t = await getTranslations({ locale, namespace: "home.metadata" });
+  const image = await socialImage(locale);
 
   return {
     title: t("title"),
@@ -37,7 +39,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t("title"),
       description: t("description"),
       url: localizedPath(locale, "/"),
+      images: [image],
       ...openGraphLocales(locale),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+      images: [image],
     },
   };
 }

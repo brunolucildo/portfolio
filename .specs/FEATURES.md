@@ -78,7 +78,7 @@ A seção de internacionalização formaliza o inglês (padrão) e o português 
 
 # SPEC-009 — Resume
 
-**Status:** Approved. Refinada e movida para [`009-resume.md`](./009-resume.md).
+**Status:** In Review. Refinada, implementada e movida para [`009-resume.md`](./009-resume.md).
 
 A seção Resume dá ao currículo em PDF uma página própria (`/resume`), com ações para abrir e baixar o arquivo, e define a consistência do documento com o site, o idioma do arquivo e o procedimento de atualização. Os requisitos, os critérios de aceitação, o rascunho dos textos, o mapa de consistência, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
@@ -86,94 +86,17 @@ A seção Resume dá ao currículo em PDF uma página própria (`/resume`), com 
 
 # SPEC-010 — Global Layout and Navigation
 
-## 1. Contexto
+**Status:** In Review. Refinada, implementada e movida para [`010-global-layout.md`](./010-global-layout.md).
 
-O layout global estabelece a estrutura compartilhada entre todas as páginas.
-
-## 2. Objetivo
-
-Garantir consistência de navegação, identidade visual e comportamento.
-
-## 3. Elementos
-
-- Header.
-- Navegação principal.
-- Language Switcher.
-- Conteúdo principal.
-- Footer.
-- Elementos compartilhados de layout.
-
-## 4. Requisitos funcionais
-
-- Navegar entre páginas.
-- Indicar a localização atual.
-- Alternar idiomas.
-- Adaptar navegação ao mobile.
-- Disponibilizar acesso ao currículo.
-- Exibir links de contato no footer.
-
-## 5. Requisitos não funcionais
-
-- HTML semântico.
-- Navegação por teclado.
-- Responsividade.
-- Contraste adequado.
-- Foco visível.
-- Ausência de scroll horizontal.
-- Carregamento eficiente.
-
-## 6. Critérios de aceitação
-
-- Layout consistente em todas as páginas.
-- Menu desktop funcional.
-- Menu mobile funcional.
-- Links corretos.
-- Idioma preservado.
-- Navegação acessível.
+O layout global reúne cabeçalho, navegação, seletor de idioma, rodapé e o atalho para o conteúdo. A SPEC formaliza o que já foi implementado, registra a auditoria em build de produção e fecha as lacunas encontradas (menu mobile, foco atrás do cabeçalho fixo, alvos de toque, estado ativo do botão Resume e link do currículo no rodapé). Os requisitos, os critérios de aceitação, a auditoria, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
 ---
 
 # SPEC-011 — Photography and Visual Assets
 
-## 1. Contexto
+**Status:** In Review. Refinada, implementada e movida para [`011-visual-assets.md`](./011-visual-assets.md).
 
-O projeto poderá utilizar fotografia profissional e imagens de projetos para reforçar a identidade visual.
-
-## 2. Objetivo
-
-Utilizar elementos visuais autênticos e relevantes, sem comprometer o estilo Dark Premium.
-
-## 3. Escopo
-
-- Fotografia profissional.
-- Imagem de apresentação.
-- Imagens de projetos.
-- Imagens de compartilhamento.
-- Ícones e ilustrações.
-
-## 4. Requisitos
-
-- Utilizar imagens autorizadas.
-- Otimizar dimensões e formatos.
-- Preservar qualidade visual.
-- Garantir contraste com o fundo.
-- Utilizar texto alternativo quando necessário.
-- Evitar imagens genéricas sem relação com o conteúdo.
-
-## 5. Decisões pendentes
-
-- Utilização de fotografia pessoal.
-- Posição da fotografia no Hero ou About.
-- Tratamento visual.
-- Seleção das imagens de projetos.
-
-## 6. Critérios de aceitação
-
-- Imagens aprovadas.
-- Arquivos otimizados.
-- Direitos de uso verificados.
-- Apresentação responsiva.
-- Textos alternativos adequados.
+A SPEC reúne a fotografia do Hero, as telas dos projetos e os ícones de tecnologias já aprovados, e cria o ícone do site e a imagem de compartilhamento. Os requisitos, os critérios de aceitação, a auditoria, o inventário de direitos, o rascunho dos textos, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
 ---
 

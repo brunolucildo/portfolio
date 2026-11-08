@@ -16,42 +16,47 @@ function isActivePath(current: string, href: string): boolean {
     : current === href || current.startsWith(`${href}/`);
 }
 
-type ResumeProps = { href: string; localized: boolean };
-
+/**
+ * Botão secundário que leva à página do currículo (SPEC-009, RES-RF-07). Na
+ * página do currículo, a borda passa para a cor primary (LAY-RF-04). O alvo de
+ * toque tem 44 px (LAY-RF-12); o `!` vence o `min-h-9` do tamanho `sm`.
+ */
 function ResumeLink({
-  href,
-  localized,
-  className,
-}: ResumeProps & { className?: string }) {
+  active,
+  onNavigate,
+}: {
+  active: boolean;
+  onNavigate: () => void;
+}) {
   const t = useTranslations("navigation");
 
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      lang={localized ? undefined : "en"}
-      className={buttonStyles({ variant: "secondary", size: "sm", className })}
+    <Link
+      href="/resume"
+      aria-current={active ? "page" : undefined}
+      onClick={onNavigate}
+      className={buttonStyles({
+        variant: "secondary",
+        size: "sm",
+        className: cn("min-h-11!", active && "border-primary!"),
+      })}
     >
-      {localized ? t("resume") : t("resumeFallback")}
-      <span className="sr-only"> {t("newTab")}</span>
-    </a>
+      {t("resume")}
+    </Link>
   );
 }
 
-export function HeaderNav({
-  resumeHref,
-  resumeLocalized,
-}: {
-  resumeHref: string;
-  resumeLocalized: boolean;
-}) {
+export function HeaderNav() {
   const t = useTranslations("navigation");
   const pathname = usePathname();
   // Guarda a rota em que o menu foi aberto: ao navegar, ele fecha sem effect.
   const [openPath, setOpenPath] = useState<string | null>(null);
   const open = openPath === pathname;
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // Fechar também ao acionar o link da página atual, que não muda a rota
+  // (LAY-RF-06).
+  const closeMenu = () => setOpenPath(null);
 
   useEffect(() => {
     if (!open) return;
@@ -63,9 +68,22 @@ export function HeaderNav({
       }
     }
 
+    // Ao chegar à largura do desktop, o painel não faz mais sentido: fecha,
+    // para não reaparecer aberto ao voltar ao celular (LAY-RF-07).
+    const desktop = window.matchMedia("(min-width: 64rem)");
+    function onViewportChange(event: MediaQueryListEvent) {
+      if (event.matches) setOpenPath(null);
+    }
+
     document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+    desktop.addEventListener("change", onViewportChange);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      desktop.removeEventListener("change", onViewportChange);
+    };
   }, [open]);
+
+  const resumeActive = isActivePath(pathname, "/resume");
 
   const links = mainNavigation.map(({ key, href }) => {
     const active = isActivePath(pathname, href);
@@ -75,6 +93,7 @@ export function HeaderNav({
         <Link
           href={href}
           aria-current={active ? "page" : undefined}
+          onClick={closeMenu}
           className={cn(
             "inline-flex min-h-11 items-center text-small font-medium transition-colors duration-(--duration-fast) ease-standard",
             active
@@ -96,7 +115,7 @@ export function HeaderNav({
 
       <div className="hidden items-center gap-4 lg:flex">
         <LanguageSwitcher />
-        <ResumeLink href={resumeHref} localized={resumeLocalized} />
+        <ResumeLink active={resumeActive} onNavigate={closeMenu} />
       </div>
 
       <button
@@ -136,7 +155,7 @@ export function HeaderNav({
           </nav>
           <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-6">
             <LanguageSwitcher />
-            <ResumeLink href={resumeHref} localized={resumeLocalized} />
+            <ResumeLink active={resumeActive} onNavigate={closeMenu} />
           </div>
         </div>
       </div>

@@ -1,7 +1,8 @@
 {
   "metadata": {
     "title": "Bruno Lucildo",
-    "description": "Desenvolvimento backend, liderança técnica e arquitetura de software."
+    "description": "Desenvolvimento backend, liderança técnica e arquitetura de software.",
+    "ogImageAlt": "Bruno Lucildo, Desenvolvedor Backend Sênior | Líder Técnico. Engenharia além do código."
   },
   "navigation": {
     "label": "Navegação principal",
@@ -10,7 +11,6 @@
     "closeMenu": "Fechar menu",
     "newTab": "(abre em uma nova aba)",
     "resume": "Currículo",
-    "resumeFallback": "Currículo (EN)",
     "items": {
       "home": "Início",
       "about": "Sobre",
@@ -174,7 +174,7 @@
       }
     },
     "captions": {
-      "reelix": "Telas da versão de desenvolvimento. A interface do app está em português. Dados e imagens de filmes e séries do TMDB; este produto não é endossado nem certificado pelo TMDB.",
+      "reelix": "Telas da versão de desenvolvimento. A interface do app está em português. Dados e imagens de filmes e séries do TMDB. Este produto usa o TMDB e as APIs do TMDB, mas não é endossado, certificado nem aprovado de outra forma pelo TMDB.",
       "fintalab": "Telas do protótipo conceitual estático. Todas as pessoas, clubes e números são fictícios."
     },
     "images": {
@@ -391,6 +391,59 @@
         "action": "Ver currículo",
         "actionFallback": "Ver currículo (EN)"
       }
+    }
+  },
+  "resume": {
+    "metadata": {
+      "title": "Currículo | Bruno Lucildo",
+      "description": "Veja ou baixe o currículo de Bruno Lucildo (PDF, em inglês): experiência profissional, formação, habilidades e idiomas."
+    },
+    "title": "Currículo",
+    "intro": "A versão formal da minha trajetória profissional, em um único documento. A página Experiência conta a mesma história com mais contexto.",
+    "actions": {
+      "view": "Ver currículo",
+      "download": "Baixar PDF"
+    },
+    "languageNotice": "O currículo está disponível apenas em inglês.",
+    "details": {
+      "format": "Formato",
+      "formatValue": "PDF",
+      "language": "Idioma do arquivo",
+      "updated": "Última atualização",
+      "size": "Tamanho"
+    },
+    "fileLanguage": {
+      "en": "Inglês",
+      "pt-BR": "Português"
+    },
+    "inside": {
+      "title": "O que o documento traz",
+      "items": {
+        "summary": {
+          "title": "Resumo",
+          "text": "um perfil da minha formação e do meu foco."
+        },
+        "experience": {
+          "title": "Experiência profissional",
+          "text": "cargos, períodos e responsabilidades."
+        },
+        "education": {
+          "title": "Formação",
+          "text": "graduação e pós-graduação."
+        },
+        "skills": {
+          "title": "Habilidades",
+          "text": "linguagens, frameworks, bancos de dados, mensageria e arquitetura."
+        },
+        "languages": {
+          "title": "Idiomas",
+          "text": "idiomas falados e nível de proficiência."
+        }
+      }
+    },
+    "links": {
+      "experience": "Ver experiência",
+      "contact": "Entrar em contato"
     }
   },
   "notFound": {

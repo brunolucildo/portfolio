@@ -500,7 +500,7 @@ test("a configuração tem os canais e o currículo esperados", () => {
     linkedin: linkedinUrl,
     github: githubUrl,
   });
-  expect(siteConfig.resume.en).toBe(resumeHref);
+  expect(siteConfig.resume.en.href).toBe(resumeHref);
   expect(existsSync(path.join(process.cwd(), "public", resumeHref))).toBe(true);
 });
 

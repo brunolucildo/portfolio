@@ -20,6 +20,7 @@ export const routing = defineRouting({
     "/ai-lab": "/ai-lab",
     "/ai-lab/[slug]": "/ai-lab/[slug]",
     "/contact": { en: "/contact", "pt-BR": "/contato" },
+    "/resume": { en: "/resume", "pt-BR": "/curriculo" },
   },
 });
 
