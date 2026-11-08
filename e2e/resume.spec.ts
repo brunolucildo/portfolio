@@ -465,13 +465,18 @@ test.describe("PDF do currículo", () => {
     expect(body.length).toBeLessThan(1024 * 1024);
   });
 
-  test("a página do currículo não é bloqueada para os buscadores", async ({
+  test("a página do currículo não é bloqueada além do resto do site", async ({
     request,
   }) => {
+    // Só o PDF tem regra própria de noindex; a página segue a regra do ambiente
+    // (em localhost, noindex em tudo; indexável em produção, SPEC-013).
+    const home = await request.get("/en");
     for (const target of ["/en/resume", "/pt-BR/curriculo"]) {
       const response = await request.get(target);
       expect(response.status()).toBe(200);
-      expect(response.headers()["x-robots-tag"] ?? "").not.toContain("noindex");
+      expect(response.headers()["x-robots-tag"]).toBe(
+        home.headers()["x-robots-tag"],
+      );
     }
   });
 });

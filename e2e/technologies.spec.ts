@@ -204,7 +204,7 @@ const pages: TechnologiesPage[] = [
     path: "/en/technologies",
     title: "Technologies | Bruno Lucildo",
     description:
-      "Technologies and engineering practices Bruno Lucildo works with, from .NET and PostgreSQL to RabbitMQ and AI, grouped by category and linked to where they were used.",
+      "Technologies and practices Bruno Lucildo works with, from .NET and PostgreSQL to RabbitMQ and AI, grouped by category and linked to where they were used.",
     openGraphLocale: "en_US",
     h1: "Technologies",
     intro:

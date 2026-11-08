@@ -75,6 +75,8 @@ const repositories: Record<Origin, string> = {
 
 type ExperimentText = {
   name: string;
+  /** Título curto, só para o `<title>` (SPEC-013). */
+  metaTitle: string;
   summary: string;
   type: string;
   state: string;
@@ -133,7 +135,7 @@ const pages: AiLabPage[] = [
     detailPath: (slug) => `/en/ai-lab/${slug}`,
     title: "AI Lab | Bruno Lucildo",
     description:
-      "Experiments in applied AI: retrieval-augmented answers, output validation with a judge model, consistency tests, prompt design, fine-tuning and test methods, with results and limitations.",
+      "Applied AI experiments by Bruno Lucildo: grounded answers, judge-model validation, consistency tests, prompts and fine-tuning, with results and limitations.",
     openGraphLocale: "en_US",
     h1: "AI Lab",
     headline: "Exploring the intelligence behind the code.",
@@ -172,6 +174,7 @@ const pages: AiLabPage[] = [
     experiments: {
       "rag-grounding": {
         name: "Grounded answers over reports (RAG)",
+        metaTitle: "Grounded answers over reports (RAG)",
         summary:
           "Answering questions about scouting reports using only retrieved excerpts, and showing how much of each answer can be traced back to them.",
         type: "Proof of concept",
@@ -186,6 +189,7 @@ const pages: AiLabPage[] = [
       },
       "output-validation": {
         name: "Validating model output with rules and a judge model",
+        metaTitle: "Judge-model output validation",
         summary:
           "Checking what a language model says with rules in code and a second model that has to quote the evidence.",
         type: "Proof of concept",
@@ -206,6 +210,7 @@ const pages: AiLabPage[] = [
       },
       "score-consistency": {
         name: "Median of three samples for stable scores",
+        metaTitle: "Median of three for stable scores",
         summary:
           "Testing whether answering with the median of three samples makes a model's scores stable.",
         type: "Study",
@@ -219,6 +224,7 @@ const pages: AiLabPage[] = [
       },
       "analyst-personas": {
         name: "Analyst personas built with prompts",
+        metaTitle: "Analyst personas built with prompts",
         summary:
           "Designing analyst personas with prompts, conversation history and simple input and output checks.",
         type: "Study",
@@ -229,6 +235,7 @@ const pages: AiLabPage[] = [
       },
       "approach-and-model-choice": {
         name: "Choosing an approach and a model",
+        metaTitle: "Choosing an approach and a model",
         summary:
           "Comparing rules, machine learning, language models and a hybrid design, then three models, to decide how to automate football performance analysis.",
         type: "Study",
@@ -242,6 +249,7 @@ const pages: AiLabPage[] = [
       },
       "prompt-test-framework": {
         name: "A test framework for prompts",
+        metaTitle: "A test framework for prompts",
         summary:
           "A method to test a prompt like software: fixed cases, repeated runs, scored criteria, failures traced to causes and a retest after each fix.",
         type: "Study",
@@ -255,6 +263,7 @@ const pages: AiLabPage[] = [
       },
       "lora-fine-tuning": {
         name: "Fine-tuning a small model to classify reviews (LoRA)",
+        metaTitle: "Fine-tuning a small model (LoRA)",
         summary:
           "Fine-tuning a 1.5-billion-parameter model with LoRA to classify short football performance reviews, and what the evaluation does and does not show.",
         type: "Study",
@@ -288,7 +297,7 @@ const pages: AiLabPage[] = [
     detailPath: (slug) => `/pt-BR/ai-lab/${slug}`,
     title: "AI Lab | Bruno Lucildo",
     description:
-      "Experimentos de IA aplicada: respostas com recuperação de informação, validação de saída com um modelo juiz, testes de consistência, desenho de prompts, ajuste fino e métodos de teste, com resultados e limitações.",
+      "Experimentos de IA aplicada: respostas fundamentadas, validação com modelo juiz, consistência, prompts e ajuste fino, com resultados e limitações.",
     openGraphLocale: "pt_BR",
     h1: "AI Lab",
     headline: "Explorando a inteligência por trás do código.",
@@ -327,6 +336,7 @@ const pages: AiLabPage[] = [
     experiments: {
       "rag-grounding": {
         name: "Respostas fundamentadas em relatórios (RAG)",
+        metaTitle: "Respostas fundamentadas (RAG)",
         summary:
           "Responder perguntas sobre relatórios de observação usando só os trechos recuperados, mostrando quanto de cada resposta pode ser rastreado até eles.",
         type: "Prova de conceito",
@@ -341,6 +351,7 @@ const pages: AiLabPage[] = [
       },
       "output-validation": {
         name: "Validação da saída do modelo com regras e um modelo juiz",
+        metaTitle: "Validação de saída com modelo juiz",
         summary:
           "Checar o que um modelo de linguagem diz com regras em código e um segundo modelo que precisa citar a evidência.",
         type: "Prova de conceito",
@@ -361,6 +372,7 @@ const pages: AiLabPage[] = [
       },
       "score-consistency": {
         name: "Mediana de três amostras para notas estáveis",
+        metaTitle: "Notas estáveis com mediana de três",
         summary:
           "Testar se responder com a mediana de três amostras torna estáveis as notas de um modelo.",
         type: "Estudo",
@@ -374,6 +386,7 @@ const pages: AiLabPage[] = [
       },
       "analyst-personas": {
         name: "Personas de analista construídas com prompts",
+        metaTitle: "Personas de analista com prompts",
         summary:
           "Desenhar personas de analista com prompts, histórico de conversa e checagens simples de entrada e saída.",
         type: "Estudo",
@@ -385,6 +398,7 @@ const pages: AiLabPage[] = [
       },
       "approach-and-model-choice": {
         name: "Escolha de abordagem e de modelo",
+        metaTitle: "Escolha de abordagem e de modelo",
         summary:
           "Comparar regras, aprendizado de máquina, modelos de linguagem e uma abordagem híbrida, e três modelos, para decidir como automatizar a análise de atletas.",
         type: "Estudo",
@@ -398,6 +412,7 @@ const pages: AiLabPage[] = [
       },
       "prompt-test-framework": {
         name: "Um framework de testes para prompts",
+        metaTitle: "Um framework de testes para prompts",
         summary:
           "Um método para testar um prompt como se testa software: casos fixos, execuções repetidas, critérios com nota, falhas ligadas a causas e reteste a cada correção.",
         type: "Estudo",
@@ -411,6 +426,7 @@ const pages: AiLabPage[] = [
       },
       "lora-fine-tuning": {
         name: "Ajuste fino de um modelo pequeno para classificar avaliações (LoRA)",
+        metaTitle: "Ajuste fino de um modelo (LoRA)",
         summary:
           "Ajustar um modelo de 1,5 bilhão de parâmetros com LoRA para classificar avaliações curtas de desempenho no futebol, e o que a avaliação mostra e não mostra.",
         type: "Estudo",
@@ -826,7 +842,7 @@ for (const lab of pages) {
           await page.goto(detailPath);
 
           await expect(page).toHaveTitle(
-            `${text.name} | AI Lab | Bruno Lucildo`,
+            `${text.metaTitle} | AI Lab | Bruno Lucildo`,
           );
           const description = await page
             .locator('meta[name="description"]')

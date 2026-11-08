@@ -26,7 +26,7 @@ O site é bilíngue (inglês como padrão e português do Brasil), estático e s
 | Links de contexto em Technologies (TECH-RF-10) e anterior/seguinte no AI Lab (AIL-RF-16) | Concluídos |
 | AI Lab: escolha de abordagem e de modelo, framework de testes e fine-tuning (SPEC-006 v0.5.0) | Concluídos |
 | Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience, Projects, Technologies, AI Lab, Contact, Internationalization, Resume, Layout global e Assets (imagens, ícone e compartilhamento) |
-| SEO final | Pendente |
+| SEO final (SPEC-013) | Implementado: `robots.txt`, `sitemap.xml` (34 páginas), guarda de indexação, JSON-LD e limites de título e descrição; falta o domínio para validar no Search Console e no Rich Results Test |
 | Hospedagem, domínio e analytics | Pendentes de decisão |
 
 O detalhamento está nas especificações em [`.specs/`](./.specs/).
@@ -77,7 +77,19 @@ Copie `.env.example` para `.env.local` se precisar definir valores locais.
 
 | Variável | Uso |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | URL pública do site, usada em canonical e Open Graph. Sem ela, o padrão é `http://localhost:3000`. |
+| `NEXT_PUBLIC_SITE_URL` | URL pública do site, usada em canonical, Open Graph, sitemap e dados estruturados. Só o domínio, sem caminho; a barra final é removida e um valor inválido derruba o build. Sem ela, o padrão é `http://localhost:3000`. |
+| `SITE_INDEXING` | Autoriza os buscadores. Só o valor `allow` libera, e exige `NEXT_PUBLIC_SITE_URL` com `https` fora de `localhost` (senão o build falha). Sem ela, o site fica bloqueado. |
+
+### Publicação e indexação
+
+O site nasce **bloqueado para buscadores**: sem `SITE_INDEXING=allow`, o `robots.txt` diz `Disallow: /` e toda resposta sai com `X-Robots-Tag: noindex, nofollow`. Isso protege previews e o ambiente local. Para publicar:
+
+1. No ambiente de produção, defina `NEXT_PUBLIC_SITE_URL` (ex.: `https://seu-dominio.dev`) e `SITE_INDEXING=allow` **antes do build**; as duas são lidas na compilação.
+2. Depois do deploy, confira `/robots.txt` (deve ter `Allow: /` e a linha `Sitemap:`), `/sitemap.xml` (34 URLs com o domínio certo) e a ausência do cabeçalho `X-Robots-Tag` em `/en`. O PDF do currículo mantém o seu `noindex`.
+3. Nos previews, deixe `SITE_INDEXING` sem valor.
+4. Com o domínio no ar: envie o sitemap no Google Search Console e valide a Home e o About no Rich Results Test (itens do QA final).
+
+O build avisa no log quando a indexação está desligada.
 
 ## Idiomas e rotas
 

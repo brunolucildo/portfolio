@@ -114,7 +114,7 @@ const pages: ExperiencePage[] = [
     path: "/en/experience",
     title: "Experience | Bruno Lucildo",
     description:
-      "Bruno Lucildo's career path from full-stack developer to backend technical lead: roles, responsibilities and results across more than ten years of enterprise software.",
+      "Bruno Lucildo's career from full-stack developer to backend technical lead: roles, responsibilities and results across 10+ years of enterprise software.",
     openGraphLocale: "en_US",
     h1: "Experience",
     labels: {
@@ -141,7 +141,7 @@ const pages: ExperiencePage[] = [
     path: "/pt-BR/experiencia",
     title: "Experiência | Bruno Lucildo",
     description:
-      "A trajetória profissional de Bruno Lucildo de desenvolvedor full stack a líder técnico backend: cargos, responsabilidades e resultados em mais de dez anos de software corporativo.",
+      "A trajetória de Bruno Lucildo de desenvolvedor full stack a líder técnico backend: cargos, responsabilidades e resultados em 10+ anos de software corporativo.",
     openGraphLocale: "pt_BR",
     h1: "Experiência",
     labels: {

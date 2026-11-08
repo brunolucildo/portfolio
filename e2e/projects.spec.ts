@@ -96,7 +96,7 @@ const pages: ProjectsPage[] = [
     path: "/en/projects",
     title: "Projects | Bruno Lucildo",
     description:
-      "Academic, personal and conceptual projects by Bruno Lucildo, each with its current state: AI-assisted football analysis, a movie and series tracking app and a performance-feedback product concept.",
+      "Projects by Bruno Lucildo and their current state: AI football analysis (academic), a movie and series tracking app (personal) and a product concept.",
     openGraphLocale: "en_US",
     h1: "Projects",
     labels: {
@@ -171,7 +171,7 @@ const pages: ProjectsPage[] = [
     },
     detailDescriptions: {
       football:
-        "An academic project that analyzes football athlete performance with AI, retrieval and layered answer verification: architecture, technical decisions and current state.",
+        "An academic project that analyzes football athlete performance with AI, retrieval and layered answer checks: architecture, decisions and current state.",
       reelix:
         "A personal movie and series tracking app with privacy-first sharing and spoiler control: architecture, technical decisions and current state.",
     },
@@ -181,7 +181,7 @@ const pages: ProjectsPage[] = [
     path: "/pt-BR/projetos",
     title: "Projetos | Bruno Lucildo",
     description:
-      "Projetos acadêmicos, pessoais e conceituais de Bruno Lucildo, cada um com seu estado atual: análise de futebol com IA, um aplicativo de acompanhamento de filmes e séries e um conceito de produto de retorno de desempenho.",
+      "Projetos de Bruno Lucildo e o estado atual de cada um: análise de futebol com IA (acadêmico), app de filmes e séries (pessoal) e um conceito de produto.",
     openGraphLocale: "pt_BR",
     h1: "Projetos",
     labels: {
@@ -256,9 +256,9 @@ const pages: ProjectsPage[] = [
     },
     detailDescriptions: {
       football:
-        "Um projeto acadêmico que analisa o desempenho de atletas de futebol com IA, recuperação de informações e verificação de respostas em camadas: arquitetura, decisões técnicas e estado atual.",
+        "Projeto acadêmico de análise de desempenho de atletas de futebol com IA, recuperação e checagem de respostas em camadas: arquitetura, decisões e estado atual.",
       reelix:
-        "Um aplicativo pessoal de acompanhamento de filmes e séries, com compartilhamento que prioriza a privacidade e controle de spoilers: arquitetura, decisões técnicas e estado atual.",
+        "Aplicativo de acompanhamento de filmes e séries, com compartilhamento que prioriza a privacidade e controle de spoilers: arquitetura, decisões e estado atual.",
     },
   },
 ];

@@ -89,14 +89,17 @@ function isAiLabExperimentNamespace(
   return namespace.startsWith(aiLabExperimentPrefix);
 }
 
-/** Título e descrição de um experimento: o resumo de uma frase vira a descrição. */
+/**
+ * Título e descrição de um experimento: o título curto (`metaTitle`, só para o
+ * `<title>`, até 60 caracteres no total) e o resumo de uma frase como descrição.
+ */
 async function aiLabExperimentTexts(
   locale: Locale,
   key: DetailExperiment["key"],
 ): Promise<{ title: string; description: string }> {
   const t = await getTranslations({ locale, namespace: "aiLab" });
   return {
-    title: `${t(`experiments.${key}.name`)} | ${t("title")} | ${siteConfig.name}`,
+    title: `${t(`experiments.${key}.metaTitle`)} | ${t("title")} | ${siteConfig.name}`,
     description: t(`experiments.${key}.summary`),
   };
 }
