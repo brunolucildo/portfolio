@@ -86,7 +86,7 @@ A seção Resume dá ao currículo em PDF uma página própria (`/resume`), com 
 
 # SPEC-010 — Global Layout and Navigation
 
-**Status:** Proposed. Refinada e movida para [`010-global-layout.md`](./010-global-layout.md).
+**Status:** In Review. Refinada, implementada e movida para [`010-global-layout.md`](./010-global-layout.md).
 
 O layout global reúne cabeçalho, navegação, seletor de idioma, rodapé e o atalho para o conteúdo. A SPEC formaliza o que já foi implementado, registra a auditoria em build de produção e fecha as lacunas encontradas (menu mobile, foco atrás do cabeçalho fixo, alvos de toque, estado ativo do botão Resume e link do currículo no rodapé). Os requisitos, os critérios de aceitação, a auditoria, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 

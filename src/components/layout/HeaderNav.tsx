@@ -16,15 +16,30 @@ function isActivePath(current: string, href: string): boolean {
     : current === href || current.startsWith(`${href}/`);
 }
 
-/** Botão secundário que leva à página do currículo (SPEC-009, RES-RF-07). */
-function ResumeLink({ active }: { active: boolean }) {
+/**
+ * Botão secundário que leva à página do currículo (SPEC-009, RES-RF-07). Na
+ * página do currículo, a borda passa para a cor primary (LAY-RF-04). O alvo de
+ * toque tem 44 px (LAY-RF-12); o `!` vence o `min-h-9` do tamanho `sm`.
+ */
+function ResumeLink({
+  active,
+  onNavigate,
+}: {
+  active: boolean;
+  onNavigate: () => void;
+}) {
   const t = useTranslations("navigation");
 
   return (
     <Link
       href="/resume"
       aria-current={active ? "page" : undefined}
-      className={buttonStyles({ variant: "secondary", size: "sm" })}
+      onClick={onNavigate}
+      className={buttonStyles({
+        variant: "secondary",
+        size: "sm",
+        className: cn("min-h-11!", active && "border-primary!"),
+      })}
     >
       {t("resume")}
     </Link>
@@ -39,6 +54,10 @@ export function HeaderNav() {
   const open = openPath === pathname;
   const buttonRef = useRef<HTMLButtonElement>(null);
 
+  // Fechar também ao acionar o link da página atual, que não muda a rota
+  // (LAY-RF-06).
+  const closeMenu = () => setOpenPath(null);
+
   useEffect(() => {
     if (!open) return;
 
@@ -49,8 +68,19 @@ export function HeaderNav() {
       }
     }
 
+    // Ao chegar à largura do desktop, o painel não faz mais sentido: fecha,
+    // para não reaparecer aberto ao voltar ao celular (LAY-RF-07).
+    const desktop = window.matchMedia("(min-width: 64rem)");
+    function onViewportChange(event: MediaQueryListEvent) {
+      if (event.matches) setOpenPath(null);
+    }
+
     document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+    desktop.addEventListener("change", onViewportChange);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      desktop.removeEventListener("change", onViewportChange);
+    };
   }, [open]);
 
   const resumeActive = isActivePath(pathname, "/resume");
@@ -63,6 +93,7 @@ export function HeaderNav() {
         <Link
           href={href}
           aria-current={active ? "page" : undefined}
+          onClick={closeMenu}
           className={cn(
             "inline-flex min-h-11 items-center text-small font-medium transition-colors duration-(--duration-fast) ease-standard",
             active
@@ -84,7 +115,7 @@ export function HeaderNav() {
 
       <div className="hidden items-center gap-4 lg:flex">
         <LanguageSwitcher />
-        <ResumeLink active={resumeActive} />
+        <ResumeLink active={resumeActive} onNavigate={closeMenu} />
       </div>
 
       <button
@@ -124,7 +155,7 @@ export function HeaderNav() {
           </nav>
           <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-6">
             <LanguageSwitcher />
-            <ResumeLink active={resumeActive} />
+            <ResumeLink active={resumeActive} onNavigate={closeMenu} />
           </div>
         </div>
       </div>

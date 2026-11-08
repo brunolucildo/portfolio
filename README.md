@@ -20,8 +20,8 @@ O site é bilíngue (inglês como padrão e português do Brasil), estático e s
 | Contact (SPEC-007) | Implementada, em revisão |
 | Internationalization (SPEC-008) | Implementada, em revisão |
 | Resume (SPEC-009) | Implementada, em revisão. PDF ajustado entregue (formação e autor); título do arquivo em branco, aceito |
-| Layout global (SPEC-010) | Especificada (Proposed); correções da auditoria ainda não implementadas |
-| Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience, Projects, Technologies, AI Lab, Contact, Internationalization e Resume |
+| Layout global (SPEC-010) | Implementada, em revisão |
+| Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience, Projects, Technologies, AI Lab, Contact, Internationalization, Resume e Layout global |
 | SEO final | Pendente |
 | Hospedagem, domínio e analytics | Pendentes de decisão |
 

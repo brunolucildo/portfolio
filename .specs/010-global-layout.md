@@ -7,8 +7,8 @@
 | Nome | Global Layout and Navigation |
 | Identificador | SPEC-010 |
 | Slug | `010-global-layout` |
-| Versão | 0.1.0 |
-| Status | Proposed (refinada em 2026-11-08; aguarda o OK do Bruno para implementar as correções) |
+| Versão | 0.2.0 |
+| Status | In Review (implementada em 2026-11-08; aguardando a revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-010 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -167,7 +167,7 @@ Feita em um build de produção, com Playwright (Chromium), nos dois idiomas.
 
 | ID | Pergunta | Bloqueia? | Default adotado se não houver resposta |
 |---|---|---|---|
-| Q1 | Posso implementar as correções da seção 7 e criar `e2e/layout.spec.ts`? | **Sim** (implementação) | Nenhum: implementação só depois do OK. |
+| Q1 | Posso implementar as correções da seção 7 e criar `e2e/layout.spec.ts`? | Resolvida em 2026-11-08: autorizado pelo Bruno | Nenhum: implementação só depois do OK. |
 | Q2 | O menu mobile deve fechar também ao clicar fora dele? | Não | Não fecha (premissa 3). |
 | Q3 | O botão Resume e o nome do site passam a 44 px de altura (hoje 36 px e 26 px)? | Não | Sim (LAY-RF-12), como as demais páginas. |
 | Q4 | O fechamento do menu ao passar de 1024 px (LAY-RF-07) entra na v1? | Não | Entra, como Should. |
@@ -189,7 +189,51 @@ Feita em um build de produção, com Playwright (Chromium), nos dois idiomas.
 | 2026-11-08 | O rodapé ganha um link para o currículo (`/resume`), depois de Contact, na lista de navegação. | Bruno |
 | 2026-11-08 | O botão Resume mostra o estado ativo com a borda na cor primary, além do `aria-current`. | Bruno |
 | 2026-11-08 | A próxima etapa depois da SPEC-009 é o refinamento da SPEC-010 (layout e navegação já implementados). | Bruno |
+| 2026-11-08 | Implementação das correções da seção 7 e de `e2e/layout.spec.ts` autorizada (Q1). Q2 a Q4 seguem com os defaults da seção 11. | Bruno |
 
 ## Refinamento
 
+- 2026-11-08, v0.2.0: correções implementadas e `e2e/layout.spec.ts` criado; a seção 15 registra a entrega e a verificação.
 - 2026-11-08, v0.1.0: SPEC criada a partir do rascunho de `FEATURES.md` (Draft v0.1), do `DESIGN.md` (10), do `DESIGN_SYSTEM.md` (4.2), do `QA.md`, do código dos componentes de layout e de uma auditoria em build de produção (cabeçalho em 1024 a 1280 px, menu mobile, atalho, foco sob o cabeçalho fixo, landmarks, contraste e alvos de toque). Rascunho original preservado: estrutura compartilhada, navegação entre páginas, localização atual, troca de idioma, adaptação ao mobile, acesso ao currículo e links de contato no rodapé; os requisitos não funcionais (HTML semântico, teclado, responsividade, contraste, foco, sem rolagem horizontal, carregamento) viraram LAY-RNF-01 a 06 com medições. Seis lacunas e duas decisões do Bruno registradas; aguardando o OK (Q1).
+
+## 15. Implementação e verificação
+
+Implementada na branch `feat/layout` (a partir da `docs/spec-009-resume`) em 2026-11-08, depois da autorização (Q1).
+
+- Novo: `e2e/layout.spec.ts` (50 testes, 25 por idioma).
+- Alterados: `src/components/layout/HeaderNav.tsx` (menu que fecha em qualquer link e ao chegar ao desktop, borda ativa e 44 px no Resume), `Header.tsx` (alvo de 44 px no nome do site), `Footer.tsx` (link do currículo), `src/app/globals.css` (`scroll-padding-top`) e `README.md`.
+
+Decisões de implementação:
+
+- O helper `cn` do projeto só junta classes e não resolve conflitos do Tailwind, então o botão Resume usa o modificador `!` (`min-h-11!` e `border-primary!`), como o estilo `text` já faz com `px-0!`. O botão continua no tamanho `sm`, com o mesmo texto e o mesmo preenchimento.
+- `closeMenu` fecha o painel em qualquer link (itens, Resume), inclusive o da página atual, que não muda a rota. O fechamento ao passar de 1024 px usa um listener de `matchMedia` que só existe enquanto o menu está aberto.
+- `scroll-padding-top` de 5 rem em `html` vale também para âncoras e para o atalho do conteúdo.
+- O link do currículo no rodapé reutiliza `navigation.resume` e fica depois de Contact; o currículo continua fora de `mainNavigation`.
+
+Divergências em relação à SPEC: nenhuma. Em LAY-CA-12, o teste cobre a Home, Contact e o currículo (a SPEC pedia uma página interna); em LAY-CA-03, as páginas filhas testadas são `/projects/reelix` e `/ai-lab/rag-grounding`.
+
+| Critério | Resultado | Evidência |
+|---|---|---|
+| LAY-CA-01 | Atendido | As oito rotas fixas, nos dois idiomas, e a 404: `lang`, um `banner`, um `main#main`, um `contentinfo`, e o primeiro `Tab` no atalho. |
+| LAY-CA-02 | Atendido | Nome com link para a Home, sete itens na ordem e com as rotas do idioma, lista de idioma e Resume. |
+| LAY-CA-03 | Atendido | Só o item da seção tem `aria-current="page"` nas sete rotas e nas duas páginas filhas. |
+| LAY-CA-04 | Atendido | Borda `rgb(183, 243, 107)` e `aria-current` no currículo; `rgb(37, 43, 38)` e sem `aria-current` em About. |
+| LAY-CA-05 | Atendido | `aria-expanded`, `aria-controls`, rótulo "Open menu"/"Close menu" (pt-BR: "Abrir menu"/"Fechar menu") e painel com sete itens, dois idiomas e Resume. |
+| LAY-CA-06 | Atendido | Fecha ao acionar o link da página atual, outro link, o Resume (também já no currículo) e o idioma; `Escape` devolve o foco ao botão. |
+| LAY-CA-07 | Atendido | Aberto a 375 px, a 1280 px e de volta a 375 px: painel fechado. |
+| LAY-CA-08 | Atendido | Nome, ano corrente, sete itens e o currículo por último, e Email, LinkedIn e GitHub. |
+| LAY-CA-09 | Atendido | Atalho visível com o foco; `Enter` leva o foco a `main`. |
+| LAY-CA-10 | Atendido | `Tab` e `Shift+Tab` por 70 paradas em `/projects` (1440 × 600 px): nenhum elemento fora do cabeçalho com o topo atrás dele. |
+| LAY-CA-11 | Atendido | Todos os links e botões do cabeçalho e do rodapé, a 1440 e a 375 px (menu aberto), com 44 px ou mais e contorno de foco. |
+| LAY-CA-12 | Atendido | Sem rolagem horizontal nem sobreposição em 360, 390, 768, 1024, 1100, 1366, 1440 e 1920 px, nos dois idiomas. |
+| LAY-CA-13 | Atendido | Sem expressões proibidas nem "(EN)" no cabeçalho e no rodapé. |
+| LAY-CA-14 | Atendido | `tsc --noEmit` sem erros e a suíte E2E completa com 676 testes passando. |
+
+Verificação adicional:
+
+- Mutação: cinco defeitos de propósito (sem `scroll-padding-top`, link do menu sem `onClick`, nome do site sem 44 px, rodapé sem o currículo e `matchMedia` apontando para uma largura inalcançável) derrubaram 10 testes, ao menos um por correção. Arquivos restaurados e suíte completa verde depois.
+- Navegador: botão Resume com a borda verde-limão em `/en/resume` conferido em produção, no servidor da porta 3200 (já encerrado).
+- Erros do próprio teste, corrigidos na primeira rodada: rótulo da Home em pt-BR ("Início"), slug do AI Lab, lista de paradas do teclado e a regra do Chromium de só mostrar `:focus-visible` em foco programático depois de interação por teclado.
+- Biome passa nos arquivos novos e alterados.
+
+Não verificado: leitores de tela reais, o contraste com ferramenta (os valores vêm dos tokens), Firefox e Safari (os testes rodam só no Chromium) e o menu em um aparelho com toque.
