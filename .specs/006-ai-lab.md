@@ -7,8 +7,8 @@
 | Nome | AI Lab |
 | Identificador | SPEC-006 |
 | Slug | `006-ai-lab` |
-| Versão | 0.4.0 |
-| Status | Done em 2026-11-08, por decisão do Bruno; os itens não verificados seguem para o QA final (antes: In Review, textos aprovados e implementada em 2026-11-08; aguardando revisão do usuário e do PR; material adicional da seção 7.6 segue em aberto) |
+| Versão | 0.5.0 |
+| Status | Done em 2026-11-08 (v0.5.0: três experimentos da pós entregues, com os textos da seção 7.7 aprovados pelo Bruno; ver seção 16) |
 | Data | 2026-11-08 |
 | Origem | SPEC-006 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -42,7 +42,7 @@ O AI Lab é a seção do portfólio dedicada a experimentos, estudos e provas de
 
 - Blog, artigos, newsletter ou qualquer fluxo editorial recorrente.
 - Demonstração ao vivo, chat embutido ou qualquer chamada de modelo a partir do site (nenhuma chave de API, nenhum backend).
-- Experimentos sem registro público (por exemplo, trabalho em ambiente profissional ou notas privadas).
+- Experimentos sem registro público (por exemplo, trabalho em ambiente profissional ou notas privadas). **Exceção da v0.5.0:** os três experimentos da seção 7.7, por decisão do Bruno, com a origem declarada no texto e sem link para repositório.
 - Resultados de trabalho corporativo, nome da empresa, nome do curso e da instituição da pós-graduação.
 - Nomes de atletas, trechos ou dados dos relatórios usados no Football Stat Analytics (os PDFs não são públicos).
 - Percentuais, gráficos de desempenho e rankings de modelos. Os números entram como contagens, com amostra e ressalva.
@@ -70,6 +70,9 @@ O AI Lab é a seção do portfólio dedicada a experimentos, estudos e provas de
 | AIL-RF-14 | Must | O Language Switcher de uma página de detalhe leva ao mesmo experimento no outro idioma. |
 | AIL-RF-15 | Must | Nomes de tecnologia, de modelo e de comandos permanecem na grafia original nos dois idiomas; só os rótulos, os títulos de seção e os textos corridos são traduzidos. |
 | AIL-RF-16 | Should (entregue em 2026-11-08, v0.4.0) | A página de detalhe oferece navegação para o experimento anterior e o seguinte. |
+| AIL-RF-17 | Must | A lista tem oito cards, na ordem: os quatro experimentos atuais, os três da seção 7.7 e o card "Em planejamento". Os sete experimentos com detalhe têm página em `/ai-lab/[slug]` com os mesmos seis campos de AIL-RF-04 (v0.5.0). |
+| AIL-RF-18 | Must | Os três experimentos da seção 7.7 seguem as regras de honestidade da seção 7.7: o fine-tuning declara que as contagens vêm dos dados de treino; o framework de testes não publica resultado numérico; a escolha de modelo não publica notas, médias nem ranking (v0.5.0). |
+| AIL-RF-19 | Must | Experimento sem repositório público (os três da seção 7.7) não mostra "Parte de" nem "Repositório", não lista tecnologias que não existam em Technologies e não cita o nome do curso nem da instituição (v0.5.0). |
 
 ## 5. Requisitos não funcionais
 
@@ -234,7 +237,69 @@ Em 2026-11-08 o Bruno indicou os documentos que montou nas pastas `Pos/Modulo 1`
 | Framework de testes de prompt (10 casos, 3 execuções, prompt V1 para V2) | M2D4 | Engenharia de prompts; avaliação | O método é sólido e reaproveitável. Mas a tabela de execuções é descrita como "cenário de teste controlado, utilizado para demonstrar a identificação de inconsistências", e não se sabe se as 30 execuções foram reais. | Q7 |
 | Escolha de abordagem (regras, ML, LLM, híbrida) e de modelo | Matriz Comparativa e Benchmark Resumido (M1) | Avaliação de modelos | São notas de 1 a 5 e níveis qualitativos, sem método de medição descrito. Publicar um ranking de modelos pareceria resultado comprovado e contraria a seção 3.2. | Q8 |
 
-Se o Bruno aprovar algum candidato, ele entra por nova versão desta SPEC (slug, tipo, estado, textos en e pt-BR e ressalvas), e os números do fine-tuning seriam convertidos em contagens "X de Y", nunca em percentuais (AIL-RF-07).
+**Decisão de 2026-11-08 (Q6 a Q8):** os três candidatos entram pela v0.5.0, seção 7.7, com os números do fine-tuning em contagens "X de Y", nunca em percentuais (AIL-RF-07).
+
+### 7.7. Experimentos da pós (v0.5.0, textos aprovados em 2026-11-08)
+
+O Bruno decidiu em 2026-11-08 (Q6 a Q8) publicar três itens dos módulos da pós. Os textos abaixo usam só o que está nos documentos que ele montou (lidos de novo em 2026-11-08: `M3D4`, o notebook de fine-tuning, `M2D4`, a Matriz Comparativa e o Benchmark Resumido) e foram aprovados pelo Bruno em 2026-11-08 (Q9). Os documentos não são públicos e o notebook não está em repositório: por isso nenhum dos três mostra "Parte de" nem "Repositório" (Q11).
+
+| Slug | Nome (`en`) | Nome (`pt-BR`) | Tipo | Estado | Modelo | Tecnologias | Projeto de origem |
+|---|---|---|---|---|---|---|---|
+| `approach-and-model-choice` | Choosing an approach and a model | Escolha de abordagem e de modelo | Study | Concluded | não definido | nenhuma | nenhum |
+| `prompt-test-framework` | A test framework for prompts | Um framework de testes para prompts | Study | Concluded | não definido | nenhuma | nenhum |
+| `lora-fine-tuning` | Fine-tuning a small model to classify reviews (LoRA) | Ajuste fino de um modelo pequeno para classificar avaliações (LoRA) | Study | Concluded (Q10) | Qwen2.5-1.5B-Instruct, adaptador LoRA | nenhuma (Q12) | nenhum |
+
+Ordem na lista: depois dos quatro experimentos atuais e antes do card "Em planejamento", na ordem dos módulos (1, 2 e 3). Os números do experimento 7 são todos contagens "X de Y" (AIL-RF-07), e os dos experimentos 5 e 6 são parâmetros do método (dez critérios, escala de 1 a 5, dez casos, três execuções), não resultados.
+
+**Regras de honestidade deste bloco**
+
+- **Fine-tuning:** as contagens foram medidas nos mesmos 75 exemplos usados no treino (no notebook, `test_df = df` e `train_dataset` vêm do mesmo `reviews.parquet`), e o texto diz isso. O relatório do exercício afirma uma divisão estratificada com 20% para teste, o que o notebook salvo não mostra; a frase da seção Limitações expõe essa diferença e é a mais sensível do bloco (Q9).
+- **Framework de testes:** só o método. As 30 execuções da tabela do documento são "um cenário de teste controlado, utilizado para demonstrar a identificação de inconsistências"; nenhum resultado, falha encontrada nem "reteste corrigido" é publicado.
+- **Escolha de abordagem e de modelo:** a decisão e a justificativa, sem notas por modelo, sem médias e sem ordem de colocação (a seção 3.2 proíbe ranking de modelos). A comparação é do planejamento e os experimentos reais rodam no `gpt-4o-mini`; o texto declara isso (Q14).
+- Nenhum dos três cita o nome do curso nem da instituição, e nenhum usa nome de atleta nem trecho de relatório.
+
+**Experimento 5: Choosing an approach and a model / Escolha de abordagem e de modelo**
+
+| Campo | en | pt-BR |
+|---|---|---|
+| Resumo | Comparing rules, machine learning, language models and a hybrid design, then three models, to decide how to automate football performance analysis. | Comparar regras, aprendizado de máquina, modelos de linguagem e uma abordagem híbrida, e três modelos, para decidir como automatizar a análise de atletas. |
+| Objetivo | Decide, before building anything, which kind of technology fits each part of a football performance analysis, and which language model to start with. | Decidir, antes de construir qualquer coisa, que tipo de tecnologia serve a cada parte de uma análise de desempenho no futebol e com qual modelo de linguagem começar. |
+| Problema | Every option has strengths and costs: fixed rules are predictable but rigid, language models read free text well but can be inconsistent or wrong, and cost and delay differ between models. Choosing by habit or by hype leaves those trade-offs unrecorded. | Cada opção tem forças e custos: regras fixas são previsíveis, mas rígidas; modelos de linguagem leem texto livre bem, mas podem ser inconsistentes ou errar; e custo e latência variam entre modelos. Escolher por hábito ou por moda deixa essas trocas sem registro. |
+| Abordagem | I compared four approaches (deterministic rules, machine learning, a language model and a hybrid) across ten criteria, such as flexibility, consistency, ease of validation, operating cost and risk of incorrect analyses. Then I compared three language models (GPT-4o, Claude Sonnet and Llama 3 70B) on quality, consistency, latency, cost and fit for the case. Both comparisons use qualitative levels and 1-to-5 scores that I assigned in a planning exercise. | Comparei quatro abordagens (regras determinísticas, aprendizado de máquina, um modelo de linguagem e uma abordagem híbrida) em dez critérios, como flexibilidade, consistência, facilidade de validação, custo operacional e risco de análises incorretas. Depois comparei três modelos de linguagem (GPT-4o, Claude Sonnet e Llama 3 70B) em qualidade, consistência, latência, custo e adequação ao caso. As duas comparações usam níveis qualitativos e notas de 1 a 5 que eu atribuí em um exercício de planejamento. |
+| Resultados | A decision, not a measurement: a hybrid design, with rules for calculations and objective criteria, machine learning where classification is needed and a language model to interpret and write analyses, always behind output validation and human review for critical cases. For the pilot the model chosen was Claude Sonnet, for its balance of quality, consistency and moderate cost. No scores are published here, because they were judgments, not measurements. | Uma decisão, não uma medição: uma abordagem híbrida, com regras para cálculos e critérios objetivos, aprendizado de máquina onde houver classificação e um modelo de linguagem para interpretar e escrever análises, sempre com validação das saídas e revisão humana nos casos críticos. Para o piloto, o modelo escolhido foi o Claude Sonnet, pelo equilíbrio entre qualidade, consistência e custo moderado. Nenhuma nota é publicada aqui, porque eram juízos, e não medições. |
+| Limitações | The levels and scores are qualitative and have no stated measurement method, so they must not be read as a model ranking. The comparison was made at planning time, before the experiments on this page existed: those run on gpt-4o-mini, not on the model chosen for the pilot, and the scores were never checked against them. Cost and latency depend on the provider, the date and the infrastructure. | Os níveis e as notas são qualitativos e não têm método de medição declarado, então não devem ser lidos como um ranking de modelos. A comparação foi feita no planejamento, antes de os experimentos desta página existirem: eles rodam no gpt-4o-mini, e não no modelo escolhido para o piloto, e as notas nunca foram conferidas contra eles. Custo e latência dependem do provedor, da data e da infraestrutura. |
+| Aprendizados | Writing the trade-offs down makes the choice open to discussion. The experiment on validating model output is one way of applying the hybrid idea: rules and a verifier around the model, because the model alone does not guarantee consistency. | Escrever as trocas torna a escolha discutível. O experimento de validação da saída é uma forma de aplicar a ideia híbrida: regras e um verificador em volta do modelo, porque só o modelo não garante consistência. |
+
+**Experimento 6: A test framework for prompts / Um framework de testes para prompts**
+
+| Campo | en | pt-BR |
+|---|---|---|
+| Resumo | A method to test a prompt like software: fixed cases, repeated runs, scored criteria, failures traced to causes and a retest after each fix. | Um método para testar um prompt como se testa software: casos fixos, execuções repetidas, critérios com nota, falhas ligadas a causas e reteste a cada correção. |
+| Objetivo | Define a repeatable way to judge whether a prompt that turns athlete data into scored attributes is accurate, consistent and honest when data is missing. | Definir uma forma repetível de julgar se um prompt que transforma dados de atletas em atributos com nota é preciso, consistente e honesto quando faltam dados. |
+| Problema | A response that merely looks right is not evidence. The same prompt can invent a statistic, overvalue volume over efficiency or give different answers to the same case, and an edit to the prompt can fix one problem and cause another. | Uma resposta que apenas parece certa não é evidência. O mesmo prompt pode inventar uma estatística, supervalorizar volume sobre eficiência ou dar respostas diferentes ao mesmo caso, e um ajuste no prompt pode resolver um problema e causar outro. |
+| Abordagem | The framework defines eight criteria, each scored from 1 to 5: accuracy, adherence to the data, consistency, completeness, justification, hallucination, score coherence and format. It uses ten test cases covering simple, complex, ambiguous, extreme and reliability situations (for example, many shots with low efficiency, missing data, contradictory indicators and a request for information that was never provided), each meant to run three times with the same input. Failures are linked to a hypothesis about the prompt, the prompt is rewritten as explicit, checkable rules, and the same cases run again. The cycle is: test, find failures, analyze causes, fix the prompt, retest and validate. | O framework define oito critérios, cada um com nota de 1 a 5: precisão, aderência aos dados, consistência, completude, justificativa, alucinação, coerência dos scores e formato. Usa dez casos de teste que cobrem situações simples, complexas, ambíguas, extremas e de confiabilidade (por exemplo, muitas finalizações com baixa eficiência, dados ausentes, indicadores contraditórios e um pedido de informação que nunca foi fornecida), cada um pensado para rodar três vezes com a mesma entrada. As falhas são ligadas a uma hipótese sobre o prompt, o prompt é reescrito como regras explícitas e verificáveis, e os mesmos casos rodam de novo. O ciclo é: testar, identificar falhas, analisar causas, corrigir o prompt, retestar e validar. |
+| Resultados | No results are published for this experiment. The tables in the original document are an illustrative scenario, written to show how failures would be identified and traced, not a record of measured runs. | Nenhum resultado é publicado neste experimento. As tabelas do documento original são um cenário ilustrativo, escrito para mostrar como as falhas seriam identificadas e rastreadas, e não o registro de execuções medidas. |
+| Limitações | It is a method, not a measurement: there is no published evidence about a real prompt. Ten cases with three runs each are a small sample, the 1-to-5 scores are assigned by a person, and a clean retest does not guarantee that new errors will not appear, so the cycle has to be repeated whenever the prompt, the model or the indicators change. | É um método, não uma medição: não há evidência publicada sobre um prompt real. Dez casos com três execuções cada são uma amostra pequena, as notas de 1 a 5 são atribuídas por uma pessoa, e um reteste sem falhas não garante que novos erros não vão aparecer, então o ciclo precisa ser repetido sempre que o prompt, o modelo ou os indicadores mudarem. |
+| Aprendizados | Turning vague instructions into rules that can be checked is what makes a fix testable. The framework puts missing data and unanswerable requests among the cases because that is where a model is most tempted to invent something. | Transformar instruções vagas em regras que podem ser verificadas é o que torna uma correção testável. O framework põe dados ausentes e pedidos sem resposta entre os casos porque é aí que o modelo mais se sente tentado a inventar. |
+
+**Experimento 7: Fine-tuning a small model to classify reviews (LoRA) / Ajuste fino de um modelo pequeno para classificar avaliações (LoRA)**
+
+| Campo | en | pt-BR |
+|---|---|---|
+| Resumo | Fine-tuning a 1.5-billion-parameter model with LoRA to classify short football performance reviews, and what the evaluation does and does not show. | Ajustar um modelo de 1,5 bilhão de parâmetros com LoRA para classificar avaliações curtas de desempenho no futebol, e o que a avaliação mostra e não mostra. |
+| Objetivo | Find out whether a LoRA adapter makes a small open model better at labelling a performance review as positive, neutral or negative, and at answering in a format a program can read. | Descobrir se um adaptador LoRA deixa um modelo aberto e pequeno melhor em rotular uma avaliação de desempenho como positiva, neutra ou negativa, e em responder no formato que um programa consegue ler. |
+| Problema | Small models often ignore the required answer format or lean toward the wrong label, and classifying reviews by hand does not scale. Fine-tuning is a candidate fix, but only a fair evaluation can say whether it helps. | Modelos pequenos costumam ignorar o formato de resposta exigido ou pender para o rótulo errado, e classificar avaliações à mão não escala. O ajuste fino é uma correção candidata, mas só uma avaliação justa diz se ele ajuda. |
+| Abordagem | The base model, Qwen2.5-1.5B-Instruct, was loaded with 4-bit quantization on a Colab T4 GPU and trained with a LoRA adapter (rank 16, alpha 32, on the attention query and value projections) for three epochs, with a system instruction and a JSON answer holding a single sentiment field. The training set was one file of 75 short reviews, 25 per class. The comparison switches the adapter off and on over the same model, with greedy decoding, and counts correct labels, invalid answers and a confusion matrix. | O modelo-base, Qwen2.5-1.5B-Instruct, foi carregado com quantização de 4 bits em uma GPU T4 do Colab e treinado com um adaptador LoRA (posto 16, alfa 32, nas projeções de consulta e de valor da atenção) por três épocas, com uma instrução de sistema e uma resposta em JSON com um único campo de sentimento. O conjunto de treino era um arquivo de 75 avaliações curtas, 25 por classe. A comparação desliga e liga o adaptador sobre o mesmo modelo, com decodificação gulosa, e conta rótulos corretos, respostas inválidas e uma matriz de confusão. |
+| Resultados | On the same 75 reviews used for training, the model without the adapter labelled 55 correctly and the adapted model 63. Invalid answers fell from 13 of 75 to 1 of 75. Negative reviews found rose from 14 of 25 to 22 of 25, and positive reviews from 23 of 25 to 25 of 25, while neutral reviews found fell from 18 of 25 to 16 of 25 and neutral reviews labelled positive grew from 5 of 25 to 9 of 25. Because these reviews were also the training data, the counts show what the adapter learned, not how it would perform on new reviews. | Nas mesmas 75 avaliações usadas no treino, o modelo sem o adaptador rotulou 55 corretamente e o modelo ajustado, 63. As respostas inválidas caíram de 13 de 75 para 1 de 75. As avaliações negativas encontradas subiram de 14 de 25 para 22 de 25, e as positivas, de 23 de 25 para 25 de 25, enquanto as neutras encontradas caíram de 18 de 25 para 16 de 25, e as neutras rotuladas como positivas subiram de 5 de 25 para 9 de 25. Como essas avaliações também eram os dados de treino, as contagens mostram o que o adaptador aprendeu, não como ele se sairia com avaliações novas. |
+| Limitações | There is no held-out test set. The write-up of the exercise describes a stratified split with one fifth of the data held out, but the notebook I kept evaluates the whole file it trained on, so I treat every count above as measured on training data and as no evidence of generalization. 75 reviews, one run and one seed are a very small sample, with no confidence interval. Label quality depends on how clearly positive, neutral and negative were defined, and ambiguous examples hurt both training and evaluation. One answer from the adapted model was still invalid, and neutral descriptions of facts (a yellow card, having started the match) drifted toward positive. It is not ready for unattended use. | Não há conjunto de teste separado. O relatório do exercício descreve uma divisão estratificada com um quinto dos dados reservado, mas o notebook que guardei avalia o arquivo inteiro com que treinou, então trato todas as contagens acima como medidas nos dados de treino e não como evidência de generalização. 75 avaliações, uma execução e uma semente são uma amostra muito pequena, sem intervalo de confiança. A qualidade dos rótulos depende de quão claramente positivo, neutro e negativo foram definidos, e exemplos ambíguos atrapalham o treino e a avaliação. Uma resposta do modelo ajustado ainda saiu inválida, e descrições neutras de fatos (um cartão amarelo, ter sido titular) deslizaram para positivo. Não está pronto para uso sem supervisão. |
+| Aprendizados | A higher count is not evidence until the test data is kept apart from training: here the same file feeds both, so the table cannot say whether the adapter generalizes. Counting format failures separately from labelling errors, and looking at which examples drifted, taught more than the headline number. Next time I would split the data first, freeze the test set and repeat with other seeds. | Um número maior não é evidência enquanto os dados de teste não ficam separados do treino: aqui o mesmo arquivo alimenta os dois, e a tabela não consegue dizer se o adaptador generaliza. Contar as falhas de formato separadamente dos erros de rótulo, e olhar quais exemplos deslizaram, ensinou mais do que o número de destaque. Da próxima vez eu dividiria os dados primeiro, congelaria o conjunto de teste e repetiria com outras sementes. |
+
+**Lista e SEO (mudanças da v0.5.0, a aprovar junto com a Q9)**
+
+| Item | en | pt-BR |
+|---|---|---|
+| Lista, descrição (SEO) | Experiments in applied AI: retrieval-augmented answers, output validation with a judge model, consistency tests, prompt design, fine-tuning and test methods, with results and limitations. | Experimentos de IA aplicada: respostas com recuperação de informação, validação de saída com um modelo juiz, testes de consistência, desenho de prompts, ajuste fino e métodos de teste, com resultados e limitações. |
+| Detalhe, descrição (SEO) | O resumo de uma frase de cada experimento acima. | O mesmo, em português. |
 
 ## 8. Critérios de aceitação
 
@@ -254,6 +319,10 @@ Se o Bruno aprovar algum candidato, ele entra por nova versão desta SPEC (slug,
 | AIL-CA-12 | **Given** qualquer página do AI Lab, **when** os metadados são lidos, **then** há título, descrição, canonical, `hreflang` e Open Graph únicos por idioma, e as rotas estão no sitemap. |
 | AIL-CA-14 | **Given** cada página de detalhe, **when** a navegação é lida, **then** há um `nav` com o experimento anterior e o seguinte na ordem da lista (só um dos dois nas pontas), com nome acessível, alvo de 44 px, foco visível e destino no mesmo idioma. (Should.) |
 | AIL-CA-13 | **Given** o repositório, **when** `pnpm typecheck`, `pnpm check` e `pnpm test:e2e` rodam, **then** os três passam, e `e2e/ai-lab.spec.ts` cobre os critérios acima. |
+| AIL-CA-15 | **Given** `/en/ai-lab` e `/pt-BR/ai-lab`, **when** a lista é aberta, **then** há oito cards, os sete com detalhe levam a `/ai-lab/<slug>` no mesmo idioma e o card "Em planejamento" continua sem link. (v0.5.0) |
+| AIL-CA-16 | **Given** cada um dos três novos detalhes, nos dois idiomas, **when** a página é aberta, **then** há o `h1`, a linha de fatos e os seis `h2` de AIL-RF-04, sem "Parte de", sem "Repositório" e sem `%`. (v0.5.0) |
+| AIL-CA-17 | **Given** `lora-fine-tuning`, **when** Resultados e Limitações são lidos, **then** todo resultado é uma contagem "X de Y", o texto diz que os dados de teste são os de treino e não há a palavra "generaliza" afirmada como resultado; **given** `prompt-test-framework`, **then** a seção Resultados diz que não há resultados publicados; **given** `approach-and-model-choice`, **then** nenhuma nota de 1 a 5 nem média de modelo aparece. (v0.5.0) |
+| AIL-CA-18 | **Given** a navegação anterior/seguinte (AIL-CA-14), **when** os sete detalhes são percorridos, **then** a ordem é a da lista e só as pontas têm um único link. (v0.5.0) |
 
 ## 9. Dependências
 
@@ -288,6 +357,12 @@ Se o Bruno aprovar algum candidato, ele entra por nova versão desta SPEC (slug,
 | Q6 | Fine-tuning (seção 7.6): publicar como estudo com enquadramento honesto (resultados medidos nos próprios dados de treino, e a falha de avaliação como aprendizado), refazer no Colab com separação treino/teste real e publicar os números válidos, ou deixar fora da v1? O PDF também precisa ser corrigido, se for entregue de novo. | Não (os outros quatro não dependem) | Fora da v1. **Decidido em 2026-11-08 (Bruno): publicar com enquadramento honesto**, dizendo que os números vêm dos dados de treino e que a falha de avaliação foi o aprendizado. Exige nova rodada de textos (v0.4.0). |
 | Q7 | As 30 execuções do framework de testes (M2D4) foram reais ou ilustrativas? Se ilustrativas, publico só o método. | Não | Só o método, sem resultados, se o candidato entrar. **Decidido em 2026-11-08 (Bruno): as 30 execuções foram ilustrativas; entra só o método, sem resultados numéricos.** |
 | Q8 | A escolha de abordagem e de modelo do Módulo 1 entra em algum formato? | Não | Fora da v1. **Decidido em 2026-11-08 (Bruno): entra como estudo**, com texto novo para aprovação (v0.4.0). |
+| Q9 | Os textos da seção 7.7 (os três experimentos e a descrição de SEO da lista), em inglês e português, podem ser publicados? Em especial a frase da seção Limitações do fine-tuning, que expõe a diferença entre o relatório e o notebook. | Resolvida em 2026-11-08: aprovados como estão pelo Bruno, inclusive essa frase | Nenhum: implementação só depois da aprovação. |
+| Q10 | O estado do fine-tuning é "Concluído" (a pergunta do exercício foi respondida só nos dados de treino) ou prefere outro (por exemplo, "Em desenvolvimento", se for refazer com treino e teste separados)? | Não | "Concluído", com a ressalva no texto. **Resolvida em 2026-11-08 (Bruno): Concluído, com a ressalva no texto.** |
+| Q11 | O notebook do fine-tuning (e o framework de testes) viram público, com link "Repositório" na página, ou ficam sem link? | Não | Sem link, com a origem declarada no texto. **Resolvida em 2026-11-08 (Bruno): sem link, origem declarada no texto.** |
+| Q12 | O fine-tuning cita tecnologias (Python, Hugging Face Transformers, PEFT/LoRA, Colab)? Isso exige incluí-las na página Technologies, em "IA e aprendizado de máquina", sem contexto. | Não | Nenhuma tecnologia; o campo Modelo já traz o Qwen2.5 e o LoRA. **Default adotado na implementação (não perguntado ao Bruno): nenhuma tecnologia; reversível em `aiLab.ts`.** |
+| Q13 | A ordem dos três novos (escolha de abordagem, framework de testes, fine-tuning, na ordem dos módulos) serve? | Não | A da tabela. **Default adotado na implementação (não perguntado ao Bruno): a ordem da tabela; reversível em `aiLab.ts`.** |
+| Q14 | O experimento de escolha de modelo cita que os experimentos reais rodam no `gpt-4o-mini` e não no modelo escolhido no planejamento (Claude Sonnet)? Se há um motivo para a troca, quer registrá-lo? | Não | Cita a diferença, sem motivo. **Resolvida em 2026-11-08 (Bruno): cita a diferença, sem o motivo.** |
 
 ## 12. Premissas
 
@@ -308,9 +383,12 @@ Se o Bruno aprovar algum candidato, ele entra por nova versão desta SPEC (slug,
 | 2026-11-08 | Números de avaliação publicados como contagens, com ressalvas; sem percentuais. | Bruno |
 | 2026-11-08 | Analytics Personas entra como card "Em planejamento", sem página de detalhe. | Bruno |
 | 2026-11-08 | Textos, números e ressalvas da seção 7.3 aprovados e implementação autorizada (Q1). Q2 a Q5 seguem como premissas reversíveis (tipo e estado em `aiLab.ts`, gráfico estático, ordem da tabela). | Bruno |
+| 2026-11-08 | Material da pós no AI Lab: entram o fine-tuning com enquadramento honesto, o método do framework de testes (sem resultados, porque as 30 execuções foram ilustrativas) e a escolha de abordagem e de modelo como estudo. Textos da seção 7.7 aprovados em seguida (Q9). | Bruno |
+| 2026-11-08 | Textos da seção 7.7 aprovados como estão. O fine-tuning fica "Concluído", sem link de repositório, e a escolha de modelo cita que os experimentos rodam no `gpt-4o-mini` (Q9, Q10, Q11 e Q14). Implementação autorizada. | Bruno |
 
 ## Refinamento
 
+- 2026-11-08, v0.5.0: refinamento dos três itens da pós decididos pelo Bruno (Q6 a Q8). Fontes lidas de novo, notebook conferido célula a célula (treino e avaliação no mesmo arquivo, sem divisão), textos em en e pt-BR na seção 7.7, requisitos AIL-RF-17 a 19, critérios AIL-CA-15 a 18 e perguntas Q9 a Q14. Textos aprovados e implementados no mesmo dia; a seção 16 registra a entrega e a verificação.
 - 2026-11-08, v0.4.0: AIL-RF-16 entregue por decisão do Bruno, com o critério AIL-CA-14 e os rótulos provisórios da navegação (a aprovar). O link de projeto de origem passou a usar o helper `projectHref`, compartilhado com Technologies.
 - 2026-11-08, v0.3.0: textos aprovados (Q1) e página implementada; seção 15 registra a entrega, as divergências e a verificação.
 - 2026-11-08, v0.1.0: SPEC criada a partir do ponteiro de `FEATURES.md` (Draft v0.1), do `BUSINESS.md` (7), do `CONTENT.md` (4.6), do `DESIGN.md` (6.6) e do `DESIGN_SYSTEM.md` (4.9). Conteúdo levantado nos README públicos de `football-stat-analytics-cli`, `fintalab` e `analytics-personas`. Quatro decisões do Bruno registradas na seção 13. Textos, estados e premissas aguardam a aprovação (Q1 a Q5).
@@ -360,3 +438,46 @@ Verificação adicional:
 - Navegador: lista e detalhe conferidos em 1440 px (en) e em 375 px (pt-BR). A pasta `.next` precisou ser apagada uma vez por causa de um `EPERM` do build.
 
 Não verificado: o contraste não foi medido com ferramenta (usa os mesmos tokens do restante do site), e LCP e CLS não foram medidos.
+
+## 16. Implementação e verificação da v0.5.0
+
+Implementada na branch `feat/ai-lab-pos` em 2026-11-08, depois da aprovação dos textos (Q9). O que estava previsto e foi feito:
+
+**Código e conteúdo**
+
+- `src/config/aiLab.ts`: três chaves novas (`approachAndModelChoice`, `promptTestFramework`, `loraFineTuning`) em `AiLabExperimentKey` e na lista, antes do card em planejamento; `origin: null` e `technologies: []` nos três (Q12); `model: "Qwen2.5-1.5B-Instruct, LoRA adapter"` só no fine-tuning.
+- `src/content/{en,pt-BR}/common.json`: três blocos em `aiLab.experiments.<key>` (nome, resumo e os seis textos) e a descrição de SEO da lista (seção 7.7).
+- `ExperimentDetail`: já esconde "Parte de" e "Repositório" quando `origin` é nulo; conferir `ProjectTechnologies` com lista vazia.
+- `src/lib/seo/metadata.ts`: sem mudança (o namespace `aiLab.experiments.<key>` já resolve nome e resumo).
+
+**Testes que mudam**
+
+- `e2e/ai-lab.spec.ts`: a lista passa de cinco para oito cards, os slugs de quatro para sete, os detalhes de quatro para sete (inclusive a navegação anterior/seguinte, agora com meio de lista), e entram AIL-CA-15 a 18.
+- O teste de consistência com `technologies.ts` e `projects.ts` (AIL-CA-08) aceita `technologies: []` e `origin: null`.
+- `e2e/layout.spec.ts`, `e2e/assets.spec.ts` e `e2e/i18n.spec.ts` citam `rag-grounding` e rotas fixas; conferir que os novos slugs entram nas verificações de `og:image` e de textos iguais nos dois idiomas.
+
+**Documentação**
+
+- Seções 3.1, 4 (AIL-RF-01 a 04, 17 a 19), 7.1, 8 e 15 desta SPEC; README e `FEATURES.md`; `CONTENT.md` (item "Definir conteúdos iniciais do AI Lab").
+
+**Divergências em relação ao previsto**
+
+- **`ExperimentDetail`:** o bloco "Technologies" (rótulo e lista) deixou de aparecer quando o experimento não tem tecnologias; antes ele renderizava o rótulo com uma lista vazia. Os três novos tornaram isso visível.
+- **Q12 e Q13:** as duas seguem o default da SPEC e não foram perguntadas ao Bruno.
+- **Fonte dos textos:** os blocos de `common.json` foram gerados a partir das tabelas da seção 7.7, para o site e a SPEC não divergirem.
+
+| Critério | Resultado | Evidência |
+|---|---|---|
+| AIL-CA-15 | Atendido | A lista tem oito cards nos dois idiomas: os sete com um único link para `/ai-lab/<slug>` e o card "Em planejamento" sem link, que passou a ser o oitavo. |
+| AIL-CA-16 | Atendido | Os três novos detalhes têm `h1`, a linha de fatos, os seis `h2` na ordem e nenhum "Parte de" nem "Repositório" (nem link externo); o fine-tuning mostra "Modelo", os outros dois não; nenhum mostra o bloco de tecnologias. |
+| AIL-CA-17 | Atendido | Fine-tuning: ao menos oito contagens "X de Y" em Resultados, sem `%`, com "dados de treino" e "não como evidência de generalização" em Limitações. Framework: Resultados sem nenhum dígito e com "Nenhum resultado é publicado". Escolha de modelo: Resultados sem dígito, nenhuma média do tipo 4,6, e o texto cita o Claude Sonnet e o `gpt-4o-mini`. Os três sem nome de empresa, expressão proibida nem frase de busca de emprego. |
+| AIL-CA-18 | Atendido | Os sete detalhes percorridos na ordem da lista; o primeiro só tem o seguinte e o último só tem o anterior; os do meio têm os dois. |
+
+Verificação adicional:
+
+- `tsc --noEmit` sem erros (inclui a paridade de chaves entre en e pt-BR) e suíte E2E completa com 830 testes passando (110 novos em relação aos 720 anteriores).
+- Mutação: cinco defeitos de propósito (frase de limitação do fine-tuning trocada por "good evidence", um número em Resultados do framework, uma nota de modelo na escolha de modelo, `origin: "football"` no fine-tuning e a guarda do bloco de tecnologias removida) derrubaram 12 testes. Arquivos restaurados e suíte completa verde depois.
+- Navegador: página do fine-tuning em inglês (cabeçalho sem "Parte de" e sem tecnologias; Resultados e Limitações com o texto aprovado) e lista em português com os oito cards conferidas no servidor de produção da porta 3200, já encerrado.
+- Os resumos dos três novos têm de 140 a 160 caracteres, dentro do limite da descrição de SEO.
+
+Não verificado: leitores de tela, contraste com ferramenta, LCP e CLS, e a leitura dos textos em um aparelho real. O notebook e os documentos da pós não são públicos, então ninguém consegue reproduzir os números do fine-tuning a partir do site.

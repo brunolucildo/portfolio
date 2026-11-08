@@ -284,7 +284,7 @@
   "aiLab": {
     "metadata": {
       "title": "AI Lab | Bruno Lucildo",
-      "description": "Experiments in applied AI: retrieval-augmented answers, output validation with a judge model, consistency tests and prompt design, with results and limitations."
+      "description": "Experiments in applied AI: retrieval-augmented answers, output validation with a judge model, consistency tests, prompt design, fine-tuning and test methods, with results and limitations."
     },
     "title": "AI Lab",
     "intro": "I'm studying AI systems development and management, and I use study projects to explore language models. Each experiment states what I wanted to find out, how I approached it, what I measured and where it falls short. They are learning projects, not products.",
@@ -355,6 +355,36 @@
         "results": "No formal evaluation was done in this experiment: the checks are textual heuristics and the repository has no test suite. The same personas are part of Football Stat Analytics, where validation and measurement were built.",
         "limitations": "The checks do not guarantee that an answer is correct or safe. The repository has no install or run instructions yet, so the experiment cannot be reproduced from it, and it is separate from the future FintaLab product.",
         "learned": "Without tests or measurements there is no way to tell whether a persona follows its instructions, which is the gap the validation and evaluation experiments address."
+      },
+      "approachAndModelChoice": {
+        "name": "Choosing an approach and a model",
+        "summary": "Comparing rules, machine learning, language models and a hybrid design, then three models, to decide how to automate football performance analysis.",
+        "objective": "Decide, before building anything, which kind of technology fits each part of a football performance analysis, and which language model to start with.",
+        "problem": "Every option has strengths and costs: fixed rules are predictable but rigid, language models read free text well but can be inconsistent or wrong, and cost and delay differ between models. Choosing by habit or by hype leaves those trade-offs unrecorded.",
+        "approach": "I compared four approaches (deterministic rules, machine learning, a language model and a hybrid) across ten criteria, such as flexibility, consistency, ease of validation, operating cost and risk of incorrect analyses. Then I compared three language models (GPT-4o, Claude Sonnet and Llama 3 70B) on quality, consistency, latency, cost and fit for the case. Both comparisons use qualitative levels and 1-to-5 scores that I assigned in a planning exercise.",
+        "results": "A decision, not a measurement: a hybrid design, with rules for calculations and objective criteria, machine learning where classification is needed and a language model to interpret and write analyses, always behind output validation and human review for critical cases. For the pilot the model chosen was Claude Sonnet, for its balance of quality, consistency and moderate cost. No scores are published here, because they were judgments, not measurements.",
+        "limitations": "The levels and scores are qualitative and have no stated measurement method, so they must not be read as a model ranking. The comparison was made at planning time, before the experiments on this page existed: those run on gpt-4o-mini, not on the model chosen for the pilot, and the scores were never checked against them. Cost and latency depend on the provider, the date and the infrastructure.",
+        "learned": "Writing the trade-offs down makes the choice open to discussion. The experiment on validating model output is one way of applying the hybrid idea: rules and a verifier around the model, because the model alone does not guarantee consistency."
+      },
+      "promptTestFramework": {
+        "name": "A test framework for prompts",
+        "summary": "A method to test a prompt like software: fixed cases, repeated runs, scored criteria, failures traced to causes and a retest after each fix.",
+        "objective": "Define a repeatable way to judge whether a prompt that turns athlete data into scored attributes is accurate, consistent and honest when data is missing.",
+        "problem": "A response that merely looks right is not evidence. The same prompt can invent a statistic, overvalue volume over efficiency or give different answers to the same case, and an edit to the prompt can fix one problem and cause another.",
+        "approach": "The framework defines eight criteria, each scored from 1 to 5: accuracy, adherence to the data, consistency, completeness, justification, hallucination, score coherence and format. It uses ten test cases covering simple, complex, ambiguous, extreme and reliability situations (for example, many shots with low efficiency, missing data, contradictory indicators and a request for information that was never provided), each meant to run three times with the same input. Failures are linked to a hypothesis about the prompt, the prompt is rewritten as explicit, checkable rules, and the same cases run again. The cycle is: test, find failures, analyze causes, fix the prompt, retest and validate.",
+        "results": "No results are published for this experiment. The tables in the original document are an illustrative scenario, written to show how failures would be identified and traced, not a record of measured runs.",
+        "limitations": "It is a method, not a measurement: there is no published evidence about a real prompt. Ten cases with three runs each are a small sample, the 1-to-5 scores are assigned by a person, and a clean retest does not guarantee that new errors will not appear, so the cycle has to be repeated whenever the prompt, the model or the indicators change.",
+        "learned": "Turning vague instructions into rules that can be checked is what makes a fix testable. The framework puts missing data and unanswerable requests among the cases because that is where a model is most tempted to invent something."
+      },
+      "loraFineTuning": {
+        "name": "Fine-tuning a small model to classify reviews (LoRA)",
+        "summary": "Fine-tuning a 1.5-billion-parameter model with LoRA to classify short football performance reviews, and what the evaluation does and does not show.",
+        "objective": "Find out whether a LoRA adapter makes a small open model better at labelling a performance review as positive, neutral or negative, and at answering in a format a program can read.",
+        "problem": "Small models often ignore the required answer format or lean toward the wrong label, and classifying reviews by hand does not scale. Fine-tuning is a candidate fix, but only a fair evaluation can say whether it helps.",
+        "approach": "The base model, Qwen2.5-1.5B-Instruct, was loaded with 4-bit quantization on a Colab T4 GPU and trained with a LoRA adapter (rank 16, alpha 32, on the attention query and value projections) for three epochs, with a system instruction and a JSON answer holding a single sentiment field. The training set was one file of 75 short reviews, 25 per class. The comparison switches the adapter off and on over the same model, with greedy decoding, and counts correct labels, invalid answers and a confusion matrix.",
+        "results": "On the same 75 reviews used for training, the model without the adapter labelled 55 correctly and the adapted model 63. Invalid answers fell from 13 of 75 to 1 of 75. Negative reviews found rose from 14 of 25 to 22 of 25, and positive reviews from 23 of 25 to 25 of 25, while neutral reviews found fell from 18 of 25 to 16 of 25 and neutral reviews labelled positive grew from 5 of 25 to 9 of 25. Because these reviews were also the training data, the counts show what the adapter learned, not how it would perform on new reviews.",
+        "limitations": "There is no held-out test set. The write-up of the exercise describes a stratified split with one fifth of the data held out, but the notebook I kept evaluates the whole file it trained on, so I treat every count above as measured on training data and as no evidence of generalization. 75 reviews, one run and one seed are a very small sample, with no confidence interval. Label quality depends on how clearly positive, neutral and negative were defined, and ambiguous examples hurt both training and evaluation. One answer from the adapted model was still invalid, and neutral descriptions of facts (a yellow card, having started the match) drifted toward positive. It is not ready for unattended use.",
+        "learned": "A higher count is not evidence until the test data is kept apart from training: here the same file feeds both, so the table cannot say whether the adapter generalizes. Counting format failures separately from labelling errors, and looking at which examples drifted, taught more than the headline number. Next time I would split the data first, freeze the test set and repeat with other seeds."
       },
       "analyticsPersonas": {
         "name": "Analytics Personas",

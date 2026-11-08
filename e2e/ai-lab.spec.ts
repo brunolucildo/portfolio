@@ -16,7 +16,10 @@ type Slug =
   | "rag-grounding"
   | "output-validation"
   | "score-consistency"
-  | "analyst-personas";
+  | "analyst-personas"
+  | "approach-and-model-choice"
+  | "prompt-test-framework"
+  | "lora-fine-tuning";
 
 type Origin = "football" | "fintalab";
 
@@ -42,9 +45,25 @@ const shared = {
     technologies: ["TypeScript", "OpenAI API", "SQLite"],
     origin: "fintalab" as Origin,
   },
+  // Material de estudo sem repositório público (SPEC-006 v0.5.0, seção 7.7).
+  "approach-and-model-choice": {
+    model: null,
+    technologies: [],
+    origin: null,
+  },
+  "prompt-test-framework": {
+    model: null,
+    technologies: [],
+    origin: null,
+  },
+  "lora-fine-tuning": {
+    model: "Qwen2.5-1.5B-Instruct, LoRA adapter",
+    technologies: [],
+    origin: null,
+  },
 } satisfies Record<
   Slug,
-  { model: string; technologies: string[]; origin: Origin }
+  { model: string | null; technologies: string[]; origin: Origin | null }
 >;
 
 const slugs = Object.keys(shared) as Slug[];
@@ -112,7 +131,7 @@ const pages: AiLabPage[] = [
     detailPath: (slug) => `/en/ai-lab/${slug}`,
     title: "AI Lab | Bruno Lucildo",
     description:
-      "Experiments in applied AI: retrieval-augmented answers, output validation with a judge model, consistency tests and prompt design, with results and limitations.",
+      "Experiments in applied AI: retrieval-augmented answers, output validation with a judge model, consistency tests, prompt design, fine-tuning and test methods, with results and limitations.",
     openGraphLocale: "en_US",
     h1: "AI Lab",
     intro:
@@ -204,6 +223,50 @@ const pages: AiLabPage[] = [
         limitationsStart: "The checks do not guarantee",
         resultsContain: ["No formal evaluation was done in this experiment"],
       },
+      "approach-and-model-choice": {
+        name: "Choosing an approach and a model",
+        summary:
+          "Comparing rules, machine learning, language models and a hybrid design, then three models, to decide how to automate football performance analysis.",
+        type: "Study",
+        state: "Concluded",
+        objectiveStart: "Decide, before building anything",
+        limitationsStart: "The levels and scores are qualitative",
+        resultsContain: [
+          "A decision, not a measurement",
+          "No scores are published here",
+        ],
+      },
+      "prompt-test-framework": {
+        name: "A test framework for prompts",
+        summary:
+          "A method to test a prompt like software: fixed cases, repeated runs, scored criteria, failures traced to causes and a retest after each fix.",
+        type: "Study",
+        state: "Concluded",
+        objectiveStart: "Define a repeatable way to judge",
+        limitationsStart: "It is a method, not a measurement",
+        resultsContain: [
+          "No results are published for this experiment",
+          "illustrative scenario",
+        ],
+      },
+      "lora-fine-tuning": {
+        name: "Fine-tuning a small model to classify reviews (LoRA)",
+        summary:
+          "Fine-tuning a 1.5-billion-parameter model with LoRA to classify short football performance reviews, and what the evaluation does and does not show.",
+        type: "Study",
+        state: "Concluded",
+        objectiveStart: "Find out whether a LoRA adapter",
+        limitationsStart: "There is no held-out test set",
+        resultsContain: [
+          "55 correctly and the adapted model 63",
+          "13 of 75 to 1 of 75",
+          "14 of 25 to 22 of 25",
+          "23 of 25 to 25 of 25",
+          "18 of 25 to 16 of 25",
+          "5 of 25 to 9 of 25",
+          "also the training data",
+        ],
+      },
     },
     planning: {
       name: "Analytics Personas",
@@ -221,7 +284,7 @@ const pages: AiLabPage[] = [
     detailPath: (slug) => `/pt-BR/ai-lab/${slug}`,
     title: "AI Lab | Bruno Lucildo",
     description:
-      "Experimentos de IA aplicada: respostas com recuperação de informação, validação de saída com um modelo juiz, testes de consistência e desenho de prompts, com resultados e limitações.",
+      "Experimentos de IA aplicada: respostas com recuperação de informação, validação de saída com um modelo juiz, testes de consistência, desenho de prompts, ajuste fino e métodos de teste, com resultados e limitações.",
     openGraphLocale: "pt_BR",
     h1: "AI Lab",
     intro:
@@ -314,6 +377,50 @@ const pages: AiLabPage[] = [
         limitationsStart: "As checagens não garantem",
         resultsContain: ["Este experimento não teve avaliação formal"],
       },
+      "approach-and-model-choice": {
+        name: "Escolha de abordagem e de modelo",
+        summary:
+          "Comparar regras, aprendizado de máquina, modelos de linguagem e uma abordagem híbrida, e três modelos, para decidir como automatizar a análise de atletas.",
+        type: "Estudo",
+        state: "Concluído",
+        objectiveStart: "Decidir, antes de construir qualquer coisa",
+        limitationsStart: "Os níveis e as notas são qualitativos",
+        resultsContain: [
+          "Uma decisão, não uma medição",
+          "Nenhuma nota é publicada aqui",
+        ],
+      },
+      "prompt-test-framework": {
+        name: "Um framework de testes para prompts",
+        summary:
+          "Um método para testar um prompt como se testa software: casos fixos, execuções repetidas, critérios com nota, falhas ligadas a causas e reteste a cada correção.",
+        type: "Estudo",
+        state: "Concluído",
+        objectiveStart: "Definir uma forma repetível de julgar",
+        limitationsStart: "É um método, não uma medição",
+        resultsContain: [
+          "Nenhum resultado é publicado neste experimento",
+          "cenário ilustrativo",
+        ],
+      },
+      "lora-fine-tuning": {
+        name: "Ajuste fino de um modelo pequeno para classificar avaliações (LoRA)",
+        summary:
+          "Ajustar um modelo de 1,5 bilhão de parâmetros com LoRA para classificar avaliações curtas de desempenho no futebol, e o que a avaliação mostra e não mostra.",
+        type: "Estudo",
+        state: "Concluído",
+        objectiveStart: "Descobrir se um adaptador LoRA",
+        limitationsStart: "Não há conjunto de teste separado",
+        resultsContain: [
+          "rotulou 55 corretamente e o modelo ajustado, 63",
+          "13 de 75 para 1 de 75",
+          "14 de 25 para 22 de 25",
+          "23 de 25 para 25 de 25",
+          "18 de 25 para 16 de 25",
+          "5 de 25 para 9 de 25",
+          "também eram os dados de treino",
+        ],
+      },
     },
     planning: {
       name: "Analytics Personas",
@@ -348,7 +455,7 @@ for (const lab of pages) {
   const allPaths = [lab.path, ...slugs.map((slug) => lab.detailPath(slug))];
 
   test.describe(`AI Lab (${lab.locale})`, () => {
-    test("a lista tem um h1, a abertura e cinco experimentos na ordem prevista", async ({
+    test("a lista tem um h1, a abertura e oito experimentos na ordem prevista", async ({
       page,
     }) => {
       await page.goto(lab.path);
@@ -361,7 +468,7 @@ for (const lab of pages) {
         lab.planning.name,
       ];
       const cards = page.locator("#ai-lab-list > li");
-      await expect(cards).toHaveCount(5);
+      await expect(cards).toHaveCount(8);
       await expect(cards.getByRole("heading", { level: 2 })).toHaveText(names);
     });
 
@@ -379,9 +486,13 @@ for (const lab of pages) {
         await expect(card, slug).toContainText(text.type);
         await expect(card, slug).toContainText(text.state);
         await expect(card, slug).toContainText(text.summary);
-        await expect(card, slug).toContainText(
-          `${lab.labels.model}: ${data.model}`,
-        );
+        if (data.model) {
+          await expect(card, slug).toContainText(
+            `${lab.labels.model}: ${data.model}`,
+          );
+        } else {
+          await expect(card, slug).not.toContainText(`${lab.labels.model}:`);
+        }
         await expect(card.getByRole("listitem"), slug).toHaveText(
           data.technologies,
         );
@@ -392,7 +503,8 @@ for (const lab of pages) {
       page,
     }) => {
       await page.goto(lab.path);
-      const card = page.locator("#ai-lab-list > li").nth(4);
+      // O card em planejamento é o último da lista, depois dos sete com detalhe.
+      const card = page.locator("#ai-lab-list > li").nth(slugs.length);
 
       await expect(card).toContainText(lab.planning.type);
       await expect(card).toContainText(lab.planning.state);
@@ -571,7 +683,7 @@ for (const lab of pages) {
       const text = lab.experiments[slug];
       const data = shared[slug];
       const detailPath = lab.detailPath(slug);
-      const origin = lab.origins[data.origin];
+      const origin = data.origin ? lab.origins[data.origin] : null;
 
       test.describe(`detalhe ${slug}`, () => {
         test("tem um h1, tipo, estado, resumo, modelo e tecnologias", async ({
@@ -586,12 +698,24 @@ for (const lab of pages) {
           await expect(main).toContainText(text.type);
           await expect(main).toContainText(text.state);
           await expect(main.locator("header")).toContainText(text.summary);
-          await expect(main.locator("header")).toContainText(
-            `${lab.labels.model}: ${data.model}`,
-          );
+          if (data.model) {
+            await expect(main.locator("header")).toContainText(
+              `${lab.labels.model}: ${data.model}`,
+            );
+          } else {
+            await expect(main.locator("header")).not.toContainText(
+              `${lab.labels.model}:`,
+            );
+          }
           await expect(main.locator("header").getByRole("listitem")).toHaveText(
             data.technologies,
           );
+          // Sem tecnologias, o rótulo "Technologies" e a lista vazia não aparecem.
+          if (data.technologies.length === 0) {
+            await expect(
+              main.locator("header").getByText(/^(Technologies|Tecnologias)$/),
+            ).toHaveCount(0);
+          }
         });
 
         test("tem as seis seções na ordem prevista", async ({ page }) => {
@@ -625,11 +749,23 @@ for (const lab of pages) {
           }
         });
 
-        test("liga ao projeto de origem e ao repositório público", async ({
+        test("liga ao projeto de origem e ao repositório público, quando existem", async ({
           page,
         }) => {
           await page.goto(detailPath);
           const header = page.getByRole("main").locator("header");
+
+          // Material de estudo sem repositório público: sem "Parte de" nem "Repositório".
+          if (!origin || !data.origin) {
+            await expect(header).not.toContainText(`${lab.labels.partOf}:`);
+            await expect(
+              header.getByRole("link", {
+                name: new RegExp(`^${lab.labels.repository}`),
+              }),
+            ).toHaveCount(0);
+            await expect(header.locator('a[target="_blank"]')).toHaveCount(0);
+            return;
+          }
 
           const originLink = header.getByRole("link", {
             name: origin.name,
@@ -823,7 +959,7 @@ for (const lab of pages) {
   });
 }
 
-test("a fonte de dados lista os cinco experimentos com os slugs e estados previstos", () => {
+test("a fonte de dados lista os oito experimentos com os slugs e estados previstos", () => {
   expect(
     aiLabExperiments.map(({ slug, type, state }) => ({ slug, type, state })),
   ).toEqual([
@@ -835,6 +971,9 @@ test("a fonte de dados lista os cinco experimentos com os slugs e estados previs
     },
     { slug: "score-consistency", type: "study", state: "concluded" },
     { slug: "analyst-personas", type: "study", state: "concluded" },
+    { slug: "approach-and-model-choice", type: "study", state: "concluded" },
+    { slug: "prompt-test-framework", type: "study", state: "concluded" },
+    { slug: "lora-fine-tuning", type: "study", state: "concluded" },
     { slug: null, type: "study", state: "planning" },
   ]);
   // Nenhum experimento é "Projeto concluído" na v1 (AIL-RF-06).
@@ -876,6 +1015,78 @@ test("toda tecnologia do AI Lab existe em Technologies e o projeto de origem exi
     expect(experiment.origin).toBe(expected.origin);
   }
 });
+
+for (const lab of pages) {
+  test.describe(`AI Lab, material da pós (${lab.locale})`, () => {
+    test("o fine-tuning só publica contagens e diz que os dados de teste são os de treino", async ({
+      page,
+    }) => {
+      await page.goto(lab.detailPath("lora-fine-tuning"));
+      const results = (await page.locator("#results").textContent()) ?? "";
+      const limitations =
+        (await page.locator("#limitations").textContent()) ?? "";
+      const ofWord = lab.locale === "en" ? "of" : "de";
+      const counts = new RegExp(`\\d+ ${ofWord} \\d+`, "g");
+
+      // Toda quantidade de Resultados é "X de Y" e não há porcentagem.
+      expect(results.match(counts)?.length ?? 0).toBeGreaterThanOrEqual(8);
+      expect(results).not.toContain("%");
+      expect(limitations).toContain(
+        lab.locale === "en" ? "training data" : "dados de treino",
+      );
+      expect(limitations).toContain(
+        lab.locale === "en"
+          ? "no evidence of generalization"
+          : "não como evidência de generalização",
+      );
+    });
+
+    test("o framework de testes não publica nenhum número em Resultados", async ({
+      page,
+    }) => {
+      await page.goto(lab.detailPath("prompt-test-framework"));
+      const results = (await page.locator("#results").textContent()) ?? "";
+
+      expect(results).not.toMatch(/\d/);
+      expect(results).toContain(
+        lab.locale === "en"
+          ? "No results are published"
+          : "Nenhum resultado é publicado",
+      );
+    });
+
+    test("a escolha de modelo não publica notas nem médias dos modelos", async ({
+      page,
+    }) => {
+      await page.goto(lab.detailPath("approach-and-model-choice"));
+      const main = await mainText(page);
+      const results = (await page.locator("#results").textContent()) ?? "";
+
+      // Notas de 1 a 5 só aparecem como descrição da escala, nunca por modelo.
+      expect(results).not.toMatch(/\d/);
+      expect(main).not.toMatch(/\b[1-5][.,][0-9]\b/);
+      expect(main).toContain("Claude Sonnet");
+      expect(main).toContain("gpt-4o-mini");
+    });
+
+    test("os três não citam curso, instituição, nome de empresa nem atletas", async ({
+      page,
+    }) => {
+      for (const slug of [
+        "approach-and-model-choice",
+        "prompt-test-framework",
+        "lora-fine-tuning",
+      ]) {
+        await page.goto(lab.detailPath(slug));
+        const found = findPhrases(
+          `${await mainText(page)}\n${await page.title()}`,
+          [...companyNames, ...forbiddenPhrases, ...jobSeekingPhrases],
+        );
+        expect(found, slug).toEqual([]);
+      }
+    });
+  });
+}
 
 for (const target of [
   "/en/ai-lab/nao-existe",

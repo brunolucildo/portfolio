@@ -91,7 +91,9 @@ export async function ExperimentDetail({ experiment }: ExperimentDetailProps) {
               {model}
             </p>
           ) : null}
-          <ProjectTechnologies technologies={technologies} />
+          {technologies.length > 0 ? (
+            <ProjectTechnologies technologies={technologies} />
+          ) : null}
           {originProject && origin ? (
             <div className="mt-4 flex flex-wrap items-center gap-x-8">
               <p className="text-small text-muted">
