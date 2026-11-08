@@ -280,6 +280,30 @@ test.describe("guarda de indexação", () => {
   });
 });
 
+test.describe("cabeçalhos de segurança", () => {
+  test("páginas e arquivos estáticos saem com os cabeçalhos básicos e sem X-Powered-By", async ({
+    request,
+  }) => {
+    for (const path of [
+      "/en",
+      "/pt-BR/sobre",
+      "/en/nao-existe",
+      "/robots.txt",
+      siteConfig.resume.en.href,
+    ]) {
+      const headers = (await request.get(path)).headers();
+
+      expect(headers["x-content-type-options"], path).toBe("nosniff");
+      expect(headers["referrer-policy"], path).toBe(
+        "strict-origin-when-cross-origin",
+      );
+      expect(headers["x-frame-options"], path).toBe("DENY");
+      expect(headers["permissions-policy"], path).toContain("camera=()");
+      expect(headers["x-powered-by"], path).toBeUndefined();
+    }
+  });
+});
+
 test.describe("dados estruturados", () => {
   type LdNode = Record<string, unknown>;
 

@@ -162,7 +162,7 @@ const pages: AiLabPage[] = [
       "pt-BR": "/pt-BR/ai-lab",
       "x-default": "/en/ai-lab",
     },
-    otherLanguage: { name: "Português", path: "/pt-BR/ai-lab" },
+    otherLanguage: { name: "PT, Português", path: "/pt-BR/ai-lab" },
     otherDetailPath: (slug) => `/pt-BR/ai-lab/${slug}`,
     origins: {
       football: {
@@ -324,7 +324,7 @@ const pages: AiLabPage[] = [
       "pt-BR": "/pt-BR/ai-lab",
       "x-default": "/en/ai-lab",
     },
-    otherLanguage: { name: "English", path: "/en/ai-lab" },
+    otherLanguage: { name: "EN, English", path: "/en/ai-lab" },
     otherDetailPath: (slug) => `/en/ai-lab/${slug}`,
     origins: {
       football: {

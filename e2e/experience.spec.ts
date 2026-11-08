@@ -129,7 +129,7 @@ const pages: ExperiencePage[] = [
       "pt-BR": "/pt-BR/experiencia",
       "x-default": "/en/experience",
     },
-    otherLanguage: { name: "Português", path: "/pt-BR/experiencia" },
+    otherLanguage: { name: "PT, Português", path: "/pt-BR/experiencia" },
     roles: roles({
       techLead: "Technical Lead",
       seniorBackend: "Senior Backend Engineer",
@@ -157,7 +157,7 @@ const pages: ExperiencePage[] = [
       "pt-BR": "/pt-BR/experiencia",
       "x-default": "/en/experience",
     },
-    otherLanguage: { name: "English", path: "/en/experience" },
+    otherLanguage: { name: "EN, English", path: "/en/experience" },
     roles: roles({
       techLead: "Líder Técnico",
       seniorBackend: "Engenheiro Backend Sênior",

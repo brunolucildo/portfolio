@@ -84,7 +84,7 @@ const pages: ResumePage[] = [
       "pt-BR": "/pt-BR/curriculo",
       "x-default": "/en/resume",
     },
-    otherLanguage: { name: "Português", path: "/pt-BR/curriculo" },
+    otherLanguage: { name: "PT, Português", path: "/pt-BR/curriculo" },
   },
   {
     locale: "pt-BR",
@@ -125,7 +125,7 @@ const pages: ResumePage[] = [
       "pt-BR": "/pt-BR/curriculo",
       "x-default": "/en/resume",
     },
-    otherLanguage: { name: "English", path: "/en/resume" },
+    otherLanguage: { name: "EN, English", path: "/en/resume" },
   },
 ];
 

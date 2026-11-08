@@ -79,7 +79,7 @@ const pages: ContactPage[] = [
       "pt-BR": "/pt-BR/contato",
       "x-default": "/en/contact",
     },
-    otherLanguage: { name: "Português", path: "/pt-BR/contato" },
+    otherLanguage: { name: "PT, Português", path: "/pt-BR/contato" },
     placeholder: "This section is under construction.",
   },
   {
@@ -117,7 +117,7 @@ const pages: ContactPage[] = [
       "pt-BR": "/pt-BR/contato",
       "x-default": "/en/contact",
     },
-    otherLanguage: { name: "English", path: "/en/contact" },
+    otherLanguage: { name: "EN, English", path: "/en/contact" },
     placeholder: "Esta seção está em construção.",
   },
 ];

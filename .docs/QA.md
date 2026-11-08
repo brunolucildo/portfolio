@@ -273,20 +273,22 @@ Não utilizar o ambiente de produção para testar funcionalidades incompletas.
 
 ## 13. Checklist de publicação
 
-- [ ] Build de produção concluído.
-- [ ] Verificação TypeScript concluída.
-- [ ] Lint e formatação concluídos.
-- [ ] Testes automatizados aprovados.
-- [ ] Fluxos principais validados.
-- [ ] Inglês e português revisados.
-- [ ] Layout mobile validado.
-- [ ] Navegação por teclado validada.
-- [ ] Movimento reduzido validado.
-- [ ] SEO validado.
-- [ ] Links revisados.
-- [ ] Currículo atualizado.
-- [ ] Conteúdo profissional revisado.
-- [ ] Nenhuma informação confidencial publicada.
+Estado em 2026-11-08, com o detalhe e as medições em [`QA-RELATORIO.md`](./QA-RELATORIO.md).
+
+- [x] Build de produção concluído.
+- [x] Verificação TypeScript concluída.
+- [x] Lint e formatação concluídos.
+- [x] Testes automatizados aprovados (911 E2E).
+- [x] Fluxos principais validados (cobertos pelos E2E).
+- [ ] Inglês e português revisados (paridade de chaves testada; falta a leitura final do Bruno).
+- [x] Layout mobile validado (E2E de 360 a 1920 px e axe a 390 px; falta aparelho real).
+- [x] Navegação por teclado validada (E2E de ordem e foco; falta leitor de tela).
+- [x] Movimento reduzido validado (E2E).
+- [ ] SEO validado (local aprovado; faltam Search Console e Rich Results Test, que exigem o domínio).
+- [ ] Links revisados (internos e GitHub aprovados; falta conferir o LinkedIn à mão).
+- [x] Currículo atualizado.
+- [ ] Conteúdo profissional revisado (decisão do Bruno).
+- [ ] Nenhuma informação confidencial publicada (sem segredos no histórico; falta a confirmação do Bruno sobre o conteúdo).
 - [ ] Domínio e HTTPS funcionando.
 
 ## 14. Definition of Done

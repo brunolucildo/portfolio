@@ -39,8 +39,8 @@ const routes: RoutePair[] = [
 const locales: Locale[] = ["en", "pt-BR"];
 const other = (locale: Locale): Locale => (locale === "en" ? "pt-BR" : "en");
 const switcherName: Record<Locale, string> = {
-  en: "English",
-  "pt-BR": "Português",
+  en: "EN, English",
+  "pt-BR": "PT, Português",
 };
 
 /** Textos da 404 (SPEC-008, seção 7.2). */

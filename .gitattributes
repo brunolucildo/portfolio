@@ -1,0 +1,3 @@
+# Fim de linha em LF em qualquer sistema, para que o Biome (que exige LF) e o Git
+# concordem no Windows, onde o checkout padrão converteria os arquivos para CRLF.
+* text=auto eol=lf

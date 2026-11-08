@@ -27,6 +27,7 @@ O site é bilíngue (inglês como padrão e português do Brasil), estático e s
 | AI Lab: escolha de abordagem e de modelo, framework de testes e fine-tuning (SPEC-006 v0.5.0) | Concluídos |
 | Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience, Projects, Technologies, AI Lab, Contact, Internationalization, Resume, Layout global e Assets (imagens, ícone e compartilhamento) |
 | SEO final (SPEC-013) | Implementado: `robots.txt`, `sitemap.xml` (34 páginas), guarda de indexação, JSON-LD e limites de título e descrição; falta o domínio para validar no Search Console e no Rich Results Test |
+| QA final | Executado em 2026-11-08: 911 E2E, axe-core sem violações, Lighthouse 100 em acessibilidade e boas práticas; 3 defeitos corrigidos. Relatório em [`.docs/QA-RELATORIO.md`](./.docs/QA-RELATORIO.md); faltam as conferências manuais e as que dependem do domínio |
 | Hospedagem, domínio e analytics | Pendentes de decisão |
 
 O detalhamento está nas especificações em [`.specs/`](./.specs/).

@@ -49,6 +49,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
     >
       {routing.locales.map((locale) => {
         const isActive = locale === activeLocale;
+        const code = locale.slice(0, 2).toUpperCase();
 
         return (
           <li key={locale}>
@@ -57,7 +58,9 @@ export function LanguageSwitcher({ className }: { className?: string }) {
               locale={locale}
               lang={locale}
               hrefLang={locale}
-              aria-label={t(`options.${locale}`)}
+              // O nome acessível começa pelo texto visível (WCAG 2.5.3): quem
+              // controla a página por voz diz "EN" ou "PT".
+              aria-label={`${code}, ${t(`options.${locale}`)}`}
               aria-current={isActive ? "true" : undefined}
               className={cn(
                 "inline-flex min-h-11 min-w-11 items-center justify-center rounded-md px-3 text-small font-medium transition-colors duration-(--duration-fast) ease-standard",
@@ -66,7 +69,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
                   : "text-muted hover:text-foreground",
               )}
             >
-              {locale.slice(0, 2).toUpperCase()}
+              {code}
             </Link>
           </li>
         );

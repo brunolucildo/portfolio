@@ -40,7 +40,7 @@ const texts: Record<
     closeMenu: "Close menu",
     language: "Language",
     channels: ["Email", "LinkedIn", "GitHub"],
-    otherLanguage: { name: "Português", home: "/pt-BR" },
+    otherLanguage: { name: "PT, Português", home: "/pt-BR" },
   },
   "pt-BR": {
     home: "/pt-BR",
@@ -60,7 +60,7 @@ const texts: Record<
     closeMenu: "Fechar menu",
     language: "Idioma",
     channels: ["Email", "LinkedIn", "GitHub"],
-    otherLanguage: { name: "English", home: "/en" },
+    otherLanguage: { name: "EN, English", home: "/en" },
   },
 };
 
@@ -293,6 +293,35 @@ for (const locale of locales) {
         new RegExp(`${pathFor(other, "/about")}/?$`),
       );
       await expect(page.locator("#mobile-menu")).toBeHidden();
+    });
+
+    test("o nome acessível de links e botões contém o texto visível (WCAG 2.5.3)", async ({
+      page,
+    }) => {
+      await page.goto(pathFor(locale, "/about"));
+
+      const mismatches = await page.evaluate(() => {
+        const normalize = (text: string) =>
+          text.replace(/\s+/g, " ").trim().toLowerCase();
+
+        return [
+          ...document.querySelectorAll<HTMLElement>(
+            "header a, header button, footer a, main a, main button",
+          ),
+        ].flatMap((element) => {
+          const label = element.getAttribute("aria-label");
+          // biome-ignore lint/performance/useDomNodeTextContent: precisa do texto renderizado (o visível), não do conteúdo do nó.
+          const visible = normalize(element.innerText);
+
+          if (!label || !visible || normalize(label).includes(visible)) {
+            return [];
+          }
+
+          return [`"${visible}" não está em "${label}"`];
+        });
+      });
+
+      expect(mismatches).toEqual([]);
     });
 
     test("Escape fecha o menu e devolve o foco ao botão", async ({ page }) => {

@@ -109,7 +109,7 @@ const pages: ProjectsPage[] = [
       "pt-BR": "/pt-BR/projetos",
       "x-default": "/en/projects",
     },
-    otherLanguage: { name: "Português", path: "/pt-BR/projetos" },
+    otherLanguage: { name: "PT, Português", path: "/pt-BR/projetos" },
     projects: [
       {
         name: "Football Stat Analytics",
@@ -194,7 +194,7 @@ const pages: ProjectsPage[] = [
       "pt-BR": "/pt-BR/projetos",
       "x-default": "/en/projects",
     },
-    otherLanguage: { name: "English", path: "/en/projects" },
+    otherLanguage: { name: "EN, English", path: "/en/projects" },
     projects: [
       {
         name: "Football Stat Analytics",
