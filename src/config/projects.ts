@@ -166,7 +166,7 @@ export const projects: readonly ProjectConfig[] = [
       "Supabase Auth",
       "TMDB",
     ],
-    listImages: [reelixHome],
+    listImages: [reelixHome, reelixSearch, reelixWatchlist],
     detailImages: [
       reelixHome,
       reelixMovies,

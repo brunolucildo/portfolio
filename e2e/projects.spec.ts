@@ -131,7 +131,11 @@ const pages: ProjectsPage[] = [
         technologies: technologies.reelix,
         repository: repositories.reelix,
         detail: "/en/projects/reelix",
-        listImages: ["/images/projects/reelix-home.jpg"],
+        listImages: [
+          "/images/projects/reelix-home.jpg",
+          "/images/projects/reelix-search.jpg",
+          "/images/projects/reelix-watchlist.jpg",
+        ],
       },
       {
         name: "FintaLab",
@@ -212,7 +216,11 @@ const pages: ProjectsPage[] = [
         technologies: technologies.reelix,
         repository: repositories.reelix,
         detail: "/pt-BR/projetos/reelix",
-        listImages: ["/images/projects/reelix-home.jpg"],
+        listImages: [
+          "/images/projects/reelix-home.jpg",
+          "/images/projects/reelix-search.jpg",
+          "/images/projects/reelix-watchlist.jpg",
+        ],
       },
       {
         name: "FintaLab",
@@ -781,6 +789,37 @@ test("as telas do FintaLab ficam lado a lado em 1440 px e empilhadas em 390 px",
   expect(narrow).toHaveLength(3);
   expect(new Set(narrow).size).toBe(3);
 });
+
+// As três telas do Reelix na lista ficam lado a lado em qualquer largura (telas
+// de celular em retrato, sem empilhar) e sem rolagem horizontal na página.
+for (const width of [1440, 390]) {
+  test(`as três telas do Reelix na lista ficam lado a lado com ${width} px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/en/projects");
+
+    const boxes = await page
+      .locator("#projects-list > li:nth-child(2) img")
+      .evaluateAll((els) =>
+        els.map((el) => {
+          const rect = el.getBoundingClientRect();
+          return { top: Math.round(rect.top), left: rect.left };
+        }),
+      );
+    expect(boxes).toHaveLength(3);
+    expect(new Set(boxes.map((box) => box.top)).size).toBe(1);
+    expect(boxes[0]?.left ?? 0).toBeLessThan(boxes[1]?.left ?? 0);
+    expect(boxes[1]?.left ?? 0).toBeLessThan(boxes[2]?.left ?? 0);
+
+    const overflow = await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    );
+    expect(overflow).toBeLessThanOrEqual(0);
+  });
+}
 
 // As nove telas do Reelix ficam em uma única fileira rolável, em qualquer largura,
 // e a fileira recebe foco para ser operada pelo teclado.
