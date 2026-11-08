@@ -7,7 +7,7 @@
 | Nome | Projects |
 | Identificador | SPEC-004 |
 | Slug | `004-projects` |
-| Versão | 0.6.0 |
+| Versão | 0.7.0 |
 | Status | In Review (implementada em 2026-11-07; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-07 |
 | Origem | SPEC-004 de `.specs/FEATURES.md` (v0.1, Draft) |
@@ -280,7 +280,7 @@ Capturas deixadas de fora de propósito: minhas listas (traz uma lista de teste 
 | Texto do detalhe virar cópia do README | Texto próprio, em português e inglês, só com fatos documentados; aprovação do usuário (Q1). |
 | Contexto acadêmico atribuído a um curso sem confirmação | Só "projeto acadêmico" (PROJ-RF-09). |
 | Divergência entre Home, lista e detalhe | Fonte única de dados e PROJ-CA-13. |
-| As seis telas novas do Reelix serem publicadas sem a aprovação específica do usuário | Foram escolhidas e revisadas pelo agente a partir do pedido de "mais imagens"; aprovação pendente (Q6); retirar uma tela é só tirá-la de `src/config/projects.ts`. |
+| As seis telas novas do Reelix serem publicadas sem a aprovação específica do usuário | Foram escolhidas e revisadas pelo agente a partir do pedido de "mais imagens"; **aprovadas pelo usuário em 2026-11-07 (Q6)**; retirar uma tela continua sendo só tirá-la de `src/config/projects.ts`. |
 | Captura do app mostrar dado pessoal ou de terceiros | Revisão visual de cada imagem (PROJ-CA-19) e telas sociais, de perfil e de notificações fora da v1. |
 | A home do Reelix traz pôsteres de séries (arte de estúdio, via TMDB, com o rosto de uma pessoa real num deles) e o que o usuário assiste | Uso aprovado pelo usuário (Q5), crédito ao TMDB na legenda, uma única tela com pôsteres e substituição por uma captura sem pôsteres se algum titular reclamar. |
 | Imagens do Reelix ficarem desatualizadas quando o app mudar, e a interface estar em português nas duas versões | Legenda explícita ("versão de desenvolvimento", "interface em português"); atualizar as capturas quando a interface mudar de forma visível. |
@@ -294,7 +294,7 @@ Capturas deixadas de fora de propósito: minhas listas (traz uma lista de teste 
 | Q2 | A categoria "Product concept"/"Conceito de produto" e o estado "Conceptual"/"Conceitual" servem ao FintaLab? | PROJ-RF-04 e a Home. | Bruno | Não bloqueia (reversível). |
 | Q3 | A ordem Football, Reelix, FintaLab está correta na lista e na Home? | PROJ-RF-01 e PROJ-RF-14. | Bruno | Não bloqueia (reversível). |
 | Q4 | Os textos alternativos e as legendas das imagens (seção 7.6) estão aprovados? A interface do Reelix, em português, aparece nas duas versões do site. | PROJ-RF-15. | Bruno | **Resolvida (2026-11-07):** aprovados. |
-| Q6 | As seis telas novas do Reelix (home de filmes, busca, detalhe de série, avaliações e comentários, watchlist e topo do perfil) e seus textos alternativos estão aprovados? O detalhe de série mostra a imagem de fundo de uma série com atores reais, como a home mostra pôsteres. | PROJ-RF-15 e PROJ-RF-16. | Bruno | Não bloqueia: já estão no site, em commit, e podem ser retiradas. |
+| Q6 | As seis telas novas do Reelix (home de filmes, busca, detalhe de série, avaliações e comentários, watchlist e topo do perfil) e seus textos alternativos estão aprovados? O detalhe de série mostra a imagem de fundo de uma série com atores reais, como a home mostra pôsteres. | PROJ-RF-15 e PROJ-RF-16. | Bruno | **Resolvida (2026-11-07):** telas e textos alternativos aprovados. |
 | Q5 | A home do Reelix (com pôsteres de séries e o que você assiste) pode entrar como imagem? Ela é a tela principal do app, mas mostra arte de estúdio e o rosto de uma pessoa real num pôster. Há captura pronta, fora do repositório. | PROJ-RF-16 e PROJ-CA-19. | Bruno | **Resolvida (2026-11-07):** a home entra (`reelix-home.jpg`), com crédito ao TMDB na legenda. |
 
 ## 12. Premissas
@@ -321,7 +321,7 @@ Decisões reversíveis adotadas neste refinamento.
 | 2026-11-07 | Capturas feitas com a conta de desenvolvimento do usuário, que entrou sozinho no app; telas sociais, de perfil de amigos, de notificações, listas e detalhe de título ficam fora da v1. | Decisão tomada na captura |
 | 2026-11-07 | Textos das seções 7.2 a 7.4, textos alternativos e legendas das imagens aprovados (Q1 e Q4). | Resposta do usuário |
 | 2026-11-07 | A home do Reelix, com pôsteres de séries do TMDB, entra como imagem (capa do Reelix e primeira tela do detalhe); a legenda do Reelix credita o TMDB. | Resposta do usuário (Q5); o crédito é adição do agente |
-| 2026-11-07 | Mais imagens do Reelix: de três para nove telas, em uma fileira rolável no detalhe; escolha e textos alternativos das seis novas feitos pelo agente, a confirmar (Q6). | Pedido do usuário ("não dá pra adicionar mais imagens do Reelix?") |
+| 2026-11-07 | Mais imagens do Reelix: de três para nove telas, em uma fileira rolável no detalhe; escolha e textos alternativos das seis novas feitos pelo agente e aprovados pelo usuário (Q6). | Pedido do usuário ("não dá pra adicionar mais imagens do Reelix?") |
 | 2026-11-07 | A home do Reelix é guardada em JPEG (196 KB) porque o PNG tinha 613 KB, acima do limite de 250 KB. | Decisão técnica do agente |
 | 2026-11-07 | Football Stat Analytics é só "projeto acadêmico", sem citar curso ou instituição. | Resposta do usuário |
 | 2026-11-07 | Estudos de caso profissionais ficam fora da v1. | Premissa herdada das SPEC-001 e SPEC-003 |
@@ -378,6 +378,7 @@ Divergências em relação à SPEC e achados:
 | 2026-11-07 | Estrutura de detalhe reduzida de nove para sete seções, com Implementation dentro de Architecture. | Decisão do usuário. |
 | 2026-11-07 | Rascunho dos textos nos dois idiomas, com tecnologias conferidas nos repositórios e rastreabilidade de cada fato. | Os textos não existiam e o conteúdo precisa refletir o estado real dos projetos. |
 | 2026-11-07 | Movida de `FEATURES.md` para `.specs/004-projects.md`. | `.specs/README.md` prevê separar por funcionalidade conforme o projeto cresce. |
+| 2026-11-07 | Versão 0.7.0: seis telas novas do Reelix e textos alternativos aprovados (Q6); nenhuma pergunta aberta. | Decisão do usuário. |
 | 2026-11-07 | Versão 0.6.0: seis telas novas do Reelix (nove no total), galeria rolável no detalhe, novos textos alternativos, Q6 e riscos; imagens em JPEG ou PNG, todas com até 250 KB. | Pedido do usuário para adicionar mais imagens do Reelix. |
 | 2026-11-07 | Versão 0.5.0: implementada; seção 15 com a verificação dos critérios, as divergências e os achados. | Implementação da SPEC. |
 | 2026-11-07 | Versão 0.4.0: textos e imagens aprovados (Q1, Q4 e Q5); home do Reelix incluída como terceira imagem (JPEG), capa do Reelix e legenda com crédito ao TMDB; status passa a Approved. | Decisão do usuário. |
