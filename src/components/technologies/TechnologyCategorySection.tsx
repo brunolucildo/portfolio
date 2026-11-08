@@ -1,6 +1,9 @@
 import { getTranslations } from "next-intl/server";
+import { Fragment } from "react";
+import { projectHref } from "@/components/projects/href";
 import { columns } from "@/components/projects/layout";
 import type { TechnologyCategory } from "@/config/technologies";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils/cn";
 import { TechnologyIcon } from "./TechnologyIcon";
 
@@ -8,7 +11,11 @@ type TechnologyCategorySectionProps = {
   category: TechnologyCategory;
 };
 
-/** Uma categoria da página Technologies (TECH-RF-01 e TECH-RF-03). */
+/** Link da linha de contexto: sublinhado discreto, destaque ao passar o mouse. */
+const contextLinkClass =
+  "underline decoration-border underline-offset-4 transition-colors duration-(--duration-fast) ease-standard hover:text-foreground hover:decoration-primary";
+
+/** Uma categoria da página Technologies (TECH-RF-01, TECH-RF-03 e TECH-RF-10). */
 export async function TechnologyCategorySection({
   category,
 }: TechnologyCategorySectionProps) {
@@ -27,9 +34,23 @@ export async function TechnologyCategorySection({
 
       <ul className="mt-6 grid gap-x-8 gap-y-6 md:grid-cols-2 lg:mt-0">
         {category.technologies.map((technology) => {
+          // "Experience" leva à página de Experience; cada projeto, ao detalhe
+          // (ou à lista, quando não há detalhe).
           const context = [
-            ...(technology.experience ? [t("experience")] : []),
-            ...technology.projects.map((key) => tProjects(`items.${key}.name`)),
+            ...(technology.experience
+              ? [
+                  {
+                    key: "experience",
+                    label: t("experience"),
+                    href: "/experience" as const,
+                  },
+                ]
+              : []),
+            ...technology.projects.map((key) => ({
+              key,
+              label: tProjects(`items.${key}.name`),
+              href: projectHref(key),
+            })),
           ];
 
           return (
@@ -43,7 +64,14 @@ export async function TechnologyCategorySection({
                 <span className="block text-foreground">{technology.name}</span>
                 {context.length > 0 ? (
                   <span className="mt-1 block text-small text-muted">
-                    {context.join(" · ")}
+                    {context.map(({ key, label, href }, index) => (
+                      <Fragment key={key}>
+                        {index > 0 ? " · " : null}
+                        <Link href={href} className={contextLinkClass}>
+                          {label}
+                        </Link>
+                      </Fragment>
+                    ))}
                   </span>
                 ) : null}
               </div>

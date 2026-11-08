@@ -186,6 +186,8 @@ type TechnologiesPage = {
   note: string;
   categoryTitles: string[];
   contextLabels: Record<Context, string>;
+  /** Destino de cada item de contexto (TECH-RF-10). */
+  contextPaths: Record<Context, string>;
   navigation: {
     label: string;
     footer: string;
@@ -223,6 +225,13 @@ const pages: TechnologiesPage[] = [
       football: "Football Stat Analytics",
       reelix: "Reelix",
       fintalab: "FintaLab",
+    },
+    contextPaths: {
+      experience: "/en/experience",
+      football: "/en/projects/football-stat-analytics",
+      reelix: "/en/projects/reelix",
+      // O FintaLab só aparece na lista, sem página de detalhe.
+      fintalab: "/en/projects",
     },
     navigation: {
       label: "Main navigation",
@@ -263,6 +272,12 @@ const pages: TechnologiesPage[] = [
       football: "Football Stat Analytics",
       reelix: "Reelix",
       fintalab: "FintaLab",
+    },
+    contextPaths: {
+      experience: "/pt-BR/experiencia",
+      football: "/pt-BR/projetos/football-stat-analytics",
+      reelix: "/pt-BR/projetos/reelix",
+      fintalab: "/pt-BR/projetos",
     },
     navigation: {
       label: "Navegação principal",
@@ -596,13 +611,71 @@ for (const technologies of pages) {
       }
     });
 
-    test("o teclado só percorre o menu, o idioma e o rodapé (sem tabulações extras na lista)", async ({
+    test("cada item de contexto é um link: Experience leva a Experience, e cada projeto ao detalhe ou à lista", async ({
       page,
     }) => {
       await page.goto(technologies.path);
-      await expect(
-        page.locator("#technologies-list a, #technologies-list button"),
-      ).toHaveCount(0);
+      const sections = page.locator("#technologies-list > section");
+
+      for (const [index, category] of categories.entries()) {
+        const items = sections.nth(index).locator("ul > li");
+
+        for (const [position, item] of category.items.entries()) {
+          const links = items.nth(position).locator("div > span a");
+          const expected = item.context;
+
+          await expect(links, item.name).toHaveCount(expected.length);
+          await expect(links, item.name).toHaveText(
+            expected.map((key) => technologies.contextLabels[key]),
+          );
+          const hrefs = await links.evaluateAll((els) =>
+            els.map((el) => el.getAttribute("href")),
+          );
+          expect(hrefs, item.name).toEqual(
+            expected.map((key) => technologies.contextPaths[key]),
+          );
+        }
+      }
+    });
+
+    test("a lista só tem links de contexto (um por item de contexto) e nenhum botão", async ({
+      page,
+    }) => {
+      await page.goto(technologies.path);
+      const total = categories
+        .flatMap((category) => category.items)
+        .reduce((sum, item) => sum + item.context.length, 0);
+
+      await expect(page.locator("#technologies-list a")).toHaveCount(total);
+      await expect(page.locator("#technologies-list button")).toHaveCount(0);
+    });
+
+    test("os links de contexto têm foco visível e levam à página certa", async ({
+      page,
+    }) => {
+      await page.goto(technologies.path);
+      const links = page.locator("#technologies-list a");
+
+      for (const link of (await links.all()).slice(0, 6)) {
+        await link.focus();
+        const outline = await link.evaluate(
+          (element) => getComputedStyle(element).outlineStyle,
+        );
+        expect(outline, (await link.textContent()) ?? "").not.toBe("none");
+      }
+
+      await page
+        .locator("#technologies-list a", {
+          hasText: technologies.contextLabels.reelix,
+        })
+        .first()
+        .click();
+      await expect(page).toHaveURL(
+        new RegExp(`${technologies.contextPaths.reelix}/?$`),
+      );
+      await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+        technologies.contextLabels.reelix,
+      );
     });
   });
 }

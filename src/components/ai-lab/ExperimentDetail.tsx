@@ -1,10 +1,11 @@
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
+import { projectHref } from "@/components/projects/href";
 import { columns, measure } from "@/components/projects/layout";
 import { ProjectTechnologies } from "@/components/projects/ProjectTechnologies";
 import { buttonStyles } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import type { DetailExperiment } from "@/config/aiLab";
+import { type DetailExperiment, experimentsWithDetail } from "@/config/aiLab";
 import { projects } from "@/config/projects";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils/cn";
@@ -19,6 +20,10 @@ const sections = [
   "limitations",
   "learned",
 ] as const;
+
+/** Link para o experimento vizinho: rótulo pequeno e nome, com alvo de 44 px. */
+const neighborClass =
+  "group flex min-h-11 flex-col justify-center gap-1 decoration-primary underline-offset-4 hover:[&>span:last-child]:underline";
 
 type DetailBlockProps = {
   id: string;
@@ -55,6 +60,13 @@ export async function ExperimentDetail({ experiment }: ExperimentDetailProps) {
   const tNav = await getTranslations("navigation");
   const originProject = projects.find((project) => project.key === origin);
 
+  // Vizinhos na ordem da lista, só entre experimentos com página (AIL-RF-16).
+  const position = experimentsWithDetail.findIndex(
+    (item) => item.slug === experiment.slug,
+  );
+  const previous = experimentsWithDetail[position - 1];
+  const next = experimentsWithDetail[position + 1];
+
   return (
     <div className="py-20 md:py-24">
       <Container>
@@ -79,20 +91,15 @@ export async function ExperimentDetail({ experiment }: ExperimentDetailProps) {
               {model}
             </p>
           ) : null}
-          <ProjectTechnologies technologies={technologies} />
+          {technologies.length > 0 ? (
+            <ProjectTechnologies technologies={technologies} />
+          ) : null}
           {originProject && origin ? (
             <div className="mt-4 flex flex-wrap items-center gap-x-8">
               <p className="text-small text-muted">
                 <span className="font-medium">{t("labels.partOf")}: </span>
                 <Link
-                  href={
-                    originProject.slug
-                      ? {
-                          pathname: "/projects/[slug]",
-                          params: { slug: originProject.slug },
-                        }
-                      : "/projects"
-                  }
+                  href={projectHref(origin)}
                   className="text-primary underline-offset-4 hover:underline"
                 >
                   {tProjects(`items.${origin}.name`)}
@@ -125,6 +132,48 @@ export async function ExperimentDetail({ experiment }: ExperimentDetailProps) {
             </p>
           </DetailBlock>
         ))}
+
+        {previous || next ? (
+          <nav
+            aria-label={t("labels.experimentNavigation")}
+            className="flex flex-wrap items-start justify-between gap-x-8 gap-y-4 border-t border-border pt-10"
+          >
+            {previous ? (
+              <Link
+                href={{
+                  pathname: "/ai-lab/[slug]",
+                  params: { slug: previous.slug },
+                }}
+                className={neighborClass}
+              >
+                <span className="text-small text-muted">
+                  <span aria-hidden="true">← </span>
+                  {t("labels.previousExperiment")}
+                </span>
+                <span className="text-body text-foreground">
+                  {t(`experiments.${previous.key}.name`)}
+                </span>
+              </Link>
+            ) : null}
+            {next ? (
+              <Link
+                href={{
+                  pathname: "/ai-lab/[slug]",
+                  params: { slug: next.slug },
+                }}
+                className={cn(neighborClass, "ml-auto text-right")}
+              >
+                <span className="text-small text-muted">
+                  {t("labels.nextExperiment")}
+                  <span aria-hidden="true"> →</span>
+                </span>
+                <span className="text-body text-foreground">
+                  {t(`experiments.${next.key}.name`)}
+                </span>
+              </Link>
+            ) : null}
+          </nav>
+        ) : null}
       </Container>
     </div>
   );

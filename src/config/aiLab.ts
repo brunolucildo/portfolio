@@ -11,6 +11,9 @@ export type AiLabExperimentKey =
   | "outputValidation"
   | "scoreConsistency"
   | "analystPersonas"
+  | "approachAndModelChoice"
+  | "promptTestFramework"
+  | "loraFineTuning"
   | "analyticsPersonas";
 
 /** "Projeto concluído" existe no vocabulário, mas nenhum experimento o usa na v1. */
@@ -68,6 +71,35 @@ export const aiLabExperiments: readonly AiLabExperiment[] = [
     model: "gpt-4o-mini",
     technologies: ["TypeScript", "OpenAI API", "SQLite"],
     origin: "fintalab",
+  },
+  // Material de estudo sem repositório público (SPEC-006 v0.5.0, seção 7.7):
+  // sem projeto de origem e sem tecnologias listadas.
+  {
+    key: "approachAndModelChoice",
+    slug: "approach-and-model-choice",
+    type: "study",
+    state: "concluded",
+    model: null,
+    technologies: [],
+    origin: null,
+  },
+  {
+    key: "promptTestFramework",
+    slug: "prompt-test-framework",
+    type: "study",
+    state: "concluded",
+    model: null,
+    technologies: [],
+    origin: null,
+  },
+  {
+    key: "loraFineTuning",
+    slug: "lora-fine-tuning",
+    type: "study",
+    state: "concluded",
+    model: "Qwen2.5-1.5B-Instruct, LoRA adapter",
+    technologies: [],
+    origin: null,
   },
   {
     key: "analyticsPersonas",

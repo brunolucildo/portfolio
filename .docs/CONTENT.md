@@ -497,7 +497,7 @@ Um conteúdo poderá ser considerado pronto para publicação quando:
 | Revisar histórico profissional | Definido: cargos, datas e textos aprovados (SPEC-003) |
 | Validar conquistas e métricas profissionais | Definido na SPEC-003 (seção 7.3): só as métricas autorizadas por Bruno são publicadas, e só em Experience |
 | Selecionar projetos da primeira versão | Definido na SPEC-004: Football Stat Analytics, Reelix e FintaLab |
-| Definir conteúdos iniciais do AI Lab | Definidos na SPEC-006 (aprovados em 2026-11-08); candidatos dos módulos da pós aguardam decisão |
+| Definir conteúdos iniciais do AI Lab | Definidos na SPEC-006 (aprovados em 2026-11-08); os três itens dos módulos da pós entram pela SPEC-006 v0.5.0 (aprovados em 2026-11-08) |
 | Confirmar links públicos dos projetos | Conferidos em 2026-11-08 (GitHub e três repositórios públicos, status 200). Decidido em 2026-11-08: os bancos `.db` do repositório do Football ficam públicos (SPEC-004) |
 | Definir utilização da fotografia | Definido: no Hero, com o tratamento aprovado (SPEC-001 e SPEC-011) |
 | Preparar currículo atualizado | Definido na SPEC-009: PDF em inglês, com página própria (`/resume`) |
