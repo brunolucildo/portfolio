@@ -3,27 +3,34 @@ import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/ui/Section";
-import { featuredProjects } from "@/config/projects";
+import { projects } from "@/config/projects";
 import { Link } from "@/i18n/navigation";
 
+/**
+ * Destaques da Home (HOME-RF-04 e PROJ-RF-14): os mesmos projetos, na mesma
+ * ordem e com os mesmos textos da página Projects.
+ */
 export async function FeaturedProjects() {
   const t = await getTranslations("home.projects");
+  const tProjects = await getTranslations("projects");
   const tNav = await getTranslations("navigation");
 
   return (
     <Section id="featured-projects" title={t("title")}>
-      <ul className="grid gap-6 md:grid-cols-2">
-        {featuredProjects.map(({ key, repositoryUrl }) => (
+      <ul className="grid gap-6 lg:grid-cols-3">
+        {projects.map(({ key, repositoryUrl }) => (
           <li key={key} className="flex">
             <Card className="flex w-full flex-col p-8">
               <div className="flex flex-wrap gap-2">
-                <Badge>{t(`items.${key}.category`)}</Badge>
-                <Badge>{t(`items.${key}.status`)}</Badge>
+                <Badge>{tProjects(`items.${key}.category`)}</Badge>
+                <Badge>{tProjects(`items.${key}.status`)}</Badge>
               </div>
               <h3 className="mt-6 text-h3 text-foreground">
-                {t(`items.${key}.name`)}
+                {tProjects(`items.${key}.name`)}
               </h3>
-              <p className="mt-3 text-muted">{t(`items.${key}.description`)}</p>
+              <p className="mt-3 text-muted">
+                {tProjects(`items.${key}.description`)}
+              </p>
               <a
                 href={repositoryUrl}
                 target="_blank"

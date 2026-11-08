@@ -34,7 +34,6 @@
   },
   "pages": {
     "placeholder": "Esta seção está em construção.",
-    "projects": { "title": "Projetos" },
     "aiLab": { "title": "AI Lab" },
     "contact": { "title": "Contato" }
   },
@@ -144,6 +143,128 @@
       }
     }
   },
+  "projects": {
+    "metadata": {
+      "title": "Projetos | Bruno Lucildo",
+      "description": "Projetos acadêmicos, pessoais e conceituais de Bruno Lucildo, cada um com seu estado atual: análise de futebol com IA, um aplicativo de acompanhamento de filmes e séries e um conceito de produto de retorno de desempenho."
+    },
+    "title": "Projetos",
+    "intro": "Projetos acadêmicos, pessoais e conceituais, cada um com seu estado atual e um link para o repositório público.",
+    "labels": {
+      "viewDetails": "Ver detalhes",
+      "repository": "Ver no GitHub",
+      "back": "Voltar para projetos",
+      "technologies": "Tecnologias",
+      "screens": "Telas"
+    },
+    "items": {
+      "football": {
+        "name": "Football Stat Analytics",
+        "category": "Projeto acadêmico",
+        "status": "Em desenvolvimento",
+        "description": "Análise de desempenho de atletas de futebol com IA, interação conversacional e recuperação de informações."
+      },
+      "reelix": {
+        "name": "Reelix",
+        "category": "Projeto pessoal",
+        "status": "Em desenvolvimento",
+        "description": "Aplicativo para descobrir e acompanhar filmes e séries, registrar o que você assistiu e compartilhar atividades autorizadas com amigos."
+      },
+      "fintalab": {
+        "name": "FintaLab",
+        "category": "Conceito de produto",
+        "status": "Conceitual",
+        "description": "Uma plataforma planejada que transforma observações de partidas em retorno de desempenho fundamentado em evidências para jogadores, agências e clubes. Está em fase de planejamento: o repositório reúne o planejamento do produto, um wireframe estático e um chatbot experimental, e FintaLab é um nome de trabalho."
+      }
+    },
+    "captions": {
+      "reelix": "Telas da versão de desenvolvimento. A interface do app está em português. Dados e imagens de filmes e séries do TMDB; este produto não é endossado nem certificado pelo TMDB.",
+      "fintalab": "Telas do protótipo conceitual estático. Todas as pessoas, clubes e números são fictícios."
+    },
+    "images": {
+      "reelixHome": "Tela inicial do Reelix no celular: a aba Séries com as fileiras \"Continuar Assistindo\" e \"Começar a Assistir\", com pôsteres de séries, e o início do calendário de estreias.",
+      "reelixMovies": "Tela inicial do Reelix no celular, aba Filmes: a fileira \"Quero assistir\" com um pôster de filme, a fileira de filmes em destaque e o início dos favoritos.",
+      "reelixSearch": "Pesquisa no catálogo do Reelix no celular: as abas Filmes e Séries, o campo de busca com \"Interestelar\" e dois resultados com pôster e ano.",
+      "reelixTitle": "Tela de título do Reelix no celular, para a série Breaking Bad: uma imagem de fundo, a data de lançamento, botões de ação, a sinopse e as abas de temporadas e episódios com o progresso assistido.",
+      "reelixReviews": "Seção de avaliações e comentários do Reelix no celular: o controle de nota em meia estrela com a escolha entre privado e público, e a caixa de comentário com a opção de marcar como spoiler e a escolha de visibilidade.",
+      "reelixWatchlist": "Tela de watchlist do Reelix no celular: abas de favoritos, watchlist e minhas listas, campo de busca no catálogo, opção de ordenação e dois títulos com pôster, tipo, ano e gênero.",
+      "reelixProfile": "Tela de perfil do Reelix no celular: opções de avatar (iniciais e personagens ilustrados) e uma fileira de medalhas de conquistas com um link para progresso e estatísticas.",
+      "reelixStats": "Tela de conquistas e estatísticas do Reelix no celular: totais de episódios, séries, filmes e registros, tempo estimado de exibição e a atividade do mês.",
+      "reelixLogin": "Tela de entrada do Reelix no celular: o logotipo do reelix, o título \"Suas histórias começam aqui.\" e os campos de e-mail e senha.",
+      "fintalabLanding": "Protótipo conceitual do FintaLab, tela inicial: o título \"Cada partida pode levar você mais longe.\" ao lado de uma ilustração de campo de futebol, com o aviso de que pessoas, clubes e números são fictícios.",
+      "fintalabEvaluation": "Protótipo conceitual do FintaLab, tela de avaliação: uma carta de jogador em pixel art com notas fictícias e um aviso de que os valores são inventados e não foram gerados pelo motor.",
+      "fintalabRoster": "Protótipo conceitual do FintaLab, tela de elenco: uma tabela com quatro jogadores fictícios, com posição, nacionalidade, vínculo e última avaliação."
+    },
+    "detail": {
+      "sections": {
+        "overview": "Visão geral",
+        "challenge": "Desafio",
+        "solution": "Solução",
+        "architecture": "Arquitetura",
+        "decisions": "Decisões técnicas",
+        "state": "Estado atual",
+        "links": "Links"
+      },
+      "football": {
+        "metadata": {
+          "title": "Football Stat Analytics | Bruno Lucildo",
+          "description": "Um projeto acadêmico que analisa o desempenho de atletas de futebol com IA, recuperação de informações e verificação de respostas em camadas: arquitetura, decisões técnicas e estado atual."
+        },
+        "overview": "O Football Stat Analytics é uma aplicação de linha de comando que analisa o desempenho de atletas de futebol com IA. Ela indexa relatórios de observação, responde perguntas fundamentadas nesses relatórios e oferece um chat interativo com personas de analista. É um projeto acadêmico.",
+        "challenge": "Modelos de linguagem produzem com facilidade afirmações que parecem corretas, mas não têm suporte: números inventados, ações que os dados nunca citaram e adjetivos elogiosos. Na análise esportiva isso é pior do que não responder. O desafio foi manter cada resposta ligada à evidência fornecida pelo usuário ou aos relatórios indexados.",
+        "solution": "As respostas passam por camadas de verificação. Regras determinísticas impõem o formato de saída e rejeitam números e termos sem suporte. Um verificador semântico, um segundo modelo que precisa citar a evidência, avalia cada afirmação. Uma resposta reprovada recebe uma tentativa automática de correção, e as respostas baseadas em relatórios terminam com um relatório de fundamentação que mostra o que pôde ser rastreado até os trechos recuperados.",
+        "architecture": "A aplicação é escrita em TypeScript sobre Node.js, com remoção nativa de tipos e o módulo SQLite embutido. A ingestão extrai o texto de relatórios em PDF, traduz, divide em trechos, gera embeddings com a API da OpenAI e grava tudo no SQLite. A recuperação ordena os trechos por uma pontuação híbrida, que combina similaridade de embeddings e coincidência de palavras-chave, e envia os cinco melhores ao prompt da resposta. O chat guarda o histórico da sessão no SQLite e resume as mensagens mais antigas quando o contexto cresce. O código separa o comportamento de IA (personas, políticas, validação e verificação) do armazenamento e da recuperação, e 109 testes automatizados o cobrem com chamadas de modelo simuladas, então rodam sem chave de API.",
+        "decisions": [
+          {
+            "title": "Regras no código, não só nos prompts.",
+            "text": "Instruções de prompt sozinhas não garantem que o modelo siga uma política, então as regras mais importantes são verificadas pelo código."
+          },
+          {
+            "title": "Um juiz em quem não se confia às cegas.",
+            "text": "O verificador precisa citar a evidência, e uma citação que não está na evidência é rejeitada. Se o próprio verificador falhar, o chat continua funcionando e mostra um aviso."
+          },
+          {
+            "title": "Consenso opcional, desligado por padrão.",
+            "text": "Responder com a mediana de três amostras custa três vezes a geração e não tornou as notas estáveis de forma confiável, então está disponível, mas desativado."
+          },
+          {
+            "title": "Armazenamento local simples.",
+            "text": "O histórico de conversas e os embeddings ficam em arquivos SQLite, o que torna o projeto fácil de executar e inspecionar."
+          }
+        ],
+        "state": "Em desenvolvimento. O projeto se descreve como experimental: as respostas não são conferidas com estatísticas oficiais, a ingestão de PDF não faz OCR, e as verificações são salvaguardas que não substituem a revisão humana. Uma limitação conhecida é a recuperação: o índice não tem metadados de atleta para filtrar, então uma pergunta sobre um atleta pode recuperar trechos sobre outros."
+      },
+      "reelix": {
+        "metadata": {
+          "title": "Reelix | Bruno Lucildo",
+          "description": "Um aplicativo pessoal de acompanhamento de filmes e séries, com compartilhamento que prioriza a privacidade e controle de spoilers: arquitetura, decisões técnicas e estado atual."
+        },
+        "overview": "O Reelix é um aplicativo para descobrir e acompanhar filmes e séries, registrar o que você assistiu e compartilhar atividades autorizadas com amigos. O repositório reúne um app mobile em React Native e uma API em ASP.NET Core. É um projeto pessoal.",
+        "challenge": "Um diário do que se assiste é dado pessoal. Compartilhá-lo com amigos só funciona se cada pessoa controla o que é compartilhado, e comentários e avaliações não podem estragar um enredo para quem ainda não assistiu. O desafio foi construir os recursos sociais sobre isso, com privacidade e controle de spoilers como regras do produto, e não como remendos.",
+        "solution": "O compartilhamento é opcional e dividido em consentimentos separados para histórico, avaliações e favoritos. Comentários são privados por padrão, podem ser sinalizados como spoiler e ficam ocultos até o leitor escolher revelá-los. O acompanhamento de progresso, as listas, as conquistas e um ranking mensal entre amigos seguem as mesmas regras.",
+        "architecture": "A API é um monólito modular em ASP.NET Core (.NET 10), organizado nos projetos Domain, Application, Infrastructure e Api para que as regras de negócio não dependam de frameworks nem do banco. Os dados ficam no PostgreSQL, via Entity Framework Core. O Supabase Auth cuida do login, e a API valida seus tokens e os associa à conta interna. Os metadados de filmes e séries vêm do TMDB, por trás de um adaptador, com as credenciais do provedor mantidas no servidor. O app mobile usa React Native com Expo, TypeScript estrito, Expo Router e TanStack Query. Um workflow do GitHub Actions executa os testes do backend, as verificações de lint e tipos do mobile, auditorias de dependências e a busca por segredos.",
+        "decisions": [
+          {
+            "title": "Um monólito modular antes de microsserviços.",
+            "text": "O desenho se mantém simples até o uso real justificar mais infraestrutura."
+          },
+          {
+            "title": "Um único sistema de identidade.",
+            "text": "O Supabase Auth é o único provedor, e um segundo sistema, como o ASP.NET Identity, foi deliberadamente deixado de fora."
+          },
+          {
+            "title": "Provedores por trás de um adaptador.",
+            "text": "A integração com o catálogo pode ser trocada sem mexer nas regras de negócio, e as chaves dos provedores nunca chegam ao app."
+          },
+          {
+            "title": "IA desligada até haver decisão.",
+            "text": "Existe no servidor um classificador automático de spoilers, desativado por padrão enquanto custo e política de dados são definidos; a sinalização manual de spoilers funciona sem ele."
+          }
+        ],
+        "state": "Em desenvolvimento. O código cobre contas, onboarding, descoberta, acompanhamento, listas, avaliações e comentários, amigos, notificações e conquistas, mas o próprio repositório afirma que isso descreve a implementação e não confirma uma implantação em produção. As notificações push remotas estão desativadas, o widget Android não foi implementado e o app mobile ainda não tem testes automatizados."
+      }
+    }
+  },
   "home": {
     "metadata": {
       "title": "Bruno Lucildo | Desenvolvedor Backend Sênior e Líder Técnico",
@@ -169,21 +290,7 @@
     "projects": {
       "title": "Projetos em destaque",
       "repository": "Ver no GitHub",
-      "link": "Ver projetos",
-      "items": {
-        "football": {
-          "name": "Football Stat Analytics",
-          "category": "Projeto acadêmico",
-          "status": "Em desenvolvimento",
-          "description": "Análise de desempenho de atletas de futebol com IA, interação conversacional e recuperação de informações."
-        },
-        "reelix": {
-          "name": "Reelix",
-          "category": "Projeto pessoal",
-          "status": "Em desenvolvimento",
-          "description": "Aplicativo para descobrir e acompanhar filmes e séries, registrar o que você assistiu e compartilhar atividades autorizadas com amigos."
-        }
-      }
+      "link": "Ver projetos"
     },
     "aiLab": {
       "title": "AI Lab",

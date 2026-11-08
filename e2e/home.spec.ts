@@ -7,6 +7,7 @@ type HomePage = {
   headline: string;
   facts: string[];
   projectStatus: string;
+  conceptualStatus: string;
   repositoryLink: string;
   aiLab: { name: string; path: string };
 };
@@ -22,6 +23,7 @@ const pages: HomePage[] = [
       "Leading a team of five developers",
     ],
     projectStatus: "In development",
+    conceptualStatus: "Conceptual",
     repositoryLink: "View on GitHub",
     aiLab: { name: "Explore the AI Lab", path: "/en/ai-lab" },
   },
@@ -35,6 +37,7 @@ const pages: HomePage[] = [
       "Liderando uma equipe de cinco desenvolvedores",
     ],
     projectStatus: "Em desenvolvimento",
+    conceptualStatus: "Conceitual",
     repositoryLink: "Ver no GitHub",
     aiLab: { name: "Explorar o AI Lab", path: "/pt-BR/ai-lab" },
   },
@@ -43,6 +46,7 @@ const pages: HomePage[] = [
 const repositories = [
   "https://github.com/brunolucildo/football-stat-analytics-cli",
   "https://github.com/brunolucildo/reelix",
+  "https://github.com/brunolucildo/fintalab",
 ];
 
 test("a raiz redireciona para o idioma padrão", async ({ page }) => {
@@ -245,21 +249,22 @@ for (const home of pages) {
       }
     });
 
-    test("destaca dois projetos em desenvolvimento com link para o GitHub", async ({
+    test("destaca três projetos com estado e link para o GitHub", async ({
       page,
     }) => {
       await page.goto(home.path);
 
       const projects = page.locator("#featured-projects li");
-      await expect(projects).toHaveCount(2);
-      for (const project of await projects.all()) {
-        await expect(project).toContainText(home.projectStatus);
-      }
+      await expect(projects).toHaveCount(3);
+      await expect(projects.nth(0)).toContainText(home.projectStatus);
+      await expect(projects.nth(1)).toContainText(home.projectStatus);
+      await expect(projects.nth(2)).toContainText("FintaLab");
+      await expect(projects.nth(2)).toContainText(home.conceptualStatus);
 
       const links = page
         .locator("#featured-projects")
         .getByRole("link", { name: home.repositoryLink });
-      await expect(links).toHaveCount(2);
+      await expect(links).toHaveCount(3);
       expect(
         await links.evaluateAll((els) =>
           els.map((a) => a.getAttribute("href")),

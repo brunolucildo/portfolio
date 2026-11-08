@@ -7,8 +7,8 @@
 | Nome | Home |
 | Identificador | SPEC-001 |
 | Slug | `001-home` |
-| Versão | 0.7.0 |
-| Status | In Review (v0.7.0 implementada, incluindo o fallback em JavaScript do parallax, HOME-RF-14; fallback confirmado visualmente no Firefox pelo usuário em 2026-11-07; aguardam validação final a revisão de conteúdo provisório e o domínio) |
+| Versão | 0.8.0 |
+| Status | In Review (v0.8.0 implementada: três projetos em destaque, com o FintaLab; inclui o fallback em JavaScript do parallax, HOME-RF-14, confirmado no Firefox pelo usuário em 2026-11-07; aguardam validação final a revisão de conteúdo provisório e o domínio) |
 | Data | 2026-11-07 |
 | Origem | SPEC-001 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -28,7 +28,7 @@ A Home é a principal porta de entrada do portfólio. Deve apresentar rapidament
 
 1. **Hero:** posicionamento profissional, mensagem principal, mensagem complementar, CTAs, fotografia e parallax.
 2. **Faixa de experiência:** três fatos verificáveis, com link para Experience.
-3. **Projetos em destaque:** Football Stat Analytics (projeto acadêmico) e Reelix (projeto pessoal), ambos com estado explícito e link para o repositório público.
+3. **Projetos em destaque:** Football Stat Analytics (projeto acadêmico), Reelix (projeto pessoal) e FintaLab (conceito de produto), cada um com estado explícito e link para o repositório público.
 4. **Destaque do AI Lab:** bloco de chamada com link para a página AI Lab.
 5. **Caminhos de contato:** CTA "Get in Touch" no Hero. Os canais completos ficam no footer (SPEC-010).
 6. **Metadados** da Home nos dois idiomas.
@@ -51,7 +51,7 @@ A Home é a principal porta de entrada do portfólio. Deve apresentar rapidament
 | HOME-RF-01 | Must | O Hero exibe, nesta ordem: identificação de posicionamento, título principal (`h1`) e mensagem complementar, com os textos da seção 8. |
 | HOME-RF-02 | Must | O Hero oferece dois CTAs: "Explore My Work" (principal) para a página Projects e "Get in Touch" (secundário) para a página Contact. |
 | HOME-RF-03 | Must | A faixa de experiência exibe os três fatos da seção 8, com um link para Experience. |
-| HOME-RF-04 | Must | O destaque de projetos apresenta o Football Stat Analytics e o Reelix, cada um com nome, descrição curta, categoria, estado atual explícito e link para o repositório (HOME-RF-13). Um link para Projects aparece abaixo dos cards. |
+| HOME-RF-04 | Must | O destaque de projetos apresenta o Football Stat Analytics, o Reelix e o FintaLab, nessa ordem, cada um com nome, descrição curta, categoria, estado atual explícito e link para o repositório (HOME-RF-13). Nome, categoria, estado e descrição vêm da mesma fonte da página Projects (SPEC-004, PROJ-RF-14). Um link para Projects aparece abaixo dos cards. |
 | HOME-RF-05 | Should | O destaque do AI Lab apresenta uma descrição do escopo da seção e um link para a página AI Lab, sem citar experimentos ou resultados específicos. |
 | HOME-RF-06 | Must | O Hero possui um espaço para fotografia profissional: à direita do texto a partir de 1024 px e abaixo do texto em larguras menores. Sem o arquivo da foto, o Hero se apresenta apenas com texto, sem espaço vazio. |
 | HOME-RF-07 | Must | O Hero aplica parallax em 2 a 3 camadas decorativas, ativo somente a partir de 1024 px e sem `prefers-reduced-motion: reduce`. |
@@ -85,7 +85,7 @@ A Home é a principal porta de entrada do portfólio. Deve apresentar rapidament
 |---|---|---|
 | Hero | Texto à esquerda, fotografia à direita (≥1024 px). Coluna única em larguras menores, com a foto abaixo do texto. | Título em `text-display`. Muito espaço negativo. |
 | Faixa de experiência | Três itens em linha (≥768 px) ou em coluna (<768 px), com link para Experience. | Sem cards idênticos: apresentada como faixa tipográfica. |
-| Projetos em destaque | Dois cards lado a lado (≥768 px) ou empilhados (<768 px), cada um com categoria, estado, descrição e link para o GitHub; link para Projects abaixo. | Usa `Card` (sem hover, pois o card não é clicável) e `Badge`. |
+| Projetos em destaque | Três cards em colunas (≥1024 px) ou empilhados (<1024 px), cada um com categoria, estado, descrição e link para o GitHub; link para Projects abaixo. | Usa `Card` (sem hover, pois o card não é clicável) e `Badge`. |
 | AI Lab | Bloco de chamada com título, texto curto e link. | Visual coerente com o restante, sem criar nova identidade. |
 
 ### 6.2. Estados
@@ -146,6 +146,7 @@ Origem: `CONTENT.md`, `BUSINESS.md`, `SEO.md` e `.specs/FEATURES.md`. A coluna S
 | Reelix: categoria | Personal project | Projeto pessoal | CONTENT 6.2 | Provisório |
 | Reelix: descrição | An app to discover and track movies and series, record what you have watched and share authorized activity with friends. | Aplicativo para descobrir e acompanhar filmes e séries, registrar o que você assistiu e compartilhar atividades autorizadas com amigos. | README do repositório `reelix` (04/11/2026) | `pt-BR` do README; `en` provisório |
 | Reelix: estado | In development | Em desenvolvimento | README e PROJECT_STATUS do repositório; resposta do usuário | Aprovado |
+| FintaLab (nome, categoria, estado e descrição) | Os textos do FintaLab (conceito de produto, estado Conceptual) e os dos outros dois projetos agora ficam em `projects.items` e são os mesmos da página Projects | Idem | SPEC-004, seção 7.2 | Aprovado (2026-11-07) |
 | AI Lab | Texto de chamada sobre o escopo (LLMs, agentes, RAG, engenharia de prompts) | Equivalente | SPEC-006 e BUSINESS 7.2 | Provisório |
 | Título dos blocos | Experience; Featured projects; AI Lab | Experiência; Projetos em destaque; AI Lab | Criado na implementação | Provisório |
 | Rótulos dos links | View experience; View projects; View on GitHub; Explore the AI Lab | Ver experiência; Ver projetos; Ver no GitHub; Explorar o AI Lab | Criado na implementação | Provisório |
@@ -168,7 +169,7 @@ Regras de conteúdo:
 | HOME-CA-01 | RF-01 | **Given** a Home em `/en` **When** a página carrega **Then** o `h1` é "Engineering beyond code." e a identificação e a mensagem complementar aparecem acima da dobra em 1366×768. |
 | HOME-CA-02 | RF-02 | **Given** a Home em `/en` **When** o usuário ativa "Explore My Work" **Then** navega para `/en/projects`; **When** ativa "Get in Touch" **Then** navega para `/en/contact`. Em `/pt-BR` os destinos são `/pt-BR/projetos` e `/pt-BR/contato`. |
 | HOME-CA-03 | RF-03 | **Given** a Home **When** renderizada **Then** exibe exatamente os três fatos da seção 8 e um link para Experience que leva à rota do idioma ativo. |
-| HOME-CA-04 | RF-04 | **Given** a Home **When** renderizada **Then** há dois cards (Football Stat Analytics e Reelix), cada um com categoria e estado de lista permitida; nenhum card apresenta o projeto como produto lançado. O link abaixo dos cards leva a Projects. |
+| HOME-CA-04 | RF-04 | **Given** a Home **When** renderizada **Then** há três cards (Football Stat Analytics, Reelix e FintaLab), cada um com categoria e estado de lista permitida (o FintaLab como "Conceptual"/"Conceitual"); nenhum card apresenta o projeto como produto lançado. O link abaixo dos cards leva a Projects. |
 | HOME-CA-05 | RF-05 | **Given** a Home **When** renderizada **Then** o bloco do AI Lab tem link para a rota AI Lab do idioma e não contém alegações de resultado nem nomes de experimentos específicos. |
 | HOME-CA-06 | RF-06 | **Given** largura ≥1024 px e arquivo de foto presente **Then** a foto fica à direita do texto. **Given** largura <1024 px **Then** fica abaixo do texto. **Given** arquivo ausente **Then** o Hero não reserva espaço para a foto. |
 | HOME-CA-07 | RF-07, RNF-06 | **Given** largura ≥1024 px **When** o usuário rola **Then** as camadas decorativas se movem em velocidades diferentes e o texto principal não se move. **Given** `prefers-reduced-motion: reduce` **Then** nenhuma camada se move. **Given** largura <1024 px **Then** nenhuma camada se move. |
@@ -180,7 +181,7 @@ Regras de conteúdo:
 | HOME-CA-13 | RNF-01 | **Given** build de produção em perfil mobile **When** medido com Lighthouse **Then** LCP ≤2,5 s e CLS ≤0,1. |
 | HOME-CA-14 | RNF-04 | **Given** navegação apenas por teclado **When** o usuário percorre a Home **Then** a ordem é skip link, header, CTAs, link de experiência, card do projeto, link do AI Lab, footer, com foco visível em cada item. |
 | HOME-CA-15 | RNF-07 | **Given** as larguras 360, 390, 768, 1366, 1440 e 1920 px **Then** `scrollWidth` é igual a `innerWidth` em ambos os idiomas. |
-| HOME-CA-17 | RF-13 | **Given** os cards de projeto **When** o usuário ativa "View on GitHub" **Then** o repositório correspondente (`brunolucildo/football-stat-analytics-cli` ou `brunolucildo/reelix`) abre em nova aba, o link tem `rel="noopener noreferrer"` e um leitor de tela anuncia a nova aba. |
+| HOME-CA-17 | RF-13 | **Given** os cards de projeto **When** o usuário ativa "View on GitHub" **Then** o repositório correspondente (`brunolucildo/football-stat-analytics-cli`, `brunolucildo/reelix` ou `brunolucildo/fintalab`) abre em nova aba, o link tem `rel="noopener noreferrer"` e um leitor de tela anuncia a nova aba. |
 | HOME-CA-18 | RF-14, RNF-06 | **Given** um navegador sem `animation-timeline` (ex.: Firefox) e largura ≥1024 px **When** o usuário rola **Then** as camadas se movem com os mesmos deslocamentos e a mesma rotação de HOME-RF-07 e o texto principal não se move. **Given** `prefers-reduced-motion: reduce` ou largura <1024 px **Then** nenhuma camada se move e nenhum listener de scroll fica registrado. **Given** a mudança dessas condições com a página aberta **Then** o movimento é ligado ou desligado sem recarregar. **Given** um navegador com `animation-timeline` **Then** o fallback não registra listener algum. **Given** JavaScript desabilitado **Then** a página permanece íntegra, com as camadas estáticas onde o CSS não é suportado. |
 | HOME-CA-16 | RNF-09 | **Given** o código da Home **Then** `pnpm check`, `pnpm typecheck` e `pnpm build` terminam sem erros. |
 
@@ -192,7 +193,7 @@ Regras de conteúdo:
 | SPEC-008 Internationalization | Implementada na base | Rotas, conteúdo `en`/`pt-BR`, metadados por idioma. |
 | Design system | Implementado | Tokens e componentes Button, Container, Section, Card, Badge. |
 | SPEC-011 Fotografia | Pendente | Arquivo e tratamento da foto (Q1). |
-| SPEC-004 Projects | Pendente | Páginas de detalhe; até lá os destaques levam a `/projects`. |
+| SPEC-004 Projects | Implementada | Fonte única dos projetos e dos textos dos cards; o link abaixo dos cards leva à lista. |
 | SPEC-006 AI Lab | Pendente | Destino do destaque e texto de escopo. |
 | Domínio definitivo | Pendente | Canonical e URLs absolutas do Open Graph (Q4). |
 
@@ -248,6 +249,7 @@ Decisões reversíveis adotadas neste refinamento. Podem ser alteradas sem refaz
 | 2026-11-07 | Arquivo da foto indicado e movido para `public/images/hero/bruno-lucildo-hero.png`. | Resposta do usuário (Q1) |
 | 2026-11-07 | Football Stat Analytics permanece "Em desenvolvimento" (o README do projeto o chama de "experimental"). | Resposta do usuário |
 | 2026-11-07 | Reelix entra na Home como projeto pessoal em desenvolvimento. | Resposta do usuário |
+| 2026-11-07 | FintaLab entra na Home como terceiro destaque, conceito de produto em planejamento. | Resposta do usuário (SPEC-004) |
 | 2026-11-07 | Cards de projeto com link externo para o repositório no GitHub. | Resposta do usuário |
 | 2026-11-07 | Parallax ganha fallback em JavaScript para navegadores sem scroll-driven animations (Firefox), mantendo o CSS como caminho principal. Substitui a decisão "em CSS" sem JS apenas para esses navegadores; segue sem biblioteca. | Resposta do usuário (retomada) |
 | 2026-11-07 | Texto alternativo da foto aprovado; mantidos a captura atual e o tratamento visual implementado. | Resposta do usuário (Q1) |
@@ -270,3 +272,4 @@ Decisões reversíveis adotadas neste refinamento. Podem ser alteradas sem refaz
 | 2026-11-07 | v0.5.0: Reelix incluído nos destaques; RF-04 reescrito para dois projetos; novo RF-13 e CA-17 (links para o GitHub); tabela de conteúdo, composição e riscos atualizados. | Informações do perfil público do GitHub e decisão do usuário. |
 | 2026-11-07 | v0.6.0: parallax intensificado (deslocamentos, opacidade e contornos maiores; quadrado girando) e coberto por testes E2E. | Pedido do usuário: o efeito original não era percebido no Chrome nem no Firefox. |
 | 2026-11-07 | v0.7.0: novo HOME-RF-14, seção 7.1 e HOME-CA-18 (fallback em JavaScript do parallax); RNF-06, estados e riscos ajustados; Q1 atualizada e texto alternativo da foto aprovado. Foto do Hero passa a ser versionada e renomeada para `bruno-lucildo-portrait.png` (riscos, premissa 7 e Q1 ajustados). Fallback implementado (`HeroParallaxLayers.tsx`, variáveis `--parallax-*`) e coberto por 5 testes E2E em `e2e/home.spec.ts` (CA-18; o Chromium é forçado ao caminho do fallback; mutação confirmada). Confirmado no Firefox real pelo usuário. | Decisões do usuário na retomada: o efeito deve aparecer também no Firefox; a foto entra no Git. |
+| 2026-11-07 | v0.8.0: FintaLab entra como terceiro destaque (RF-04, composição, CA-04, CA-17 e dependência da SPEC-004 atualizados); nome, categoria, estado e descrição dos cards passam a vir da fonte única de Projects. Implementado e coberto por `e2e/home.spec.ts` e `e2e/projects.spec.ts`. | Pedido do usuário na SPEC-004. |
