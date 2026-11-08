@@ -20,7 +20,7 @@ export async function FeaturedProjects() {
       <ul className="grid gap-6 lg:grid-cols-3">
         {projects.map(({ key, repositoryUrl }) => (
           <li key={key} className="flex">
-            <Card className="flex w-full flex-col p-8">
+            <Card interactive className="flex w-full flex-col p-8">
               <div className="flex flex-wrap gap-2">
                 <Badge>{tProjects(`items.${key}.category`)}</Badge>
                 <Badge>{tProjects(`items.${key}.status`)}</Badge>

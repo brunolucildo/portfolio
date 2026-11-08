@@ -288,6 +288,52 @@
     },
     "title": "AI Lab",
     "intro": "I'm studying AI systems development and management, and I use study projects to explore language models. Each experiment states what I wanted to find out, how I approached it, what I measured and where it falls short. They are learning projects, not products.",
+    "neural": {
+      "hero": {
+        "headline": "Exploring the intelligence behind the code.",
+        "description": "Experiments, research and ideas exploring the possibilities of artificial intelligence.",
+        "cta": "Explore experiments"
+      },
+      "philosophy": {
+        "title": "The philosophy",
+        "items": {
+          "explore": {
+            "title": "Explore",
+            "text": "Investigate models and emerging technologies."
+          },
+          "experiment": {
+            "title": "Experiment",
+            "text": "Test ideas, architectures and techniques."
+          },
+          "understand": {
+            "title": "Understand",
+            "text": "Learn from results, failures and discoveries."
+          }
+        }
+      },
+      "experiments": {
+        "title": "Experiments & Research",
+        "filtersLabel": "Filter experiments",
+        "filters": {
+          "all": "All",
+          "experiments": "Experiments",
+          "research": "Research",
+          "projects": "Projects"
+        },
+        "showing": "Showing",
+        "of": "of",
+        "featured": "Featured experiment"
+      },
+      "log": {
+        "title": "Research log",
+        "intro": "The experiments in the order they appear in the lab, with what each one taught me. There are no dates: this is a path, not a calendar.",
+        "context": "Context",
+        "read": "Read the experiment"
+      },
+      "closing": {
+        "headline": "Curiosity never stops."
+      }
+    },
     "labels": {
       "objective": "Objective",
       "problem": "Problem investigated",

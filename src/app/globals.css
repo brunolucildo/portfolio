@@ -115,6 +115,276 @@
   }
 }
 
+/*
+ * AI Lab: Neural Intelligence Environment (SPEC-012). O roxo é um acento
+ * exclusivo desta página; o verde segue indicando atividade e ação.
+ */
+
+/* Iluminação difusa atrás da rede: manchas de roxo e verde, sem movimento. */
+.neural-glow {
+  background:
+    radial-gradient(
+      55% 60% at 78% 38%,
+      rgb(167 139 250 / 0.16),
+      transparent 70%
+    ),
+    radial-gradient(
+      40% 45% at 62% 78%,
+      rgb(183 243 107 / 0.07),
+      transparent 70%
+    );
+}
+
+/* Rede neural: o desenho estático some quando o canvas assume. */
+.neural-layer {
+  transform: translate3d(0, var(--neural-shift, 0px), 0);
+}
+
+.neural canvas {
+  opacity: 0;
+}
+
+.neural canvas,
+.neural-fallback {
+  transition: opacity var(--duration-slow) var(--ease-standard);
+}
+
+.neural[data-neural-state="running"] canvas,
+.neural[data-neural-state="static"] canvas {
+  opacity: 1;
+}
+
+.neural[data-neural-state="running"] .neural-fallback,
+.neural[data-neural-state="static"] .neural-fallback {
+  opacity: 0;
+}
+
+/* Grade de experimentos: itens escondidos pelo filtro e grade uniforme quando filtrada. */
+.neural-grid > li[hidden] {
+  display: none;
+}
+
+@media (width >= 48rem) {
+  .neural-grid[data-filtered="true"] > li {
+    grid-column: span 1;
+  }
+}
+
+@media (width >= 64rem) {
+  .neural-grid[data-filtered="true"] > li {
+    grid-column: span 6;
+    grid-row: auto;
+  }
+}
+
+/* Cards interativos do site: luz verde discreta que segue o cursor (`CardLight`). */
+[data-card-light]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-standard);
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 30%),
+    rgb(183 243 107 / 0.07),
+    transparent 70%
+  );
+}
+
+[data-card-light]:hover::before,
+[data-card-light]:focus-within::before {
+  opacity: 1;
+}
+
+/* Itens: profundidade e iluminação localizada só com ponteiro fino. */
+.neural-tile {
+  transition:
+    transform var(--duration-normal) var(--ease-standard),
+    border-color var(--duration-normal) var(--ease-standard),
+    box-shadow var(--duration-normal) var(--ease-standard),
+    background-color var(--duration-normal) var(--ease-standard);
+}
+
+.neural-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-standard);
+  background: radial-gradient(
+    280px circle at var(--mx, 50%) var(--my, 30%),
+    rgb(183 243 107 / 0.1),
+    rgb(167 139 250 / 0.11) 45%,
+    transparent 72%
+  );
+}
+
+.neural-tile[data-linked="true"]:hover,
+.neural-tile[data-linked="true"]:focus-within {
+  border-color: rgb(167 139 250 / 0.6);
+  background-color: var(--color-surface-elevated);
+  box-shadow: var(--shadow-glow-purple);
+}
+
+.neural-tile[data-linked="true"]:hover::before,
+.neural-tile[data-linked="true"]:focus-within::before {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) and (
+    prefers-reduced-motion: no-preference
+  ) {
+  .neural-tile[data-linked="true"]:hover {
+    transform: perspective(900px) translateY(-4px) rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg));
+  }
+}
+
+/* Philosophy: marcas gráficas abstratas; sem animação ficam no estado completo. */
+.neural-mark-spread {
+  transform-box: view-box;
+  transform-origin: 80px 60px;
+  animation: neural-spread 6s var(--ease-standard) infinite;
+}
+
+.neural-mark-link {
+  stroke-dasharray: 100;
+  animation: neural-link 4.5s var(--ease-standard) infinite;
+}
+
+.neural-mark-converge {
+  stroke-dasharray: 90;
+  animation: neural-converge 5s var(--ease-standard) infinite;
+}
+
+.neural-mark-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neural-pulse 3s ease-in-out infinite;
+}
+
+@keyframes neural-spread {
+  0%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes neural-link {
+  0%,
+  100% {
+    stroke-dashoffset: 100;
+  }
+  40%,
+  75% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes neural-converge {
+  0%,
+  100% {
+    stroke-dashoffset: 90;
+  }
+  45%,
+  80% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes neural-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+}
+
+/* Research Log: linha e pontos luminosos; a revelação só existe com JavaScript. */
+.neural-log-item::before {
+  content: "";
+  position: absolute;
+  top: 0.9rem;
+  bottom: -0.5rem;
+  left: 0.43rem;
+  width: 1px;
+  transform-origin: top;
+  background: linear-gradient(
+    to bottom,
+    rgb(167 139 250 / 0.6),
+    rgb(167 139 250 / 0.12)
+  );
+  transition: transform var(--duration-slow) var(--ease-standard) 150ms;
+}
+
+.neural-log-item:last-child::before {
+  display: none;
+}
+
+.neural-log-dot {
+  position: absolute;
+  top: 0.45rem;
+  left: 0;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+  box-shadow:
+    0 0 0 4px rgb(183 243 107 / 0.12),
+    0 0 18px rgb(183 243 107 / 0.35);
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.neural-log[data-revealing="true"] > .neural-log-item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+}
+
+.neural-log[data-revealing="true"] > .neural-log-item::before {
+  transform: scaleY(0);
+}
+
+.neural-log[data-revealing="true"] > .neural-log-item .neural-log-dot {
+  transform: scale(0.3);
+}
+
+.neural-log[data-revealing="true"] > .neural-log-item[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+.neural-log[data-revealing="true"]
+  > .neural-log-item[data-visible="true"]::before {
+  transform: scaleY(1);
+}
+
+.neural-log[data-revealing="true"]
+  > .neural-log-item[data-visible="true"]
+  .neural-log-dot {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neural-mark-spread,
+  .neural-mark-link,
+  .neural-mark-converge,
+  .neural-mark-pulse {
+    animation: none;
+  }
+}
+
 /* O !important é intencional: a preferência do usuário deve vencer qualquer utilitário. */
 @media (prefers-reduced-motion: reduce) {
   *,

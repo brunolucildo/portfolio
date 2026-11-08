@@ -93,6 +93,8 @@ type AiLabPage = {
   description: string;
   openGraphLocale: string;
   h1: string;
+  headline: string;
+  cta: string;
   intro: string;
   labels: {
     objective: string;
@@ -134,6 +136,8 @@ const pages: AiLabPage[] = [
       "Experiments in applied AI: retrieval-augmented answers, output validation with a judge model, consistency tests, prompt design, fine-tuning and test methods, with results and limitations.",
     openGraphLocale: "en_US",
     h1: "AI Lab",
+    headline: "Exploring the intelligence behind the code.",
+    cta: "Explore experiments",
     intro:
       "I'm studying AI systems development and management, and I use study projects to explore language models. Each experiment states what I wanted to find out, how I approached it, what I measured and where it falls short. They are learning projects, not products.",
     labels: {
@@ -287,6 +291,8 @@ const pages: AiLabPage[] = [
       "Experimentos de IA aplicada: respostas com recuperação de informação, validação de saída com um modelo juiz, testes de consistência, desenho de prompts, ajuste fino e métodos de teste, com resultados e limitações.",
     openGraphLocale: "pt_BR",
     h1: "AI Lab",
+    headline: "Explorando a inteligência por trás do código.",
+    cta: "Explorar experimentos",
     intro:
       "Estudo desenvolvimento e gestão de sistemas de IA e uso projetos de estudo para explorar modelos de linguagem. Cada experimento diz o que eu queria descobrir, como abordei, o que medi e onde ele falha. São projetos de aprendizado, não produtos.",
     labels: {
@@ -455,12 +461,15 @@ for (const lab of pages) {
   const allPaths = [lab.path, ...slugs.map((slug) => lab.detailPath(slug))];
 
   test.describe(`AI Lab (${lab.locale})`, () => {
-    test("a lista tem um h1, a abertura e oito experimentos na ordem prevista", async ({
+    test("a lista tem um h1 com o rótulo e a headline, a abertura e oito experimentos na ordem prevista", async ({
       page,
     }) => {
       await page.goto(lab.path);
 
-      await expect(page.getByRole("heading", { level: 1 })).toHaveText(lab.h1);
+      const h1 = page.getByRole("heading", { level: 1 });
+      await expect(h1).toHaveCount(1);
+      await expect(h1).toContainText(lab.h1);
+      await expect(h1).toContainText(lab.headline);
       await expect(page.getByRole("main")).toContainText(lab.intro);
 
       const names = [
@@ -469,7 +478,7 @@ for (const lab of pages) {
       ];
       const cards = page.locator("#ai-lab-list > li");
       await expect(cards).toHaveCount(8);
-      await expect(cards.getByRole("heading", { level: 2 })).toHaveText(names);
+      await expect(cards.getByRole("heading", { level: 3 })).toHaveText(names);
     });
 
     test("cada card mostra tipo, estado, resumo, modelo e tecnologias", async ({
@@ -562,7 +571,7 @@ for (const lab of pages) {
       await page.goto(lab.path);
 
       const hrefs: string[] = [];
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < 70; i++) {
         await page.keyboard.press("Tab");
         const href = await page.evaluate(
           () => document.activeElement?.getAttribute("href") ?? "",
@@ -575,9 +584,11 @@ for (const lab of pages) {
       expect(hrefs[0]).toBe("#main");
       expect(order.every((position) => position > 0)).toBe(true);
       expect([...order].sort((a, b) => a - b)).toEqual(order);
+      // Um alvo por card na grade e um link por registro no Research Log.
       expect(hrefs.filter((href) => href.includes("/ai-lab/")).length).toBe(
-        slugs.length,
+        slugs.length * 2,
       );
+      expect(hrefs).toContain("#experiments");
     });
 
     test("não há percentuais, citação a curso, empresa, atletas nem expressões proibidas", async ({
@@ -655,7 +666,7 @@ for (const lab of pages) {
     }) => {
       await page.setViewportSize({ width: 1366, height: 900 });
       await page.goto(lab.path);
-      const lines = await longestLines(page, "main header p");
+      const lines = await longestLines(page, "main section p");
 
       expect(lines.length).toBeGreaterThanOrEqual(1);
       for (const { width, longestLine } of lines) {
@@ -664,19 +675,41 @@ for (const lab of pages) {
       }
     });
 
-    test("o elemento gráfico é decorativo e fica oculto abaixo de 1024 px", async ({
+    test("as redes e as marcas gráficas são decorativas e não entram na árvore de acessibilidade", async ({
       page,
     }) => {
       await page.setViewportSize({ width: 1440, height: 900 });
       await page.goto(lab.path);
-      const graphic = page.locator("main header svg");
 
-      await expect(graphic).toHaveAttribute("aria-hidden", "true");
-      await expect(graphic).toBeVisible();
+      const networks = page.locator("[data-neural-variant]");
+      await expect(networks).toHaveCount(2);
+      for (const network of await networks.all()) {
+        await expect(network).toHaveAttribute("aria-hidden", "true");
+      }
       expect(await page.getByRole("main").getByRole("img").count()).toBe(0);
+      expect(
+        await page.locator("main svg:not([aria-hidden='true'])").count(),
+        "svg sem aria-hidden",
+      ).toBe(0);
+    });
 
-      await page.setViewportSize({ width: 768, height: 900 });
-      await expect(graphic).toBeHidden();
+    test("a estrutura de títulos da lista não pula níveis", async ({
+      page,
+    }) => {
+      await page.goto(lab.path);
+      const levels = await page
+        .locator("main")
+        .evaluate((main) =>
+          [...main.querySelectorAll("h1, h2, h3, h4, h5, h6")].map((h) =>
+            Number(h.tagName.slice(1)),
+          ),
+        );
+
+      expect(levels[0]).toBe(1);
+      expect(levels.filter((level) => level === 1)).toHaveLength(1);
+      for (let i = 1; i < levels.length; i++) {
+        expect(levels[i] ?? 0).toBeLessThanOrEqual((levels[i - 1] ?? 0) + 1);
+      }
     });
 
     for (const slug of slugs) {

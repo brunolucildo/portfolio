@@ -288,6 +288,52 @@
     },
     "title": "AI Lab",
     "intro": "Estudo desenvolvimento e gestão de sistemas de IA e uso projetos de estudo para explorar modelos de linguagem. Cada experimento diz o que eu queria descobrir, como abordei, o que medi e onde ele falha. São projetos de aprendizado, não produtos.",
+    "neural": {
+      "hero": {
+        "headline": "Explorando a inteligência por trás do código.",
+        "description": "Experimentos, pesquisa e ideias que exploram as possibilidades da inteligência artificial.",
+        "cta": "Explorar experimentos"
+      },
+      "philosophy": {
+        "title": "A filosofia",
+        "items": {
+          "explore": {
+            "title": "Explorar",
+            "text": "Investigar modelos e tecnologias emergentes."
+          },
+          "experiment": {
+            "title": "Experimentar",
+            "text": "Testar ideias, arquiteturas e técnicas."
+          },
+          "understand": {
+            "title": "Entender",
+            "text": "Aprender com resultados, falhas e descobertas."
+          }
+        }
+      },
+      "experiments": {
+        "title": "Experimentos e pesquisa",
+        "filtersLabel": "Filtrar experimentos",
+        "filters": {
+          "all": "Todos",
+          "experiments": "Experimentos",
+          "research": "Pesquisa",
+          "projects": "Projetos"
+        },
+        "showing": "Mostrando",
+        "of": "de",
+        "featured": "Experimento em destaque"
+      },
+      "log": {
+        "title": "Registro de pesquisa",
+        "intro": "Os experimentos na ordem em que aparecem no laboratório, com o que cada um me ensinou. Não há datas: é um caminho, não um calendário.",
+        "context": "Contexto",
+        "read": "Ler o experimento"
+      },
+      "closing": {
+        "headline": "A curiosidade não para."
+      }
+    },
     "labels": {
       "objective": "Objetivo",
       "problem": "Problema investigado",

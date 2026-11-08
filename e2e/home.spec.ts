@@ -291,3 +291,76 @@ for (const home of pages) {
     });
   });
 }
+
+test.describe("Luz do cursor nos cards dos destaques", () => {
+  const light = (card: import("@playwright/test").Locator) =>
+    card.evaluate((el) => (el as HTMLElement).style.getPropertyValue("--mx"));
+
+  test("a luz acompanha o cursor e some quando ele sai", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/en");
+    const card = page.locator("#featured-projects [data-card-light]").first();
+
+    await card.scrollIntoViewIfNeeded();
+    await expect(
+      page.locator("#featured-projects [data-card-light]"),
+    ).toHaveCount(3);
+    await expect(card, "sem hover").toHaveCSS("--mx", "");
+    await expect
+      .poll(() =>
+        card.evaluate((el) => getComputedStyle(el, "::before").opacity),
+      )
+      .toBe("0");
+
+    await card.hover({ position: { x: 50, y: 40 } });
+    await expect.poll(() => light(card)).not.toBe("");
+    await expect
+      .poll(() =>
+        card.evaluate((el) => getComputedStyle(el, "::before").opacity),
+      )
+      .toBe("1");
+    const first = Number.parseFloat(await light(card));
+
+    await card.hover({ position: { x: 200, y: 60 } });
+    await expect
+      .poll(async () => Number.parseFloat(await light(card)))
+      .toBeGreaterThan(first + 100);
+
+    await page.mouse.move(5, 5);
+    await expect
+      .poll(() =>
+        card.evaluate((el) => getComputedStyle(el, "::before").opacity),
+      )
+      .toBe("0");
+  });
+
+  test("com movimento reduzido a luz não segue o cursor", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/en");
+    const card = page.locator("#featured-projects [data-card-light]").first();
+
+    await card.scrollIntoViewIfNeeded();
+    await card.hover({ position: { x: 120, y: 60 } });
+    await page.waitForTimeout(300);
+    expect(await light(card)).toBe("");
+  });
+
+  test("o texto continua legível sobre a luz (a camada não captura o ponteiro)", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/en");
+    const card = page.locator("#featured-projects [data-card-light]").first();
+
+    await card.scrollIntoViewIfNeeded();
+    await expect(
+      await card.evaluate(
+        (el) => getComputedStyle(el, "::before").pointerEvents,
+      ),
+    ).toBe("none");
+    await expect(card.getByRole("link")).toBeVisible();
+    await card.getByRole("link").hover();
+    await expect(card.getByRole("link")).toBeVisible();
+  });
+});
