@@ -70,42 +70,9 @@ A seção Contact reúne os canais de comunicação profissional: e-mail com bot
 
 # SPEC-008 — Internationalization
 
-## 1. Contexto
+**Status:** Proposed. Refinada e movida para [`008-internationalization.md`](./008-internationalization.md).
 
-O site deverá oferecer conteúdo em inglês e português brasileiro.
-
-## 2. Objetivo
-
-Atender públicos internacionais e brasileiros, mantendo uma experiência consistente.
-
-## 3. Idiomas
-
-- `en`: padrão.
-- `pt-BR`: alternativo.
-
-## 4. Requisitos funcionais
-
-- Identificar o idioma ativo.
-- Permitir alternância.
-- Preservar a página equivalente quando possível.
-- Apresentar conteúdo traduzido.
-- Utilizar URLs próprias por idioma.
-- Configurar metadados e hreflang.
-
-## 5. Regras
-
-- Não misturar traduções.
-- Não utilizar traduções literais sem revisão.
-- Não perder o contexto da navegação durante a troca.
-- Manter consistência de datas e formatos.
-
-## 6. Critérios de aceitação
-
-- Todas as páginas públicas disponíveis nos dois idiomas, salvo exceção documentada.
-- Navegação de idioma funcionando.
-- Metadados localizados.
-- Nenhuma tradução essencial ausente.
-- URLs coerentes.
+A seção de internacionalização formaliza o inglês (padrão) e o português do Brasil: rotas, redirecionamentos, seletor de idioma, metadados, `hreflang`, página 404 localizada e proteção contra textos sem tradução. Os requisitos, os critérios de aceitação, a auditoria do que já existe, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 
 ---
 
