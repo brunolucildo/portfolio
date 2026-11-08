@@ -7,8 +7,8 @@
 | Nome | Technologies |
 | Identificador | SPEC-005 |
 | Slug | `005-technologies` |
-| Versão | 0.2.0 |
-| Status | Proposed (refinada em 2026-11-08; aguardando aprovação dos textos, dos ícones e das perguntas abertas) |
+| Versão | 0.3.0 |
+| Status | In Review (implementada em 2026-11-08; aguardando revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-005 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -57,7 +57,7 @@ A página Technologies apresenta as tecnologias, os frameworks, os bancos de dad
 | TECH-RF-07 | Must | A página não cita o nome da empresa, o curso nem a instituição da pós-graduação, e não publica percentuais. |
 | TECH-RF-08 | Must | Toda tecnologia exibida em Experience (`experience.ts`) e em Projects (`projects.ts`) existe também em Technologies, e toda tecnologia de Technologies com contexto está de fato em Experience, em Projects ou no currículo. Variações de nome (por exemplo, "Entity Framework" e "Entity Framework Core") ficam em uma única entrada. |
 | TECH-RF-09 | Must | Cada tecnologia tem um ícone: o da fonte licenciada quando existir, ou um monograma próprio quando não existir (seção 7.5). Todos têm o mesmo tamanho, usam `currentColor` e não usam cores de marca. |
-| TECH-RF-10 | Should | Cada nome de projeto na linha de contexto leva à página de detalhe do projeto (ou à lista, quando não há detalhe), e "Experience" leva a `/experience`. |
+| TECH-RF-10 | Should (não entregue na v1; ver seção 15) | Cada nome de projeto na linha de contexto leva à página de detalhe do projeto (ou à lista, quando não há detalhe), e "Experience" leva a `/experience`. |
 | TECH-RF-11 | Must | A página tem metadados indexáveis em cada idioma (título, descrição, canonical, `hreflang`, Open Graph), sem `noindex`. |
 | TECH-RF-12 | Must | Os nomes de tecnologia ficam na nomenclatura original nos dois idiomas; só títulos de categoria, abertura e rótulos de contexto são traduzidos (`CONTENT.md`, 3.3). |
 
@@ -67,7 +67,7 @@ A página Technologies apresenta as tecnologias, os frameworks, os bancos de dad
 |---|---|---|
 | TECH-RNF-01 | Acessibilidade | Um único `h1`, `h2` por categoria sem pular níveis, listas semânticas, ícones `aria-hidden` e nome sempre em texto; contraste AA do texto e dos ícones sobre o fundo escuro; foco visível nos links (se houver). |
 | TECH-RNF-02 | Responsividade | Sem rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px, nos dois idiomas. Texto corrido com no máximo 80 caracteres por linha. |
-| TECH-RNF-03 | Desempenho | Sem dependência de runtime nova; ícones como SVG versionados no repositório, servidos como arquivos estáticos ou embutidos como componentes; nenhuma imagem raster; sem layout shift. |
+| TECH-RNF-03 | Desempenho | Sem dependência de runtime nova; ícones como SVG versionados no repositório, servidos como arquivos estáticos (máscara CSS, sem SVG embutido no HTML); nenhuma imagem raster; sem layout shift. |
 | TECH-RNF-04 | Consistência visual | Segue a identidade Dark Premium: sem cards, sem neon, sem gradiente decorativo, sem borda ou numeração meramente decorativa; ícones em tom secundário (`muted`), sem cor de marca. |
 | TECH-RNF-05 | Licenças | Cada ícone de terceiros tem a origem e a licença registradas, e o aviso de licença exigido (MIT, no caso do devicon) fica versionado junto dos arquivos. |
 | TECH-RNF-06 | SEO | Título e descrição únicos por idioma; páginas ligadas entre si por `hreflang`; link para a página no menu e no rodapé. |
@@ -198,11 +198,11 @@ Regras:
 |---|---|---|
 | TECH-CA-01 | RF-01 | **Given** `/en/technologies` e `/pt-BR/tecnologias` **When** a página carrega **Then** há um único `h1`, o parágrafo de abertura e oito `h2` na ordem Languages, Backend, Databases, Messaging and Caching, Architecture, AI and Machine Learning, Frontend and Mobile, Tools and Infrastructure (nomes traduzidos em pt-BR). |
 | TECH-CA-02 | RF-02 | **Given** qualquer página **When** o menu e o rodapé são lidos **Then** "Technologies"/"Tecnologias" aparece entre Projects e AI Lab e leva à rota do idioma; **Given** a rota ativa **Then** o item tem `aria-current="page"`. |
-| TECH-CA-03 | RF-03 | **Given** cada categoria **Then** tem uma `ul` e cada item tem nome em texto; os itens com ícone têm um SVG `aria-hidden`; as tecnologias da seção 7.1 aparecem na categoria e na ordem previstas. |
+| TECH-CA-03 | RF-03 | **Given** cada categoria **Then** tem uma `ul` e cada item tem nome em texto; os itens com ícone têm um elemento decorativo `aria-hidden` (máscara de SVG ou monograma); as tecnologias da seção 7.1 aparecem na categoria e na ordem previstas. |
 | TECH-CA-04 | RF-04, RF-07 | **Given** o texto das duas páginas **Then** não contém "%", "expert", "avançado", "anos de" nem barra de nível, e não cita a empresa, o curso nem a instituição. |
 | TECH-CA-05 | RF-05, RF-06 | **Given** cada item **Then** a linha de contexto é exatamente a da seção 7.1 (por exemplo, PostgreSQL mostra "Experience · Reelix"); Football Stat Analytics e FintaLab nunca aparecem como "Experience". |
 | TECH-CA-06 | RF-08 | **Given** as tecnologias exibidas nas páginas Experience e Projects **Then** cada uma tem uma entrada em Technologies (com a mesma grafia, exceto as variações da seção 7.1); **Given** uma tecnologia com contexto "Experience" **Then** ela consta em `experience.ts` ou no currículo; **Given** uma com contexto de projeto **Then** consta em `projects.ts`. |
-| TECH-CA-07 | RF-09, RNF-04 | **Given** cada item com ícone **Then** o SVG tem 24 px, usa `currentColor` e o mesmo tom `muted`; nenhum item de Architecture tem ícone ou espaço reservado. |
+| TECH-CA-07 | RF-09, RNF-04 | **Given** cada item com ícone **Then** o ícone tem 24 px e usa o mesmo tom `muted` do texto secundário; nenhum item de Architecture tem ícone ou espaço reservado. |
 | TECH-CA-08 | RF-10 | **Given** o contexto de uma tecnologia **Then** "Experience" leva à rota de Experience e cada projeto leva ao detalhe (ou à lista); os links têm nome acessível e foco visível. (Should.) |
 | TECH-CA-09 | RF-11, RNF-06 | **Given** a rota em cada idioma **Then** o `html` tem o `lang` certo, o título e a descrição são os da seção 7.3, não há `noindex`, o canonical aponta para a própria rota e os `hreflang` `en`, `pt-BR` e `x-default` estão corretos. |
 | TECH-CA-10 | RF-12 | **Given** a versão em português **Then** os nomes das tecnologias estão na grafia original e só os títulos, a abertura, a nota e os rótulos de contexto estão traduzidos. |
@@ -238,11 +238,11 @@ Regras:
 
 | ID | Pergunta | Impacto | Dono | Bloqueia |
 |---|---|---|---|---|
-| Q1 | Os textos das seções 7.2 e 7.3 e os rótulos de contexto estão aprovados? | Conteúdo da página. | Bruno | Bloqueia a implementação. |
-| Q2 | A regra de ícones da seção 7.5 serve: ícone oficial (devicon, MIT) quando existir e monograma de 1 a 2 letras, **sem imitar o logotipo**, quando não existir? Você pediu um ícone "próximo" ao inexistente; recriar um logotipo seria imitar a marca, então proponho o monograma. | TECH-RF-09, aparência da lista. | Bruno | Bloqueia a implementação. |
-| Q3 | A categoria "Frontend and Mobile" (React Native e Expo) e a inclusão de Supabase Auth e TMDB em "Tools and Infrastructure" estão corretas? Elas existem para a página ficar consistente com Projects, mas ampliam as categorias iniciais da `FEATURES.md`. | Seção 7.1. | Bruno | Não bloqueia (reversível). |
-| Q4 | **Azure Service Bus** consta no currículo (Skills), mas em nenhum cargo. Entra na lista sem linha de contexto, ou prefere dizer onde usou ("Experience")? | Seção 7.1. | Bruno | Não bloqueia (default: sem contexto). |
-| Q5 | **Domain-Driven Design** consta em `BUSINESS.md` e `CONTENT.md`, mas não no currículo nem em nenhum cargo. Pode entrar em Architecture com o contexto "Experience"? Git, Docker e CI/CD entram? Se sim, com qual contexto? | Seção 7.1. | Bruno | Não bloqueia (default: fora). |
+| Q1 | Os textos das seções 7.2 e 7.3 e os rótulos de contexto estão aprovados? | Conteúdo da página. | Bruno | **Resolvida (2026-11-08):** aprovados. |
+| Q2 | A regra de ícones da seção 7.5 serve: ícone oficial (devicon, MIT) quando existir e monograma de 1 a 2 letras, **sem imitar o logotipo**, quando não existir? Você pediu um ícone "próximo" ao inexistente; recriar um logotipo seria imitar a marca, então proponho o monograma. | TECH-RF-09, aparência da lista. | Bruno | **Resolvida (2026-11-08):** aprovada (monograma sem imitar logotipos). |
+| Q3 | A categoria "Frontend and Mobile" (React Native e Expo) e a inclusão de Supabase Auth e TMDB em "Tools and Infrastructure" estão corretas? Elas existem para a página ficar consistente com Projects, mas ampliam as categorias iniciais da `FEATURES.md`. | Seção 7.1. | Bruno | Não bloqueia (reversível). Implementada com a categoria nova. |
+| Q4 | **Azure Service Bus** consta no currículo (Skills), mas em nenhum cargo. Entra na lista sem linha de contexto, ou prefere dizer onde usou ("Experience")? | Seção 7.1. | Bruno | Não bloqueia. Implementada com o default (sem contexto). |
+| Q5 | **Domain-Driven Design** consta em `BUSINESS.md` e `CONTENT.md`, mas não no currículo nem em nenhum cargo. Pode entrar em Architecture com o contexto "Experience"? Git, Docker e CI/CD entram? Se sim, com qual contexto? | Seção 7.1. | Bruno | Não bloqueia. Implementada com o default (fora). |
 
 ## 12. Premissas
 
@@ -263,7 +263,9 @@ Decisões reversíveis adotadas neste refinamento.
 | 2026-11-08 | Technologies será uma página própria, no menu principal. | Resposta do usuário |
 | 2026-11-08 | As tecnologias mostram onde foram usadas (Experience e projetos). | Resposta do usuário |
 | 2026-11-08 | Categorias de IA e de ferramentas só com o que está documentado (currículo e repositórios). | Resposta do usuário |
-| 2026-11-08 | Ícones de marca: procurados na internet e, se não houver, criados "próximos". O agente propôs devicon (MIT) com monograma próprio, sem imitar logotipos, a confirmar (Q2). | Resposta do usuário; proposta do agente |
+| 2026-11-08 | Ícones de marca: procurados na internet e, se não houver, criados "próximos". O agente propôs devicon (MIT) com monograma próprio, sem imitar logotipos, aprovado pelo usuário (Q2). | Resposta do usuário; proposta do agente |
+| 2026-11-08 | Textos de interface, SEO e regra de ícones aprovados; implementação autorizada. | Resposta do usuário (Q1 e Q2) |
+| 2026-11-08 | Ícones de marca como máscara CSS do SVG versionado, em vez de SVG embutido; links de contexto (Should) ficam para depois. | Decisão técnica do agente |
 | 2026-11-08 | A SPEC passa a viver em `.specs/005-technologies.md`, como as SPEC-001 a 004. | Premissa herdada |
 
 ## Refinamento
@@ -271,3 +273,37 @@ Decisões reversíveis adotadas neste refinamento.
 | Data | O que mudou | Motivo |
 |---|---|---|
 | 2026-11-08 | Versão 0.2.0: SPEC reescrita a partir do rascunho da `FEATURES.md` (v0.1) com requisitos numerados, rota, categorias com tecnologias, ícones, textos, SEO, critérios Given/When/Then, riscos e perguntas abertas. | Rascunho sem rota, sem itens e sem critérios verificáveis. |
+| 2026-11-08 | Versão 0.3.0: textos e regra de ícones aprovados (Q1 e Q2); implementada (seção 15), TECH-CA-08 não entregue (Should), ícones como máscara CSS, Q3 a Q5 seguem com os defaults. | Aprovação do usuário e implementação. |
+
+## 15. Implementação e verificação
+
+Implementada na branch `feat/technologies` em 2026-11-08, depois da aprovação dos textos e da regra de ícones (Q1 e Q2).
+
+- Novos: `src/config/technologies.ts` (fonte única: categorias, ícone, contexto e apelidos de nomes), `src/components/technologies/` (`TechnologiesContent`, `TechnologyCategorySection`, `TechnologyIcon`), `src/app/[locale]/technologies/page.tsx`, `public/images/technologies/` (17 SVG, `LICENSE-devicon.txt` e `LICENSES.md`) e `e2e/technologies.spec.ts`.
+- Alterados: `src/i18n/routing.ts` (rota `/technologies` e `/tecnologias`), `src/config/navigation.ts` (item de menu), `src/lib/seo/metadata.ts` (namespace `technologies.metadata`), `src/content/{en,pt-BR}/common.json` (seção `technologies` e `navigation.items.technologies`), `biome.json` (os SVG de terceiros em `public/images/technologies` ficam fora do lint, para não editar os arquivos originais), `.docs/ARCHITECTURE.md`, `.specs/FEATURES.md` e o README.
+
+Decisões de implementação:
+
+- Os ícones de marca são uma máscara CSS do SVG versionado, pintada com a cor secundária (`bg-muted`), em vez de SVG embutido: o HTML não cresce com os caminhos (PostgreSQL e SQL Server têm cerca de 11 KB cada), o arquivo fica em cache e a cor vem do token. O monograma é um quadrado com as iniciais, no mesmo tamanho e tom. Ambos são `aria-hidden`, com o nome sempre em texto.
+- 17 tecnologias usam ícone de marca (14 do devicon e 3 do Simple Icons: RabbitMQ, Expo e TMDB), 6 usam monograma (ASP.NET Core, Dapper, InterSystems Caché, Azure Service Bus, OpenAI API e RAG) e as 6 de Architecture ficam sem ícone. Supabase Auth usa o ícone do Supabase, e React Native usa a variante `original` do devicon, a única disponível.
+- Dois nomes unificados: "Entity Framework" (Experience) e "Entity Framework Core" (Projects) viram "Entity Framework Core"; "ASP.NET Core (.NET 10)" vira ".NET" e "ASP.NET Core" (`technologyAliases`).
+- O parágrafo de nota tem largura própria (`max-w-[30rem]`), porque em texto pequeno a coluna de leitura de 624 px passava de 80 caracteres por linha.
+
+| Critério | Resultado | Evidência |
+|---|---|---|
+| TECH-CA-01 | Atendido | `h1` único e oito `h2` na ordem prevista, nos dois idiomas. |
+| TECH-CA-02 | Atendido | Menu e rodapé mostram Projects, Technologies e AI Lab, com os caminhos do idioma e `aria-current` na página ativa. Conferido em 1024 px, em pt-BR: o menu cabe, com 30 px entre os links e o seletor de idioma. |
+| TECH-CA-03 | Atendido | Cada categoria tem uma `ul`, nomes e contexto exatos da seção 7.1 e ícones `aria-hidden` (máscara de SVG ou monograma). |
+| TECH-CA-04 | Atendido | Sem "%", sem níveis, sem empresa, curso ou instituição, sem expressões proibidas nem frases de busca de emprego. |
+| TECH-CA-05 | Atendido | Linha de contexto igual à da seção 7.1 em 29 itens, nos dois idiomas. |
+| TECH-CA-06 | Atendido | Quatro testes comparam `experience.ts`, `projects.ts` e `technologies.ts`. Mutação (marcar TypeScript como Experience) derruba três deles. |
+| TECH-CA-07 | Atendido | Ícones de 24 px na cor do texto secundário; nenhum item de Architecture tem ícone nem espaço reservado. Mutação (`bg-primary`) derruba o teste de cor. |
+| TECH-CA-08 | Não entregue (Should) | Sem links nas linhas de contexto: seriam cerca de 35 links repetidos ("Experience", nomes de projetos), que alongam a tabulação e poluem a página. Um teste garante que a lista não tem links nem botões. |
+| TECH-CA-09 | Atendido | Título, descrição, `lang`, Open Graph, canonical e `hreflang` (`en`, `pt-BR`, `x-default`) conferidos; sem `noindex`. |
+| TECH-CA-10 | Atendido | Nomes de tecnologia na grafia original; só títulos, abertura, nota e rótulos traduzidos. |
+| TECH-CA-11 | Atendido | Títulos sem pular nível; ordem de tabulação segue o DOM (a lista não tem elementos focáveis). Contraste dos ícones igual ao do texto secundário do site. |
+| TECH-CA-12 | Atendido | Sem rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px nos dois idiomas; parágrafos de abertura e nota com até 80 caracteres por linha em 1366 px. |
+| TECH-CA-13 | Atendido | Nenhuma dependência nova (`package.json` intacto). Origem e licença dos ícones em `LICENSES.md`, aviso MIT em `LICENSE-devicon.txt`; um teste confere que os 17 arquivos existem, têm até 12 KB e são servidos como `image/svg+xml`. |
+| TECH-CA-14 | Atendido | `pnpm typecheck`, `pnpm check` e `pnpm test:e2e` (238 testes) sem erros. |
+
+Não verificado: o contraste dos ícones e do texto secundário não foi medido com ferramenta (só comparado ao token existente), e LCP e CLS não foram medidos.

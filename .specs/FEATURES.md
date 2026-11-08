@@ -46,7 +46,7 @@ A seção Projects apresenta os projetos pessoais, acadêmicos e conceituais de 
 
 # SPEC-005 — Technologies
 
-**Status:** Proposed. Refinada e movida para [`005-technologies.md`](./005-technologies.md); aguarda aprovação do usuário.
+**Status:** In Review. Refinada, implementada e movida para [`005-technologies.md`](./005-technologies.md).
 
 A seção Technologies apresenta as tecnologias e ferramentas utilizadas profissionalmente ou exploradas em projetos, por categoria e com o contexto em que cada uma foi usada. Os requisitos, os critérios de aceitação, o rascunho dos textos, as perguntas abertas e o histórico de refinamento estão no arquivo dedicado.
 

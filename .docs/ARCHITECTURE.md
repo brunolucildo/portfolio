@@ -289,9 +289,10 @@ Decisão aprovada: as URLs em `pt-BR` serão traduzidas, com mapa de rotas por i
 | Experience | `/en/experience` | `/pt-BR/experiencia` |
 | Projects | `/en/projects` | `/pt-BR/projetos` |
 | AI Lab | `/en/ai-lab` | `/pt-BR/ai-lab` |
+| Technologies | `/en/technologies` | `/pt-BR/tecnologias` |
 | Contact | `/en/contact` | `/pt-BR/contato` |
 
-A página de Technologies (SPEC-005) ainda não possui rota própria definida; será decidida na SPEC correspondente.
+A página de Technologies (SPEC-005) tem rota própria, definida na SPEC correspondente.
 
 ### 7.2. Regras
 
@@ -585,7 +586,7 @@ Esses elementos poderão ser avaliados caso o escopo do produto evolua.
 | Biblioteca de componentes | Aprovado: componentes próprios sobre os tokens, sem shadcn/ui na v1 |
 | Biblioteca de animações | Aprovado: CSS e IntersectionObserver nativos; Motion só se a implementação nativa não atender ao `DESIGN.md` |
 | Estratégia definitiva de i18n | Aprovado: `next-intl`, rotas `[locale]`, URLs traduzidas em `pt-BR` |
-| Rota da página Technologies | Pendente |
+| Rota da página Technologies | Aprovado: `/technologies` (`/tecnologias`), no menu principal |
 | Hospedagem | Pendente |
 | Analytics | Pendente |
 | Nome completo do domínio `.dev` | Pendente |
