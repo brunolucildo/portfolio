@@ -5,7 +5,11 @@ import { columns, measure } from "@/components/projects/layout";
 import { ProjectTechnologies } from "@/components/projects/ProjectTechnologies";
 import { buttonStyles } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { type DetailExperiment, experimentsWithDetail } from "@/config/aiLab";
+import {
+  type DetailExperiment,
+  experimentNumber,
+  experimentsWithDetail,
+} from "@/config/aiLab";
 import { projects } from "@/config/projects";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils/cn";
@@ -78,7 +82,10 @@ export async function ExperimentDetail({ experiment }: ExperimentDetailProps) {
             <span aria-hidden="true">←</span>
             {t("labels.back")}
           </Link>
-          <ExperimentMeta type={type} state={state} className="mt-6" />
+          <p className="mt-6 text-caption tracking-[0.18em] text-muted">
+            {experimentNumber(key)}
+          </p>
+          <ExperimentMeta type={type} state={state} className="mt-3" />
           <h1 className="mt-4 text-h1 text-foreground">
             {t(`experiments.${key}.name`)}
           </h1>

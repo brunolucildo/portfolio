@@ -27,6 +27,8 @@
   --color-surface: #121613;
   --color-surface-elevated: #191f1a;
   --color-primary: #b7f36b;
+  /* Acento exclusivo do AI Lab (SPEC-012): conexões e iluminação da rede neural. */
+  --color-neural-purple: #a78bfa;
   --color-on-primary: #0b0d0c;
   --color-foreground: #f3f5f2; /* Text Primary */
   --color-muted: #929a91; /* Text Secondary */
@@ -72,6 +74,7 @@
   --shadow-surface: 0 1px 2px rgb(0 0 0 / 0.4);
   --shadow-elevated: 0 8px 24px rgb(0 0 0 / 0.35);
   --shadow-glow: 0 0 32px rgb(183 243 107 / 0.15);
+  --shadow-glow-purple: 0 0 40px -12px rgb(167 139 250 / 0.55);
 
   /* Larguras (max-w-main, max-w-reading, max-w-portrait) */
   --container-*: initial;

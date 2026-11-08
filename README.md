@@ -22,6 +22,7 @@ O site é bilíngue (inglês como padrão e português do Brasil), estático e s
 | Resume (SPEC-009) | Concluída. PDF ajustado entregue (formação e autor); título do arquivo em branco, aceito |
 | Layout global (SPEC-010) | Concluída |
 | Fotografia e assets (SPEC-011) | Concluída: ícone do site, imagem de compartilhamento e créditos das imagens |
+| AI Lab: Neural Intelligence Environment (SPEC-012) | Concluída: página de lista imersiva com rede neural em Canvas 2D, filtros e Research Log; aguarda commit e PR |
 | Links de contexto em Technologies (TECH-RF-10) e anterior/seguinte no AI Lab (AIL-RF-16) | Concluídos |
 | AI Lab: escolha de abordagem e de modelo, framework de testes e fine-tuning (SPEC-006 v0.5.0) | Concluídos |
 | Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience, Projects, Technologies, AI Lab, Contact, Internationalization, Resume, Layout global e Assets (imagens, ícone e compartilhamento) |
