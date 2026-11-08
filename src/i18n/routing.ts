@@ -15,6 +15,7 @@ export const routing = defineRouting({
     },
     "/technologies": { en: "/technologies", "pt-BR": "/tecnologias" },
     "/ai-lab": "/ai-lab",
+    "/ai-lab/[slug]": "/ai-lab/[slug]",
     "/contact": { en: "/contact", "pt-BR": "/contato" },
   },
 });

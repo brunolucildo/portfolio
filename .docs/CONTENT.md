@@ -497,7 +497,7 @@ Um conteúdo poderá ser considerado pronto para publicação quando:
 | Revisar histórico profissional | Pendente |
 | Validar conquistas e métricas profissionais | Pendente |
 | Selecionar projetos da primeira versão | Pendente |
-| Definir conteúdos iniciais do AI Lab | Pendente |
+| Definir conteúdos iniciais do AI Lab | Definidos na SPEC-006 (aprovados em 2026-11-08); candidatos dos módulos da pós aguardam decisão |
 | Confirmar links públicos dos projetos | Pendente |
 | Definir utilização da fotografia | Pendente |
 | Preparar currículo atualizado | Pendente |

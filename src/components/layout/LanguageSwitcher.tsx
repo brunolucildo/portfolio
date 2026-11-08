@@ -13,9 +13,10 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   const pathname = usePathname();
   const { slug } = useParams<{ slug?: string }>();
 
-  // Em rotas com parâmetro (detalhe de projeto), o slug é o mesmo nos dois idiomas.
+  // Em rotas com parâmetro (detalhe de projeto e de experimento), o slug é o
+  // mesmo nos dois idiomas.
   const href: ComponentProps<typeof Link>["href"] =
-    pathname === "/projects/[slug]"
+    pathname === "/projects/[slug]" || pathname === "/ai-lab/[slug]"
       ? { pathname, params: { slug: slug ?? "" } }
       : pathname;
 

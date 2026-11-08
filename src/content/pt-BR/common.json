@@ -35,9 +35,6 @@
   },
   "pages": {
     "placeholder": "Esta seção está em construção.",
-    "aiLab": {
-      "title": "AI Lab"
-    },
     "contact": {
       "title": "Contato"
     }
@@ -288,6 +285,84 @@
       "ai": "IA e aprendizado de máquina",
       "frontend": "Frontend e mobile",
       "tools": "Ferramentas e infraestrutura"
+    }
+  },
+  "aiLab": {
+    "metadata": {
+      "title": "AI Lab | Bruno Lucildo",
+      "description": "Experimentos de IA aplicada: respostas com recuperação de informação, validação de saída com um modelo juiz, testes de consistência e desenho de prompts, com resultados e limitações."
+    },
+    "title": "AI Lab",
+    "intro": "Estudo desenvolvimento e gestão de sistemas de IA e uso projetos de estudo para explorar modelos de linguagem. Cada experimento diz o que eu queria descobrir, como abordei, o que medi e onde ele falha. São projetos de aprendizado, não produtos.",
+    "labels": {
+      "objective": "Objetivo",
+      "problem": "Problema investigado",
+      "approach": "Abordagem",
+      "results": "Resultados",
+      "limitations": "Limitações",
+      "learned": "O que aprendi",
+      "model": "Modelo",
+      "technologies": "Tecnologias",
+      "partOf": "Parte de",
+      "repository": "Repositório",
+      "back": "Todos os experimentos",
+      "experiments": "Experimentos"
+    },
+    "types": {
+      "study": "Estudo",
+      "proofOfConcept": "Prova de conceito",
+      "completed": "Projeto concluído"
+    },
+    "states": {
+      "inDevelopment": "Em desenvolvimento",
+      "concluded": "Concluído",
+      "planning": "Em planejamento"
+    },
+    "experiments": {
+      "ragGrounding": {
+        "name": "Respostas fundamentadas em relatórios (RAG)",
+        "summary": "Responder perguntas sobre relatórios de observação usando só os trechos recuperados, mostrando quanto de cada resposta pode ser rastreado até eles.",
+        "objective": "Responder perguntas sobre relatórios de observação usando só o que os relatórios dizem, e deixar visível quanto de cada resposta tem suporte de fato.",
+        "problem": "Um modelo perguntado sobre relatórios que não leu inventa detalhes plausíveis: números, fontes e ações. Citar uma fonte não prova que a fonte diga aquilo.",
+        "approach": "Os PDFs dos relatórios viram texto, são traduzidos do espanhol para o português do Brasil, divididos em trechos e guardados com embeddings no SQLite. Uma pergunta recupera os cinco trechos mais relevantes, ordenados por uma nota híbrida que combina a similaridade dos embeddings com a coincidência de palavras-chave e descarta os trechos fracos. O prompt exige uma fonte depois de cada afirmação e roda com temperatura 0. Toda resposta termina com um relatório de fundamentação: uma checagem lexical de quantas afirmações, números e fontes citadas aparecem no texto recuperado, seguida de uma checagem semântica feita por uma segunda chamada ao modelo.",
+        "results": "Na avaliação, uma pergunta com suporte nos relatórios foi respondida com a checagem semântica aprovada, e as perguntas que os relatórios não respondem (o campeão de um torneio passado, o salário de um jogador) foram recusadas como esperado. Uma pergunta escrita depois falhou: a busca colocou o relatório certo em primeiro, mas preencheu as outras quatro vagas com trechos sobre outros atletas, e o modelo recusou. Só poucas perguntas de RAG foram testadas, então isto mostra comportamento, não uma taxa de falha.",
+        "limitations": "O índice não tem metadados do atleta para filtrar, então uma pergunta sobre um atleta pode recuperar trechos de outros. A extração de PDF não usa OCR, então relatórios escaneados podem não render texto. A nota de relevância ordena trechos; não mede confiança nem verdade. A checagem lexical não é semântica, e as respostas não são comparadas com estatísticas oficiais.",
+        "learned": "Uma citação não prova nada sozinha: o que ajudou foi mostrar, ao lado da resposta, o que pôde e o que não pôde ser rastreado. Uma falha de busca parece uma falha do modelo, então vale medir as duas separadamente."
+      },
+      "outputValidation": {
+        "name": "Validação da saída do modelo com regras e um modelo juiz",
+        "summary": "Checar o que um modelo de linguagem diz com regras em código e um segundo modelo que precisa citar a evidência.",
+        "objective": "Manter cada afirmação de uma persona de analista ligada à evidência que o usuário forneceu.",
+        "problem": "Instruções no prompt, sozinhas, não garantem que o modelo siga uma política. Nos primeiros testes ao vivo ele produziu adjetivos elogiosos, ações que os dados nunca citaram e notas para atributos sem evidência.",
+        "approach": "Regras determinísticas impõem o formato da resposta e rejeitam números, adjetivos e ações que não estão na entrada do usuário. Um verificador semântico, um segundo modelo, julga cada afirmação restante e precisa citar a evidência; uma citação que não está na evidência é rejeitada, e, se o próprio verificador falha, a resposta é aceita com um aviso. Uma resposta rejeitada ganha uma tentativa automática de correção que lista as regras violadas. Um harness de avaliação ao vivo roda o modelo real em casos fixos e em casos escritos depois, e informa quantas respostas passam.",
+        "results": "Nos casos que guiaram os ajustes, as respostas válidas na primeira tentativa passaram de 0 de 15 para 12 de 15 ao longo de quatro rodadas, e 14 de 15 após a tentativa de correção; esse último número é otimista, porque os ajustes foram feitos nesses mesmos casos. Numa segunda rodada escrita depois, 43 de 48 respostas foram válidas na primeira tentativa e 48 de 48 após a correção (22 de 24 e 24 de 24 só nesses casos). Uma instrução embutida para dar 99 a todos os atributos não alterou as notas. Na calibração do verificador com 30 afirmações rotuladas pelo autor, em três repetições ele rejeitou 41 de 45 afirmações sem suporte e aceitou 42 de 45 com suporte.",
+        "limitations": "As regras são lexicais, checam números por extenso só até cinquenta e não provam que cada frase está correta. O juiz também é um modelo: ele aceitou, em todas as repetições, uma afirmação falsa de dado ausente. Os rótulos foram definidos só pelo autor, e 30 afirmações e 15 respostas por rodada são amostras pequenas que descrevem este arranjo, não uma taxa de erro geral. O modelo não é totalmente determinístico: uma nota variou dez pontos entre rodadas com temperatura 0. Nada disso substitui a revisão humana.",
+        "learned": "Meça com casos escritos depois dos ajustes, ou os números elogiam o trabalho. Um verificador não deve ser aceito às cegas: exigir uma citação o tornou checável. A checagem custa uma requisição extra por resposta, o preço de menos afirmações sem suporte."
+      },
+      "scoreConsistency": {
+        "name": "Mediana de três amostras para notas estáveis",
+        "summary": "Testar se responder com a mediana de três amostras torna estáveis as notas de um modelo.",
+        "objective": "Descobrir se algum modo torna confiáveis, de uma execução para outra, as notas para a mesma entrada.",
+        "problem": "A mesma entrada pode gerar notas diferentes do mesmo modelo, mesmo com temperatura 0, o que enfraquece uma nota na qual alguém poderia se basear.",
+        "approach": "Cada um de seis casos de atleta foi respondido oito vezes por modo (temperatura 0 com e sem semente, e a mediana de três amostras em duas temperaturas), e os vetores de notas foram comparados. Só a validação determinística foi aplicada. O experimento rodou duas vezes, com 48 respostas por modo e rodada.",
+        "results": "Nenhum modo estabilizou as notas de forma confiável: o caso que variou mudou entre as rodadas, e o mesmo modo foi de uma variação máxima de 1 ponto para 8 entre duas execuções. A semente não ajudou de modo consistente. A votação pela mediana foi o único modo em que todas as respostas foram válidas, porque descarta as amostras inválidas.",
+        "limitations": "Seis casos e duas rodadas são uma amostra pequena. A variação vem do modelo, então ajustar essas configurações não a elimina. A mediana custa três vezes a geração. Calcular as notas em código a partir dos indicadores citados eliminaria a variação, mas transformaria juízos qualitativos em uma fórmula, então isso não foi feito.",
+        "learned": "Um resultado negativo também é resultado: ele fechou a decisão de manter o consenso disponível, mas desligado por padrão. Consistência é algo a medir, não a presumir."
+      },
+      "analystPersonas": {
+        "name": "Personas de analista construídas com prompts",
+        "summary": "Desenhar personas de analista com prompts, histórico de conversa e checagens simples de entrada e saída.",
+        "objective": "Explorar até onde só os prompts conseguem moldar um assistente para análise de futebol.",
+        "problem": "O mesmo modelo deve se comportar de forma diferente ao avaliar o desempenho de um jogador, uma proposta de transferência ou uma leitura tática, e cada tarefa precisa das suas regras sobre o que conta como evidência.",
+        "approach": "Um chatbot de terminal em TypeScript envia mensagens para a API da OpenAI e transmite a resposta. Três personas têm instruções próprias: análise esportiva, análise de proposta de transferência e análise tática. A conversa fica no SQLite, com utilitários para limitar ou resumir o histórico, e checagens simples filtram a entrada e a saída.",
+        "results": "Este experimento não teve avaliação formal: as checagens são heurísticas textuais e o repositório não tem suíte de testes. As mesmas personas fazem parte do Football Stat Analytics, onde a validação e a medição foram construídas.",
+        "limitations": "As checagens não garantem que uma resposta esteja correta ou segura. O repositório ainda não tem instruções de instalação ou execução, então o experimento não pode ser reproduzido a partir dele, e é separado do futuro produto FintaLab.",
+        "learned": "Sem testes ou medições, não há como saber se uma persona segue as suas instruções, que é a lacuna que os experimentos de validação e avaliação tratam."
+      },
+      "analyticsPersonas": {
+        "name": "Analytics Personas",
+        "summary": "Uma plataforma para criar e operar especialistas: agentes de IA especializados nas funções de um clube de futebol, alimentados por fontes de dados conectadas, com respostas rastreáveis até elas. A fundação técnica existe; as funcionalidades de produto, não."
+      }
     }
   },
   "home": {
