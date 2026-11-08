@@ -7,8 +7,8 @@
 | Nome | Resume |
 | Identificador | SPEC-009 |
 | Slug | `009-resume` |
-| Versão | 0.3.0 |
-| Status | In Review (implementada em 2026-11-08; aguardando o PDF ajustado, Q2, e a revisão do usuário e do PR) |
+| Versão | 0.4.0 |
+| Status | In Review (implementada e com o PDF ajustado entregue em 2026-11-08; aguardando a revisão do usuário e do PR) |
 | Data | 2026-11-08 |
 | Origem | SPEC-009 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -59,7 +59,7 @@ Hoje o currículo existe só como um PDF em inglês (`public/documents/resume/br
 | RES-RF-09 | Must | O PDF do currículo é servido com `X-Robots-Tag: noindex` (cabeçalho só para `/documents/resume/:path*`); o `Content-Type` continua `application/pdf` e o arquivo abre no navegador. A página `/resume` é indexável. |
 | RES-RF-10 | Must | A página tem metadados indexáveis em cada idioma (título, descrição, canonical, `hreflang`, Open Graph), sem `noindex`, com o `hreflang` apontando `/en/resume` ↔ `/pt-BR/curriculo`. |
 | RES-RF-11 | Must | O texto visível da página não contém telefone, cidade, nome da empresa, curso, instituição, percentuais, nem as expressões proibidas e as frases de busca de emprego de `e2e/support/content-rules.ts`. |
-| RES-RF-12 | Must | O PDF publicado tem título e autor nos metadados (título "Bruno Lucildo — Resume", autor "Bruno Lucildo", sujeitos à aprovação da Q2) e o rótulo da formação alinhado ao do site. Enquanto o arquivo novo não chega, os critérios que dependem dele ficam pendentes. |
+| RES-RF-12 | Must | O PDF publicado tem o autor "Bruno Lucildo" nos metadados e o rótulo da formação alinhado ao do site. O título do arquivo, previsto na v0.3.0 ("Bruno Lucildo — Resume"), ficou sem preenchimento: o Bruno aceitou em 2026-11-08 e pode incluí-lo numa troca futura do PDF. |
 | RES-RF-13 | Must | Datas, cargos, tamanho da equipe, anos de experiência e formação do PDF coincidem com o site, exceto onde a seção 7.5 registra uma exceção aprovada. A conferência é feita por leitura a cada troca do PDF. |
 | RES-RF-14 | Must | Ao trocar o PDF, `siteConfig.resume` tem a data da atualização (`updatedAt`, formato `AAAA-MM`) revisada no mesmo commit. O procedimento está na seção 7.6. |
 | RES-RF-15 | Should | A página mostra também o Tamanho do arquivo (em KB ou MB, lido do arquivo em tempo de build), para quem baixa em conexão móvel. |
@@ -179,11 +179,11 @@ Fonte: leitura do PDF atual, `CONTENT.md`, SPEC-002, SPEC-003 e SPEC-005, e as r
 | Cargos e datas | Cinco cargos, jul/2016 a atual; Senior Backend até maio/2023 | Experience, mesmas datas | Coincide |
 | Redução de 80% (RabbitMQ) | Citada | Citada só em Experience; fora da Home e do About | Aceito: o PDF é documento |
 | Nome da empresa | Citado | Fora do site (descrição sem nome) | Divergência conhecida e aceita (SPEC-003, seção 11 e risco da seção 10); o PDF público já cita |
-| Formação | "Master's in AI Systems Development and Management" | "pós-graduação (programa Master)" | **A alinhar** no PDF (RES-RF-12, Q2) |
+| Formação | "Master's in AI Systems Development and Management" | "pós-graduação (programa Master)" | Alinhado em 2026-11-08: o PDF novo diz "Postgraduate Program (Master) in AI Systems Development and Management" |
 | Mais de 200 PRs, migração para .NET, padrões em várias equipes | Não cita | Cita (Experience) | Mantido assim (decisão de 2026-11-08) |
 | Frases de busca de emprego ("Seeking…", "Open to global relocation…") | Citadas | Proibidas | Exceção aprovada pelo Bruno: só no documento |
 | Telefone e cidade | Citados | Fora do site | Exceção aprovada pelo Bruno; `noindex` reduz a indexação |
-| Metadados do arquivo | Autor "User"; sem título | — | **A corrigir** no PDF (RES-RF-12) |
+| Metadados do arquivo | Autor "Bruno Lucildo"; sem título | — | Autor corrigido em 2026-11-08; título ausente, aceito pelo Bruno (o arquivo foi gerado pelo Adobe PDF Services) |
 | Tecnologias | Lista própria, inclui Azure Service Bus e Event-Driven Architecture | Technologies usa a lista do currículo (`resumeOnly` em `technologies.spec.ts`) | Coincide por teste |
 
 ### 7.6. Procedimento para trocar o PDF
@@ -218,7 +218,7 @@ O rótulo segue o do site e o do LinkedIn ("Postgraduate Degree, Master's Progra
 | RES-CA-11 | **Given** uma requisição ao PDF, **when** a resposta chega, **then** o status é 200, `Content-Type` é `application/pdf`, `X-Robots-Tag` contém `noindex`, o arquivo começa com `%PDF-` e tem menos de 1 MB; **given** a página `/resume`, **then** não há `noindex`. |
 | RES-CA-12 | **Given** a página, **when** os metadados são lidos, **then** há título, descrição, canonical, `hreflang` (`en`, `pt-BR`, `x-default`, apontando as rotas localizadas) e Open Graph únicos por idioma, sem `noindex`. |
 | RES-CA-13 | **Given** o texto visível da página nos dois idiomas, **when** lido, **then** não contém `%`, telefone, cidade, empresa, curso, instituição, expressões proibidas nem frases de busca de emprego. |
-| RES-CA-14 | **Given** o PDF publicado, **when** o dicionário de metadados é lido, **then** o título é "Bruno Lucildo — Resume" e o autor é "Bruno Lucildo" (ou o valor aprovado na Q2); **given** o texto do PDF, **then** a linha da formação coincide com a aprovada. *Pendente até o Bruno enviar o arquivo novo.* |
+| RES-CA-14 | **Given** o PDF publicado, **when** os metadados são lidos, **then** o autor é "Bruno Lucildo" (e não o usuário do computador); **given** o texto do PDF, **then** a linha da formação diz "Postgraduate Program (Master) in AI Systems Development and Management". |
 | RES-CA-15 | **Given** a seção 7.5, **when** conferida por leitura contra o PDF e o site, **then** cada linha está "Coincide", "Aceito" ou "Mantido", sem pendência. |
 | RES-CA-16 | **Given** `siteConfig.resume.updatedAt`, **when** lido, **then** tem o formato `AAAA-MM`, não está no futuro e é igual ou posterior ao mês de geração do PDF. |
 | RES-CA-17 | **Given** os links e botões da página e do header, **when** medidos, **then** têm pelo menos 44 px de altura e foco visível, e a tabulação segue a ordem visual. |
@@ -255,7 +255,7 @@ O rótulo segue o do site e o do LinkedIn ("Postgraduate Degree, Master's Progra
 | ID | Pergunta | Bloqueia? | Default adotado se não houver resposta |
 |---|---|---|---|
 | Q1 | Os textos das seções 7.2 e 7.3 podem ser publicados? | Resolvida em 2026-11-08: aprovados pelo Bruno | Nenhum: implementação só depois da aprovação. |
-| Q2 | A formação no PDF fica como na seção 7.7, e o título e o autor do arquivo são "Bruno Lucildo — Resume" e "Bruno Lucildo"? O Bruno ajusta no Word e envia o PDF novo. | Só RES-RF-12 e RES-CA-14 | A página é implementada com o PDF atual; os dois critérios ficam pendentes até o arquivo chegar. |
+| Q2 | A formação no PDF fica como na seção 7.7, e o título e o autor do arquivo são "Bruno Lucildo — Resume" e "Bruno Lucildo"? O Bruno ajusta no Word e envia o PDF novo. | Resolvida em 2026-11-08: formação e autor entregues; o título ficou de fora por escolha dele | A página é implementada com o PDF atual; os dois critérios ficam pendentes até o arquivo chegar. |
 | Q3 | A seção Resume de Contact continua com o link direto para o PDF ou passa a levar à página `/resume`? | Não | Continua com o link direto (RES-RF-08). |
 | Q4 | A página mostra a data da última atualização e o tamanho do arquivo? | Não | Mostra os dois: a data é obrigatória (RES-RF-03) e o tamanho é Should (RES-RF-15). |
 | Q5 | O nome completo "Bruno Lucildo da Silva" no PDF, contra "Bruno Lucildo" no site, fica assim? | Não | Fica (seção 7.5). |
@@ -284,9 +284,11 @@ O rótulo segue o do site e o do LinkedIn ("Postgraduate Degree, Master's Progra
 | 2026-11-08 | O botão do header leva à página `/resume`. | Bruno |
 | 2026-11-08 | A página mostra ações e o que há no PDF, sem pré-visualização embutida. | Bruno |
 | 2026-11-08 | Textos e SEO das seções 7.2 e 7.3 aprovados e implementação autorizada (Q1). Q2 a Q5 seguem abertas, com os defaults da seção 11. | Bruno |
+| 2026-11-08 | PDF novo entregue (`CV - Bruno Lucildo.pdf`, na pasta `CV`) com a formação ajustada e o autor corrigido; o título do arquivo pode ficar vazio ("se não funcionou, pode ignorar"). Q2 resolvida. | Bruno |
 
 ## Refinamento
 
+- 2026-11-08, v0.4.0: PDF ajustado entregue (Q2 resolvida): formação alinhada e autor corrigido; RES-RF-12 deixou de exigir o título do arquivo, por escolha do Bruno; RES-CA-14 atendido; teste do mês de criação passou a ler também o `xmp:CreateDate`, e um teste novo confere o autor.
 - 2026-11-08, v0.3.0: página, botão do header, `noindex` e testes implementados; a seção 15 registra a entrega, as divergências e a verificação. A SPEC-008 (seção 7.4) foi atualizada para o novo comportamento do botão do menu.
 - 2026-11-08, v0.2.0: textos e SEO aprovados (Q1); status passa a Approved. Q2 (PDF ajustado) segue pendente e só afeta RES-RF-12 e RES-CA-14.
 - 2026-11-08, v0.1.0: SPEC criada a partir do rascunho de `FEATURES.md` (Draft v0.1), do `BUSINESS.md`, do `CONTENT.md` (4.8), do `DESIGN.md`, do `DESIGN_SYSTEM.md` (4.2), do `QA.md`, do código (`site.ts`, header, Contact, rotas), dos testes existentes e da leitura do PDF atual. Rascunho original preservado: PDF, abrir ou baixar, idioma por versão, documento atualizado e acesso pelo menu como ação secundária. Detalhado: o que é "atualizado" virou procedimento e critério (RES-RF-13/14); "abrir ou baixar" virou dois botões; "versão por idioma" virou regra com aviso; "dados pessoais desnecessários" virou decisão registrada (telefone e cidade no PDF) com `noindex`; "integrar ao menu" virou o botão levando à página. Seis decisões do Bruno de 2026-11-08 e duas anteriores registradas na seção 13; textos aguardavam a aprovação (Q1).
@@ -327,7 +329,7 @@ Divergências em relação à SPEC:
 | RES-CA-11 | Atendido | PDF com 200, `application/pdf`, `X-Robots-Tag: noindex`, `%PDF-` e menos de 1 MB; as páginas `/resume` e `/curriculo` sem `noindex`. |
 | RES-CA-12 | Atendido | Título, descrição, canonical, `hreflang` (`en`, `pt-BR`, `x-default`, com as rotas localizadas) e Open Graph. |
 | RES-CA-13 | Atendido | Sem `%`, telefone, cidade, empresa, expressões proibidas nem frases de busca de emprego. |
-| RES-CA-14 | **Pendente** | Depende do PDF ajustado pelo Bruno (Q2). O arquivo atual ainda tem autor "User", sem título, e a formação "Master's in…". |
+| RES-CA-14 | Atendido | PDF novo do Bruno (261 KB, gerado em 2026-11-08): autor "Bruno Lucildo" (teste lê o `dc:creator` do XMP; o arquivo antigo daria `User`) e formação "Postgraduate Program (Master)…", conferida por leitura. O título ficou vazio, aceito por ele. |
 | RES-CA-15 | Atendido | Seção 7.5 conferida por leitura do PDF em 2026-11-08; as linhas "A alinhar" e "A corrigir" dependem da Q2. |
 | RES-CA-16 | Atendido | Formato `AAAA-MM`, não está no futuro e não é anterior ao mês de geração do PDF (`/CreationDate`). |
 | RES-CA-17 | Atendido | Os quatro alvos da página têm 44 px ou mais e contorno de foco; a tabulação segue a ordem visual. |

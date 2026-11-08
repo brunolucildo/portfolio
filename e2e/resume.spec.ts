@@ -490,13 +490,27 @@ test.describe("configuração do currículo", () => {
 
   test("a data de atualização não é anterior ao mês de geração do PDF", () => {
     const raw = readFileSync(resumeFile).toString("latin1");
-    const created = /\/CreationDate\s*\(D:(\d{4})(\d{2})/.exec(raw);
+    // O Word grava `/CreationDate` em texto; o Adobe PDF Services só deixa a
+    // data no pacote XMP (`xmp:CreateDate`). Vale a primeira que existir.
+    const created =
+      /\/CreationDate\s*\(D:(\d{4})(\d{2})/.exec(raw) ??
+      /<xmp:CreateDate>(\d{4})-(\d{2})/.exec(raw);
 
     // Sem a data nos metadados não há o que comparar; o PDF novo deve trazê-la.
-    expect(created, "o PDF precisa ter /CreationDate").not.toBeNull();
+    expect(created, "o PDF precisa ter a data de criação").not.toBeNull();
     expect(
       siteConfig.resume.en.updatedAt >= `${created?.[1]}-${created?.[2]}`,
     ).toBe(true);
+  });
+
+  test("o PDF traz o nome como autor, e não o usuário do computador", () => {
+    const raw = readFileSync(resumeFile).toString("latin1");
+    const creator = /<dc:creator>([\s\S]*?)<\/dc:creator>/.exec(raw);
+
+    // O autor fica no pacote XMP, em texto, mesmo quando o resto está compactado.
+    expect(creator, "o PDF precisa ter dc:creator").not.toBeNull();
+    const names = [...(creator?.[1] ?? "").matchAll(/<rdf:li[^>]*>([^<]*)</g)];
+    expect(names.map((match) => match[1])).toEqual(["Bruno Lucildo"]);
   });
 
   test("o PDF de pt-BR, quando existir, passa a ser usado e o aviso deixa de valer", () => {
