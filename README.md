@@ -90,7 +90,7 @@ O site nasce **bloqueado para buscadores**: sem `SITE_INDEXING=allow`, o `robots
 3. Nos previews, deixe `SITE_INDEXING` sem valor.
 4. Com o domínio no ar: envie o sitemap no Google Search Console e valide a Home e o About no Rich Results Test (itens do QA final).
 
-O build avisa no log quando a indexação está desligada.
+O build avisa no log quando a indexação está desligada. A sequência completa (domínio, hospedagem, DNS e conferências) está em [`.docs/PUBLICACAO.md`](./.docs/PUBLICACAO.md).
 
 ## Idiomas e rotas
 
