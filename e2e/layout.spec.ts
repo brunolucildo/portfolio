@@ -40,7 +40,7 @@ const texts: Record<
     closeMenu: "Close menu",
     language: "Language",
     channels: ["Email", "LinkedIn", "GitHub"],
-    otherLanguage: { name: "Português", home: "/pt-BR" },
+    otherLanguage: { name: "PT, Português", home: "/pt-BR" },
   },
   "pt-BR": {
     home: "/pt-BR",
@@ -60,7 +60,7 @@ const texts: Record<
     closeMenu: "Fechar menu",
     language: "Idioma",
     channels: ["Email", "LinkedIn", "GitHub"],
-    otherLanguage: { name: "English", home: "/en" },
+    otherLanguage: { name: "EN, English", home: "/en" },
   },
 };
 
@@ -90,12 +90,21 @@ const navigationRoutes = [
 const viewportWidths = [360, 390, 768, 1024, 1100, 1366, 1440, 1920];
 const locales = routing.locales;
 
+/**
+ * O WebKit do Playwright no Windows não navega por Tab (o foco fica no `body`),
+ * e no Safari de verdade o Tab só alcança links com um ajuste do navegador. Os
+ * testes de ordem de teclado rodam em Chromium e Firefox; no Safari, à mão.
+ */
+const webkitTabNote =
+  "O WebKit não navega por Tab; a ordem do teclado é conferida em Chromium e Firefox.";
+
 for (const locale of locales) {
   const t = texts[locale];
 
   test.describe(`Layout global (${locale})`, () => {
     test("toda rota fixa tem skip link, header, main e footer, com o lang do idioma", async ({
       page,
+      browserName,
     }) => {
       for (const key of fixedRoutes) {
         await page.goto(pathFor(locale, key));
@@ -106,11 +115,13 @@ for (const locale of locales) {
         await expect(page.locator("main#main"), key).toHaveCount(1);
         await expect(page.getByRole("contentinfo"), key).toHaveCount(1);
 
-        await page.keyboard.press("Tab");
-        const first = await page.evaluate(() =>
-          document.activeElement?.getAttribute("href"),
-        );
-        expect(first, key).toBe("#main");
+        if (browserName !== "webkit") {
+          await page.keyboard.press("Tab");
+          const first = await page.evaluate(() =>
+            document.activeElement?.getAttribute("href"),
+          );
+          expect(first, key).toBe("#main");
+        }
       }
     });
 
@@ -295,6 +306,35 @@ for (const locale of locales) {
       await expect(page.locator("#mobile-menu")).toBeHidden();
     });
 
+    test("o nome acessível de links e botões contém o texto visível (WCAG 2.5.3)", async ({
+      page,
+    }) => {
+      await page.goto(pathFor(locale, "/about"));
+
+      const mismatches = await page.evaluate(() => {
+        const normalize = (text: string) =>
+          text.replace(/\s+/g, " ").trim().toLowerCase();
+
+        return [
+          ...document.querySelectorAll<HTMLElement>(
+            "header a, header button, footer a, main a, main button",
+          ),
+        ].flatMap((element) => {
+          const label = element.getAttribute("aria-label");
+          // biome-ignore lint/performance/useDomNodeTextContent: precisa do texto renderizado (o visível), não do conteúdo do nó.
+          const visible = normalize(element.innerText);
+
+          if (!label || !visible || normalize(label).includes(visible)) {
+            return [];
+          }
+
+          return [`"${visible}" não está em "${label}"`];
+        });
+      });
+
+      expect(mismatches).toEqual([]);
+    });
+
     test("Escape fecha o menu e devolve o foco ao botão", async ({ page }) => {
       await page.setViewportSize({ width: 375, height: 812 });
       await page.goto(pathFor(locale, "/about"));
@@ -318,6 +358,12 @@ for (const locale of locales) {
       await expect(page.locator("#mobile-menu")).toBeVisible();
 
       await page.setViewportSize({ width: 1280, height: 800 });
+      // O botão fica oculto no desktop, mas o atributo continua lido. Esperar o
+      // fechamento antes de voltar: duas mudanças de largura seguidas podem ser
+      // fundidas em um só evento do navegador.
+      await expect(
+        page.locator('button[aria-controls="mobile-menu"]'),
+      ).toHaveAttribute("aria-expanded", "false");
       await page.setViewportSize({ width: 375, height: 812 });
 
       await expect(page.locator("#mobile-menu")).toBeHidden();
@@ -354,7 +400,9 @@ for (const locale of locales) {
 
     test("o skip link fica visível ao receber o foco e leva o foco ao main", async ({
       page,
+      browserName,
     }) => {
+      test.skip(browserName === "webkit", webkitTabNote);
       await page.goto(pathFor(locale, "/contact"));
       await page.keyboard.press("Tab");
 
@@ -368,7 +416,12 @@ for (const locale of locales) {
       await expect(page.locator("main#main")).toBeFocused();
     });
 
-    test("o foco nunca fica atrás do cabeçalho fixo", async ({ page }) => {
+    test("o foco nunca fica atrás do cabeçalho fixo", async ({
+      page,
+      browserName,
+    }) => {
+      test.skip(browserName === "webkit", webkitTabNote);
+      test.slow(browserName !== "chromium");
       await page.setViewportSize({ width: 1440, height: 600 });
       await page.goto(pathFor(locale, "/projects"));
 
@@ -401,6 +454,7 @@ for (const locale of locales) {
 
     test("alvos do cabeçalho e do rodapé têm 44 px ou mais e foco visível, no desktop e no celular", async ({
       page,
+      browserName,
     }) => {
       const measure = async (selectorTargets: ReturnType<Page["locator"]>) => {
         const targets = await selectorTargets.all();
@@ -412,6 +466,10 @@ for (const locale of locales) {
           const name = (await target.textContent())?.trim() ?? "";
           expect(box?.height ?? 0, name).toBeGreaterThanOrEqual(44);
 
+          // No WebKit, o foco programático não ativa :focus-visible de forma
+          // confiável; o contorno do foco no Safari é conferido à mão.
+          if (browserName === "webkit") continue;
+
           await target.focus();
           const outline = await target.evaluate(
             (element) => getComputedStyle(element).outlineStyle,
@@ -422,15 +480,20 @@ for (const locale of locales) {
 
       await page.setViewportSize({ width: 1440, height: 900 });
       await page.goto(pathFor(locale, "/about"));
+      // Firefox e WebKit só mostram o foco (:focus-visible) em foco programático
+      // depois de uma interação de teclado, como o Chromium já faz no celular.
+      await page.keyboard.press("Shift");
       await measure(page.getByRole("banner").locator("a, button"));
       await measure(page.getByRole("contentinfo").locator("a"));
 
+      // Sem novo `goto` na mesma URL: no Firefox, ele deixa o clique seguinte
+      // esperando uma navegação que não termina. O CSS já refaz o layout.
       await page.setViewportSize({ width: 375, height: 812 });
-      await page.goto(pathFor(locale, "/about"));
       await page.getByRole("button", { name: t.openMenu }).click();
-      // Depois de um clique, o Chromium só mostra o foco (:focus-visible) em
-      // foco programático se a última interação foi o teclado.
-      await page.keyboard.press("Shift");
+      // Depois de um clique, o foco programático só mostra o contorno
+      // (:focus-visible) se a última interação foi o teclado. No Chromium basta
+      // uma tecla modificadora; o Firefox exige uma tecla de navegação.
+      await page.keyboard.press(browserName === "firefox" ? "Tab" : "Shift");
       await measure(page.getByRole("banner").locator("a, button"));
       await measure(page.getByRole("contentinfo").locator("a"));
     });
@@ -535,7 +598,9 @@ test("o Resume não entra em mainNavigation: cabeçalho e rodapé o tratam à pa
 
 test("a ordem do teclado no cabeçalho é nome, itens, idioma e Resume", async ({
   page,
+  browserName,
 }) => {
+  test.skip(browserName === "webkit", webkitTabNote);
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/en/about");
 

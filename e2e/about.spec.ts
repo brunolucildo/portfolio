@@ -43,7 +43,7 @@ const pages: AboutPage[] = [
       "pt-BR": "/pt-BR/sobre",
       "x-default": "/en/about",
     },
-    otherLanguage: { name: "Português", path: "/pt-BR/sobre" },
+    otherLanguage: { name: "PT, Português", path: "/pt-BR/sobre" },
   },
   {
     locale: "pt-BR",
@@ -67,7 +67,7 @@ const pages: AboutPage[] = [
       "pt-BR": "/pt-BR/sobre",
       "x-default": "/en/about",
     },
-    otherLanguage: { name: "English", path: "/en/about" },
+    otherLanguage: { name: "EN, English", path: "/en/about" },
   },
 ];
 

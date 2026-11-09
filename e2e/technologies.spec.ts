@@ -244,7 +244,7 @@ const pages: TechnologiesPage[] = [
       "pt-BR": "/pt-BR/tecnologias",
       "x-default": "/en/technologies",
     },
-    otherLanguage: { name: "Português", path: "/pt-BR/tecnologias" },
+    otherLanguage: { name: "PT, Português", path: "/pt-BR/tecnologias" },
   },
   {
     locale: "pt-BR",
@@ -290,7 +290,7 @@ const pages: TechnologiesPage[] = [
       "pt-BR": "/pt-BR/tecnologias",
       "x-default": "/en/technologies",
     },
-    otherLanguage: { name: "English", path: "/en/technologies" },
+    otherLanguage: { name: "EN, English", path: "/en/technologies" },
   },
 ];
 

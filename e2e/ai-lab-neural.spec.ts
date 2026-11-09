@@ -764,8 +764,19 @@ test.describe("rede neural: estado, densidade e interação", () => {
     await page.goto("/en/ai-lab");
     await ready(page, heroNetwork);
 
-    const client = await page.context().newCDPSession(page);
-    await client.send("Emulation.setCPUThrottlingRate", { rate: 12 });
+    // Bloqueia a thread principal por 70 ms a cada 100 ms: quadros lentos, mas
+    // abaixo dos 250 ms que o app descarta como pausa. Emular uma CPU mais lenta
+    // dependia da máquina: com ela disputada, os quadros passavam de 250 ms e a
+    // rede nunca degradava.
+    await page.evaluate(() => {
+      (window as unknown as { __stress?: number }).__stress =
+        window.setInterval(() => {
+          const end = performance.now() + 70;
+          while (performance.now() < end) {
+            // espera ocupada
+          }
+        }, 100);
+    });
 
     await expect
       .poll(
@@ -779,7 +790,11 @@ test.describe("rede neural: estado, densidade e interação", () => {
       )
       .toBeGreaterThanOrEqual(1);
 
-    await client.send("Emulation.setCPUThrottlingRate", { rate: 1 });
+    await page.evaluate(() => {
+      window.clearInterval(
+        (window as unknown as { __stress?: number }).__stress,
+      );
+    });
   });
 
   test("ao sair da página os ouvintes da rede são removidos", async ({

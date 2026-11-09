@@ -52,16 +52,18 @@ Validar:
 
 ### 3.3. Testes end-to-end
 
-Ferramenta adotada: Playwright (`@playwright/test`), somente com Chromium.
+Ferramenta adotada: Playwright (`@playwright/test`). O Chromium roda toda a suíte; o Firefox e o WebKit (o motor do Safari) rodam só a navegação, o menu mobile e o idioma (`layout.spec.ts` e `i18n.spec.ts`).
 
 Estado atual (2026-11-07):
 
 - Comando: `pnpm test:e2e`. A configuração em `playwright.config.ts` faz o build de produção e sobe o app na porta 3100, sempre testando um build novo; o relatório HTML fica em `playwright-report/`.
-- Primeira instalação do navegador: `pnpm exec playwright install chromium`.
+- Primeira instalação dos navegadores: `pnpm exec playwright install chromium firefox webkit`.
+- Acessibilidade: `e2e/a11y.spec.ts` roda o axe-core (`@axe-core/playwright`, regras WCAG 2.0, 2.1 e 2.2 A e AA e boas práticas) nas 34 páginas e nas duas 404, a 1440 e a 390 px, e falha com qualquer violação. Tem um teste de controle que injeta defeitos para provar que o axe os acusa.
+- Limite do WebKit: o do Playwright no Windows não navega por Tab (o foco fica no `body`) e o Safari de verdade só alcança links com um ajuste do navegador. Os testes de ordem de teclado e do skip link rodam em Chromium e Firefox, e o contorno do foco no Safari é conferido à mão.
 - Os testes ficam em `e2e/`, um arquivo por página (`home.spec.ts`, `about.spec.ts`), com regras de conteúdo compartilhadas em `e2e/support/content-rules.ts`.
 - Cobertura atual: estrutura de títulos, metadados (`title`, descrição, canonical, `hreflang`, Open Graph, `noindex`), links e rotas por idioma, troca de idioma, expressões proibidas, ordem e foco do teclado, alvos de toque, largura de leitura e rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px.
 - Cada nova página implementada ganha seu `*.spec.ts` na mesma entrega, cobrindo os critérios de aceitação verificáveis pelo navegador da sua SPEC.
-- Não cobrem: contraste, leitores de tela, LCP e CLS, que continuam em verificação manual ou com ferramenta própria.
+- Não cobrem: o contraste de texto sobre gradiente e sobre o Canvas (que o axe não decide; medido por pixel no relatório de QA), leitores de tela, LCP e CLS, que continuam em verificação manual ou com ferramenta própria.
 
 Vitest e React Testing Library (3.1 e 3.2) ainda não foram adotados: entram quando houver lógica própria para testar, como a validação do formulário de contato.
 
@@ -273,20 +275,22 @@ Não utilizar o ambiente de produção para testar funcionalidades incompletas.
 
 ## 13. Checklist de publicação
 
-- [ ] Build de produção concluído.
-- [ ] Verificação TypeScript concluída.
-- [ ] Lint e formatação concluídos.
-- [ ] Testes automatizados aprovados.
-- [ ] Fluxos principais validados.
-- [ ] Inglês e português revisados.
-- [ ] Layout mobile validado.
-- [ ] Navegação por teclado validada.
-- [ ] Movimento reduzido validado.
-- [ ] SEO validado.
-- [ ] Links revisados.
-- [ ] Currículo atualizado.
-- [ ] Conteúdo profissional revisado.
-- [ ] Nenhuma informação confidencial publicada.
+Estado em 2026-11-08, com o detalhe e as medições em [`QA-RELATORIO.md`](./QA-RELATORIO.md).
+
+- [x] Build de produção concluído.
+- [x] Verificação TypeScript concluída.
+- [x] Lint e formatação concluídos.
+- [x] Testes automatizados aprovados (1334 E2E em Chromium, Firefox e WebKit).
+- [x] Fluxos principais validados (cobertos pelos E2E).
+- [ ] Inglês e português revisados (paridade de chaves testada; falta a leitura final do Bruno).
+- [x] Layout mobile validado (E2E de 360 a 1920 px e axe a 390 px; falta aparelho real).
+- [x] Navegação por teclado validada (E2E de ordem e foco; falta leitor de tela).
+- [x] Movimento reduzido validado (E2E).
+- [ ] SEO validado (local aprovado; faltam Search Console e Rich Results Test, que exigem o domínio).
+- [ ] Links revisados (internos e GitHub aprovados; falta conferir o LinkedIn à mão).
+- [x] Currículo atualizado.
+- [ ] Conteúdo profissional revisado (decisão do Bruno).
+- [ ] Nenhuma informação confidencial publicada (sem segredos no histórico; falta a confirmação do Bruno sobre o conteúdo).
 - [ ] Domínio e HTTPS funcionando.
 
 ## 14. Definition of Done

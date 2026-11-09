@@ -79,7 +79,7 @@ const pages: ContactPage[] = [
       "pt-BR": "/pt-BR/contato",
       "x-default": "/en/contact",
     },
-    otherLanguage: { name: "Português", path: "/pt-BR/contato" },
+    otherLanguage: { name: "PT, Português", path: "/pt-BR/contato" },
     placeholder: "This section is under construction.",
   },
   {
@@ -117,7 +117,7 @@ const pages: ContactPage[] = [
       "pt-BR": "/pt-BR/contato",
       "x-default": "/en/contact",
     },
-    otherLanguage: { name: "English", path: "/en/contact" },
+    otherLanguage: { name: "EN, English", path: "/en/contact" },
     placeholder: "Esta seção está em construção.",
   },
 ];
@@ -423,7 +423,7 @@ for (const contact of pages) {
       await page.goto(contact.path);
       const targets = page.locator("#contact-channels").locator("a, button");
 
-      expect(await targets.count()).toBe(5);
+      await expect(targets).toHaveCount(5);
       for (const target of await targets.all()) {
         const box = await target.boundingBox();
         expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
