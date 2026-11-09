@@ -1,12 +1,11 @@
 import { expect, type Page, test } from "@playwright/test";
-import { aiLabExperiments } from "../src/config/aiLab";
-import { projects } from "../src/config/projects";
 import { siteConfig } from "../src/config/site";
 import { routing } from "../src/i18n/routing";
 import { getIndexingPolicy, normalizeSiteUrl } from "../src/lib/seo/indexing";
 import { buildRobots } from "../src/lib/seo/robots";
 import { serializeJsonLd } from "../src/lib/seo/serialize";
 import { companyNames, withheldFromAbout } from "./support/content-rules";
+import { expectedPaths } from "./support/routes";
 
 /**
  * SEO final (SPEC-013): robots.txt, sitemap.xml, guarda de indexação, dados
@@ -24,33 +23,6 @@ const decode = (text: string) =>
     .replaceAll("&amp;", "&")
     .replaceAll("&#x27;", "'")
     .replaceAll("&quot;", '"');
-
-/** Caminhos públicos esperados, derivados das rotas (e não do sitemap). */
-function expectedPaths(): { locale: Locale; path: string }[] {
-  const projectSlugs = projects.flatMap(({ slug }) => (slug ? [slug] : []));
-  const experimentSlugs = aiLabExperiments.flatMap(({ slug }) =>
-    slug ? [slug] : [],
-  );
-
-  return routing.locales.flatMap((locale) =>
-    Object.entries(routing.pathnames).flatMap(([key, entry]) => {
-      const template = typeof entry === "string" ? entry : entry[locale];
-      const slugs = key.startsWith("/projects/")
-        ? projectSlugs
-        : key.startsWith("/ai-lab/")
-          ? experimentSlugs
-          : [null];
-
-      return slugs.map((slug) => {
-        const pathname = slug ? template.replace("[slug]", slug) : template;
-        return {
-          locale,
-          path: `/${locale}${pathname === "/" ? "" : pathname}`,
-        };
-      });
-    }),
-  );
-}
 
 type SitemapEntry = { loc: string; alternates: Record<string, string> };
 

@@ -423,7 +423,7 @@ for (const contact of pages) {
       await page.goto(contact.path);
       const targets = page.locator("#contact-channels").locator("a, button");
 
-      expect(await targets.count()).toBe(5);
+      await expect(targets).toHaveCount(5);
       for (const target of await targets.all()) {
         const box = await target.boundingBox();
         expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);

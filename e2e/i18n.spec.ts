@@ -281,6 +281,8 @@ test.describe("metadados", () => {
   const heads = new Map<string, Head>();
 
   test.beforeAll(async ({ browser }) => {
+    // São dezenas de navegações em sequência; no Firefox passam dos 30 s padrão.
+    test.setTimeout(120_000);
     const page = await browser.newPage();
     for (const pair of routes) {
       for (const locale of locales) {
@@ -365,6 +367,8 @@ test("o único cookie do site é NEXT_LOCALE", async ({ page, context }) => {
   await page
     .getByRole("link", { name: switcherName["pt-BR"], exact: true })
     .click();
+  // Sem esperar o destino do clique, o Firefox aborta a navegação seguinte.
+  await page.waitForURL(/\/pt-BR(\/|$)/);
   for (const pair of routes) {
     await page.goto(pair["pt-BR"]);
   }

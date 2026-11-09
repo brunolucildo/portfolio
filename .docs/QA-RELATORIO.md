@@ -9,13 +9,13 @@ Execução do QA final descrito em `QA.md`, sobre a `main` em fc975db (SPECs 001
 | Área | Resultado |
 |---|---|
 | Build, TypeScript, Biome, dependências | Aprovado |
-| Testes end-to-end | 911 passando (Chromium) |
-| Acessibilidade automatizada (WCAG 2.2 AA) | 0 violações em 72 execuções (36 URLs, 2 larguras) |
+| Testes end-to-end | 1334 passando em Chromium, Firefox e WebKit (5 ignorados no WebKit, seção 6.1) |
+| Acessibilidade automatizada (WCAG 2.2 AA) | 0 violações em 72 execuções (36 URLs, 2 larguras), agora como teste permanente |
 | Contraste dos casos que a ferramenta não decide | Sem falha real (pior caso 4,55:1) |
 | Lighthouse | Acessibilidade 100, boas práticas 100, desempenho 94 a 100 |
 | Desempenho real (LCP, CLS, TBT) | Dentro das metas |
 | Segurança | Sem segredos; 1 melhoria aplicada (cabeçalhos) |
-| Defeitos encontrados | 1 média, 2 baixas, todas corrigidas |
+| Defeitos encontrados | 1 média, 2 baixas, todas corrigidas; 3 instabilidades de teste resolvidas |
 | Bloqueios para publicar | Nenhum de código; faltam domínio, HTTPS e conferências manuais |
 
 ## 2. Verificações automáticas
@@ -26,7 +26,7 @@ Execução do QA final descrito em `QA.md`, sobre a `main` em fc975db (SPECs 001
 | `biome check .` (121 arquivos) | 0 erros (antes: 3 a 48 falhas só de CRLF, resolvidas pelo `.gitattributes`) |
 | `pnpm audit` | Nenhuma vulnerabilidade conhecida |
 | Build de produção | Concluído; o aviso `[seo] Indexação desligada` aparece de propósito sem `SITE_INDEXING=allow` |
-| `pnpm test:e2e` | 911 passando em 1,8 min |
+| `pnpm test:e2e` | 1334 passando em 4,4 min (três navegadores); 911 em 1,8 min só com Chromium |
 | Dependências de execução | 4 (`next`, `next-intl`, `react`, `react-dom`) |
 
 ## 3. Acessibilidade
@@ -97,6 +97,28 @@ Todos bem abaixo da meta de 2,5 s. O peso transferido por página fica entre 258
 
 Os testes novos foram validados por mutação: com as correções revertidas, 5 testes falham.
 
+### 6.1. Firefox e WebKit, e instabilidades de teste
+
+Com a decisão QA-Q2, o Firefox e o WebKit passaram a rodar a navegação, o menu mobile e o idioma. A primeira rodada deu 19 falhas, e nenhuma era defeito do site. Triagem:
+
+| Achado | Causa | Resolução |
+|---|---|---|
+| `beforeAll` de metadados com timeout no Firefox | 68 navegações em sequência passam dos 30 s padrão | Timeout do gancho em 120 s; projetos Firefox e WebKit com 90 s por teste |
+| Teste do cookie `NEXT_LOCALE` abortado no Firefox | Navegava enquanto o clique do seletor ainda carregava | Espera a URL de destino antes de seguir |
+| Foco visível sem contorno no Firefox e no WebKit | O foco programático só ativa `:focus-visible` depois de uma interação de teclado; no menu mobile o Firefox exige uma tecla de navegação | Pressiona `Shift` (Chromium e WebKit) ou `Tab` (Firefox) antes de medir; confirmado por sondagem que o estilo aparece (`solid 2px`) |
+| Clique no menu mobile trava no Firefox | `goto` na mesma URL já aberta deixa o clique esperando uma navegação que não termina (1 de 3 execuções) | O teste não recarrega a página só para mudar a largura |
+| O WebKit não navega por Tab | O WebKit do Playwright no Windows deixa o foco no `body`, mesmo com Alt+Tab; o Safari de verdade só alcança links com um ajuste do navegador | 5 testes de Tab ignorados no WebKit, com a razão no código; seguem em Chromium e Firefox. O contorno do foco no WebKit fica para o Safari real |
+
+Três instabilidades em Chromium, que a carga maior expôs:
+
+| Achado | Causa | Resolução |
+|---|---|---|
+| Contact contava 4 botões em vez de 5 | O botão Copiar só aparece depois da hidratação e o teste contava na hora | `toHaveCount(5)`, que repete até estabilizar |
+| Menu mobile aberto depois de 1280 px e de volta a 375 px (cerca de 8% em isolamento) | Duas mudanças de largura seguidas podem ser fundidas em um só evento do navegador; o componente está certo, uma pessoa não redimensiona tão rápido | O teste espera o menu fechar no desktop antes de voltar (60 de 60 passam) |
+| Degradação da rede neural não acontecia sob carga | O app descarta quadros acima de 250 ms como pausa, e a CPU emulada 12 vezes mais lenta, numa máquina disputada, passava disso | O teste bloqueia a thread por 70 ms a cada 100 ms, independente da máquina; passa 6 de 6 e em metade do tempo |
+
+Também limitei os workers a 35% dos núcleos para reduzir a disputa entre os três navegadores.
+
 ## 7. Pendências que dependem de domínio, hospedagem ou de uma pessoa
 
 Nada disso bloqueia o código, mas bloqueia o item correspondente do checklist de publicação.
@@ -114,7 +136,7 @@ Nada disso bloqueia o código, mas bloqueia o item correspondente do checklist d
 - Abrir o LinkedIn (`/in/bruno-lucildo/`), que bloqueia robôs, e confirmar que o perfil está certo.
 - Ler os textos em inglês e português uma última vez (ortografia, tom, datas, cargos): os textos foram aprovados SPEC a SPEC, mas não há revisão ortográfica automática.
 - Testar com um leitor de tela (NVDA ou VoiceOver) os fluxos principais: menu, troca de idioma, AI Lab.
-- Testar em Firefox e Safari (os testes automáticos rodam só em Chromium) e num celular real, incluindo o menu e o parallax.
+- Testar no Safari de verdade (o WebKit do Playwright não navega por Tab nem confirma o contorno do foco) e num celular real, incluindo o menu e o parallax. O Firefox já é coberto pelos testes automáticos de navegação, menu e idioma.
 - Conferir que o link `mailto:` abre um aplicativo de e-mail e que o botão Copiar funciona no Chrome de uso diário; baixar o PDF do currículo pelo botão.
 - Confirmar que nenhuma informação confidencial está publicada. As checagens automáticas cobrem empresa e métricas; o PDF do currículo traz telefone e e-mail por decisão do Bruno.
 
@@ -124,14 +146,17 @@ Nada disso bloqueia o código, mas bloqueia o item correspondente do checklist d
 pnpm typecheck
 pnpm check
 pnpm audit
+pnpm exec playwright install chromium firefox webkit
 pnpm test:e2e
 ```
 
-As auditorias de acessibilidade e desempenho usaram axe-core e Lighthouse em uma pasta temporária, contra `next start` em uma porta livre (conferir que a porta está livre antes: um servidor antigo na mesma porta devolve HTML velho). Se o Bruno quiser que a auditoria vire teste permanente, o caminho é `@axe-core/playwright` como dependência de desenvolvimento, decisão registrada na seção 9.
+O `pnpm test:e2e` já inclui o axe-core (`e2e/a11y.spec.ts`). A auditoria de desempenho (Lighthouse) e a medição de contraste por pixel foram feitas com ferramentas em uma pasta temporária, contra `next start` em uma porta livre (conferir que a porta está livre antes: um servidor antigo na mesma porta devolve HTML velho).
 
-## 9. Decisões e perguntas
+## 9. Decisões
 
-| ID | Pergunta | Recomendação |
+Respondidas pelo Bruno em 2026-11-08, com as opções recomendadas.
+
+| ID | Pergunta | Decisão |
 |---|---|---|
-| QA-Q1 | Adotar `@axe-core/playwright` como dependência de desenvolvimento, com um teste que roda o axe nas 34 páginas e fecha o build se houver violação? | Sim: o `QA.md` já cita axe-core, o custo é uma dependência de desenvolvimento, e a regressão de acessibilidade passa a ser pega no `pnpm test:e2e` |
-| QA-Q2 | Rodar Firefox e WebKit no Playwright (download dos navegadores, na casa de 150 MB, estimativa)? | Sim, só para um subconjunto de testes (navegação, idioma, menu mobile), para cobrir Firefox e Safari sem dobrar o tempo da suíte |
+| QA-Q1 | Adotar `@axe-core/playwright` como dependência de desenvolvimento, com teste permanente nas 34 páginas? | **Sim.** Entregue em `e2e/a11y.spec.ts` (74 testes). O `pnpm` 12 acusa `ERR_PNPM_IGNORED_BUILDS` de `@parcel/watcher` e `@swc/core` em qualquer instalação, o que já acontecia antes; nenhum script de build foi aprovado. |
+| QA-Q2 | Rodar Firefox e WebKit no Playwright? | **Sim, um subconjunto** (navegação, menu mobile e idioma). Entregue na seção 6.1. |
