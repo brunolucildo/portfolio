@@ -31,16 +31,18 @@ type ProjectsPage = {
   alternates: Record<string, string>;
   otherLanguage: { name: string; path: string };
   projects: ProjectExpectation[];
-  captions: { reelix: string; fintalab: string };
+  captions: { reelix: string; rondo: string; fintalab: string };
   reelixAlts: string[];
+  rondoAlts: string[];
   sectionTitles: string[];
-  detailTitles: { football: string; reelix: string };
-  detailDescriptions: { football: string; reelix: string };
+  detailTitles: { football: string; reelix: string; rondo: string };
+  detailDescriptions: { football: string; reelix: string; rondo: string };
 };
 
 const repositories = {
   football: "https://github.com/brunolucildo/football-stat-analytics-cli",
   reelix: "https://github.com/brunolucildo/reelix",
+  rondo: "https://github.com/brunolucildo/rondo",
   fintalab: "https://github.com/brunolucildo/fintalab",
 };
 
@@ -56,6 +58,7 @@ const technologies = {
     "Supabase Auth",
     "TMDB",
   ],
+  rondo: ["TypeScript", "Node.js", "PostgreSQL"],
   fintalab: ["TypeScript", "OpenAI API", "SQLite"],
 };
 
@@ -90,13 +93,35 @@ const reelixAltsPt: string[] = [
   'Tela de entrada do Reelix no celular: o logotipo do reelix, o título "Suas histórias começam aqui." e os campos de e-mail e senha.',
 ];
 
+/** Textos alternativos das quatro telas do Rondo, na ordem do detalhe. */
+const rondoAltsEn: string[] = [
+  "Rondo sign-in screen: the pixel-art Rondo logo above a card with email and password fields, an orange Sign in button and links to recover the password and create an account. The app interface is in English.",
+  "Rondo sign-up screen: the logo above a card with first name, last name, email, password and password confirmation fields and an orange Create account button. The app interface is in English.",
+  "Rondo password recovery screen: the logo above a card asking for the email to receive a reset link, with an orange Send reset link button. The app interface is in English.",
+  "Rondo reset password screen: the logo above a card with new password and confirmation fields, each with a show-password control, and an orange Reset password button. The app interface is in English.",
+];
+
+const rondoAltsPt: string[] = [
+  "Tela de entrada do Rondo: o logo do Rondo em pixel art sobre um cartão com os campos de e-mail e senha, um botão laranja Sign in e links para recuperar a senha e criar uma conta. A interface do app está em inglês.",
+  "Tela de cadastro do Rondo: o logo sobre um cartão com os campos de nome, sobrenome, e-mail, senha e confirmação de senha e um botão laranja Create account. A interface do app está em inglês.",
+  "Tela de recuperação de senha do Rondo: o logo sobre um cartão que pede o e-mail para receber o link de redefinição, com um botão laranja Send reset link. A interface do app está em inglês.",
+  "Tela de redefinição de senha do Rondo: o logo sobre um cartão com os campos de nova senha e confirmação, cada um com um controle para mostrar a senha, e um botão laranja Reset password. A interface do app está em inglês.",
+];
+
+const rondoImages = [
+  "/images/projects/rondo-sign-in.png",
+  "/images/projects/rondo-sign-up.png",
+  "/images/projects/rondo-forgot-password.png",
+  "/images/projects/rondo-reset-password.png",
+];
+
 const pages: ProjectsPage[] = [
   {
     locale: "en",
     path: "/en/projects",
     title: "Projects | Bruno Lucildo",
     description:
-      "Projects by Bruno Lucildo and their current state: AI football analysis (academic), a movie and series tracking app (personal) and a product concept.",
+      "Projects by Bruno Lucildo and their current state: AI football analysis, a movie tracking app and a club AI platform (personal), and a product concept.",
     openGraphLocale: "en_US",
     h1: "Projects",
     labels: {
@@ -138,6 +163,17 @@ const pages: ProjectsPage[] = [
         ],
       },
       {
+        name: "Rondo",
+        category: "Personal project",
+        status: "In development",
+        description:
+          "A platform to create and run AI experts for the roles of a football club, with answers traceable to connected sources. The technical foundation exists; product features do not.",
+        technologies: technologies.rondo,
+        repository: repositories.rondo,
+        detail: "/en/projects/rondo",
+        listImages: rondoImages.slice(0, 3),
+      },
+      {
         name: "FintaLab",
         category: "Product concept",
         status: "Conceptual",
@@ -152,10 +188,13 @@ const pages: ProjectsPage[] = [
     captions: {
       reelix:
         "Screens from the development build. The app interface is in Portuguese. Movie and series data and images from TMDB. This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.",
+      rondo:
+        "Screens from the local development build, with no real data. The app interface is in English.",
       fintalab:
         "Screens from the static concept prototype. All people, clubs and numbers are fictional.",
     },
     reelixAlts: reelixAltsEn,
+    rondoAlts: rondoAltsEn,
     sectionTitles: [
       "Overview",
       "Challenge",
@@ -168,12 +207,15 @@ const pages: ProjectsPage[] = [
     detailTitles: {
       football: "Football Stat Analytics | Bruno Lucildo",
       reelix: "Reelix | Bruno Lucildo",
+      rondo: "Rondo | Bruno Lucildo",
     },
     detailDescriptions: {
       football:
         "An academic project that analyzes football athlete performance with AI, retrieval and layered answer checks: architecture, decisions and current state.",
       reelix:
         "A personal movie and series tracking app with privacy-first sharing and spoiler control: architecture, technical decisions and current state.",
+      rondo:
+        "A personal platform for football club AI experts: authentication, observability and load tests in place; architecture, decisions and current state.",
     },
   },
   {
@@ -181,7 +223,7 @@ const pages: ProjectsPage[] = [
     path: "/pt-BR/projetos",
     title: "Projetos | Bruno Lucildo",
     description:
-      "Projetos de Bruno Lucildo e o estado atual de cada um: análise de futebol com IA (acadêmico), app de filmes e séries (pessoal) e um conceito de produto.",
+      "Projetos de Bruno Lucildo e o estado de cada um: análise de futebol com IA, app de filmes e plataforma de IA para clubes (pessoais) e um conceito de produto.",
     openGraphLocale: "pt_BR",
     h1: "Projetos",
     labels: {
@@ -223,6 +265,17 @@ const pages: ProjectsPage[] = [
         ],
       },
       {
+        name: "Rondo",
+        category: "Projeto pessoal",
+        status: "Em desenvolvimento",
+        description:
+          "Uma plataforma para criar e operar especialistas de IA para as funções de um clube de futebol, com respostas rastreáveis até as fontes conectadas. A fundação técnica existe; as funcionalidades de produto, não.",
+        technologies: technologies.rondo,
+        repository: repositories.rondo,
+        detail: "/pt-BR/projetos/rondo",
+        listImages: rondoImages.slice(0, 3),
+      },
+      {
         name: "FintaLab",
         category: "Conceito de produto",
         status: "Conceitual",
@@ -237,10 +290,13 @@ const pages: ProjectsPage[] = [
     captions: {
       reelix:
         "Telas da versão de desenvolvimento. A interface do app está em português. Dados e imagens de filmes e séries do TMDB. Este produto usa o TMDB e as APIs do TMDB, mas não é endossado, certificado nem aprovado de outra forma pelo TMDB.",
+      rondo:
+        "Telas da versão de desenvolvimento local, sem dados reais. A interface do app está em inglês.",
       fintalab:
         "Telas do protótipo conceitual estático. Todas as pessoas, clubes e números são fictícios.",
     },
     reelixAlts: reelixAltsPt,
+    rondoAlts: rondoAltsPt,
     sectionTitles: [
       "Visão geral",
       "Desafio",
@@ -253,12 +309,15 @@ const pages: ProjectsPage[] = [
     detailTitles: {
       football: "Football Stat Analytics | Bruno Lucildo",
       reelix: "Reelix | Bruno Lucildo",
+      rondo: "Rondo | Bruno Lucildo",
     },
     detailDescriptions: {
       football:
         "Projeto acadêmico de análise de desempenho de atletas de futebol com IA, recuperação e checagem de respostas em camadas: arquitetura, decisões e estado atual.",
       reelix:
         "Aplicativo de acompanhamento de filmes e séries, com compartilhamento que prioriza a privacidade e controle de spoilers: arquitetura, decisões e estado atual.",
+      rondo:
+        "Plataforma pessoal de especialistas de IA para clubes de futebol: autenticação, observabilidade e testes de carga prontos; arquitetura, decisões e estado atual.",
     },
   },
 ];
@@ -273,7 +332,7 @@ async function mainText(page: import("@playwright/test").Page) {
 
 for (const projects of pages) {
   test.describe(`Projects (${projects.locale})`, () => {
-    test("a lista tem um h1 e três projetos na ordem prevista", async ({
+    test("a lista tem um h1 e quatro projetos na ordem prevista", async ({
       page,
     }) => {
       await page.goto(projects.path);
@@ -292,7 +351,7 @@ for (const projects of pages) {
     }) => {
       await page.goto(projects.path);
       const entries = page.locator("#projects-list > li");
-      await expect(entries).toHaveCount(3);
+      await expect(entries).toHaveCount(4);
 
       for (const [index, project] of projects.projects.entries()) {
         const entry = entries.nth(index);
@@ -375,6 +434,9 @@ for (const projects of pages) {
         projects.captions.reelix,
       );
       await expect(entries.nth(2).locator("figcaption")).toHaveText(
+        projects.captions.rondo,
+      );
+      await expect(entries.nth(3).locator("figcaption")).toHaveText(
         projects.captions.fintalab,
       );
     });
@@ -390,6 +452,7 @@ for (const projects of pages) {
         "reelix-profile.png",
         "reelix-stats.png",
         "reelix-login.png",
+        ...rondoImages.map((image) => path.basename(image)),
         ...["landing", "evaluation", "roster"].map(
           (screen) => `fintalab-${screen}.${projects.locale}.png`,
         ),
@@ -410,6 +473,7 @@ for (const projects of pages) {
         projects.path,
         projects.projects[0]?.detail ?? "",
         projects.projects[1]?.detail ?? "",
+        projects.projects[2]?.detail ?? "",
       ]) {
         await page.goto(target);
         const text = await mainText(page);
@@ -425,6 +489,7 @@ for (const projects of pages) {
         projects.path,
         projects.projects[0]?.detail ?? "",
         projects.projects[1]?.detail ?? "",
+        projects.projects[2]?.detail ?? "",
       ]) {
         await page.goto(target);
         const text = `${await mainText(page)}\n${await page.title()}`;
@@ -489,12 +554,14 @@ for (const projects of pages) {
         if (href.startsWith("mailto:")) break;
       }
 
-      const [football, reelix, fintalab] = projects.projects;
+      const [football, reelix, rondo, fintalab] = projects.projects;
       const order = [
         hrefs.indexOf(football?.detail ?? ""),
         hrefs.indexOf(football?.repository ?? ""),
         hrefs.indexOf(reelix?.detail ?? ""),
         hrefs.indexOf(reelix?.repository ?? ""),
+        hrefs.indexOf(rondo?.detail ?? ""),
+        hrefs.indexOf(rondo?.repository ?? ""),
         hrefs.indexOf(fintalab?.repository ?? ""),
         hrefs.findIndex((href) => href.startsWith("mailto:")),
       ];
@@ -516,7 +583,7 @@ for (const projects of pages) {
       const home = projects.locale === "en" ? "/en" : "/pt-BR";
       await page.goto(home);
       const cards = page.locator("#featured-projects li");
-      await expect(cards).toHaveCount(3);
+      await expect(cards).toHaveCount(4);
 
       for (const [index, project] of projects.projects.entries()) {
         const card = cards.nth(index);
@@ -558,8 +625,8 @@ for (const projects of pages) {
     });
   });
 
-  for (const key of ["football", "reelix"] as const) {
-    const index = key === "football" ? 0 : 1;
+  for (const key of ["football", "reelix", "rondo"] as const) {
+    const index = { football: 0, reelix: 1, rondo: 2 }[key];
     const project = projects.projects[index];
     const detailPath = project?.detail ?? "";
 
@@ -610,13 +677,13 @@ for (const projects of pages) {
         }
       });
 
-      test("lista quatro decisões técnicas, cada uma com decisão e razão", async ({
+      test("lista as decisões técnicas, cada uma com decisão e razão", async ({
         page,
       }) => {
         await page.goto(detailPath);
         const decisions = page.locator("#decisions li");
 
-        await expect(decisions).toHaveCount(4);
+        await expect(decisions).toHaveCount(key === "rondo" ? 5 : 4);
         for (const decision of await decisions.all()) {
           await expect(decision.locator("p")).toHaveCount(2);
         }
@@ -628,6 +695,29 @@ for (const projects of pages) {
 
         if (key === "football") {
           await expect(images).toHaveCount(0);
+          return;
+        }
+
+        if (key === "rondo") {
+          await expect(images).toHaveCount(4);
+          const rondoSources = await images.evaluateAll((els) =>
+            els.map((el) => {
+              const url = new URL(
+                el.getAttribute("src") ?? "",
+                "http://localhost",
+              );
+              return url.searchParams.get("url") ?? url.pathname;
+            }),
+          );
+          expect(rondoSources).toEqual(rondoImages);
+          expect(
+            await images.evaluateAll((els) =>
+              els.map((el) => el.getAttribute("alt")),
+            ),
+          ).toEqual(projects.rondoAlts);
+          await expect(page.locator("main figcaption")).toHaveText(
+            projects.captions.rondo,
+          );
           return;
         }
 
@@ -770,7 +860,7 @@ test("as telas do FintaLab ficam lado a lado em 1440 px e empilhadas em 390 px",
 }) => {
   const tops = async () =>
     page
-      .locator("#projects-list > li:nth-child(3) img")
+      .locator("#projects-list > li:nth-child(4) img")
       .evaluateAll((els) =>
         els.map((el) =>
           Math.round(el.getBoundingClientRect().top + window.scrollY),
@@ -858,6 +948,88 @@ for (const width of [1440, 390]) {
     await expect(gallery).toBeFocused();
   });
 }
+
+// As três telas do Rondo na lista ficam lado a lado em qualquer largura e as
+// quatro do detalhe ficam em uma fileira rolável e focável (SPEC-014, RON-RF-08).
+for (const width of [1440, 390]) {
+  test(`as três telas do Rondo na lista ficam lado a lado com ${width} px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/en/projects");
+
+    const boxes = await page
+      .locator("#projects-list > li:nth-child(3) img")
+      .evaluateAll((els) =>
+        els.map((el) => {
+          const rect = el.getBoundingClientRect();
+          return { top: Math.round(rect.top), left: rect.left };
+        }),
+      );
+    expect(boxes).toHaveLength(3);
+    expect(new Set(boxes.map((box) => box.top)).size).toBe(1);
+    expect(boxes[0]?.left ?? 0).toBeLessThan(boxes[1]?.left ?? 0);
+    expect(boxes[1]?.left ?? 0).toBeLessThan(boxes[2]?.left ?? 0);
+
+    const overflow = await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    );
+    expect(overflow).toBeLessThanOrEqual(0);
+  });
+
+  test(`as telas do Rondo ficam em uma fileira rolável e focável com ${width} px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/en/projects/rondo");
+    const gallery = page.getByRole("region", { name: "Screens" });
+
+    await expect(gallery).toHaveCount(1);
+    await expect(gallery).toHaveAttribute("tabindex", "0");
+    const tops = await gallery
+      .locator("img")
+      .evaluateAll((els) =>
+        els.map((el) =>
+          Math.round(el.getBoundingClientRect().top + window.scrollY),
+        ),
+      );
+    expect(tops).toHaveLength(4);
+    expect(new Set(tops).size).toBe(1);
+
+    const pageOverflow = await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    );
+    expect(pageOverflow).toBeLessThanOrEqual(0);
+
+    await gallery.focus();
+    await expect(gallery).toBeFocused();
+  });
+}
+
+// O Rondo não promete o que não existe: o texto diz o que está fora e não traz
+// números (SPEC-014, RON-RF-05 e RON-RF-06).
+test("o Rondo declara o que não existe e não publica números", async ({
+  page,
+}) => {
+  await page.goto("/en/projects/rondo");
+  const text = await mainText(page);
+
+  expect(text).toContain("do not exist yet");
+  expect(text).toContain("Not implemented: experts, connectors");
+  expect(text.match(/\d+\s?%/g)).toBeNull();
+  expect(findPhrases(text, ["Vercel", "Bun", "OpenAI", "Claude"])).toEqual([]);
+  expect(text.match(/Analytics Personas/g)).toHaveLength(1);
+
+  await page.goto("/pt-BR/projetos/rondo");
+  const textPt = await mainText(page);
+  expect(textPt).toContain("ainda não existem");
+  expect(textPt).toContain("Não implementado: especialistas, conectores");
+  expect(textPt.match(/Analytics Personas/g)).toHaveLength(1);
+});
 
 test("o Football inclui o número de testes, único número de qualidade", async ({
   page,

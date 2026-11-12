@@ -1,5 +1,7 @@
 # SPEC-004 — Projects
 
+> **Atualização de 2026-11-12 (SPEC-014):** o Rondo passa a ser o quarto projeto da lista, em terceiro lugar, com página de detalhe em `/projects/rondo`. Onde esta SPEC diz "três projetos" ou lista só Football, Reelix e FintaLab, vale a SPEC-014. O detalhe do Rondo tem cinco decisões técnicas (as demais têm quatro).
+
 ## 1. Identificação
 
 | Campo | Valor |

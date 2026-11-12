@@ -14,7 +14,7 @@ import {
   jobSeekingPhrases,
 } from "./support/content-rules";
 
-type Context = "experience" | "football" | "reelix" | "fintalab";
+type Context = "experience" | "football" | "reelix" | "rondo" | "fintalab";
 
 /** Ícone esperado: arquivo de marca, monograma ou nenhum. */
 type IconExpectation = { brand: string } | { monogram: string } | "none";
@@ -44,7 +44,7 @@ const categories: CategoryExpectation[] = [
       {
         name: "TypeScript",
         icon: { brand: "typescript" },
-        context: ["football", "reelix", "fintalab"],
+        context: ["football", "reelix", "rondo", "fintalab"],
       },
       {
         name: "InterSystems Caché",
@@ -69,7 +69,7 @@ const categories: CategoryExpectation[] = [
       {
         name: "Node.js",
         icon: { brand: "nodejs" },
-        context: ["experience", "football"],
+        context: ["experience", "football", "rondo"],
       },
       {
         name: "Entity Framework Core",
@@ -85,7 +85,7 @@ const categories: CategoryExpectation[] = [
       {
         name: "PostgreSQL",
         icon: { brand: "postgresql" },
-        context: ["experience", "reelix"],
+        context: ["experience", "reelix", "rondo"],
       },
       {
         name: "SQL Server",
@@ -224,12 +224,14 @@ const pages: TechnologiesPage[] = [
       experience: "Experience",
       football: "Football Stat Analytics",
       reelix: "Reelix",
+      rondo: "Rondo",
       fintalab: "FintaLab",
     },
     contextPaths: {
       experience: "/en/experience",
       football: "/en/projects/football-stat-analytics",
       reelix: "/en/projects/reelix",
+      rondo: "/en/projects/rondo",
       // O FintaLab só aparece na lista, sem página de detalhe.
       fintalab: "/en/projects",
     },
@@ -271,12 +273,14 @@ const pages: TechnologiesPage[] = [
       experience: "Experiência",
       football: "Football Stat Analytics",
       reelix: "Reelix",
+      rondo: "Rondo",
       fintalab: "FintaLab",
     },
     contextPaths: {
       experience: "/pt-BR/experiencia",
       football: "/pt-BR/projetos/football-stat-analytics",
       reelix: "/pt-BR/projetos/reelix",
+      rondo: "/pt-BR/projetos/rondo",
       fintalab: "/pt-BR/projetos",
     },
     navigation: {

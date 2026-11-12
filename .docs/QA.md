@@ -58,7 +58,7 @@ Estado atual (2026-11-07):
 
 - Comando: `pnpm test:e2e`. A configuração em `playwright.config.ts` faz o build de produção e sobe o app na porta 3100, sempre testando um build novo; o relatório HTML fica em `playwright-report/`.
 - Primeira instalação dos navegadores: `pnpm exec playwright install chromium firefox webkit`.
-- Acessibilidade: `e2e/a11y.spec.ts` roda o axe-core (`@axe-core/playwright`, regras WCAG 2.0, 2.1 e 2.2 A e AA e boas práticas) nas 34 páginas e nas duas 404, a 1440 e a 390 px, e falha com qualquer violação. Tem um teste de controle que injeta defeitos para provar que o axe os acusa.
+- Acessibilidade: `e2e/a11y.spec.ts` roda o axe-core (`@axe-core/playwright`, regras WCAG 2.0, 2.1 e 2.2 A e AA e boas práticas) nas 36 páginas e nas duas 404, a 1440 e a 390 px, e falha com qualquer violação. Tem um teste de controle que injeta defeitos para provar que o axe os acusa.
 - Limite do WebKit: o do Playwright no Windows não navega por Tab (o foco fica no `body`) e o Safari de verdade só alcança links com um ajuste do navegador. Os testes de ordem de teclado e do skip link rodam em Chromium e Firefox, e o contorno do foco no Safari é conferido à mão.
 - Os testes ficam em `e2e/`, um arquivo por página (`home.spec.ts`, `about.spec.ts`), com regras de conteúdo compartilhadas em `e2e/support/content-rules.ts`.
 - Cobertura atual: estrutura de títulos, metadados (`title`, descrição, canonical, `hreflang`, Open Graph, `noindex`), links e rotas por idioma, troca de idioma, expressões proibidas, ordem e foco do teclado, alvos de toque, largura de leitura e rolagem horizontal em 360, 390, 768, 1366, 1440 e 1920 px.

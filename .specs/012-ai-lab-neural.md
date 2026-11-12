@@ -1,5 +1,7 @@
 # SPEC-012 — AI Lab: Neural Intelligence Environment
 
+> **Atualização de 2026-11-12 (SPEC-014):** NEU-RF-15 muda: o card "Em planejamento" (agora Rondo) tem um único link, no nome, para `/projects/rondo` (`/projetos/rondo`); os demais continuam como estão. Vale a SPEC-014.
+
 ## 1. Identificação
 
 | Campo | Valor |

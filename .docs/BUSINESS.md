@@ -430,7 +430,7 @@ Nenhuma meta numérica está definida neste momento.
 | Qual será a extensão definitiva do domínio? | Definido: `.me`, no Namecheap (oferta do GitHub Student Developer Pack) |
 | Qual será o nome completo do domínio? | Definido: `brunolucildo.me` (a registrar) |
 | Quais conquistas profissionais poderão ser divulgadas? | Definido na SPEC-003 (seção 7.3): só as métricas autorizadas por Bruno, em Experience |
-| Quais projetos estarão na primeira versão? | Definido na SPEC-004: Football Stat Analytics, Reelix e FintaLab |
+| Quais projetos estarão na primeira versão? | Definido na SPEC-004 e na SPEC-014: Football Stat Analytics, Reelix, Rondo e FintaLab |
 | A fotografia ficará no Hero ou na seção Sobre? | Definido: no Hero, com o tratamento aprovado (SPEC-001 e SPEC-011) |
 | A primeira versão terá ferramentas de analytics? | Em aberto |
 

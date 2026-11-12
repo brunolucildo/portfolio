@@ -65,7 +65,7 @@ test.describe("arquivos de imagem", () => {
     const files = imageFiles().sort();
     const referenced = referencedImages().sort();
 
-    expect(files.length).toBe(33);
+    expect(files.length).toBe(37);
     expect(
       files.filter((file) => !referenced.includes(file)),
       "arquivos sem uso",
@@ -82,7 +82,7 @@ test.describe("arquivos de imagem", () => {
     );
 
     const screens = imageFiles().filter((file) => file.includes("/projects/"));
-    expect(screens.length).toBe(15);
+    expect(screens.length).toBe(19);
     for (const file of screens) {
       expect(statSync(publicPath(file)).size, file).toBeLessThan(
         maxBytes.screen,
@@ -144,17 +144,18 @@ test.describe("arquivos de imagem", () => {
     }
   });
 
-  test("CREDITS.md registra os seis grupos, com origem, direitos e data", () => {
+  test("CREDITS.md registra os sete grupos, com origem, direitos e data", () => {
     const credits = readFileSync(path.join(imagesDir, "CREDITS.md"), "utf8");
     const rows = credits
       .split("\n")
       .filter((line) => line.startsWith("|") && !line.startsWith("|---"))
       .slice(1); // cabeçalho da tabela
 
-    expect(rows).toHaveLength(6);
+    expect(rows).toHaveLength(7);
     for (const [index, marker] of [
       "hero/bruno-lucildo-portrait.png",
       "reelix",
+      "rondo",
       "fintalab",
       "technologies",
       "icon.tsx",
@@ -189,16 +190,18 @@ const imagePages: Record<Locale, { path: string; images: number }[]> = {
   en: [
     { path: "/en", images: 1 },
     { path: "/en/about", images: 0 },
-    { path: "/en/projects", images: 6 },
+    { path: "/en/projects", images: 9 },
     { path: "/en/projects/reelix", images: 9 },
+    { path: "/en/projects/rondo", images: 4 },
     { path: "/en/projects/football-stat-analytics", images: 0 },
     { path: "/en/technologies", images: 0 },
   ],
   "pt-BR": [
     { path: "/pt-BR", images: 1 },
     { path: "/pt-BR/sobre", images: 0 },
-    { path: "/pt-BR/projetos", images: 6 },
+    { path: "/pt-BR/projetos", images: 9 },
     { path: "/pt-BR/projetos/reelix", images: 9 },
+    { path: "/pt-BR/projetos/rondo", images: 4 },
   ],
 };
 

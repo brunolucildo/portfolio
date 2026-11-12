@@ -45,8 +45,8 @@ async function scrollThrough(page: Page) {
   await page.waitForTimeout(500);
 }
 
-test("o conjunto de páginas auditadas é o das 34 páginas públicas e das 2 404", () => {
-  expect(pages).toHaveLength(36);
+test("o conjunto de páginas auditadas é o das 36 páginas públicas e das 2 404", () => {
+  expect(pages).toHaveLength(38);
 });
 
 for (const viewport of viewports) {

@@ -1,5 +1,7 @@
 # SPEC-001 — Home
 
+> **Atualização de 2026-11-12 (SPEC-014):** os destaques da Home passam de três para quatro projetos (o Rondo entra em terceiro), em grade de duas colunas a partir de 1024 px. Onde esta SPEC diz "três destaques" (HOME-RF-04, HOME-CA-04, HOME-CA-17), vale a SPEC-014.
+
 ## 1. Identificação
 
 | Campo | Valor |

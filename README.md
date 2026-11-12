@@ -26,7 +26,7 @@ O site é bilíngue (inglês como padrão e português do Brasil), estático e s
 | Links de contexto em Technologies (TECH-RF-10) e anterior/seguinte no AI Lab (AIL-RF-16) | Concluídos |
 | AI Lab: escolha de abordagem e de modelo, framework de testes e fine-tuning (SPEC-006 v0.5.0) | Concluídos |
 | Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience, Projects, Technologies, AI Lab, Contact, Internationalization, Resume, Layout global e Assets (imagens, ícone e compartilhamento) |
-| SEO final (SPEC-013) | Implementado: `robots.txt`, `sitemap.xml` (34 páginas), guarda de indexação, JSON-LD e limites de título e descrição; falta o domínio para validar no Search Console e no Rich Results Test |
+| SEO final (SPEC-013) | Implementado: `robots.txt`, `sitemap.xml` (36 páginas), guarda de indexação, JSON-LD e limites de título e descrição; falta o domínio para validar no Search Console e no Rich Results Test |
 | QA final | Executado em 2026-11-08: 1334 E2E em Chromium, Firefox e WebKit, axe-core como teste permanente (0 violações WCAG 2.2 AA), Lighthouse 100 em acessibilidade e boas práticas; 3 defeitos corrigidos e 3 instabilidades de teste resolvidas. Relatório em [`.docs/QA-RELATORIO.md`](./.docs/QA-RELATORIO.md); faltam as conferências manuais e as que dependem do domínio |
 | Hospedagem e domínio | Decididos em 2026-11-12: Vercel Hobby e `brunolucildo.me` (Namecheap); falta registrar e publicar, conforme [`.docs/PUBLICACAO.md`](./.docs/PUBLICACAO.md) |
 | Analytics | Pendente de decisão |
@@ -87,7 +87,7 @@ Copie `.env.example` para `.env.local` se precisar definir valores locais.
 O site nasce **bloqueado para buscadores**: sem `SITE_INDEXING=allow`, o `robots.txt` diz `Disallow: /` e toda resposta sai com `X-Robots-Tag: noindex, nofollow`. Isso protege previews e o ambiente local. Para publicar:
 
 1. No ambiente de produção, defina `NEXT_PUBLIC_SITE_URL` (ex.: `https://seu-dominio.me`) e `SITE_INDEXING=allow` **antes do build**; as duas são lidas na compilação.
-2. Depois do deploy, confira `/robots.txt` (deve ter `Allow: /` e a linha `Sitemap:`), `/sitemap.xml` (34 URLs com o domínio certo) e a ausência do cabeçalho `X-Robots-Tag` em `/en`. O PDF do currículo mantém o seu `noindex`.
+2. Depois do deploy, confira `/robots.txt` (deve ter `Allow: /` e a linha `Sitemap:`), `/sitemap.xml` (36 URLs com o domínio certo) e a ausência do cabeçalho `X-Robots-Tag` em `/en`. O PDF do currículo mantém o seu `noindex`.
 3. Nos previews, deixe `SITE_INDEXING` sem valor.
 4. Com o domínio no ar: envie o sitemap no Google Search Console e valide a Home e o About no Rich Results Test (itens do QA final).
 
