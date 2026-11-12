@@ -131,7 +131,7 @@ Nada disso bloqueia o código, mas bloqueia o item correspondente do checklist d
 - Otimizador de imagens do Next na hospedagem escolhida (a escolha da hospedagem muda o custo e o comportamento).
 - Prévia do cartão de compartilhamento no LinkedIn, WhatsApp e X, e o ícone na aba e no iPhone.
 
-**Depende de uma pessoa**
+**Depende de uma pessoa** (conferências manuais abaixo concluídas pelo Bruno em 2026-11-12)
 
 - Abrir o LinkedIn (`/in/bruno-lucildo/`), que bloqueia robôs, e confirmar que o perfil está certo.
 - Ler os textos em inglês e português uma última vez (ortografia, tom, datas, cargos): os textos foram aprovados SPEC a SPEC, mas não há revisão ortográfica automática.

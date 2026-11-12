@@ -507,7 +507,7 @@ Alternativas a avaliar:
 - Cloudflare.
 - Outra plataforma compatível com a estratégia de renderização escolhida.
 
-A decisão final deverá considerar custo, facilidade de manutenção, desempenho e suporte ao domínio `.dev`.
+**Decisão (2026-11-12):** Vercel, plano Hobby, com o domínio `.me` apontado para ela. O guia de publicação está em `PUBLICACAO.md`.
 
 ### 13.3. Ambientes
 
@@ -522,7 +522,7 @@ Um ambiente de Preview poderá ser utilizado para validar Pull Requests antes da
 
 ## 14. Domínio e infraestrutura
 
-O domínio será registrado utilizando a extensão `.dev`, por meio da Name.com.
+O domínio será registrado utilizando a extensão `.me`, por meio do Namecheap.
 
 O nome completo ainda deverá ser definido.
 
@@ -587,9 +587,9 @@ Esses elementos poderão ser avaliados caso o escopo do produto evolua.
 | Biblioteca de animações | Aprovado: CSS e IntersectionObserver nativos; Motion só se a implementação nativa não atender ao `DESIGN.md` |
 | Estratégia definitiva de i18n | Aprovado: `next-intl`, rotas `[locale]`, URLs traduzidas em `pt-BR` |
 | Rota da página Technologies | Aprovado: `/technologies` (`/tecnologias`), no menu principal |
-| Hospedagem | Pendente |
+| Hospedagem | Aprovado (2026-11-12): Vercel, plano Hobby |
 | Analytics | Pendente |
-| Nome completo do domínio `.dev` | Pendente |
+| Nome completo do domínio `.me` | Aprovado (2026-11-12): `brunolucildo.me` (a registrar) |
 | Serviço de formulário de contato | Pendente |
 
 As decisões deverão ser registradas conforme forem aprovadas.

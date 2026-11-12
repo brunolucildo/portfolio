@@ -1,0 +1,6 @@
+allowBuilds:
+  # Ambos chegam só via next-intl (extração de mensagens e modo watch), recursos
+  # que o projeto não usa. Os binários de cada plataforma vêm como dependências
+  # opcionais, então os scripts de instalação não são necessários.
+  "@parcel/watcher": false
+  "@swc/core": false
