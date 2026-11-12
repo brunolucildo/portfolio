@@ -341,18 +341,15 @@ O currículo será um recurso secundário.
 
 ### 9.1. Provedor
 
-O domínio será registrado ou administrado pela Name.com, conforme a assinatura de um ano disponível.
+O domínio será registrado e administrado pelo Namecheap, por meio da oferta de um ano de domínio `.me` do GitHub Student Developer Pack.
 
 ### 9.2. Extensões em Avaliação
 
-As extensões consideradas são:
+As extensões consideradas inicialmente eram `.dev` e `.app`, via Name.com.
 
-- `.dev`
-- `.app`
+**Decisão (2026-11-12):** `.me`, no Namecheap. O motivo é a oferta do GitHub Student Developer Pack, que dá um ano de registro gratuito do `.me`. O `.dev` e o `.app` ficam descartados nesta versão.
 
-**Recomendação inicial:** `.dev`, por apresentar maior alinhamento com a identidade profissional de um desenvolvedor e com o propósito do portfólio.
-
-A extensão definitiva ainda não foi escolhida.
+Nome completo aprovado: `brunolucildo.me` (a registrar).
 
 ### 9.3. Critérios de Decisão
 
@@ -424,14 +421,14 @@ Nenhuma meta numérica está definida neste momento.
 - O currículo será complementar.
 - Não haverá blog técnico.
 - O AI Lab terá uma área própria.
-- O registro do domínio será realizado pela Name.com.
+- O registro do domínio será realizado pelo Namecheap (extensão `.me`).
 
 ### 12.2. Questões em Aberto
 
 | Questão | Situação |
 |---|---|
-| Qual será a extensão definitiva do domínio? | Em aberto: `.dev` ou `.app` |
-| Qual será o nome completo do domínio? | Em aberto |
+| Qual será a extensão definitiva do domínio? | Definido: `.me`, no Namecheap (oferta do GitHub Student Developer Pack) |
+| Qual será o nome completo do domínio? | Definido: `brunolucildo.me` (a registrar) |
 | Quais conquistas profissionais poderão ser divulgadas? | Definido na SPEC-003 (seção 7.3): só as métricas autorizadas por Bruno, em Experience |
 | Quais projetos estarão na primeira versão? | Definido na SPEC-004: Football Stat Analytics, Reelix e FintaLab |
 | A fotografia ficará no Hero ou na seção Sobre? | Definido: no Hero, com o tratamento aprovado (SPEC-001 e SPEC-011) |

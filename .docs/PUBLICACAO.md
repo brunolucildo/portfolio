@@ -2,7 +2,7 @@
 
 # Guia de publicação
 
-Passo a passo para colocar o portfólio no ar. A proposta é **Vercel (plano Hobby)** com um domínio **`.dev` do Name.com** (ano grátis). A escolha da hospedagem ainda é uma decisão do Bruno; se mudar, as seções 3 a 5 precisam ser adaptadas. O restante (variáveis, indexação e conferências) vale para qualquer hospedagem.
+Passo a passo para colocar o portfólio no ar. Decidido pelo Bruno em 2026-11-12: **Vercel (plano Hobby)** com o domínio **`brunolucildo.me` no Namecheap** (ano grátis, pela oferta do GitHub Student Developer Pack). Se a hospedagem mudar, as seções 3 a 5 precisam ser adaptadas. O restante (variáveis, indexação e conferências) vale para qualquer hospedagem.
 
 Este guia não substitui o `README.md` (seção "Publicação e indexação") nem o `SEO.md`: ele organiza a sequência e acrescenta o que é específico da hospedagem.
 
@@ -11,21 +11,22 @@ Este guia não substitui o `README.md` (seção "Publicação e indexação") ne
 | Item | Estado |
 |---|---|
 | Código na `main`, SPECs 001 a 013 e QA final | Pronto |
-| Conferências manuais do `QA-RELATORIO.md` (seção 6) | Pendentes (Safari real, celular, leitor de tela, textos en/pt-BR, mailto, Copiar, PDF, LinkedIn) |
-| Conteúdo confidencial | Confirmar que nada sensível aparece no site nem no PDF |
-| Domínio | A registrar |
-| Hospedagem | A conectar |
+| Conferências manuais do `QA-RELATORIO.md` (seção 7) | Concluídas pelo Bruno em 2026-11-12 (Safari real, celular, leitor de tela, textos en/pt-BR, mailto, Copiar, PDF, LinkedIn) |
+| Conteúdo confidencial | Conferido pelo Bruno em 2026-11-12: nada sensível no site nem no PDF |
+| Domínio | `brunolucildo.me` aprovado; a registrar no Namecheap |
+| Hospedagem | Vercel Hobby aprovada; a conectar |
 
-Faça as conferências manuais antes de liberar a indexação: depois que o Google indexa, corrigir texto errado leva dias.
+As conferências manuais já foram feitas (a indexação pode ser liberada). Se algum texto mudar depois disso, corrija antes do deploy de produção: depois que o Google indexa, corrigir texto errado leva dias.
 
-## 2. Domínio (Name.com)
+## 2. Domínio (Namecheap)
 
-1. Busque o nome desejado (sugestão: `brunolucildo.dev`) e resgate o domínio grátis do plano. Quem escolhe o nome é o Bruno.
+1. Na página da oferta do GitHub Student Developer Pack, conecte a conta do GitHub ao Namecheap e resgate o **ano grátis de domínio `.me`**. Busque `brunolucildo.me` (nome aprovado pelo Bruno).
 2. Antes de concluir, confira:
-   - **Preço da renovação** do `.dev` no segundo ano e se a **renovação automática** vem ligada (cobrança no cartão).
-   - **Proteção do WHOIS** (privacidade), para não expor dados pessoais.
+   - **Preço da renovação** do `.me` no segundo ano e se a **renovação automática** vem ligada (cobrança no cartão).
+   - **Proteção do WHOIS** (privacidade), para não expor dados pessoais, e se ela está ativa neste domínio.
 3. Ponha um lembrete no calendário uns 30 dias antes de o ano grátis vencer. Se a renovação for cara, o domínio pode ser transferido para outro registrador (o Cloudflare Registrar costuma cobrar perto do custo).
-4. O `.dev` exige HTTPS em todos os navegadores (o TLD inteiro está na lista de pré-carregamento do HSTS), o que combina com a guarda de indexação do site.
+4. **Certificado SSL do Namecheap (oferta nº 2): não é necessário com a Vercel.** A Vercel emite e renova o certificado HTTPS sozinha (seção 5), e ela não usa certificado instalado por fora. Resgate a oferta só se um dia a hospedagem mudar para uma que exija certificado próprio.
+5. Diferentemente do `.dev`, o `.me` não força HTTPS por si só. O HTTPS fica por conta da Vercel (redirecionamento de `http` para `https` e `Strict-Transport-Security`); confira os dois na seção 6.
 
 ## 3. Hospedagem (Vercel)
 
@@ -34,9 +35,11 @@ Faça as conferências manuais antes de liberar a indexação: depois que o Goog
 3. **Não faça o primeiro deploy sem as variáveis da seção 4.** Se o primeiro build sair sem elas, o site publica com `localhost` no canonical e no Open Graph; basta refazer o deploy depois de defini-las, mas evita um build inútil.
 4. O plano **Hobby** é para uso pessoal e não comercial, o que cobre um portfólio. Se o site passar a vender ou a divulgar serviços pagos, reavalie (plano Pro).
 
-### Risco conhecido: instalação com pnpm
+### Instalação com pnpm (resolvido em 2026-11-12)
 
-O pnpm 12 mostra `ERR_PNPM_IGNORED_BUILDS` em qualquer instalação do projeto (já acontece localmente e não é defeito do código). Se a instalação falhar na Vercel por causa disso, **não aprove scripts de build por conta própria**: volte com o log e decidimos a correção (por exemplo, fixar a versão do pnpm ou declarar `onlyBuiltDependencies` depois de avaliar cada pacote).
+O pnpm 12 acusava `ERR_PNPM_IGNORED_BUILDS` para `@parcel/watcher` e `@swc/core`. Os dois vêm só do `next-intl` (extração de mensagens e modo watch, recursos que o projeto não usa), e os binários de cada plataforma chegam como dependências opcionais. Por isso o `pnpm-workspace.yaml` declara os dois como `false` em `allowBuilds`: nenhum script de build de terceiros roda. Conferido numa cópia limpa: `pnpm install --frozen-lockfile`, `tsc`, `biome check` e `next build` passam.
+
+Se a Vercel usar outra versão do pnpm e a instalação falhar, volte com o log; não aprove scripts de build por conta própria.
 
 ## 4. Variáveis de ambiente
 
@@ -44,7 +47,7 @@ Em **Settings → Environment Variables** do projeto na Vercel. As duas são lid
 
 | Variável | Production | Preview | Development |
 |---|---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | `https://brunolucildo.dev` (o domínio real, só a origem, sem barra final nem caminho) | vazia | vazia |
+| `NEXT_PUBLIC_SITE_URL` | `https://brunolucildo.me` (o domínio real, só a origem, sem barra final nem caminho) | vazia | vazia |
 | `SITE_INDEXING` | `allow` | **vazia** | vazia |
 
 Pontos de atenção:
@@ -56,8 +59,10 @@ Pontos de atenção:
 
 ## 5. Domínio na Vercel e DNS
 
-1. No projeto, **Settings → Domains**, adicione o domínio (`brunolucildo.dev`). Adicione também o `www.brunolucildo.dev` e deixe o `www` **redirecionar para o domínio sem `www`**, que é o canônico (`NEXT_PUBLIC_SITE_URL`).
-2. A Vercel mostra os registros DNS exigidos. No painel de DNS do Name.com, cadastre exatamente o que ela indicar (normalmente um registro `A` para o domínio raiz e um `CNAME` para o `www`). Use os valores que a própria Vercel exibe, não os de um tutorial.
+1. No projeto, **Settings → Domains**, adicione o domínio (`brunolucildo.me`). Adicione também o `www.brunolucildo.me` e deixe o `www` **redirecionar para o domínio sem `www`**, que é o canônico (`NEXT_PUBLIC_SITE_URL`).
+2. A Vercel mostra os registros DNS exigidos. No Namecheap, abra **Domain List → Manage → Advanced DNS** e cadastre exatamente o que ela indicar (normalmente um registro `A` para o domínio raiz e um `CNAME` para o `www`). Use os valores que a própria Vercel exibe, não os de um tutorial.
+   - Um domínio novo do Namecheap costuma vir com registros de página estacionada (um `CNAME` para `www` e um redirecionamento de URL no `@`). **Remova-os**, senão competem com os registros da Vercel.
+   - Mantenha os servidores de nomes no padrão do Namecheap (**Namecheap BasicDNS**), que é onde a aba Advanced DNS vale.
 3. Aguarde a propagação (de minutos a algumas horas). A Vercel emite o certificado HTTPS sozinha quando o DNS estiver correto; o status vira **Valid Configuration** no painel.
 4. Faça o deploy de produção (ou **Redeploy** do último, com as variáveis já salvas).
 
@@ -88,7 +93,7 @@ Se algo vier com `localhost`, a variável não estava definida no momento do bui
 
 ## 7. Depois de publicado
 
-1. **Google Search Console:** cadastre a propriedade do domínio (a verificação é por registro DNS `TXT` no Name.com) e envie `https://SEU-DOMINIO/sitemap.xml`.
+1. **Google Search Console:** cadastre a propriedade do domínio (a verificação é por registro DNS `TXT` na aba Advanced DNS do Namecheap) e envie `https://SEU-DOMINIO/sitemap.xml`.
 2. **Rich Results Test:** valide a Home (`WebSite` e `Person`) e o About (`ProfilePage`).
 3. **Lighthouse em produção** (Home e uma página interna, em celular): a meta é manter os números do `QA-RELATORIO.md`.
 4. **Visualização de compartilhamento:** cole o endereço no LinkedIn e confira o cartão. O LinkedIn guarda a imagem em cache; se estiver velha, use o Post Inspector deles para atualizar.

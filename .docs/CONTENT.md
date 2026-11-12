@@ -7,7 +7,7 @@
 > **Responsável:** Bruno Lucildo  
 > **Idioma da documentação:** Português (Brasil)  
 > **Idiomas do produto:** Inglês (padrão) e Português  
-> **Domínio definido:** `.dev`  
+> **Domínio definido:** `.me` (Namecheap)  
 > **Documento relacionado:** BUSINESS.md
 
 ---
