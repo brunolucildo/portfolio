@@ -4,7 +4,7 @@
  * detalhes. Nome, categoria, estado e descrição ficam em `projects.items.<key>`
  * nos arquivos de conteúdo.
  */
-export type ProjectKey = "football" | "reelix" | "fintalab";
+export type ProjectKey = "football" | "reelix" | "rondo" | "fintalab";
 
 /** Arquivo de imagem, único ou por idioma (o protótipo do FintaLab é bilíngue). */
 export type ProjectImageSource =
@@ -23,6 +23,10 @@ export type ProjectImage = {
     | "reelixProfile"
     | "reelixStats"
     | "reelixLogin"
+    | "rondoSignIn"
+    | "rondoSignUp"
+    | "rondoForgotPassword"
+    | "rondoResetPassword"
     | "fintalabLanding"
     | "fintalabEvaluation"
     | "fintalabRoster";
@@ -44,7 +48,7 @@ export type ProjectConfig = {
   /** Imagens da página de detalhe. */
   detailImages: readonly ProjectImage[];
   /** Chave da legenda das imagens em `projects.captions`. */
-  caption: "reelix" | "fintalab" | null;
+  caption: "reelix" | "rondo" | "fintalab" | null;
 };
 
 const reelixHome: ProjectImage = {
@@ -108,6 +112,35 @@ const reelixLogin: ProjectImage = {
   src: "/images/projects/reelix-login.png",
   width: 860,
   height: 1800,
+};
+
+/** Telas do app em desenvolvimento local, formulários vazios (SPEC-014, seção 7.4). */
+const rondoSignIn: ProjectImage = {
+  alt: "rondoSignIn",
+  src: "/images/projects/rondo-sign-in.png",
+  width: 1040,
+  height: 1560,
+};
+
+const rondoSignUp: ProjectImage = {
+  alt: "rondoSignUp",
+  src: "/images/projects/rondo-sign-up.png",
+  width: 1040,
+  height: 1560,
+};
+
+const rondoForgotPassword: ProjectImage = {
+  alt: "rondoForgotPassword",
+  src: "/images/projects/rondo-forgot-password.png",
+  width: 1040,
+  height: 1560,
+};
+
+const rondoResetPassword: ProjectImage = {
+  alt: "rondoResetPassword",
+  src: "/images/projects/rondo-reset-password.png",
+  width: 1040,
+  height: 1560,
 };
 
 const fintalabImages: readonly ProjectImage[] = [
@@ -181,6 +214,22 @@ export const projects: readonly ProjectConfig[] = [
     caption: "reelix",
   },
   {
+    key: "rondo",
+    slug: "rondo",
+    repositoryUrl: "https://github.com/brunolucildo/rondo",
+    // Só nomes que já constam em Technologies (consistência da SPEC-005); o
+    // restante da stack aparece no texto de Architecture (SPEC-014, seção 7.1).
+    technologies: ["TypeScript", "Node.js", "PostgreSQL"],
+    listImages: [rondoSignIn, rondoSignUp, rondoForgotPassword],
+    detailImages: [
+      rondoSignIn,
+      rondoSignUp,
+      rondoForgotPassword,
+      rondoResetPassword,
+    ],
+    caption: "rondo",
+  },
+  {
     key: "fintalab",
     slug: null,
     repositoryUrl: "https://github.com/brunolucildo/fintalab",
@@ -192,7 +241,7 @@ export const projects: readonly ProjectConfig[] = [
 ];
 
 export type DetailProject = Omit<ProjectConfig, "key" | "slug"> & {
-  key: "football" | "reelix";
+  key: "football" | "reelix" | "rondo";
   slug: string;
 };
 

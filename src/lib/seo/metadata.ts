@@ -81,7 +81,8 @@ type PageMetadataNamespace =
   | "resume.metadata"
   | AiLabExperimentNamespace
   | "projects.detail.football.metadata"
-  | "projects.detail.reelix.metadata";
+  | "projects.detail.reelix.metadata"
+  | "projects.detail.rondo.metadata";
 
 function isAiLabExperimentNamespace(
   namespace: PageMetadataNamespace,
@@ -163,6 +164,16 @@ async function pageTexts(
       const t = await getTranslations({
         locale,
         namespace: "projects.detail.reelix",
+      });
+      return {
+        title: t("metadata.title"),
+        description: t("metadata.description"),
+      };
+    }
+    case "projects.detail.rondo.metadata": {
+      const t = await getTranslations({
+        locale,
+        namespace: "projects.detail.rondo",
       });
       return {
         title: t("metadata.title"),

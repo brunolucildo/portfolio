@@ -175,7 +175,7 @@ O sitemap deverá conter apenas URLs canônicas e indexáveis.
 
 Páginas inexistentes, previews e ambientes não públicos não deverão ser indexados.
 
-Implementação (SPEC-013): o sitemap lista as 34 páginas públicas (17 por idioma) com as alternativas `hreflang` (`en`, `pt-BR` e `x-default`), sem `lastmod`, montado das mesmas fontes das rotas. O `robots.txt` libera tudo e aponta o sitemap, sem bloquear `/documents/` (o PDF do currículo sai com `X-Robots-Tag: noindex`, e bloquear o caminho impediria o robô de ler esse cabeçalho).
+Implementação (SPEC-013): o sitemap lista as 36 páginas públicas (18 por idioma; eram 34 até a SPEC-014, que acrescentou o detalhe do Rondo) com as alternativas `hreflang` (`en`, `pt-BR` e `x-default`), sem `lastmod`, montado das mesmas fontes das rotas. O `robots.txt` libera tudo e aponta o sitemap, sem bloquear `/documents/` (o PDF do currículo sai com `X-Robots-Tag: noindex`, e bloquear o caminho impediria o robô de ler esse cabeçalho).
 
 **Guarda de indexação.** O padrão é bloquear: sem `SITE_INDEXING=allow`, o `robots.txt` diz `Disallow: /` e toda resposta sai com `X-Robots-Tag: noindex, nofollow`. A variável só vale com `NEXT_PUBLIC_SITE_URL` em `https` fora de `localhost`; do contrário o build falha. O passo a passo de publicação está no README.
 

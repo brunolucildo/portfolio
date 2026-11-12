@@ -14,7 +14,7 @@ export type AiLabExperimentKey =
   | "approachAndModelChoice"
   | "promptTestFramework"
   | "loraFineTuning"
-  | "analyticsPersonas";
+  | "rondo";
 
 /** "Projeto concluído" existe no vocabulário, mas nenhum experimento o usa na v1. */
 export type ExperimentType = "study" | "proofOfConcept" | "completed";
@@ -25,6 +25,8 @@ export type AiLabExperiment = {
   key: AiLabExperimentKey;
   /** Slug da página de detalhe; `null` no card "Em planejamento". */
   slug: string | null;
+  /** Projeto cuja página o card "Em planejamento" abre (SPEC-014); `null` nos demais. */
+  projectPage?: Extract<ProjectKey, "rondo">;
   type: ExperimentType;
   state: ExperimentState;
   /** Modelo documentado; `null` quando o repositório não o define. */
@@ -105,8 +107,9 @@ export const aiLabExperiments: readonly AiLabExperiment[] = [
     origin: null,
   },
   {
-    key: "analyticsPersonas",
+    key: "rondo",
     slug: null,
+    projectPage: "rondo",
     type: "study",
     state: "planning",
     model: null,
@@ -116,7 +119,7 @@ export const aiLabExperiments: readonly AiLabExperiment[] = [
 ];
 
 export type DetailExperiment = Omit<AiLabExperiment, "key" | "slug"> & {
-  key: Exclude<AiLabExperimentKey, "analyticsPersonas">;
+  key: Exclude<AiLabExperimentKey, "rondo">;
   slug: string;
 };
 

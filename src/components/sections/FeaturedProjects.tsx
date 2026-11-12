@@ -17,7 +17,7 @@ export async function FeaturedProjects() {
 
   return (
     <Section id="featured-projects" title={t("title")}>
-      <ul className="grid gap-6 lg:grid-cols-3">
+      <ul className="grid gap-6 lg:grid-cols-2">
         {projects.map(({ key, repositoryUrl }) => (
           <li key={key} className="flex">
             <Card interactive className="flex w-full flex-col p-8">

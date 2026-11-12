@@ -1,13 +1,17 @@
 import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
-import { imageSource, type ProjectImage } from "@/config/projects";
+import {
+  imageSource,
+  type ProjectConfig,
+  type ProjectImage,
+} from "@/config/projects";
 import { cn } from "@/lib/utils/cn";
 import { measure } from "./layout";
 
 type ProjectFigureProps = {
   images: readonly ProjectImage[];
   /** Chave da legenda em `projects.captions`. */
-  caption: "reelix" | "fintalab" | null;
+  caption: ProjectConfig["caption"];
   className?: string;
 };
 

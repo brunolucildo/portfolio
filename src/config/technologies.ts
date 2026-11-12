@@ -65,7 +65,7 @@ export const technologyCategories: readonly TechnologyCategory[] = [
         name: "TypeScript",
         icon: brand("typescript"),
         experience: false,
-        projects: ["football", "reelix", "fintalab"],
+        projects: ["football", "reelix", "rondo", "fintalab"],
       },
       {
         name: "InterSystems Caché",
@@ -94,7 +94,7 @@ export const technologyCategories: readonly TechnologyCategory[] = [
         name: "Node.js",
         icon: brand("nodejs"),
         experience: true,
-        projects: ["football"],
+        projects: ["football", "rondo"],
       },
       {
         name: "Entity Framework Core",
@@ -117,7 +117,7 @@ export const technologyCategories: readonly TechnologyCategory[] = [
         name: "PostgreSQL",
         icon: brand("postgresql"),
         experience: true,
-        projects: ["reelix"],
+        projects: ["reelix", "rondo"],
       },
       {
         name: "SQL Server",

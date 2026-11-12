@@ -142,7 +142,7 @@
   "projects": {
     "metadata": {
       "title": "Projetos | Bruno Lucildo",
-      "description": "Projetos de Bruno Lucildo e o estado atual de cada um: análise de futebol com IA (acadêmico), app de filmes e séries (pessoal) e um conceito de produto."
+      "description": "Projetos de Bruno Lucildo e o estado de cada um: análise de futebol com IA, app de filmes e plataforma de IA para clubes (pessoais) e um conceito de produto."
     },
     "title": "Projetos",
     "intro": "Projetos acadêmicos, pessoais e conceituais, cada um com seu estado atual e um link para o repositório público.",
@@ -166,6 +166,12 @@
         "status": "Em desenvolvimento",
         "description": "Aplicativo para descobrir e acompanhar filmes e séries, registrar o que você assistiu e compartilhar atividades autorizadas com amigos."
       },
+      "rondo": {
+        "name": "Rondo",
+        "category": "Projeto pessoal",
+        "status": "Em desenvolvimento",
+        "description": "Uma plataforma para criar e operar especialistas de IA para as funções de um clube de futebol, com respostas rastreáveis até as fontes conectadas. A fundação técnica existe; as funcionalidades de produto, não."
+      },
       "fintalab": {
         "name": "FintaLab",
         "category": "Conceito de produto",
@@ -175,6 +181,7 @@
     },
     "captions": {
       "reelix": "Telas da versão de desenvolvimento. A interface do app está em português. Dados e imagens de filmes e séries do TMDB. Este produto usa o TMDB e as APIs do TMDB, mas não é endossado, certificado nem aprovado de outra forma pelo TMDB.",
+      "rondo": "Telas da versão de desenvolvimento local, sem dados reais. A interface do app está em inglês.",
       "fintalab": "Telas do protótipo conceitual estático. Todas as pessoas, clubes e números são fictícios."
     },
     "images": {
@@ -187,6 +194,10 @@
       "reelixProfile": "Tela de perfil do Reelix no celular: opções de avatar (iniciais e personagens ilustrados) e uma fileira de medalhas de conquistas com um link para progresso e estatísticas.",
       "reelixStats": "Tela de conquistas e estatísticas do Reelix no celular: totais de episódios, séries, filmes e registros, tempo estimado de exibição e a atividade do mês.",
       "reelixLogin": "Tela de entrada do Reelix no celular: o logotipo do reelix, o título \"Suas histórias começam aqui.\" e os campos de e-mail e senha.",
+      "rondoSignIn": "Tela de entrada do Rondo: o logo do Rondo em pixel art sobre um cartão com os campos de e-mail e senha, um botão laranja Sign in e links para recuperar a senha e criar uma conta. A interface do app está em inglês.",
+      "rondoSignUp": "Tela de cadastro do Rondo: o logo sobre um cartão com os campos de nome, sobrenome, e-mail, senha e confirmação de senha e um botão laranja Create account. A interface do app está em inglês.",
+      "rondoForgotPassword": "Tela de recuperação de senha do Rondo: o logo sobre um cartão que pede o e-mail para receber o link de redefinição, com um botão laranja Send reset link. A interface do app está em inglês.",
+      "rondoResetPassword": "Tela de redefinição de senha do Rondo: o logo sobre um cartão com os campos de nova senha e confirmação, cada um com um controle para mostrar a senha, e um botão laranja Reset password. A interface do app está em inglês.",
       "fintalabLanding": "Protótipo conceitual do FintaLab, tela inicial: o título \"Cada partida pode levar você mais longe.\" ao lado de uma ilustração de campo de futebol, com o aviso de que pessoas, clubes e números são fictícios.",
       "fintalabEvaluation": "Protótipo conceitual do FintaLab, tela de avaliação: uma carta de jogador em pixel art com notas fictícias e um aviso de que os valores são inventados e não foram gerados pelo motor.",
       "fintalabRoster": "Protótipo conceitual do FintaLab, tela de elenco: uma tabela com quatro jogadores fictícios, com posição, nacionalidade, vínculo e última avaliação."
@@ -258,6 +269,39 @@
           }
         ],
         "state": "Em desenvolvimento. O código cobre contas, onboarding, descoberta, acompanhamento, listas, avaliações e comentários, amigos, notificações e conquistas, mas o próprio repositório afirma que isso descreve a implementação e não confirma uma implantação em produção. As notificações push remotas estão desativadas, o widget Android não foi implementado e o app mobile ainda não tem testes automatizados."
+      },
+      "rondo": {
+        "metadata": {
+          "title": "Rondo | Bruno Lucildo",
+          "description": "Plataforma pessoal de especialistas de IA para clubes de futebol: autenticação, observabilidade e testes de carga prontos; arquitetura, decisões e estado atual."
+        },
+        "overview": "O Rondo é uma plataforma para criar e operar especialistas: agentes de IA especializados nas funções de um clube de futebol, como técnico ou analista de desempenho, alimentados por fontes de dados conectadas e com respostas que citam essas fontes. O projeto se chamava Analytics Personas antes de receber o nome Rondo. O repositório é um monorepo com um app web em React, uma API em Nest.js e uma pilha local de observabilidade. É um projeto pessoal.",
+        "challenge": "Os clubes de futebol guardam conhecimento em ferramentas dispersas: documentos, wikis, chamados e planilhas. Cada função precisa transformar esse material em decisões rápidas, e uma resposta que não pode ser rastreada até as fontes, ou que inventa dados, é pior do que nenhuma. O desafio é construir especialistas cujas respostas possam ser auditadas, sobre uma base em que contas e acesso aos dados sejam confiáveis desde o início.",
+        "solution": "A ideia do produto é um especialista por função, cada um com seu escopo, suas fontes autorizadas e seu formato de entrega, respondendo a pedidos em linguagem natural com citações e declarando a lacuna quando falta contexto. Até agora o trabalho foi para a base de que isso precisa: contas com confirmação por e-mail, entrada e recuperação de senha, uma API observável e testada sob carga, e um sistema de design com identidade visual própria. Os especialistas, os conectores e a integração com o modelo de linguagem estão planejados e ainda não existem.",
+        "architecture": "Um monorepo com um app web em React e Vite (TanStack Router e Query), uma API em Nest.js com TypeScript, um site de documentação em Next.js e um pacote de design system compartilhado, construído sobre Tailwind CSS e shadcn/ui. A API é organizada em fatias verticais com camadas de domínio, aplicação, infraestrutura e interface, um request handler por endpoint e um caso de uso por fluxo. Os dados ficam em PostgreSQL por meio de um Supabase local, com row-level security ligada e sem policies, de modo que só a API os alcança. A API envia traces, métricas e logs por OpenTelemetry a uma pilha Grafana local (Loki, Tempo e Mimir), com dashboard e alertas provisionados, e os testes de carga com k6 rodam contra uma instância isolada. Lint, formatação e testes unitários, de integração e end-to-end rodam localmente; ainda não há pipeline de CI.",
+        "decisions": [
+          {
+            "title": "Autenticação própria da API.",
+            "text": "Contas, hashes de senha em Argon2id e tokens de link de uso único, guardados só como hash, ficam nas tabelas da própria API; o Supabase Auth foi deliberadamente deixado de fora."
+          },
+          {
+            "title": "Sessões que podem ser revogadas na hora.",
+            "text": "O token de sessão é um JWT assinado, mas toda requisição também confere a sessão no banco; assim, sair ou entrar em outro lugar tem efeito imediato e só a última sessão de cada pessoa continua válida."
+          },
+          {
+            "title": "Proteger o servidor antes das funcionalidades.",
+            "text": "Limites de requisição no cadastro e na entrada, e um teto de hashes de senha simultâneos com fila limitada, que responde \"ocupado\" em vez de travar a API inteira, desenho moldado por testes de carga."
+          },
+          {
+            "title": "Observabilidade desde o início.",
+            "text": "Métricas, traces e logs chegam a um único dashboard do Grafana, com cada tentativa contada uma vez em um só lugar e sem dados pessoais nos rótulos das métricas."
+          },
+          {
+            "title": "Uma identidade visual própria.",
+            "text": "Uma direção retrô em 8 bits, inspirada em futebol e no Brasil, com logo em pixel art, uma paleta de cinco cores e sombras duras deslocadas, documentada com regras de acessibilidade que visam o WCAG 2.2 AA."
+          }
+        ],
+        "state": "Em desenvolvimento. Implementado: criação de conta com confirmação por e-mail, entrada, saída e recuperação de senha, mais a observabilidade e a configuração de testes de carga. Não implementado: especialistas, conectores, ingestão de fontes, integração com o modelo de linguagem, implantação e pipeline de CI. A interface está em inglês, e as telas exibidas aqui vêm da versão de desenvolvimento local, sem dados reais."
       }
     }
   },
@@ -439,8 +483,8 @@
         "limitations": "Não há conjunto de teste separado. O relatório do exercício descreve uma divisão estratificada com um quinto dos dados reservado, mas o notebook que guardei avalia o arquivo inteiro com que treinou, então trato todas as contagens acima como medidas nos dados de treino e não como evidência de generalização. 75 avaliações, uma execução e uma semente são uma amostra muito pequena, sem intervalo de confiança. A qualidade dos rótulos depende de quão claramente positivo, neutro e negativo foram definidos, e exemplos ambíguos atrapalham o treino e a avaliação. Uma resposta do modelo ajustado ainda saiu inválida, e descrições neutras de fatos (um cartão amarelo, ter sido titular) deslizaram para positivo. Não está pronto para uso sem supervisão.",
         "learned": "Um número maior não é evidência enquanto os dados de teste não ficam separados do treino: aqui o mesmo arquivo alimenta os dois, e a tabela não consegue dizer se o adaptador generaliza. Contar as falhas de formato separadamente dos erros de rótulo, e olhar quais exemplos deslizaram, ensinou mais do que o número de destaque. Da próxima vez eu dividiria os dados primeiro, congelaria o conjunto de teste e repetiria com outras sementes."
       },
-      "analyticsPersonas": {
-        "name": "Analytics Personas",
+      "rondo": {
+        "name": "Rondo",
         "summary": "Uma plataforma para criar e operar especialistas: agentes de IA especializados nas funções de um clube de futebol, alimentados por fontes de dados conectadas, com respostas rastreáveis até elas. A fundação técnica existe; as funcionalidades de produto, não."
       }
     }

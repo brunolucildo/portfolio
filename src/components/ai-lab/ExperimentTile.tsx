@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { projectHref } from "@/components/projects/href";
 import { ProjectTechnologies } from "@/components/projects/ProjectTechnologies";
 import {
   type AiLabExperiment,
@@ -18,15 +19,23 @@ type ExperimentTileProps = {
 /**
  * Item da grade de experimentos (SPEC-012, NEU-RF-13 a NEU-RF-15): número `EXP`,
  * estado em texto e cor, resumo, modelo e tecnologias. Quando há detalhe, o item
- * inteiro é um único link (o nome); o card "Em planejamento" não é um link.
+ * inteiro é um único link (o nome). O card "Em planejamento" (Rondo) também tem
+ * um único link, para a página do projeto em Projects (SPEC-014).
  */
 export async function ExperimentTile({
   experiment,
   className,
 }: ExperimentTileProps) {
   const t = await getTranslations("aiLab");
-  const { key, slug, type, state, model, technologies, featured } = experiment;
+  const { key, slug, projectPage, type, state, model, technologies, featured } =
+    experiment;
   const name = t(`experiments.${key}.name`);
+  // Detalhe do AI Lab, ou a página do projeto quando o card "Em planejamento" é um projeto (SPEC-014).
+  const href = slug
+    ? ({ pathname: "/ai-lab/[slug]", params: { slug } } as const)
+    : projectPage
+      ? projectHref(projectPage)
+      : null;
 
   return (
     <li
@@ -36,7 +45,7 @@ export async function ExperimentTile({
       className={cn("flex", className)}
     >
       <div
-        data-linked={slug ? "true" : undefined}
+        data-linked={href ? "true" : undefined}
         className={cn(
           "neural-tile group relative flex w-full flex-col overflow-hidden rounded-lg border border-border bg-surface p-6 md:p-8",
           slug === null && "border-dashed",
@@ -60,9 +69,9 @@ export async function ExperimentTile({
             featured ? "text-h2" : "text-h3",
           )}
         >
-          {slug ? (
+          {href ? (
             <Link
-              href={{ pathname: "/ai-lab/[slug]", params: { slug } }}
+              href={href}
               className="inline-flex min-h-11 items-center after:absolute after:inset-0 after:rounded-lg focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-3 focus-visible:after:outline-primary"
             >
               {name}

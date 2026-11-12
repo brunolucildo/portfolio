@@ -120,6 +120,7 @@ type AiLabPage = {
   experiments: Record<Slug, ExperimentText>;
   planning: {
     name: string;
+    href: string;
     summary: string;
     type: string;
     state: string;
@@ -282,7 +283,8 @@ const pages: AiLabPage[] = [
       },
     },
     planning: {
-      name: "Analytics Personas",
+      name: "Rondo",
+      href: "/en/projects/rondo",
       summary:
         "A platform to create and run experts: AI agents specialized in the functions of a football club, fed by connected data sources, with answers traceable to them. The technical foundation exists; product features do not.",
       type: "Study",
@@ -445,7 +447,8 @@ const pages: AiLabPage[] = [
       },
     },
     planning: {
-      name: "Analytics Personas",
+      name: "Rondo",
+      href: "/pt-BR/projetos/rondo",
       summary:
         "Uma plataforma para criar e operar especialistas: agentes de IA especializados nas funções de um clube de futebol, alimentados por fontes de dados conectadas, com respostas rastreáveis até elas. A fundação técnica existe; as funcionalidades de produto, não.",
       type: "Estudo",
@@ -524,7 +527,7 @@ for (const lab of pages) {
       }
     });
 
-    test("o card em planejamento não é um link e não declara modelo nem tecnologias", async ({
+    test("o card em planejamento tem um único link, para o projeto, e não declara modelo nem tecnologias", async ({
       page,
     }) => {
       await page.goto(lab.path);
@@ -534,7 +537,12 @@ for (const lab of pages) {
       await expect(card).toContainText(lab.planning.type);
       await expect(card).toContainText(lab.planning.state);
       await expect(card).toContainText(lab.planning.summary);
-      await expect(card.getByRole("link")).toHaveCount(0);
+      await expect(card.getByRole("link")).toHaveCount(1);
+      await expect(card.getByRole("link")).toHaveAttribute(
+        "href",
+        lab.planning.href,
+      );
+      await expect(card.getByRole("link")).toHaveText(lab.planning.name);
       await expect(card.getByRole("list")).toHaveCount(0);
       await expect(card).not.toContainText(`${lab.labels.model}:`);
     });

@@ -8,7 +8,7 @@ Este documento reúne as especificações iniciais das funcionalidades do portf�
 
 As especificações descrevem o comportamento esperado de cada página e funcionalidade, servindo como referência para implementação e validação.
 
-**Status geral:** SPECs 001 a 011 concluídas (Done, por decisão do Bruno em 2026-11-08). SEO final e QA final ainda não têm SPEC; dependem do domínio e da hospedagem. A seção 5 registra as decisões de fechamento e o que foi aberto a partir delas.
+**Status geral:** SPEC-014 (Rondo) implementada em 2026-11-12. SPECs 001 a 011 concluídas (Done, por decisão do Bruno em 2026-11-08). SEO final e QA final ainda não têm SPEC; dependem do domínio e da hospedagem. A seção 5 registra as decisões de fechamento e o que foi aberto a partir delas.
 
 ---
 
@@ -113,6 +113,14 @@ A SPEC reformula a página de lista do AI Lab como um ambiente imersivo de pesqu
 **Status:** In Review (2026-11-08). Implementada e verificada; especificação em [`013-seo.md`](./013-seo.md).
 
 A SPEC fecha o SEO técnico para a publicação: `robots.txt`, `sitemap.xml` com as 34 páginas e `hreflang`, guarda contra indexação de ambientes não públicos, validação de `NEXT_PUBLIC_SITE_URL`, dados estruturados (`WebSite`, `Person`, `ProfilePage`), limites de 60 e 160 caracteres para título e descrição (com textos reescritos para aprovação) e testes de auditoria. Hospedagem, domínio, Search Console e Lighthouse em produção ficam fora e seguem para o QA final.
+
+---
+
+# SPEC-014 — Rondo em Projects e no AI Lab
+
+**Status:** In Review (2026-11-12). Implementada e verificada; especificação em [`014-rondo.md`](./014-rondo.md).
+
+A SPEC adiciona o Rondo (antigo Analytics Personas) como quarto projeto de Projects, com página de detalhe e quatro telas do app, e transforma o card do AI Lab em um link para essa página. A Home passa a mostrar quatro destaques e o sitemap, 36 páginas. Os requisitos, os critérios de aceitação, os textos aprovados, as perguntas abertas e as decisões estão no arquivo dedicado.
 
 ---
 

@@ -8,6 +8,7 @@ Conferido em 2026-11-08. Os ícones de tecnologias têm o detalhe por arquivo em
 |---|---|---|---|
 | Fotografia do Hero | `hero/bruno-lucildo-portrait.png` | Retrato do próprio Bruno Lucildo. Uso autorizado por ele, que também decidiu versioná-la no repositório. | 2026-11-07 |
 | Telas do Reelix | `projects/reelix-*.png`, `projects/reelix-*.jpg` | Capturas do aplicativo Reelix, de autoria do Bruno, feitas na versão de desenvolvimento. Os pôsteres e os dados de filmes e séries vêm do TMDB; a legenda da página informa o crédito e que o produto não é endossado pelo TMDB. Termos: https://www.themoviedb.org/api-terms-of-use | 2026-11-07 |
+| Telas do Rondo | `projects/rondo-*.png` | Capturas do app Rondo (`apps/app`), de autoria do Bruno, em desenvolvimento local, com os formulários vazios e sem back-end. Nenhum dado real. A marca (logo pixel-art e paleta) é do próprio projeto. | 2026-11-12 |
 | Telas do FintaLab | `projects/fintalab-*.png` | Capturas do protótipo estático do FintaLab, de autoria do Bruno. Pessoas, clubes e números são fictícios. | 2026-11-07 |
 | Ícones de tecnologias | `technologies/*.svg` | devicon 2.18.0 (licença MIT) e Simple Icons (CC0). Os logotipos são marcas dos respectivos donos; o site não afirma aprovação nem parceria. Ver `technologies/LICENSES.md`. | 2026-11-08 |
 | Ícone do site | gerado por código (`src/app/icon.tsx`, `apple-icon.tsx` e `favicon.ico/route.ts`) | Monograma tipográfico "BL" do projeto, em fonte Geist (SIL OFL, incluída no Next.js) com as cores do site. Não é um logotipo registrado. | 2026-11-08 |

@@ -46,6 +46,7 @@ const pages: HomePage[] = [
 const repositories = [
   "https://github.com/brunolucildo/football-stat-analytics-cli",
   "https://github.com/brunolucildo/reelix",
+  "https://github.com/brunolucildo/rondo",
   "https://github.com/brunolucildo/fintalab",
 ];
 
@@ -249,22 +250,24 @@ for (const home of pages) {
       }
     });
 
-    test("destaca três projetos com estado e link para o GitHub", async ({
+    test("destaca quatro projetos com estado e link para o GitHub", async ({
       page,
     }) => {
       await page.goto(home.path);
 
       const projects = page.locator("#featured-projects li");
-      await expect(projects).toHaveCount(3);
+      await expect(projects).toHaveCount(4);
       await expect(projects.nth(0)).toContainText(home.projectStatus);
       await expect(projects.nth(1)).toContainText(home.projectStatus);
-      await expect(projects.nth(2)).toContainText("FintaLab");
-      await expect(projects.nth(2)).toContainText(home.conceptualStatus);
+      await expect(projects.nth(2)).toContainText("Rondo");
+      await expect(projects.nth(2)).toContainText(home.projectStatus);
+      await expect(projects.nth(3)).toContainText("FintaLab");
+      await expect(projects.nth(3)).toContainText(home.conceptualStatus);
 
       const links = page
         .locator("#featured-projects")
         .getByRole("link", { name: home.repositoryLink });
-      await expect(links).toHaveCount(3);
+      await expect(links).toHaveCount(4);
       expect(
         await links.evaluateAll((els) =>
           els.map((a) => a.getAttribute("href")),
@@ -304,7 +307,7 @@ test.describe("Luz do cursor nos cards dos destaques", () => {
     await card.scrollIntoViewIfNeeded();
     await expect(
       page.locator("#featured-projects [data-card-light]"),
-    ).toHaveCount(3);
+    ).toHaveCount(4);
     await expect(card, "sem hover").toHaveCSS("--mx", "");
     await expect
       .poll(() =>

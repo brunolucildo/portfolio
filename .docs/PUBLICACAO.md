@@ -80,7 +80,7 @@ curl -s https://SEU-DOMINIO/sitemap.xml
 |---|---|
 | `/robots.txt` | `Allow: /` e a linha `Sitemap:` com o domínio certo |
 | Cabeçalhos de `/en` | **Sem** `X-Robots-Tag`; com `X-Frame-Options: DENY` e `X-Content-Type-Options: nosniff` |
-| `/sitemap.xml` | 34 URLs, todas com o domínio de produção (nenhuma com `localhost` ou `vercel.app`) |
+| `/sitemap.xml` | 36 URLs, todas com o domínio de produção (nenhuma com `localhost` ou `vercel.app`) |
 | `/documents/resume/bruno-lucildo-resume-en.pdf` | Abre, e a resposta traz `X-Robots-Tag: noindex` |
 | Código-fonte da Home | `canonical`, `hreflang` e `og:image` com o domínio de produção; JSON-LD presente |
 | `https://www.SEU-DOMINIO` | Redireciona para o domínio sem `www` |
