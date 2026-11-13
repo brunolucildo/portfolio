@@ -28,7 +28,7 @@ O site é bilíngue (inglês como padrão e português do Brasil), estático e s
 | Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience, Projects, Technologies, AI Lab, Contact, Internationalization, Resume, Layout global e Assets (imagens, ícone e compartilhamento) |
 | SEO final (SPEC-013) | Implementado: `robots.txt`, `sitemap.xml` (36 páginas), guarda de indexação, JSON-LD e limites de título e descrição; falta o domínio para validar no Search Console e no Rich Results Test |
 | QA final | Executado em 2026-11-08: 1334 E2E em Chromium, Firefox e WebKit, axe-core como teste permanente (0 violações WCAG 2.2 AA), Lighthouse 100 em acessibilidade e boas práticas; 3 defeitos corrigidos e 3 instabilidades de teste resolvidas. Relatório em [`.docs/QA-RELATORIO.md`](./.docs/QA-RELATORIO.md); faltam as conferências manuais e as que dependem do domínio |
-| Hospedagem e domínio | Decididos em 2026-11-12: Vercel Hobby e `brunolucildo.me` (Namecheap); falta registrar e publicar, conforme [`.docs/PUBLICACAO.md`](./.docs/PUBLICACAO.md) |
+| Hospedagem e domínio | Publicado em 2026-11-13: Vercel Hobby e `brunolucildo.me` (Namecheap), com indexação liberada. Conferências de produção e Lighthouse em [`.docs/QA-RELATORIO.md`](./.docs/QA-RELATORIO.md) (seção 7.1); Search Console verificado e sitemap enviado; falta o Google ler o sitemap e indexar as páginas, conforme [`.docs/PUBLICACAO.md`](./.docs/PUBLICACAO.md) |
 | Analytics | Pendente de decisão |
 
 O detalhamento está nas especificações em [`.specs/`](./.specs/).
