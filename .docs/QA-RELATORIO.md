@@ -179,7 +179,8 @@ O SEO foi de 66 a 69 em `localhost` para 100 em produção, como previsto (a pá
 
 **Observações**
 - O endereço `portfolio-lilac-phi-39.vercel.app` é o próprio Production e também fica indexável, mas o `canonical` aponta para `brunolucildo.me`.
-- O item "uma URL de preview mantém `noindex`" não foi testado: ainda não existe um deploy de preview.
+- **Preview com `noindex`:** confirmado em `portfolio-84vcai83x-brunolucildo.vercel.app` (deploy da PR de documentação): a resposta traz `X-Robots-Tag: noindex`, inclusive protegida pela autenticação da Vercel (Deployment Protection), que soma uma segunda camada contra indexação.
+- Esse mesmo deploy revelou uma falha de configuração: `SITE_INDEXING` estava marcada para "Production and Preview" enquanto `NEXT_PUBLIC_SITE_URL` só para Production, o que derrubava o build do preview (a guarda de `src/lib/seo/indexing.ts` funcionou como esperado). Corrigido recriando `SITE_INDEXING` só em Production, com o valor em minúsculas (`allow`, não `Allow`); conferido de novo em produção após o redeploy.
 - **Pendentes:** primeira leitura do sitemap pelo Google (status "Sucesso" e 36 páginas) e a confirmação da indexação da Home; ambas dependem do tempo do Google.
 
 ## 8. Como repetir
