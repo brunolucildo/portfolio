@@ -140,6 +140,49 @@ Nada disso bloqueia o código, mas bloqueia o item correspondente do checklist d
 - Conferir que o link `mailto:` abre um aplicativo de e-mail e que o botão Copiar funciona no Chrome de uso diário; baixar o PDF do currículo pelo botão.
 - Confirmar que nenhuma informação confidencial está publicada. As checagens automáticas cobrem empresa e métricas; o PDF do currículo traz telefone e e-mail por decisão do Bruno.
 
+### 7.1. Publicação em produção (2026-11-13)
+
+Site publicado em `https://brunolucildo.me` (Vercel Hobby, domínio no Namecheap). `NEXT_PUBLIC_SITE_URL` e `SITE_INDEXING=allow` definidos só em Production.
+
+**Conferência da seção 6 do `PUBLICACAO.md`:** aprovada.
+
+| Item | Resultado |
+|---|---|
+| `/robots.txt` | `Allow: /` e `Sitemap: https://brunolucildo.me/sitemap.xml` |
+| Cabeçalhos de `/en` | Sem `X-Robots-Tag`; com `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff` e `Strict-Transport-Security` (HSTS enviado pela Vercel) |
+| `/sitemap.xml` | 36 URLs, nenhuma com `localhost` ou `vercel.app` |
+| PDF do currículo | Abre e traz `X-Robots-Tag: noindex` |
+| Home | `canonical`, `hreflang` (en, pt-BR, x-default) e `og:image` com o domínio de produção; JSON-LD presente |
+| `www` e `http` | Redirecionam (308) para `https://brunolucildo.me/` |
+| 404 | `/en/nao-existe` e `/pt-BR/nao-existe` respondem 404; o corpo de `/en/nao-existe` foi conferido no navegador pelo Bruno: layout do site, texto localizado e link para a Home (o de `/pt-BR` não foi aberto no navegador) |
+| Ícone, Apple icon e Open Graph | `/icon/small`, `/apple-icon` e `/en/opengraph-image` respondem 200 como `image/png` |
+
+**Lighthouse 13.6.0 em produção**, perfil de celular (simulação padrão), uma execução por página:
+
+| Página | Desempenho | Acessibilidade | Boas práticas | SEO | LCP | CLS | TBT |
+|---|---|---|---|---|---|---|---|
+| `/en` | 99 | 100 | 100 | 100 | 2,3 s | 0 | 40 ms |
+| `/en/projects/rondo` | 100 | 100 | 100 | 100 | 0,9 s | 0 | 30 ms |
+| `/pt-BR/projetos` | 100 | 100 | 100 | 100 | 0,9 s | 0 | 10 ms |
+
+O SEO foi de 66 a 69 em `localhost` para 100 em produção, como previsto (a página deixou de ser bloqueada). O LCP da Home (2,3 s) fica abaixo da meta de 2,5 s, mas com pouca folga; vale remedir de vez em quando.
+
+**Google Search Console e dados estruturados**
+
+| Item | Resultado |
+|---|---|
+| Propriedade de domínio | Verificada por registro `TXT` no Namecheap (o registro deve permanecer; o SPF do encaminhamento de e-mail convive com ele). A primeira tentativa falhou por cache do Google, embora o `TXT` já estivesse visível nos resolvedores públicos |
+| Sitemap | Enviado como `https://brunolucildo.me/sitemap.xml` (em propriedade de domínio o caminho relativo é recusado). Status inicial "Não foi possível buscar", sem causa no site: responde 200, `application/xml`, XML válido, também com o user-agent do Googlebot. Aguardando a primeira leitura |
+| Inspeção de URL da Home | "O URL não está no Google" (esperado: site recém-publicado); indexação solicitada |
+| Rich Results Test, `/en` | "Nenhum item detectado", com rastreamento bem-sucedido. Esperado: `WebSite`, `Person` e `ProfilePage` não geram resultado avançado, então a ferramenta não os lista |
+| JSON-LD (extraído do HTML publicado) | `/en` e `/pt-BR`: `WebSite` e `Person`; `/en/about`: `ProfilePage`. JSON válido, `@context` `https://schema.org`, `url` com o domínio de produção |
+
+**Observações**
+- O endereço `portfolio-lilac-phi-39.vercel.app` é o próprio Production e também fica indexável, mas o `canonical` aponta para `brunolucildo.me`.
+- **Preview com `noindex`:** confirmado em `portfolio-84vcai83x-brunolucildo.vercel.app` (deploy da PR de documentação): a resposta traz `X-Robots-Tag: noindex`, inclusive protegida pela autenticação da Vercel (Deployment Protection), que soma uma segunda camada contra indexação.
+- Esse mesmo deploy revelou uma falha de configuração: `SITE_INDEXING` estava marcada para "Production and Preview" enquanto `NEXT_PUBLIC_SITE_URL` só para Production, o que derrubava o build do preview (a guarda de `src/lib/seo/indexing.ts` funcionou como esperado). Corrigido recriando `SITE_INDEXING` só em Production, com o valor em minúsculas (`allow`, não `Allow`); conferido de novo em produção após o redeploy.
+- **Pendentes:** primeira leitura do sitemap pelo Google (status "Sucesso" e 36 páginas) e a confirmação da indexação da Home; ambas dependem do tempo do Google.
+
 ## 8. Como repetir
 
 ```bash

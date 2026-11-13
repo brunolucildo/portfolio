@@ -13,8 +13,8 @@ Este guia não substitui o `README.md` (seção "Publicação e indexação") ne
 | Código na `main`, SPECs 001 a 013 e QA final | Pronto |
 | Conferências manuais do `QA-RELATORIO.md` (seção 7) | Concluídas pelo Bruno em 2026-11-12 (Safari real, celular, leitor de tela, textos en/pt-BR, mailto, Copiar, PDF, LinkedIn) |
 | Conteúdo confidencial | Conferido pelo Bruno em 2026-11-12: nada sensível no site nem no PDF |
-| Domínio | `brunolucildo.me` aprovado; a registrar no Namecheap |
-| Hospedagem | Vercel Hobby aprovada; a conectar |
+| Domínio | `brunolucildo.me` registrado no Namecheap em 2026-11-13 (privacidade do WHOIS ligada; renovação automática desligada; vence em 2027-11-13) |
+| Hospedagem | Vercel Hobby, publicada em 2026-11-13; `www` redireciona (308) para o domínio sem `www` |
 
 As conferências manuais já foram feitas (a indexação pode ser liberada). Se algum texto mudar depois disso, corrija antes do deploy de produção: depois que o Google indexa, corrigir texto errado leva dias.
 
