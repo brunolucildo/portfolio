@@ -1,6 +1,6 @@
 # SPEC-006 — AI Lab
 
-> **Atualização de 2026-11-12 (SPEC-014):** o card "Analytics Personas" foi renomeado para **Rondo** e passa a ter um único link, para a página do projeto em Projects. Nome, estado ("Em planejamento"), tipo e frase continuam os mesmos. Vale a SPEC-014.
+> **Atualização de 2026-11-12 (SPEC-014):** o card "Analytics Personas" foi renomeado para **Rondo** e passa a ter um único link, para a página do projeto em Projects. Nome, estado ("Em planejamento"; desde 2026-11-18, "Concluído", ver SPEC-014 v0.3.0), tipo e frase continuam os mesmos. Vale a SPEC-014.
 
 ## 1. Identificação
 

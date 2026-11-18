@@ -1,5 +1,14 @@
 # SPEC-014 — Rondo em Projects e no AI Lab
 
+> **Atualização de 2026-11-18 (v0.3.0):** o Bruno concluiu o desenvolvimento do Rondo, e esta SPEC passa a descrever o projeto como ele está, e não mais como "fundação técnica sem funcionalidades". O que mudou em relação às seções abaixo, que ficam como registro da v0.2.0:
+>
+> - **Estado:** "Concluded"/"Concluído" (decisão do Bruno de que o desenvolvimento terminou), na lista, na Home, no detalhe e no card do AI Lab. O texto diz o que continua de fora: o projeto não está implantado, a qualidade das respostas não foi avaliada com os modelos reais (os testes usam modelos roteirizados e o Gemini nunca foi chamado com chave real) e os limites e travas valem para uma instância da API. RON-RF-05 passa a ser sobre isso, e não mais sobre "experts, conectores, LLM e CI não existem".
+> - **Texto:** descrição, Overview, Challenge, Solution, Architecture, as seis decisões técnicas (autenticação própria, sessões revogáveis, proteção do servidor, citações montadas pelo servidor, isolamento por tenant e observabilidade dos agentes) e Current state foram reescritos a partir do repositório do Rondo (README, `EXPERTS.md`, `HOME.md`, `QUALITY.md`, `ARCHITECTURE.md` §6 e ADRs 0015, 0020, 0025, 0028 e 0030, lidos em 2026-11-18). A arquitetura deixa de citar o Supabase local (substituído por Postgres com `pg`, ADR 0015) e passa a citar Weaviate, LangGraph.js, OpenAI, Gemini e o workflow de CI. Nenhum número de testes ou de avaliação é publicado (RON-RF-06).
+> - **Tecnologias:** TypeScript, Node.js, PostgreSQL, OpenAI API e RAG (as duas últimas já estavam em Technologies e ganharam o Rondo no contexto). Weaviate, LangGraph.js, Gemini e o restante da stack seguem só no texto (Q4 continua em aberto).
+> - **Imagens (RON-RF-08 e RON-RF-09):** as quatro telas de autenticação foram substituídas por seis telas do produto, capturadas pelo próprio repositório do Rondo em 2026-11-18 (`e2e/docs-screenshots.spec.ts`, 1280 × 800, de 45 a 67 KB): `rondo-expert.png`, `rondo-expert-health.png`, `rondo-answer.png`, `rondo-gap.png`, `rondo-connections.png` e `rondo-history-dark.png`. A lista mostra as três primeiras do trio especialista, resposta com fontes e conexões; o detalhe mostra as seis. São telas de computador em paisagem, então seguem o layout do FintaLab (lado a lado a partir de 768 px, empilhadas abaixo disso), e não a fileira rolável das telas de celular. As respostas do modelo nas capturas são roteirizadas (a API roda com `NODE_ENV=test`) e a legenda diz isso, além de avisar que as perguntas sugeridas dos especialistas estão em português.
+> - **AI Lab:** o card "Rondo" passa a "Concluded"/"Concluído", mantém o tipo "Study" e o único link para o projeto, e agora declara o modelo (`gpt-4o-mini, OpenAI embeddings`) e as tecnologias do projeto.
+> - **Testes:** `e2e/projects.spec.ts`, `ai-lab.spec.ts`, `technologies.spec.ts` e `assets.spec.ts` ajustados (seis telas, seis decisões, estado "Concluded", layout em paisagem, textos do que o projeto não tem).
+
 ## 1. Identificação
 
 | Campo | Valor |
@@ -7,8 +16,8 @@
 | Nome | Rondo em Projects e no AI Lab |
 | Identificador | SPEC-014 |
 | Slug | `014-rondo` |
-| Versão | 0.2.0 |
-| Status | In Review (2026-11-12). Textos e defaults aprovados pelo Bruno; implementada e verificada (seção 15). |
+| Versão | 0.3.0 |
+| Status | In Review (2026-11-12); atualizada em 2026-11-18 para o projeto concluído (nota acima). Textos e defaults da v0.2.0 aprovados pelo Bruno; os textos da v0.3.0 aguardam a revisão dele. |
 | Data | 2026-11-12 |
 | Origem | Pedido do Bruno: o projeto "Analytics Personas" virou o **Rondo**, ganhou uma identidade visual e novas funcionalidades; atualizar o portfólio com as telas do app e adicionar o projeto à seção Projects. |
 

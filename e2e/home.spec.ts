@@ -7,6 +7,7 @@ type HomePage = {
   headline: string;
   facts: string[];
   projectStatus: string;
+  concludedStatus: string;
   conceptualStatus: string;
   repositoryLink: string;
   aiLab: { name: string; path: string };
@@ -23,6 +24,7 @@ const pages: HomePage[] = [
       "Leading a team of five developers",
     ],
     projectStatus: "In development",
+    concludedStatus: "Concluded",
     conceptualStatus: "Conceptual",
     repositoryLink: "View on GitHub",
     aiLab: { name: "Explore the AI Lab", path: "/en/ai-lab" },
@@ -37,6 +39,7 @@ const pages: HomePage[] = [
       "Liderando uma equipe de cinco desenvolvedores",
     ],
     projectStatus: "Em desenvolvimento",
+    concludedStatus: "Concluído",
     conceptualStatus: "Conceitual",
     repositoryLink: "Ver no GitHub",
     aiLab: { name: "Explorar o AI Lab", path: "/pt-BR/ai-lab" },
@@ -260,7 +263,7 @@ for (const home of pages) {
       await expect(projects.nth(0)).toContainText(home.projectStatus);
       await expect(projects.nth(1)).toContainText(home.projectStatus);
       await expect(projects.nth(2)).toContainText("Rondo");
-      await expect(projects.nth(2)).toContainText(home.projectStatus);
+      await expect(projects.nth(2)).toContainText(home.concludedStatus);
       await expect(projects.nth(3)).toContainText("FintaLab");
       await expect(projects.nth(3)).toContainText(home.conceptualStatus);
 

@@ -19,7 +19,7 @@ type ExperimentTileProps = {
 /**
  * Item da grade de experimentos (SPEC-012, NEU-RF-13 a NEU-RF-15): número `EXP`,
  * estado em texto e cor, resumo, modelo e tecnologias. Quando há detalhe, o item
- * inteiro é um único link (o nome). O card "Em planejamento" (Rondo) também tem
+ * inteiro é um único link (o nome). O card do Rondo também tem
  * um único link, para a página do projeto em Projects (SPEC-014).
  */
 export async function ExperimentTile({
@@ -30,7 +30,7 @@ export async function ExperimentTile({
   const { key, slug, projectPage, type, state, model, technologies, featured } =
     experiment;
   const name = t(`experiments.${key}.name`);
-  // Detalhe do AI Lab, ou a página do projeto quando o card "Em planejamento" é um projeto (SPEC-014).
+  // Detalhe do AI Lab, ou a página do projeto quando o card é um projeto (SPEC-014).
   const href = slug
     ? ({ pathname: "/ai-lab/[slug]", params: { slug } } as const)
     : projectPage

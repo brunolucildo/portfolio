@@ -118,9 +118,9 @@ A SPEC fecha o SEO técnico para a publicação: `robots.txt`, `sitemap.xml` com
 
 # SPEC-014 — Rondo em Projects e no AI Lab
 
-**Status:** In Review (2026-11-12). Implementada e verificada; especificação em [`014-rondo.md`](./014-rondo.md).
+**Status:** In Review (2026-11-12); atualizada em 2026-11-18 (v0.3.0) para o Rondo concluído, com seis telas do produto e o texto reescrito a partir do repositório. Especificação em [`014-rondo.md`](./014-rondo.md).
 
-A SPEC adiciona o Rondo (antigo Analytics Personas) como quarto projeto de Projects, com página de detalhe e quatro telas do app, e transforma o card do AI Lab em um link para essa página. A Home passa a mostrar quatro destaques e o sitemap, 36 páginas. Os requisitos, os critérios de aceitação, os textos aprovados, as perguntas abertas e as decisões estão no arquivo dedicado.
+A SPEC adiciona o Rondo (antigo Analytics Personas) como quarto projeto de Projects, com página de detalhe e telas do app, e transforma o card do AI Lab em um link para essa página. A Home passa a mostrar quatro destaques e o sitemap, 36 páginas. Os requisitos, os critérios de aceitação, os textos aprovados, as perguntas abertas e as decisões estão no arquivo dedicado.
 
 ---
 

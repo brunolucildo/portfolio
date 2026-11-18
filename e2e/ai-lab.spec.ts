@@ -286,9 +286,9 @@ const pages: AiLabPage[] = [
       name: "Rondo",
       href: "/en/projects/rondo",
       summary:
-        "A platform to create and run experts: AI agents specialized in the functions of a football club, fed by connected data sources, with answers traceable to them. The technical foundation exists; product features do not.",
+        "A platform to talk to experts: AI agents specialized in the functions of a football club that answer from the sources a person connects, with citations and a declared gap when nothing covers the question. Development is concluded; it runs locally and is not deployed.",
       type: "Study",
-      state: "Planning",
+      state: "Concluded",
     },
     placeholder: "This section is under construction.",
     notCompleted: "Completed project",
@@ -450,9 +450,9 @@ const pages: AiLabPage[] = [
       name: "Rondo",
       href: "/pt-BR/projetos/rondo",
       summary:
-        "Uma plataforma para criar e operar especialistas: agentes de IA especializados nas funções de um clube de futebol, alimentados por fontes de dados conectadas, com respostas rastreáveis até elas. A fundação técnica existe; as funcionalidades de produto, não.",
+        "Uma plataforma para conversar com especialistas: agentes de IA especializados nas funções de um clube de futebol, que respondem a partir das fontes que a pessoa conecta, com citações e a lacuna declarada quando nada cobre a pergunta. O desenvolvimento está concluído; roda localmente e não está implantado.",
       type: "Estudo",
-      state: "Em planejamento",
+      state: "Concluído",
     },
     placeholder: "Esta seção está em construção.",
     notCompleted: "Projeto concluído",
@@ -527,11 +527,11 @@ for (const lab of pages) {
       }
     });
 
-    test("o card em planejamento tem um único link, para o projeto, e não declara modelo nem tecnologias", async ({
+    test("o card do Rondo tem um único link, para o projeto, e declara modelo e tecnologias", async ({
       page,
     }) => {
       await page.goto(lab.path);
-      // O card em planejamento é o último da lista, depois dos sete com detalhe.
+      // O card do Rondo é o último da lista, depois dos sete com detalhe.
       const card = page.locator("#ai-lab-list > li").nth(slugs.length);
 
       await expect(card).toContainText(lab.planning.type);
@@ -543,8 +543,16 @@ for (const lab of pages) {
         lab.planning.href,
       );
       await expect(card.getByRole("link")).toHaveText(lab.planning.name);
-      await expect(card.getByRole("list")).toHaveCount(0);
-      await expect(card).not.toContainText(`${lab.labels.model}:`);
+      await expect(card).toContainText(
+        `${lab.labels.model}: gpt-4o-mini, OpenAI embeddings`,
+      );
+      await expect(card.getByRole("listitem")).toHaveText([
+        "TypeScript",
+        "Node.js",
+        "OpenAI API",
+        "PostgreSQL",
+        "RAG",
+      ]);
     });
 
     test("cada experimento com detalhe é um único link para a sua página", async ({
@@ -1031,7 +1039,7 @@ test("a fonte de dados lista os oito experimentos com os slugs e estados previst
     { slug: "approach-and-model-choice", type: "study", state: "concluded" },
     { slug: "prompt-test-framework", type: "study", state: "concluded" },
     { slug: "lora-fine-tuning", type: "study", state: "concluded" },
-    { slug: null, type: "study", state: "planning" },
+    { slug: null, type: "study", state: "concluded" },
   ]);
   // Nenhum experimento é "Projeto concluído" na v1 (AIL-RF-06).
   expect(aiLabExperiments.some((item) => item.type === "completed")).toBe(
