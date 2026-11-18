@@ -65,7 +65,7 @@ test.describe("arquivos de imagem", () => {
     const files = imageFiles().sort();
     const referenced = referencedImages().sort();
 
-    expect(files.length).toBe(37);
+    expect(files.length).toBe(39);
     expect(
       files.filter((file) => !referenced.includes(file)),
       "arquivos sem uso",
@@ -82,7 +82,7 @@ test.describe("arquivos de imagem", () => {
     );
 
     const screens = imageFiles().filter((file) => file.includes("/projects/"));
-    expect(screens.length).toBe(19);
+    expect(screens.length).toBe(21);
     for (const file of screens) {
       expect(statSync(publicPath(file)).size, file).toBeLessThan(
         maxBytes.screen,
@@ -192,7 +192,7 @@ const imagePages: Record<Locale, { path: string; images: number }[]> = {
     { path: "/en/about", images: 0 },
     { path: "/en/projects", images: 9 },
     { path: "/en/projects/reelix", images: 9 },
-    { path: "/en/projects/rondo", images: 4 },
+    { path: "/en/projects/rondo", images: 6 },
     { path: "/en/projects/football-stat-analytics", images: 0 },
     { path: "/en/technologies", images: 0 },
   ],
@@ -201,7 +201,7 @@ const imagePages: Record<Locale, { path: string; images: number }[]> = {
     { path: "/pt-BR/sobre", images: 0 },
     { path: "/pt-BR/projetos", images: 9 },
     { path: "/pt-BR/projetos/reelix", images: 9 },
-    { path: "/pt-BR/projetos/rondo", images: 4 },
+    { path: "/pt-BR/projetos/rondo", images: 6 },
   ],
 };
 

@@ -23,10 +23,12 @@ export type ProjectImage = {
     | "reelixProfile"
     | "reelixStats"
     | "reelixLogin"
-    | "rondoSignIn"
-    | "rondoSignUp"
-    | "rondoForgotPassword"
-    | "rondoResetPassword"
+    | "rondoExpert"
+    | "rondoExpertHealth"
+    | "rondoAnswer"
+    | "rondoGap"
+    | "rondoConnections"
+    | "rondoHistoryDark"
     | "fintalabLanding"
     | "fintalabEvaluation"
     | "fintalabRoster";
@@ -114,33 +116,50 @@ const reelixLogin: ProjectImage = {
   height: 1800,
 };
 
-/** Telas do app em desenvolvimento local, formulários vazios (SPEC-014, seção 7.4). */
-const rondoSignIn: ProjectImage = {
-  alt: "rondoSignIn",
-  src: "/images/projects/rondo-sign-in.png",
-  width: 1040,
-  height: 1560,
+/**
+ * Telas do app em desenvolvimento local, capturadas pelo próprio repositório do
+ * Rondo (SPEC-014, seção 7.4). Respostas do modelo roteirizadas, sem dados reais.
+ */
+const rondoExpert: ProjectImage = {
+  alt: "rondoExpert",
+  src: "/images/projects/rondo-expert.png",
+  width: 1280,
+  height: 800,
 };
 
-const rondoSignUp: ProjectImage = {
-  alt: "rondoSignUp",
-  src: "/images/projects/rondo-sign-up.png",
-  width: 1040,
-  height: 1560,
+const rondoExpertHealth: ProjectImage = {
+  alt: "rondoExpertHealth",
+  src: "/images/projects/rondo-expert-health.png",
+  width: 1280,
+  height: 800,
 };
 
-const rondoForgotPassword: ProjectImage = {
-  alt: "rondoForgotPassword",
-  src: "/images/projects/rondo-forgot-password.png",
-  width: 1040,
-  height: 1560,
+const rondoAnswer: ProjectImage = {
+  alt: "rondoAnswer",
+  src: "/images/projects/rondo-answer.png",
+  width: 1280,
+  height: 800,
 };
 
-const rondoResetPassword: ProjectImage = {
-  alt: "rondoResetPassword",
-  src: "/images/projects/rondo-reset-password.png",
-  width: 1040,
-  height: 1560,
+const rondoGap: ProjectImage = {
+  alt: "rondoGap",
+  src: "/images/projects/rondo-gap.png",
+  width: 1280,
+  height: 800,
+};
+
+const rondoConnections: ProjectImage = {
+  alt: "rondoConnections",
+  src: "/images/projects/rondo-connections.png",
+  width: 1280,
+  height: 800,
+};
+
+const rondoHistoryDark: ProjectImage = {
+  alt: "rondoHistoryDark",
+  src: "/images/projects/rondo-history-dark.png",
+  width: 1280,
+  height: 800,
 };
 
 const fintalabImages: readonly ProjectImage[] = [
@@ -219,13 +238,15 @@ export const projects: readonly ProjectConfig[] = [
     repositoryUrl: "https://github.com/brunolucildo/rondo",
     // Só nomes que já constam em Technologies (consistência da SPEC-005); o
     // restante da stack aparece no texto de Architecture (SPEC-014, seção 7.1).
-    technologies: ["TypeScript", "Node.js", "PostgreSQL"],
-    listImages: [rondoSignIn, rondoSignUp, rondoForgotPassword],
+    technologies: ["TypeScript", "Node.js", "PostgreSQL", "OpenAI API", "RAG"],
+    listImages: [rondoExpert, rondoAnswer, rondoConnections],
     detailImages: [
-      rondoSignIn,
-      rondoSignUp,
-      rondoForgotPassword,
-      rondoResetPassword,
+      rondoExpert,
+      rondoExpertHealth,
+      rondoAnswer,
+      rondoGap,
+      rondoConnections,
+      rondoHistoryDark,
     ],
     caption: "rondo",
   },

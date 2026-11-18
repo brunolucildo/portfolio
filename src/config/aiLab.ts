@@ -23,9 +23,9 @@ export type ExperimentState = "inDevelopment" | "concluded" | "planning";
 
 export type AiLabExperiment = {
   key: AiLabExperimentKey;
-  /** Slug da página de detalhe; `null` no card "Em planejamento". */
+  /** Slug da página de detalhe; `null` no card que aponta para um projeto. */
   slug: string | null;
-  /** Projeto cuja página o card "Em planejamento" abre (SPEC-014); `null` nos demais. */
+  /** Projeto cuja página o card abre em Projects (SPEC-014, o Rondo); `null` nos demais. */
   projectPage?: Extract<ProjectKey, "rondo">;
   type: ExperimentType;
   state: ExperimentState;
@@ -111,9 +111,9 @@ export const aiLabExperiments: readonly AiLabExperiment[] = [
     slug: null,
     projectPage: "rondo",
     type: "study",
-    state: "planning",
-    model: null,
-    technologies: [],
+    state: "concluded",
+    model: "gpt-4o-mini, OpenAI embeddings",
+    technologies: ["TypeScript", "Node.js", "OpenAI API", "PostgreSQL", "RAG"],
     origin: null,
   },
 ];

@@ -58,7 +58,7 @@ const technologies = {
     "Supabase Auth",
     "TMDB",
   ],
-  rondo: ["TypeScript", "Node.js", "PostgreSQL"],
+  rondo: ["TypeScript", "Node.js", "PostgreSQL", "OpenAI API", "RAG"],
   fintalab: ["TypeScript", "OpenAI API", "SQLite"],
 };
 
@@ -93,27 +93,40 @@ const reelixAltsPt: string[] = [
   'Tela de entrada do Reelix no celular: o logotipo do reelix, o título "Suas histórias começam aqui." e os campos de e-mail e senha.',
 ];
 
-/** Textos alternativos das quatro telas do Rondo, na ordem do detalhe. */
+/** Textos alternativos das seis telas do Rondo, na ordem do detalhe. */
 const rondoAltsEn: string[] = [
-  "Rondo sign-in screen: the pixel-art Rondo logo above a card with email and password fields, an orange Sign in button and links to recover the password and create an account. The app interface is in English.",
-  "Rondo sign-up screen: the logo above a card with first name, last name, email, password and password confirmation fields and an orange Create account button. The app interface is in English.",
-  "Rondo password recovery screen: the logo above a card asking for the email to receive a reset link, with an orange Send reset link button. The app interface is in English.",
-  "Rondo reset password screen: the logo above a card with new password and confirmation fields, each with a show-password control, and an orange Reset password button. The app interface is in English.",
+  "Rondo home with the Head Coach expert selected: a pixel-art portrait, the role, a short description and suggested questions, above the bar with the Your connections, Add connection and Add link buttons, the expert selector and the message field. The app interface is in English.",
+  'Rondo home with the Sports Physician expert selected: a pixel-art portrait, the role "Athlete health" and suggested questions, with a notice under the message field that the content is informational support and does not replace a licensed professional.',
+  "Rondo chat with the Head Coach: a message from the user, an answer from the expert and a Sources box listing the file weekly-plan.txt. The answer text is scripted.",
+  "Rondo chat after a question that no connected source covers: the expert says so and gives general guidance, and the answer has no Sources box. The answer text is scripted.",
+  "Rondo Connections panel over the chat: the accepted file types (PDF, TXT, Markdown, JPG or PNG), a Choose a file button and the list of connections, with weekly-plan.txt marked Ready and Delete and Delete all buttons.",
+  "Rondo chat in the dark theme after reloading the page: the earlier conversation with the Head Coach is still there, with the Sources box and the answer that has no source.",
 ];
 
 const rondoAltsPt: string[] = [
-  "Tela de entrada do Rondo: o logo do Rondo em pixel art sobre um cartão com os campos de e-mail e senha, um botão laranja Sign in e links para recuperar a senha e criar uma conta. A interface do app está em inglês.",
-  "Tela de cadastro do Rondo: o logo sobre um cartão com os campos de nome, sobrenome, e-mail, senha e confirmação de senha e um botão laranja Create account. A interface do app está em inglês.",
-  "Tela de recuperação de senha do Rondo: o logo sobre um cartão que pede o e-mail para receber o link de redefinição, com um botão laranja Send reset link. A interface do app está em inglês.",
-  "Tela de redefinição de senha do Rondo: o logo sobre um cartão com os campos de nova senha e confirmação, cada um com um controle para mostrar a senha, e um botão laranja Reset password. A interface do app está em inglês.",
+  "Tela inicial do Rondo com o especialista Head Coach selecionado: um retrato em pixel art, a função, uma descrição curta e perguntas sugeridas, acima da barra com os botões Your connections, Add connection e Add link, o seletor de especialista e o campo de mensagem. A interface do app está em inglês.",
+  'Tela inicial do Rondo com o especialista Sports Physician selecionado: um retrato em pixel art, a função "Athlete health" e perguntas sugeridas, com um aviso abaixo do campo de mensagem de que o conteúdo é apoio informativo e não substitui um profissional habilitado.',
+  "Chat do Rondo com o Head Coach: uma mensagem da pessoa, uma resposta do especialista e uma caixa Sources com o arquivo weekly-plan.txt. O texto da resposta é roteirizado.",
+  "Chat do Rondo depois de uma pergunta que nenhuma fonte conectada cobre: o especialista diz isso e dá uma orientação geral, e a resposta não tem caixa Sources. O texto da resposta é roteirizado.",
+  "Painel Connections do Rondo sobre o chat: os tipos de arquivo aceitos (PDF, TXT, Markdown, JPG ou PNG), o botão Choose a file e a lista de conexões, com weekly-plan.txt em estado Ready e os botões Delete e Delete all.",
+  "Chat do Rondo no tema escuro depois de recarregar a página: a conversa anterior com o Head Coach continua lá, com a caixa Sources e a resposta sem fonte.",
 ];
 
 const rondoImages = [
-  "/images/projects/rondo-sign-in.png",
-  "/images/projects/rondo-sign-up.png",
-  "/images/projects/rondo-forgot-password.png",
-  "/images/projects/rondo-reset-password.png",
+  "/images/projects/rondo-expert.png",
+  "/images/projects/rondo-expert-health.png",
+  "/images/projects/rondo-answer.png",
+  "/images/projects/rondo-gap.png",
+  "/images/projects/rondo-connections.png",
+  "/images/projects/rondo-history-dark.png",
 ];
+
+/** As três telas da lista, na ordem: especialista, resposta com fontes e conexões. */
+const rondoListImages = [
+  rondoImages[0],
+  rondoImages[2],
+  rondoImages[4],
+] as string[];
 
 const pages: ProjectsPage[] = [
   {
@@ -165,13 +178,13 @@ const pages: ProjectsPage[] = [
       {
         name: "Rondo",
         category: "Personal project",
-        status: "In development",
+        status: "Concluded",
         description:
-          "A platform to create and run AI experts for the roles of a football club, with answers traceable to connected sources. The technical foundation exists; product features do not.",
+          "A platform to talk to AI experts for the roles of a football club, answering from the sources you connect and citing them. Development is concluded; it runs locally and is not deployed.",
         technologies: technologies.rondo,
         repository: repositories.rondo,
         detail: "/en/projects/rondo",
-        listImages: rondoImages.slice(0, 3),
+        listImages: rondoListImages,
       },
       {
         name: "FintaLab",
@@ -189,7 +202,7 @@ const pages: ProjectsPage[] = [
       reelix:
         "Screens from the development build. The app interface is in Portuguese. Movie and series data and images from TMDB. This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.",
       rondo:
-        "Screens from the local development build, with no real data. The app interface is in English.",
+        "Screens from the local development build, with scripted model answers and no real data. The app interface is in English, and the experts' suggested questions are in Portuguese.",
       fintalab:
         "Screens from the static concept prototype. All people, clubs and numbers are fictional.",
     },
@@ -215,7 +228,7 @@ const pages: ProjectsPage[] = [
       reelix:
         "A personal movie and series tracking app with privacy-first sharing and spoiler control: architecture, technical decisions and current state.",
       rondo:
-        "A personal platform for football club AI experts: authentication, observability and load tests in place; architecture, decisions and current state.",
+        "A personal platform of AI experts for football clubs that answer from your own sources, with citations: architecture, decisions and current state.",
     },
   },
   {
@@ -267,13 +280,13 @@ const pages: ProjectsPage[] = [
       {
         name: "Rondo",
         category: "Projeto pessoal",
-        status: "Em desenvolvimento",
+        status: "Concluído",
         description:
-          "Uma plataforma para criar e operar especialistas de IA para as funções de um clube de futebol, com respostas rastreáveis até as fontes conectadas. A fundação técnica existe; as funcionalidades de produto, não.",
+          "Uma plataforma para conversar com especialistas de IA para as funções de um clube de futebol, que respondem a partir das fontes que você conecta e as citam. O desenvolvimento está concluído; roda localmente e não está implantado.",
         technologies: technologies.rondo,
         repository: repositories.rondo,
         detail: "/pt-BR/projetos/rondo",
-        listImages: rondoImages.slice(0, 3),
+        listImages: rondoListImages,
       },
       {
         name: "FintaLab",
@@ -291,7 +304,7 @@ const pages: ProjectsPage[] = [
       reelix:
         "Telas da versão de desenvolvimento. A interface do app está em português. Dados e imagens de filmes e séries do TMDB. Este produto usa o TMDB e as APIs do TMDB, mas não é endossado, certificado nem aprovado de outra forma pelo TMDB.",
       rondo:
-        "Telas da versão de desenvolvimento local, sem dados reais. A interface do app está em inglês.",
+        "Telas da versão de desenvolvimento local, com respostas do modelo roteirizadas e sem dados reais. A interface do app está em inglês, e as perguntas sugeridas dos especialistas estão em português.",
       fintalab:
         "Telas do protótipo conceitual estático. Todas as pessoas, clubes e números são fictícios.",
     },
@@ -317,7 +330,7 @@ const pages: ProjectsPage[] = [
       reelix:
         "Aplicativo de acompanhamento de filmes e séries, com compartilhamento que prioriza a privacidade e controle de spoilers: arquitetura, decisões e estado atual.",
       rondo:
-        "Plataforma pessoal de especialistas de IA para clubes de futebol: autenticação, observabilidade e testes de carga prontos; arquitetura, decisões e estado atual.",
+        "Plataforma pessoal de especialistas de IA para clubes de futebol que respondem a partir das suas fontes, com citações: arquitetura, decisões e estado atual.",
     },
   },
 ];
@@ -683,7 +696,7 @@ for (const projects of pages) {
         await page.goto(detailPath);
         const decisions = page.locator("#decisions li");
 
-        await expect(decisions).toHaveCount(key === "rondo" ? 5 : 4);
+        await expect(decisions).toHaveCount(key === "rondo" ? 6 : 4);
         for (const decision of await decisions.all()) {
           await expect(decision.locator("p")).toHaveCount(2);
         }
@@ -699,7 +712,7 @@ for (const projects of pages) {
         }
 
         if (key === "rondo") {
-          await expect(images).toHaveCount(4);
+          await expect(images).toHaveCount(6);
           const rondoSources = await images.evaluateAll((els) =>
             els.map((el) => {
               const url = new URL(
@@ -949,85 +962,68 @@ for (const width of [1440, 390]) {
   });
 }
 
-// As três telas do Rondo na lista ficam lado a lado em qualquer largura e as
-// quatro do detalhe ficam em uma fileira rolável e focável (SPEC-014, RON-RF-08).
-for (const width of [1440, 390]) {
-  test(`as três telas do Rondo na lista ficam lado a lado com ${width} px`, async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width, height: 900 });
-    await page.goto("/en/projects");
-
-    const boxes = await page
-      .locator("#projects-list > li:nth-child(3) img")
-      .evaluateAll((els) =>
-        els.map((el) => {
-          const rect = el.getBoundingClientRect();
-          return { top: Math.round(rect.top), left: rect.left };
-        }),
-      );
-    expect(boxes).toHaveLength(3);
-    expect(new Set(boxes.map((box) => box.top)).size).toBe(1);
-    expect(boxes[0]?.left ?? 0).toBeLessThan(boxes[1]?.left ?? 0);
-    expect(boxes[1]?.left ?? 0).toBeLessThan(boxes[2]?.left ?? 0);
-
-    const overflow = await page.evaluate(
-      () =>
-        document.documentElement.scrollWidth -
-        document.documentElement.clientWidth,
-    );
-    expect(overflow).toBeLessThanOrEqual(0);
-  });
-
-  test(`as telas do Rondo ficam em uma fileira rolável e focável com ${width} px`, async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width, height: 900 });
-    await page.goto("/en/projects/rondo");
-    const gallery = page.getByRole("region", { name: "Screens" });
-
-    await expect(gallery).toHaveCount(1);
-    await expect(gallery).toHaveAttribute("tabindex", "0");
-    const tops = await gallery
-      .locator("img")
+// As telas do Rondo são de computador (paisagem), como as do FintaLab: ficam lado
+// a lado a partir de 768 px e empilhadas abaixo disso, na lista (três) e no
+// detalhe (seis, em duas fileiras de três), sem rolagem horizontal na página
+// (SPEC-014, RON-RF-08).
+test("as telas do Rondo ficam lado a lado em 1440 px e empilhadas em 390 px", async ({
+  page,
+}) => {
+  const tops = async (selector: string) =>
+    page
+      .locator(selector)
       .evaluateAll((els) =>
         els.map((el) =>
           Math.round(el.getBoundingClientRect().top + window.scrollY),
         ),
       );
-    expect(tops).toHaveLength(4);
-    expect(new Set(tops).size).toBe(1);
-
-    const pageOverflow = await page.evaluate(
+  const overflow = () =>
+    page.evaluate(
       () =>
         document.documentElement.scrollWidth -
         document.documentElement.clientWidth,
     );
-    expect(pageOverflow).toBeLessThanOrEqual(0);
 
-    await gallery.focus();
-    await expect(gallery).toBeFocused();
-  });
-}
+  for (const [path, selector, count, rows] of [
+    ["/en/projects", "#projects-list > li:nth-child(3) img", 3, 1],
+    ["/en/projects/rondo", "main figure img", 6, 2],
+  ] as const) {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(path);
+    const wide = await tops(selector);
+    expect(wide).toHaveLength(count);
+    expect(new Set(wide).size).toBe(rows);
+    expect(await overflow()).toBeLessThanOrEqual(0);
 
-// O Rondo não promete o que não existe: o texto diz o que está fora e não traz
-// números (SPEC-014, RON-RF-05 e RON-RF-06).
-test("o Rondo declara o que não existe e não publica números", async ({
+    await page.setViewportSize({ width: 390, height: 900 });
+    await page.goto(path);
+    const narrow = await tops(selector);
+    expect(narrow).toHaveLength(count);
+    expect(new Set(narrow).size).toBe(count);
+    expect(await overflow()).toBeLessThanOrEqual(0);
+  }
+});
+
+// O Rondo diz o que ainda não tem (não está implantado, não foi avaliado com os
+// modelos reais) e não publica números (SPEC-014, RON-RF-05 e RON-RF-06).
+test("o Rondo declara o que não tem e não publica números", async ({
   page,
 }) => {
   await page.goto("/en/projects/rondo");
   const text = await mainText(page);
 
-  expect(text).toContain("do not exist yet");
-  expect(text).toContain("Not implemented: experts, connectors");
+  expect(text).toContain("It is not deployed");
+  expect(text).toContain("has not been evaluated with the real models");
+  expect(text).toContain("scripted model answers");
   expect(text.match(/\d+\s?%/g)).toBeNull();
-  expect(findPhrases(text, ["Vercel", "Bun", "OpenAI", "Claude"])).toEqual([]);
+  expect(findPhrases(text, ["Vercel", "Bun", "Claude"])).toEqual([]);
   expect(text.match(/Analytics Personas/g)).toHaveLength(1);
 
   await page.goto("/pt-BR/projetos/rondo");
   const textPt = await mainText(page);
-  expect(textPt).toContain("ainda não existem");
-  expect(textPt).toContain("Não implementado: especialistas, conectores");
+  expect(textPt).toContain("Não está implantado");
+  expect(textPt).toContain("não foi avaliada com os modelos reais");
+  expect(textPt).toContain("respostas do modelo roteirizadas");
   expect(textPt.match(/Analytics Personas/g)).toHaveLength(1);
 });
 

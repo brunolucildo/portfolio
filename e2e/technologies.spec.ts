@@ -137,9 +137,13 @@ const categories: CategoryExpectation[] = [
       {
         name: "OpenAI API",
         icon: { monogram: "OA" },
-        context: ["football", "fintalab"],
+        context: ["football", "rondo", "fintalab"],
       },
-      { name: "RAG", icon: { monogram: "RG" }, context: ["football"] },
+      {
+        name: "RAG",
+        icon: { monogram: "RG" },
+        context: ["football", "rondo"],
+      },
     ],
   },
   {

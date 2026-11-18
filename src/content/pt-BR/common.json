@@ -169,8 +169,8 @@
       "rondo": {
         "name": "Rondo",
         "category": "Projeto pessoal",
-        "status": "Em desenvolvimento",
-        "description": "Uma plataforma para criar e operar especialistas de IA para as funções de um clube de futebol, com respostas rastreáveis até as fontes conectadas. A fundação técnica existe; as funcionalidades de produto, não."
+        "status": "Concluído",
+        "description": "Uma plataforma para conversar com especialistas de IA para as funções de um clube de futebol, que respondem a partir das fontes que você conecta e as citam. O desenvolvimento está concluído; roda localmente e não está implantado."
       },
       "fintalab": {
         "name": "FintaLab",
@@ -181,7 +181,7 @@
     },
     "captions": {
       "reelix": "Telas da versão de desenvolvimento. A interface do app está em português. Dados e imagens de filmes e séries do TMDB. Este produto usa o TMDB e as APIs do TMDB, mas não é endossado, certificado nem aprovado de outra forma pelo TMDB.",
-      "rondo": "Telas da versão de desenvolvimento local, sem dados reais. A interface do app está em inglês.",
+      "rondo": "Telas da versão de desenvolvimento local, com respostas do modelo roteirizadas e sem dados reais. A interface do app está em inglês, e as perguntas sugeridas dos especialistas estão em português.",
       "fintalab": "Telas do protótipo conceitual estático. Todas as pessoas, clubes e números são fictícios."
     },
     "images": {
@@ -194,10 +194,12 @@
       "reelixProfile": "Tela de perfil do Reelix no celular: opções de avatar (iniciais e personagens ilustrados) e uma fileira de medalhas de conquistas com um link para progresso e estatísticas.",
       "reelixStats": "Tela de conquistas e estatísticas do Reelix no celular: totais de episódios, séries, filmes e registros, tempo estimado de exibição e a atividade do mês.",
       "reelixLogin": "Tela de entrada do Reelix no celular: o logotipo do reelix, o título \"Suas histórias começam aqui.\" e os campos de e-mail e senha.",
-      "rondoSignIn": "Tela de entrada do Rondo: o logo do Rondo em pixel art sobre um cartão com os campos de e-mail e senha, um botão laranja Sign in e links para recuperar a senha e criar uma conta. A interface do app está em inglês.",
-      "rondoSignUp": "Tela de cadastro do Rondo: o logo sobre um cartão com os campos de nome, sobrenome, e-mail, senha e confirmação de senha e um botão laranja Create account. A interface do app está em inglês.",
-      "rondoForgotPassword": "Tela de recuperação de senha do Rondo: o logo sobre um cartão que pede o e-mail para receber o link de redefinição, com um botão laranja Send reset link. A interface do app está em inglês.",
-      "rondoResetPassword": "Tela de redefinição de senha do Rondo: o logo sobre um cartão com os campos de nova senha e confirmação, cada um com um controle para mostrar a senha, e um botão laranja Reset password. A interface do app está em inglês.",
+      "rondoExpert": "Tela inicial do Rondo com o especialista Head Coach selecionado: um retrato em pixel art, a função, uma descrição curta e perguntas sugeridas, acima da barra com os botões Your connections, Add connection e Add link, o seletor de especialista e o campo de mensagem. A interface do app está em inglês.",
+      "rondoExpertHealth": "Tela inicial do Rondo com o especialista Sports Physician selecionado: um retrato em pixel art, a função \"Athlete health\" e perguntas sugeridas, com um aviso abaixo do campo de mensagem de que o conteúdo é apoio informativo e não substitui um profissional habilitado.",
+      "rondoAnswer": "Chat do Rondo com o Head Coach: uma mensagem da pessoa, uma resposta do especialista e uma caixa Sources com o arquivo weekly-plan.txt. O texto da resposta é roteirizado.",
+      "rondoGap": "Chat do Rondo depois de uma pergunta que nenhuma fonte conectada cobre: o especialista diz isso e dá uma orientação geral, e a resposta não tem caixa Sources. O texto da resposta é roteirizado.",
+      "rondoConnections": "Painel Connections do Rondo sobre o chat: os tipos de arquivo aceitos (PDF, TXT, Markdown, JPG ou PNG), o botão Choose a file e a lista de conexões, com weekly-plan.txt em estado Ready e os botões Delete e Delete all.",
+      "rondoHistoryDark": "Chat do Rondo no tema escuro depois de recarregar a página: a conversa anterior com o Head Coach continua lá, com a caixa Sources e a resposta sem fonte.",
       "fintalabLanding": "Protótipo conceitual do FintaLab, tela inicial: o título \"Cada partida pode levar você mais longe.\" ao lado de uma ilustração de campo de futebol, com o aviso de que pessoas, clubes e números são fictícios.",
       "fintalabEvaluation": "Protótipo conceitual do FintaLab, tela de avaliação: uma carta de jogador em pixel art com notas fictícias e um aviso de que os valores são inventados e não foram gerados pelo motor.",
       "fintalabRoster": "Protótipo conceitual do FintaLab, tela de elenco: uma tabela com quatro jogadores fictícios, com posição, nacionalidade, vínculo e última avaliação."
@@ -273,12 +275,12 @@
       "rondo": {
         "metadata": {
           "title": "Rondo | Bruno Lucildo",
-          "description": "Plataforma pessoal de especialistas de IA para clubes de futebol: autenticação, observabilidade e testes de carga prontos; arquitetura, decisões e estado atual."
+          "description": "Plataforma pessoal de especialistas de IA para clubes de futebol que respondem a partir das suas fontes, com citações: arquitetura, decisões e estado atual."
         },
-        "overview": "O Rondo é uma plataforma para criar e operar especialistas: agentes de IA especializados nas funções de um clube de futebol, como técnico ou analista de desempenho, alimentados por fontes de dados conectadas e com respostas que citam essas fontes. O projeto se chamava Analytics Personas antes de receber o nome Rondo. O repositório é um monorepo com um app web em React, uma API em Nest.js e uma pilha local de observabilidade. É um projeto pessoal.",
-        "challenge": "Os clubes de futebol guardam conhecimento em ferramentas dispersas: documentos, wikis, chamados e planilhas. Cada função precisa transformar esse material em decisões rápidas, e uma resposta que não pode ser rastreada até as fontes, ou que inventa dados, é pior do que nenhuma. O desafio é construir especialistas cujas respostas possam ser auditadas, sobre uma base em que contas e acesso aos dados sejam confiáveis desde o início.",
-        "solution": "A ideia do produto é um especialista por função, cada um com seu escopo, suas fontes autorizadas e seu formato de entrega, respondendo a pedidos em linguagem natural com citações e declarando a lacuna quando falta contexto. Até agora o trabalho foi para a base de que isso precisa: contas com confirmação por e-mail, entrada e recuperação de senha, uma API observável e testada sob carga, e um sistema de design com identidade visual própria. Os especialistas, os conectores e a integração com o modelo de linguagem estão planejados e ainda não existem.",
-        "architecture": "Um monorepo com um app web em React e Vite (TanStack Router e Query), uma API em Nest.js com TypeScript, um site de documentação em Next.js e um pacote de design system compartilhado, construído sobre Tailwind CSS e shadcn/ui. A API é organizada em fatias verticais com camadas de domínio, aplicação, infraestrutura e interface, um request handler por endpoint e um caso de uso por fluxo. Os dados ficam em PostgreSQL por meio de um Supabase local, com row-level security ligada e sem policies, de modo que só a API os alcança. A API envia traces, métricas e logs por OpenTelemetry a uma pilha Grafana local (Loki, Tempo e Mimir), com dashboard e alertas provisionados, e os testes de carga com k6 rodam contra uma instância isolada. Lint, formatação e testes unitários, de integração e end-to-end rodam localmente; ainda não há pipeline de CI.",
+        "overview": "O Rondo é uma plataforma para conversar com especialistas: agentes de IA especializados nas funções de um clube de futebol, como técnico, analista de desempenho ou médico esportivo. Cada pessoa conecta as próprias fontes (arquivos PDF, de texto e Markdown, imagens, links, áudio e vídeo), e os especialistas respondem a partir delas, citando as fontes que usaram. O projeto se chamava Analytics Personas antes de receber o nome Rondo. O repositório é um monorepo com um app web em React, uma API em Nest.js e uma pilha local de observabilidade. É um projeto pessoal.",
+        "challenge": "Os clubes de futebol guardam conhecimento em ferramentas dispersas: documentos, wikis, chamados e planilhas. Cada função precisa transformar esse material em decisões rápidas, e uma resposta que não pode ser rastreada até as fontes, ou que inventa dados, é pior do que nenhuma. O desafio foi construir especialistas cujas respostas possam ser auditadas, sobre uma base em que contas e acesso aos dados sejam confiáveis desde o início, e fazer isso pensando em material sensível, como a saúde de atletas.",
+        "solution": "São sete especialistas, cada um uma persona com tom, escopo e limites próprios: o técnico não decide contratos, e os especialistas de saúde e de direito declaram que o conteúdo não substitui um profissional habilitado. Uma pergunta passa por um grafo em LangGraph.js que recupera trechos das fontes da própria pessoa e depois responde em streaming. As fontes usadas voltam como citações montadas pelo servidor, e não escritas pelo modelo, e, quando nenhuma fonte cobre a pergunta, o especialista diz isso em vez de inventar dados. Cada conversa é guardada por especialista, a pessoa pode listar e excluir o que conectou, e a interface segue uma identidade visual retrô em 8 bits.",
+        "architecture": "Um monorepo com um app web em React e Vite (TanStack Router e Query), uma API em Nest.js com TypeScript, um site de documentação em Next.js e um pacote de design system compartilhado, construído sobre Tailwind CSS e shadcn/ui. A API é organizada em fatias verticais com camadas de domínio, aplicação, infraestrutura e interface, um request handler por endpoint e um caso de uso por fluxo, e testes de fronteira falham quando uma camada importa o que não deve. Contas, sessões, conversas e registros de conexões ficam em PostgreSQL, acessado com o driver pg e migrations SQL versionadas. O texto de cada fonte conectada é dividido em trechos, transformado em embeddings e guardado no Weaviate, com um tenant por pessoa. Chat, embeddings e leitura de imagens usam modelos da OpenAI, e o Gemini lê áudio e vídeo. A API envia traces, métricas e logs por OpenTelemetry a uma pilha Grafana local (Loki, Tempo e Mimir), incluindo sinais dos agentes, com dashboards e alertas provisionados, e os testes de carga com k6 rodam contra uma instância isolada. Um workflow de CI roda lint, verificação de tipos, build e testes unitários; os testes de integração e end-to-end rodam localmente contra Postgres e Weaviate reais, com modelos roteirizados no lugar dos reais.",
         "decisions": [
           {
             "title": "Autenticação própria da API.",
@@ -293,15 +295,19 @@
             "text": "Limites de requisição no cadastro e na entrada, e um teto de hashes de senha simultâneos com fila limitada, que responde \"ocupado\" em vez de travar a API inteira, desenho moldado por testes de carga."
           },
           {
-            "title": "Observabilidade desde o início.",
-            "text": "Métricas, traces e logs chegam a um único dashboard do Grafana, com cada tentativa contada uma vez em um só lugar e sem dados pessoais nos rótulos das métricas."
+            "title": "Citações montadas pelo servidor.",
+            "text": "O modelo nunca escreve nomes de arquivo nem páginas: o servidor monta as fontes a partir do que foi recuperado, entrega os trechos ao modelo como dado escapado e não como instrução, e mostra \"Source removed\" quando uma fonte citada é excluída depois."
           },
           {
-            "title": "Uma identidade visual própria.",
-            "text": "Uma direção retrô em 8 bits, inspirada em futebol e no Brasil, com logo em pixel art, uma paleta de cinco cores e sombras duras deslocadas, documentada com regras de acessibilidade que visam o WCAG 2.2 AA."
+            "title": "Isolamento por construção.",
+            "text": "O conhecimento de cada pessoa fica em um tenant próprio do Weaviate, de modo que uma consulta não alcança dados de outra pessoa por causa de um filtro esquecido, e os embeddings são calculados pela aplicação, então o servidor de vetores nunca chama um provedor de IA."
+          },
+          {
+            "title": "Observabilidade que inclui os agentes.",
+            "text": "Métricas, traces e logs chegam a um único dashboard do Grafana, com sinais de cada execução dos agentes e sem conteúdo de conversa nem dados pessoais."
           }
         ],
-        "state": "Em desenvolvimento. Implementado: criação de conta com confirmação por e-mail, entrada, saída e recuperação de senha, mais a observabilidade e a configuração de testes de carga. Não implementado: especialistas, conectores, ingestão de fontes, integração com o modelo de linguagem, implantação e pipeline de CI. A interface está em inglês, e as telas exibidas aqui vêm da versão de desenvolvimento local, sem dados reais."
+        "state": "Concluído: o desenvolvimento do projeto terminou. Ele roda de ponta a ponta em uma máquina local, com criação de conta e confirmação por e-mail, entrada e recuperação de senha, chat com sete especialistas e histórico persistente, conexões de cinco tipos de fonte, respostas com citações e observabilidade dos agentes. Não está implantado. A qualidade das respostas não foi avaliada com os modelos reais: os testes automatizados usam modelos roteirizados, e a integração com o Gemini nunca foi chamada com uma chave real. Os limites de requisição e as travas ficam na memória de uma única instância da API, então mais de uma instância exigiria armazenamento compartilhado. A interface está em inglês, e as telas exibidas aqui vêm da versão de desenvolvimento local, com respostas do modelo roteirizadas e sem dados reais."
       }
     }
   },
@@ -485,7 +491,7 @@
       },
       "rondo": {
         "name": "Rondo",
-        "summary": "Uma plataforma para criar e operar especialistas: agentes de IA especializados nas funções de um clube de futebol, alimentados por fontes de dados conectadas, com respostas rastreáveis até elas. A fundação técnica existe; as funcionalidades de produto, não."
+        "summary": "Uma plataforma para conversar com especialistas: agentes de IA especializados nas funções de um clube de futebol, que respondem a partir das fontes que a pessoa conecta, com citações e a lacuna declarada quando nada cobre a pergunta. O desenvolvimento está concluído; roda localmente e não está implantado."
       }
     }
   },
