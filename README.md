@@ -25,8 +25,9 @@ O site é bilíngue (inglês como padrão e português do Brasil), estático e s
 | AI Lab: Neural Intelligence Environment (SPEC-012) | Concluída: página de lista imersiva com rede neural em Canvas 2D, filtros e Research Log; aguarda commit e PR |
 | Links de contexto em Technologies (TECH-RF-10) e anterior/seguinte no AI Lab (AIL-RF-16) | Concluídos |
 | AI Lab: escolha de abordagem e de modelo, framework de testes e fine-tuning (SPEC-006 v0.5.0) | Concluídos |
+| AI Lab: experimento da rede convolucional escrita do zero (SPEC-006 v0.6.0) | Implementado, com os textos aprovados pelo Bruno em 2026-11-27; sem commit |
 | Testes end-to-end (Playwright) | Configurados; cobrem Home, About, Experience, Projects, Technologies, AI Lab, Contact, Internationalization, Resume, Layout global e Assets (imagens, ícone e compartilhamento) |
-| SEO final (SPEC-013) | Implementado: `robots.txt`, `sitemap.xml` (36 páginas), guarda de indexação, JSON-LD e limites de título e descrição; falta o domínio para validar no Search Console e no Rich Results Test |
+| SEO final (SPEC-013) | Implementado: `robots.txt`, `sitemap.xml` (38 páginas), guarda de indexação, JSON-LD e limites de título e descrição; falta o domínio para validar no Search Console e no Rich Results Test |
 | QA final | Executado em 2026-11-08: 1334 E2E em Chromium, Firefox e WebKit, axe-core como teste permanente (0 violações WCAG 2.2 AA), Lighthouse 100 em acessibilidade e boas práticas; 3 defeitos corrigidos e 3 instabilidades de teste resolvidas. Relatório em [`.docs/QA-RELATORIO.md`](./.docs/QA-RELATORIO.md); faltam as conferências manuais e as que dependem do domínio |
 | Hospedagem e domínio | Publicado em 2026-11-13: Vercel Hobby e `brunolucildo.me` (Namecheap), com indexação liberada. Conferências de produção e Lighthouse em [`.docs/QA-RELATORIO.md`](./.docs/QA-RELATORIO.md) (seção 7.1); Search Console verificado e sitemap enviado; falta o Google ler o sitemap e indexar as páginas, conforme [`.docs/PUBLICACAO.md`](./.docs/PUBLICACAO.md) |
 | Analytics | Pendente de decisão |

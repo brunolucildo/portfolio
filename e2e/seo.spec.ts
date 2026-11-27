@@ -114,7 +114,7 @@ test.describe("robots.txt", () => {
 });
 
 test.describe("sitemap.xml", () => {
-  test("lista exatamente as 36 páginas públicas, com URL absoluta do site", async ({
+  test("lista exatamente as 38 páginas públicas, com URL absoluta do site", async ({
     request,
     baseURL,
   }) => {
@@ -126,7 +126,7 @@ test.describe("sitemap.xml", () => {
       ({ path }) => new URL(path, baseURL).href,
     );
 
-    expect(expected).toHaveLength(36);
+    expect(expected).toHaveLength(38);
     expect(entries.map((entry) => entry.loc).sort()).toEqual(expected.sort());
   });
 
@@ -390,7 +390,7 @@ test.describe("dados estruturados", () => {
         !/^\/(en|pt-BR)$/.test(path) && !/\/(about|sobre)$/.test(path),
     );
 
-    expect(others).toHaveLength(32);
+    expect(others).toHaveLength(34);
     for (const { path } of others) {
       expect(await readJsonLd(page, path), path).toHaveLength(0);
     }
@@ -442,7 +442,7 @@ test.describe("título, descrição e estrutura das páginas", () => {
     return { pages, broken };
   }
 
-  test("o rastreamento alcança as 36 páginas, sem link interno quebrado", async ({
+  test("o rastreamento alcança as 38 páginas, sem link interno quebrado", async ({
     page,
   }) => {
     const { pages, broken } = await crawl(page);

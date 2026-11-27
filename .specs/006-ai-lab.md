@@ -1,5 +1,7 @@
 # SPEC-006 — AI Lab
 
+> **Atualização de 2026-11-27 (v0.6.0):** o card do Rondo passa de tipo "Estudo" para **"Projeto concluído"** (estado continua "Concluído"), por decisão do Bruno. É o único item com esse tipo, aparece sob o filtro "Projects" da SPEC-012 e continua fora do Research Log. AIL-RF-06 vale com essa exceção; o link do card e o texto não mudam.
+
 > **Atualização de 2026-11-12 (SPEC-014):** o card "Analytics Personas" foi renomeado para **Rondo** e passa a ter um único link, para a página do projeto em Projects. Nome, estado ("Em planejamento"; desde 2026-11-18, "Concluído", ver SPEC-014 v0.3.0), tipo e frase continuam os mesmos. Vale a SPEC-014.
 
 ## 1. Identificação
@@ -9,8 +11,8 @@
 | Nome | AI Lab |
 | Identificador | SPEC-006 |
 | Slug | `006-ai-lab` |
-| Versão | 0.5.0 |
-| Status | Done em 2026-11-08 (v0.5.0: três experimentos da pós entregues, com os textos da seção 7.7 aprovados pelo Bruno; ver seção 16) |
+| Versão | 0.6.0 |
+| Status | Done em 2026-11-08 (v0.5.0: três experimentos da pós entregues, com os textos da seção 7.7 aprovados pelo Bruno; ver seção 16). v0.6.0 (2026-11-27): experimento `cnn-from-scratch` implementado, com os textos da seção 7.8 aprovados pelo Bruno em 2026-11-27 (Q15); ver seção 17 |
 | Data | 2026-11-08 |
 | Origem | SPEC-006 de `.specs/FEATURES.md` (v0.1, Draft) |
 
@@ -61,7 +63,7 @@ O AI Lab é a seção do portfólio dedicada a experimentos, estudos e provas de
 | AIL-RF-03 | Must | As rotas `/en/ai-lab/[slug]` e `/pt-BR/ai-lab/[slug]` existem para os slugs da seção 7.1 e retornam 404 para qualquer outro valor. |
 | AIL-RF-04 | Must | A página de detalhe tem um `h1` com o nome, a linha de fatos (tipo, estado, modelo, tecnologias, projeto de origem) e uma seção com `h2` para cada campo da seção 7.3, na ordem: Objetivo, Problema investigado, Abordagem, Resultados, Limitações e Aprendizados. |
 | AIL-RF-05 | Must | O tipo e o estado de cada experimento são exibidos em **texto**, nunca só por cor ou forma, e usam apenas o vocabulário da seção 7.2. |
-| AIL-RF-06 | Must | Estudo, prova de conceito e projeto concluído são distinguíveis na lista e no detalhe. Nenhum experimento é apresentado como produto, e nenhum dos cinco é classificado como "Projeto concluído" na v1. |
+| AIL-RF-06 | Must | Estudo, prova de conceito e projeto concluído são distinguíveis na lista e no detalhe. Nenhum experimento é apresentado como produto, e nenhum dos cinco é classificado como "Projeto concluído" na v1. **Exceção da v0.6.0:** o card do Rondo, que aponta para um projeto concluído em Projects, é o único "Projeto concluído". |
 | AIL-RF-07 | Must | Todo resultado numérico é uma contagem com a amostra ("43 de 48"), nunca um percentual, e vem acompanhado da ressalva sobre o tamanho da amostra ou sobre os casos terem guiado os ajustes, conforme o rascunho da seção 7.3. |
 | AIL-RF-08 | Must | Toda página de detalhe tem uma seção de Limitações com pelo menos uma limitação relevante e não apresenta resultado que o repositório público não documente. |
 | AIL-RF-09 | Must | O modelo e as tecnologias exibidos são os documentados: `gpt-4o-mini` e embeddings da OpenAI nos experimentos do Football e do FintaLab. O card "Em planejamento" não declara modelo (o repositório não define) e não lista tecnologias. |
@@ -75,6 +77,8 @@ O AI Lab é a seção do portfólio dedicada a experimentos, estudos e provas de
 | AIL-RF-17 | Must | A lista tem oito cards, na ordem: os quatro experimentos atuais, os três da seção 7.7 e o card "Em planejamento". Os sete experimentos com detalhe têm página em `/ai-lab/[slug]` com os mesmos seis campos de AIL-RF-04 (v0.5.0). |
 | AIL-RF-18 | Must | Os três experimentos da seção 7.7 seguem as regras de honestidade da seção 7.7: o fine-tuning declara que as contagens vêm dos dados de treino; o framework de testes não publica resultado numérico; a escolha de modelo não publica notas, médias nem ranking (v0.5.0). |
 | AIL-RF-19 | Must | Experimento sem repositório público (os três da seção 7.7) não mostra "Parte de" nem "Repositório", não lista tecnologias que não existam em Technologies e não cita o nome do curso nem da instituição (v0.5.0). |
+| AIL-RF-20 | Must | A lista passa a ter nove cards: os sete experimentos com detalhe, o `cnn-from-scratch` (seção 7.8) e o card do Rondo, nessa ordem. O `cnn-from-scratch` tem página em `/ai-lab/cnn-from-scratch` com os mesmos seis campos de AIL-RF-04 e, por ter repositório público próprio, mostra o link "Repositório" (sem "Parte de"), configurado em `aiLab.ts` (`repositoryUrl`). Experimento com `origin` continua usando o repositório do projeto de origem (v0.6.0). |
+| AIL-RF-21 | Must | O `cnn-from-scratch` publica só contagens "X de Y" e as perdas da época como números do log (nunca percentuais), diz que as fotos de teste vêm da mesma fonte das de treino e que 44 de 46 descreve aquele conjunto, e não afirma generalização nem desempenho geral (v0.6.0). |
 
 ## 5. Requisitos não funcionais
 
@@ -303,6 +307,37 @@ Ordem na lista: depois dos quatro experimentos atuais e antes do card "Em planej
 | Lista, descrição (SEO) | Experiments in applied AI: retrieval-augmented answers, output validation with a judge model, consistency tests, prompt design, fine-tuning and test methods, with results and limitations. | Experimentos de IA aplicada: respostas com recuperação de informação, validação de saída com um modelo juiz, testes de consistência, desenho de prompts, ajuste fino e métodos de teste, com resultados e limitações. |
 | Detalhe, descrição (SEO) | O resumo de uma frase de cada experimento acima. | O mesmo, em português. |
 
+### 7.8. Experimento da rede convolucional do zero (v0.6.0, textos aprovados em 2026-11-27)
+
+Em 2026-11-27 o Bruno pediu um novo experimento a partir do que aprendeu no projeto `neural-network` (repositório público `brunolucildo/neural-network`, conferido como público em 2026-11-27). Fontes lidas: `README.md`, `logs/train-output.txt`, `src/` e `cli/`. O Bruno não deu o texto; ele foi escrito só com o que essas fontes dizem e conferido contra o código e o log (ver seção 17).
+
+| Slug | Nome (`en`) | Nome (`pt-BR`) | Tipo | Estado | Modelo | Tecnologias | Projeto de origem |
+|---|---|---|---|---|---|---|---|
+| `cnn-from-scratch` | A convolutional network written from scratch | Uma rede convolucional escrita do zero | Study | Concluded (Q16) | TinyCNN (Q17) | TypeScript, Node.js | nenhum; repositório próprio |
+
+Ordem na lista: depois do `lora-fine-tuning` e antes do card do Rondo; o identificador `EXP / 008` passa a ser dele e o Rondo vira `EXP / 009` (Q17). As tecnologias existem em `technologies.ts`; as bibliotecas de leitura de imagem (`pngjs`, `jpeg-js`, `heic-decode`) não entram, porque não existem em Technologies e não são o assunto.
+
+**Regras de honestidade deste bloco**
+
+- Todo número vem do README, do log de treino ou do código e foi reconferido em 2026-11-27: 16.857 parâmetros, 210, 44 e 46 fotos, 210 de 210, 43 de 44 e 44 de 46 acertos do modelo salvo, perda de validação mínima de 0,0808 na época 7 e de 0,1433 na época 50, perda de treino 0,0000 a partir da época 23, acerto de validação em 43 de 44 em 47 das 50 épocas e 27 avisos de overfitting.
+- Nenhum percentual: o README usa percentuais, o site usa contagens (AIL-RF-07).
+- O texto declara o que o README já declara: dataset pequeno, fotos de noite majoritariamente urbanas, teste da mesma fonte do treino, treino lento e sem mini-lotes.
+- Não afirma que o modelo funciona em outros ambientes, nem que "aprendeu noite". O aprendizado "O acerto escondeu o que a perda mostrava" é leitura do log; os demais aprendizados são síntese a partir de limitações e melhorias que o próprio README já cita (parar perto da época 7) e tiveram o aval do Bruno em 2026-11-27 (Q15).
+
+| Campo | en | pt-BR |
+|---|---|---|
+| Nome | A convolutional network written from scratch | Uma rede convolucional escrita do zero |
+| Título curto (SEO) | A CNN written from scratch | Uma CNN escrita do zero |
+| Resumo | Writing a small convolutional network by hand, with no machine learning library, to tell day photos from night photos, and watching it overfit. | Escrever à mão uma pequena rede convolucional, sem biblioteca de aprendizado de máquina, para separar fotos de dia e de noite, e ver o overfitting acontecer. |
+| Objetivo | Understand how a convolutional network learns by building every piece myself, from tensors to backpropagation, on a task small enough to follow: telling a day photo from a night photo. | Entender como uma rede convolucional aprende construindo eu mesmo cada peça, de tensores à retropropagação, em uma tarefa pequena o bastante para acompanhar: separar uma foto de dia de uma foto de noite. |
+| Problema | Calling a library hides what a network does: how a filter slides over an image, how the error travels back through the layers and how a training run can look healthy while the model memorizes the data. Writing the pieces by hand makes each step visible, at the cost of speed. | Chamar uma biblioteca esconde o que a rede faz: como um filtro percorre a imagem, como o erro volta pelas camadas e como um treino pode parecer saudável enquanto o modelo decora os dados. Escrever as peças à mão deixa cada passo visível, ao custo da velocidade. |
+| Abordagem | A convolutional network in TypeScript with no machine learning library: the only dependencies read the image files. Tensors, 2D convolution, max-pooling, dense layers, ReLU and sigmoid, binary cross-entropy, backpropagation and the Adam optimizer were written by hand. The input is a 32 by 32 color image, and the network has two convolution blocks (4 and 8 filters of 3 by 3, each followed by max-pooling) and two dense layers, 16,857 parameters in all. It was trained for 50 epochs, one image per step, on 210 photos (105 of each class), with 44 photos for validation and 46 for a final test used once. Most photos come from Wikimedia Commons under open licenses, and some are screenshots I took. The initial weights and the shuffling use fixed seeds, so training again produces the same model. | Uma rede convolucional em TypeScript, sem biblioteca de aprendizado de máquina: as únicas dependências leem os arquivos de imagem. Tensores, convolução 2D, max-pooling, camadas densas, ReLU e sigmoide, entropia cruzada binária, retropropagação e o otimizador Adam foram escritos à mão. A entrada é uma imagem colorida de 32 por 32, e a rede tem dois blocos de convolução (4 e 8 filtros de 3 por 3, cada um seguido de max-pooling) e duas camadas densas, 16.857 parâmetros ao todo. O treino durou 50 épocas, uma imagem por passo, com 210 fotos (105 de cada classe), 44 fotos de validação e 46 de teste final, usadas uma só vez. A maior parte das fotos vem da Wikimedia Commons, com licenças abertas, e algumas são capturas de tela feitas por mim. Os pesos iniciais e o embaralhamento usam sementes fixas, então treinar de novo gera o mesmo modelo. |
+| Resultados | The saved model labelled 210 of 210 training photos correctly, 43 of 44 validation photos and 44 of 46 test photos. The training loss shows as 0.0000 from epoch 23. The validation loss was lowest at epoch 7 (0.0808) and had risen to 0.1433 by epoch 50, while validation accuracy stayed at 43 of 44 in 47 of the 50 epochs. The overfitting warning printed 27 times. The saved model is the one from epoch 50, not the best one on validation. With 46 test photos, a single photo changes the result a lot, so 44 of 46 describes this set, not how the model would do elsewhere. | O modelo salvo rotulou corretamente 210 de 210 fotos de treino, 43 de 44 fotos de validação e 44 de 46 fotos de teste. A perda de treino aparece como 0,0000 a partir da época 23. A perda de validação foi a menor na época 7 (0,0808) e tinha subido para 0,1433 na época 50, enquanto o acerto de validação ficou em 43 de 44 em 47 das 50 épocas. O aviso de overfitting apareceu 27 vezes. O modelo salvo é o da época 50, e não o melhor na validação. Com 46 fotos de teste, uma única foto muda bastante o resultado, então 44 de 46 descreve este conjunto, e não como o modelo se sairia em outros lugares. |
+| Limitações | The data set is small, and the night photos are mostly urban scenes (skylines), so the network may have learned “dark city” instead of “night” and could fail indoors or on bright nights. The test photos come from the same source as the training photos, so 44 of 46 is probably optimistic for pictures from other places. Training uses one image per step, with no mini-batches and no GPU, so it is slow: about three and a half minutes for 50 epochs. The overfitting check is a simple rule that compares the last few epochs, and it only warns; it does not stop the training. It was one split of the data and one set of seeds, with no repetitions. | O conjunto de dados é pequeno, e as fotos de noite são, em boa parte, cenas urbanas (skylines), então a rede pode ter aprendido “cidade escura” em vez de “noite” e errar em interiores ou em noites claras. As fotos de teste vêm da mesma fonte das de treino, então 44 de 46 provavelmente é otimista para imagens de outros lugares. O treino usa uma imagem por passo, sem mini-lotes e sem GPU, e por isso é lento: cerca de três minutos e meio para 50 épocas. A checagem de overfitting é uma regra simples que compara as últimas épocas e só avisa, sem interromper o treino. Foi uma divisão dos dados e um conjunto de sementes, sem repetições. |
+| Aprendizados | Accuracy hid what the loss showed: validation accuracy sat at 43 of 44 for almost the whole run while the validation loss was already getting worse, so the two are worth reading together. Writing each layer and its gradient by hand made backpropagation concrete in a way that calling a library does not. And a good test number says little when the test photos come from the same source as the training photos; stopping near epoch 7 would have been a simple improvement. | O acerto escondeu o que a perda mostrava: o acerto de validação ficou em 43 de 44 durante quase todo o treino, enquanto a perda de validação já piorava, então vale ler os dois juntos. Escrever cada camada e o seu gradiente à mão tornou a retropropagação concreta, de um jeito que chamar uma biblioteca não torna. E um bom número de teste diz pouco quando as fotos de teste vêm da mesma fonte das de treino; parar perto da época 7 teria sido uma melhoria simples. |
+
+**Descrição de SEO:** o resumo acima, com 143 caracteres em inglês e 157 em português (limite de 160), e título curto de 26 e 23 caracteres (título completo de 51 e 48, limite de 60).
+
 ## 8. Critérios de aceitação
 
 | ID | Critério (Given / When / Then) |
@@ -325,6 +360,8 @@ Ordem na lista: depois dos quatro experimentos atuais e antes do card "Em planej
 | AIL-CA-16 | **Given** cada um dos três novos detalhes, nos dois idiomas, **when** a página é aberta, **then** há o `h1`, a linha de fatos e os seis `h2` de AIL-RF-04, sem "Parte de", sem "Repositório" e sem `%`. (v0.5.0) |
 | AIL-CA-17 | **Given** `lora-fine-tuning`, **when** Resultados e Limitações são lidos, **then** todo resultado é uma contagem "X de Y", o texto diz que os dados de teste são os de treino e não há a palavra "generaliza" afirmada como resultado; **given** `prompt-test-framework`, **then** a seção Resultados diz que não há resultados publicados; **given** `approach-and-model-choice`, **then** nenhuma nota de 1 a 5 nem média de modelo aparece. (v0.5.0) |
 | AIL-CA-18 | **Given** a navegação anterior/seguinte (AIL-CA-14), **when** os sete detalhes são percorridos, **then** a ordem é a da lista e só as pontas têm um único link. (v0.5.0) |
+| AIL-CA-19 | **Given** `/en/ai-lab` e `/pt-BR/ai-lab`, **when** a lista é aberta, **then** há nove cards, os oito com detalhe levam a `/ai-lab/<slug>` no mesmo idioma, o `cnn-from-scratch` vem antes do Rondo e o Rondo continua com um único link, para o projeto. A navegação anterior/seguinte percorre os oito detalhes na ordem da lista. (v0.6.0) |
+| AIL-CA-20 | **Given** `cnn-from-scratch`, nos dois idiomas, **when** a página é aberta, **then** há o `h1`, a linha de fatos com o modelo `TinyCNN` e as tecnologias TypeScript e Node.js, o link "Repositório" para `https://github.com/brunolucildo/neural-network` (nova aba, `noopener noreferrer`, nome acessível com o nome do experimento), nenhum "Parte de", os seis `h2` na ordem, ao menos cinco contagens "X de Y" em Resultados, nenhum `%`, e a limitação diz que o teste vem da mesma fonte do treino. (v0.6.0) |
 
 ## 9. Dependências
 
@@ -365,6 +402,9 @@ Ordem na lista: depois dos quatro experimentos atuais e antes do card "Em planej
 | Q12 | O fine-tuning cita tecnologias (Python, Hugging Face Transformers, PEFT/LoRA, Colab)? Isso exige incluí-las na página Technologies, em "IA e aprendizado de máquina", sem contexto. | Não | Nenhuma tecnologia; o campo Modelo já traz o Qwen2.5 e o LoRA. **Default adotado na implementação (não perguntado ao Bruno): nenhuma tecnologia; reversível em `aiLab.ts`.** |
 | Q13 | A ordem dos três novos (escolha de abordagem, framework de testes, fine-tuning, na ordem dos módulos) serve? | Não | A da tabela. **Default adotado na implementação (não perguntado ao Bruno): a ordem da tabela; reversível em `aiLab.ts`.** |
 | Q14 | O experimento de escolha de modelo cita que os experimentos reais rodam no `gpt-4o-mini` e não no modelo escolhido no planejamento (Claude Sonnet)? Se há um motivo para a troca, quer registrá-lo? | Não | Cita a diferença, sem motivo. **Resolvida em 2026-11-08 (Bruno): cita a diferença, sem o motivo.** |
+| Q15 | Os textos da seção 7.8 (rede convolucional do zero), em inglês e português, podem ser publicados? Em especial a seção "O que aprendi", que é síntese minha a partir do README e do log, e a frase de que parar perto da época 7 "teria sido uma melhoria simples". | Não bloqueia o código; bloqueia a publicação | Resolvida em 2026-11-27: aprovados como estão pelo Bruno, inclusive "O que aprendi". A implementação segue só no working tree, sem commit. |
+| Q16 | O estado é "Concluído" (a pergunta foi respondida e o repositório está estável) ou "Em desenvolvimento" (se pretende evoluir a rede, por exemplo parando na época 7 e testando com fotos de outras fontes)? | Não | "Concluído", como os outros estudos. **Default adotado, não perguntado ao Bruno; reversível em `aiLab.ts`.** |
+| Q17 | O campo "Modelo" mostra `TinyCNN` (o nome da classe no repositório; não é um modelo de linguagem) e o experimento entra antes do Rondo, que passa de `EXP / 008` para `EXP / 009`? | Não | Os dois. **Default adotado, não perguntado ao Bruno; reversível em `aiLab.ts`.** |
 
 ## 12. Premissas
 
@@ -387,9 +427,13 @@ Ordem na lista: depois dos quatro experimentos atuais e antes do card "Em planej
 | 2026-11-08 | Textos, números e ressalvas da seção 7.3 aprovados e implementação autorizada (Q1). Q2 a Q5 seguem como premissas reversíveis (tipo e estado em `aiLab.ts`, gráfico estático, ordem da tabela). | Bruno |
 | 2026-11-08 | Material da pós no AI Lab: entram o fine-tuning com enquadramento honesto, o método do framework de testes (sem resultados, porque as 30 execuções foram ilustrativas) e a escolha de abordagem e de modelo como estudo. Textos da seção 7.7 aprovados em seguida (Q9). | Bruno |
 | 2026-11-08 | Textos da seção 7.7 aprovados como estão. O fine-tuning fica "Concluído", sem link de repositório, e a escolha de modelo cita que os experimentos rodam no `gpt-4o-mini` (Q9, Q10, Q11 e Q14). Implementação autorizada. | Bruno |
+| 2026-11-27 | O Rondo deixa de ser apresentado como estudo no AI Lab: tipo "Projeto concluído", filtro "Projects" e fora do Research Log (o Bruno aceitou a recomendação). | Bruno |
+| 2026-11-27 | Pedido de um novo experimento do AI Lab a partir do aprendizado no projeto `neural-network` (rede convolucional escrita do zero). Implementado no working tree, sem commit. | Bruno (pedido) |
+| 2026-11-27 | Textos da seção 7.8 aprovados como estão, inclusive "O que aprendi" (Q15). | Bruno |
 
 ## Refinamento
 
+- 2026-11-27, v0.6.0: novo experimento `cnn-from-scratch` a pedido do Bruno (seção 7.8), com `repositoryUrl` em `aiLab.ts` e o link "Repositório" para experimentos com repositório próprio (AIL-RF-20), requisito de honestidade AIL-RF-21, critérios AIL-CA-19 e 20 e perguntas Q15 a Q17. Textos escritos a partir do README, do log e do código do `neural-network`, com os números reconferidos; foram aprovados em 2026-11-27 (Q15). Implementação e verificação na seção 17. Textos aprovados em 2026-11-27 (Q15).
 - 2026-11-08, v0.5.0: refinamento dos três itens da pós decididos pelo Bruno (Q6 a Q8). Fontes lidas de novo, notebook conferido célula a célula (treino e avaliação no mesmo arquivo, sem divisão), textos em en e pt-BR na seção 7.7, requisitos AIL-RF-17 a 19, critérios AIL-CA-15 a 18 e perguntas Q9 a Q14. Textos aprovados e implementados no mesmo dia; a seção 16 registra a entrega e a verificação.
 - 2026-11-08, v0.4.0: AIL-RF-16 entregue por decisão do Bruno, com o critério AIL-CA-14 e os rótulos provisórios da navegação (a aprovar). O link de projeto de origem passou a usar o helper `projectHref`, compartilhado com Technologies.
 - 2026-11-08, v0.3.0: textos aprovados (Q1) e página implementada; seção 15 registra a entrega, as divergências e a verificação.
@@ -483,3 +527,36 @@ Verificação adicional:
 - Os resumos dos três novos têm de 140 a 160 caracteres, dentro do limite da descrição de SEO.
 
 Não verificado: leitores de tela, contraste com ferramenta, LCP e CLS, e a leitura dos textos em um aparelho real. O notebook e os documentos da pós não são públicos, então ninguém consegue reproduzir os números do fine-tuning a partir do site.
+
+## 17. Implementação e verificação da v0.6.0
+
+Implementada em 2026-11-27 no working tree da branch `feat/rondo-concluido`, **sem commit**, a pedido do Bruno. Os textos da seção 7.8 foram aprovados por ele em 2026-11-27 (Q15).
+
+**Código e conteúdo**
+
+- `src/config/aiLab.ts`: chave `cnnFromScratch` (slug `cnn-from-scratch`, estudo, concluído, modelo `TinyCNN`, TypeScript e Node.js, `origin: null`) inserida antes do Rondo, e o campo opcional `repositoryUrl`.
+- `src/components/ai-lab/ExperimentDetail.tsx`: mostra o link "Repositório" também quando não há `origin` mas há `repositoryUrl` (nova aba, `noopener noreferrer`, nome acessível com o nome do experimento).
+- `src/content/{en,pt-BR}/common.json`: bloco `aiLab.experiments.cnnFromScratch` (gerado a partir do mesmo texto da seção 7.8).
+- Testes: `e2e/ai-lab.spec.ts` (nove cards, oito detalhes, link de repositório próprio, dois testes novos de honestidade), `e2e/ai-lab-neural.spec.ts` (`EXP / 009`, "Showing 7 of 9") e as contagens de páginas em `e2e/seo.spec.ts` e `e2e/a11y.spec.ts` (36 para 38 páginas públicas).
+- Correções depois do primeiro relato, a partir da revisão do Bruno no navegador: (1) a grade assimétrica de `ExperimentsSection.tsx` tinha larguras para oito itens e o nono (Rondo) caiu em 1 de 12 colunas; ganhou a nona largura e um teste que exige que nenhum item fique estreito em 1024, 1440 e 1920 px (o teste falha com o defeito reintroduzido de propósito); (2) o Rondo faltava no Research Log; em vez de incluí-lo, o Bruno decidiu que ele não é um estudo: o card passou a "Projeto concluído" (`type: "completed"` em `aiLab.ts`), aparece sob o filtro "Projects" (1 item; "Research" passa de 7 para 6) e o log continua só com os experimentos que têm página. Uma versão intermediária que colocava o Rondo no log foi revertida.
+- Documentação: esta SPEC, nota em `012-ai-lab-neural.md`, `README.md`, `.docs/CONTENT.md`, `.docs/SEO.md` e `.docs/QA.md` (contagem de páginas).
+
+**Conferência das fontes (2026-11-27)**, rodada sem alterar o repositório `neural-network` (scripts em pasta temporária, `git status` limpo depois):
+
+- Modelo salvo avaliado nos três conjuntos: 210 de 210 (treino), 43 de 44 (validação), 44 de 46 (teste); 16.857 parâmetros. Perda de teste 0,2211, que o texto não cita.
+- Log: perda de validação mínima de 0,0808 na época 7 e 0,1433 na época 50; perda de treino 0,0000 desde a época 23; acerto de validação em 43 de 44 em 47 das 50 épocas; 27 avisos de overfitting.
+- Reprodutibilidade: o treino de 50 épocas, rodado de novo com saída em arquivo temporário, gerou os mesmos 16.857 parâmetros do modelo salvo (diferença máxima 0). Confirma a frase "treinar de novo gera o mesmo modelo" neste Windows com Node 24.
+- Contagem de arquivos do dataset: 105 e 105 (treino), 22 e 22 (validação), 23 e 23 (teste).
+
+| Critério | Resultado | Evidência |
+|---|---|---|
+| AIL-CA-19 | Atendido | Nove cards nos dois idiomas, `cnn-from-scratch` antes do Rondo, Rondo com um único link; anterior/seguinte percorre os oito detalhes. |
+| AIL-CA-20 | Atendido | Modelo, tecnologias, link "Repositório" com os atributos esperados, sem "Parte de", seis `h2`, contagens "X de Y", sem `%`, limitação sobre a mesma fonte do teste. |
+| AIL-RF-21 | Atendido | Dois testes novos por idioma (contagens, ressalvas, expressões proibidas). |
+
+Verificação:
+
+- `tsc --noEmit` sem erros; `biome check` limpo nos arquivos alterados.
+- Playwright, Chromium: `ai-lab`, `ai-lab-neural`, `seo`, `i18n`, `assets`, `technologies` e `a11y`: na primeira rodada 3 falharam por contagens fixas de páginas (36, 38 e 32), corrigidas; depois das correções, a suíte completa do Chromium passou (1075 testes, axe sem violações nas páginas novas). A conferência visual da lista (1440 px) e do detalhe em inglês foi feita no navegador.
+
+Não verificado: Firefox e WebKit (os specs `layout` e `i18n` também rodam neles; só o Chromium foi executado); `biome check` fora de `src` e `e2e`; conferência visual em pt-BR e em celular; mutação nos demais testes novos (só o da grade foi testado com defeito reintroduzido). Não houve commit, push nem deploy.

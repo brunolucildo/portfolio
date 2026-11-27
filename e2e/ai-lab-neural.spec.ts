@@ -32,12 +32,22 @@ type Locale = {
   };
   experiments: {
     title: string;
-    filters: { all: string; experiments: string; research: string };
+    filters: {
+      all: string;
+      experiments: string;
+      research: string;
+      projects: string;
+    };
     showing: string;
     of: string;
     featured: string;
   };
-  log: { title: string; context: string; learned: string; read: string };
+  log: {
+    title: string;
+    context: string;
+    learned: string;
+    read: string;
+  };
   closing: string;
 };
 
@@ -71,7 +81,12 @@ const locales: Locale[] = [
     },
     experiments: {
       title: "Experiments & Research",
-      filters: { all: "All", experiments: "Experiments", research: "Research" },
+      filters: {
+        all: "All",
+        experiments: "Experiments",
+        research: "Research",
+        projects: "Projects",
+      },
       showing: "Showing",
       of: "of",
       featured: "Featured experiment",
@@ -117,6 +132,7 @@ const locales: Locale[] = [
         all: "Todos",
         experiments: "Experimentos",
         research: "Pesquisa",
+        projects: "Projetos",
       },
       showing: "Mostrando",
       of: "de",
@@ -267,6 +283,7 @@ test("o destaque e a numeração EXP seguem a ordem da lista", () => {
     "EXP / 006",
     "EXP / 007",
     "EXP / 008",
+    "EXP / 009",
   ]);
 });
 
@@ -349,6 +366,23 @@ for (const lab of locales) {
       expect(featured?.height ?? 0).toBeGreaterThan(other?.height ?? 0);
     });
 
+    for (const width of [1024, 1440, 1920]) {
+      test(`nenhum item da grade fica estreito com ${width} px`, async ({
+        page,
+      }) => {
+        await page.setViewportSize({ width, height: 900 });
+        await page.goto(lab.path);
+        const tiles = page.locator("#ai-lab-list > li");
+
+        // Um item sem largura definida em `spans` cai em 1 de 12 colunas.
+        await expect(tiles).toHaveCount(aiLabExperiments.length);
+        for (const [index, tile] of (await tiles.all()).entries()) {
+          const box = await tile.boundingBox();
+          expect(box?.width ?? 0, `item ${index + 1}`).toBeGreaterThan(240);
+        }
+      });
+    }
+
     test("os filtros mostram só as categorias existentes e filtram sem recarregar", async ({
       page,
     }) => {
@@ -363,13 +397,13 @@ for (const lab of locales) {
       const buttons = filters.getByRole("button");
       const status = page.getByRole("status");
       const visible = page.locator("#ai-lab-list > li:visible");
-      const { all, experiments, research } = lab.experiments.filters;
+      const { all, experiments, research, projects } = lab.experiments.filters;
 
-      await expect(buttons).toHaveText([all, experiments, research]);
+      await expect(buttons).toHaveText([all, experiments, research, projects]);
       await expect(buttons.first()).toHaveAttribute("aria-pressed", "true");
       await expect(visible).toHaveCount(tileCount);
       await expect(status).toHaveText(
-        `${lab.experiments.showing} 8 ${lab.experiments.of} 8`,
+        `${lab.experiments.showing} 9 ${lab.experiments.of} 9`,
       );
 
       await buttons.nth(1).click();
@@ -377,13 +411,20 @@ for (const lab of locales) {
       await expect(buttons.first()).toHaveAttribute("aria-pressed", "false");
       await expect(visible).toHaveCount(2);
       await expect(status).toHaveText(
-        `${lab.experiments.showing} 2 ${lab.experiments.of} 8`,
+        `${lab.experiments.showing} 2 ${lab.experiments.of} 9`,
       );
 
       await buttons.nth(2).click();
       await expect(visible).toHaveCount(6);
       await expect(status).toHaveText(
-        `${lab.experiments.showing} 6 ${lab.experiments.of} 8`,
+        `${lab.experiments.showing} 6 ${lab.experiments.of} 9`,
+      );
+
+      // O Rondo é o único "Completed project" e aparece só sob "Projects".
+      await buttons.nth(3).click();
+      await expect(visible).toHaveCount(1);
+      await expect(status).toHaveText(
+        `${lab.experiments.showing} 1 ${lab.experiments.of} 9`,
       );
 
       await buttons.first().click();
@@ -423,7 +464,7 @@ for (const lab of locales) {
 
       // Os itens escondidos continuam no HTML e saem da ordem de tabulação.
       await expect(page.locator("#ai-lab-list > li")).toHaveCount(tileCount);
-      await expect(page.locator("#ai-lab-list > li[hidden]")).toHaveCount(2);
+      await expect(page.locator("#ai-lab-list > li[hidden]")).toHaveCount(3);
     });
 
     test("os filtros funcionam pelo teclado e têm alvo de toque de 44 px", async ({

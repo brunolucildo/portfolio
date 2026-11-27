@@ -19,7 +19,8 @@ type Slug =
   | "analyst-personas"
   | "approach-and-model-choice"
   | "prompt-test-framework"
-  | "lora-fine-tuning";
+  | "lora-fine-tuning"
+  | "cnn-from-scratch";
 
 type Origin = "football" | "fintalab";
 
@@ -61,9 +62,21 @@ const shared = {
     technologies: [],
     origin: null,
   },
+  // Estudo com repositório público próprio (SPEC-006 v0.6.0, seção 7.8).
+  "cnn-from-scratch": {
+    model: "TinyCNN",
+    technologies: ["TypeScript", "Node.js"],
+    origin: null,
+    repositoryUrl: "https://github.com/brunolucildo/neural-network",
+  },
 } satisfies Record<
   Slug,
-  { model: string | null; technologies: string[]; origin: Origin | null }
+  {
+    model: string | null;
+    technologies: string[];
+    origin: Origin | null;
+    repositoryUrl?: string;
+  }
 >;
 
 const slugs = Object.keys(shared) as Slug[];
@@ -281,13 +294,33 @@ const pages: AiLabPage[] = [
           "also the training data",
         ],
       },
+      "cnn-from-scratch": {
+        name: "A convolutional network written from scratch",
+        metaTitle: "A CNN written from scratch",
+        summary:
+          "Writing a small convolutional network by hand, with no machine learning library, to tell day photos from night photos, and watching it overfit.",
+        type: "Study",
+        state: "Concluded",
+        objectiveStart: "Understand how a convolutional network learns",
+        limitationsStart: "The data set is small",
+        resultsContain: [
+          "210 of 210 training photos",
+          "43 of 44 validation photos",
+          "44 of 46 test photos",
+          "lowest at epoch 7 (0.0808)",
+          "0.1433 by epoch 50",
+          "47 of the 50 epochs",
+          "printed 27 times",
+          "not the best one on validation",
+        ],
+      },
     },
     planning: {
       name: "Rondo",
       href: "/en/projects/rondo",
       summary:
         "A platform to talk to experts: AI agents specialized in the functions of a football club that answer from the sources a person connects, with citations and a declared gap when nothing covers the question. Development is concluded; it runs locally and is not deployed.",
-      type: "Study",
+      type: "Completed project",
       state: "Concluded",
     },
     placeholder: "This section is under construction.",
@@ -445,13 +478,33 @@ const pages: AiLabPage[] = [
           "também eram os dados de treino",
         ],
       },
+      "cnn-from-scratch": {
+        name: "Uma rede convolucional escrita do zero",
+        metaTitle: "Uma CNN escrita do zero",
+        summary:
+          "Escrever à mão uma pequena rede convolucional, sem biblioteca de aprendizado de máquina, para separar fotos de dia e de noite, e ver o overfitting acontecer.",
+        type: "Estudo",
+        state: "Concluído",
+        objectiveStart: "Entender como uma rede convolucional aprende",
+        limitationsStart: "O conjunto de dados é pequeno",
+        resultsContain: [
+          "210 de 210 fotos de treino",
+          "43 de 44 fotos de validação",
+          "44 de 46 fotos de teste",
+          "a menor na época 7 (0,0808)",
+          "0,1433 na época 50",
+          "47 das 50 épocas",
+          "apareceu 27 vezes",
+          "e não o melhor na validação",
+        ],
+      },
     },
     planning: {
       name: "Rondo",
       href: "/pt-BR/projetos/rondo",
       summary:
         "Uma plataforma para conversar com especialistas: agentes de IA especializados nas funções de um clube de futebol, que respondem a partir das fontes que a pessoa conecta, com citações e a lacuna declarada quando nada cobre a pergunta. O desenvolvimento está concluído; roda localmente e não está implantado.",
-      type: "Estudo",
+      type: "Projeto concluído",
       state: "Concluído",
     },
     placeholder: "Esta seção está em construção.",
@@ -480,7 +533,7 @@ for (const lab of pages) {
   const allPaths = [lab.path, ...slugs.map((slug) => lab.detailPath(slug))];
 
   test.describe(`AI Lab (${lab.locale})`, () => {
-    test("a lista tem um h1 com o rótulo e a headline, a abertura e oito experimentos na ordem prevista", async ({
+    test("a lista tem um h1 com o rótulo e a headline, a abertura e nove experimentos na ordem prevista", async ({
       page,
     }) => {
       await page.goto(lab.path);
@@ -496,7 +549,7 @@ for (const lab of pages) {
         lab.planning.name,
       ];
       const cards = page.locator("#ai-lab-list > li");
-      await expect(cards).toHaveCount(8);
+      await expect(cards).toHaveCount(9);
       await expect(cards.getByRole("heading", { level: 3 })).toHaveText(names);
     });
 
@@ -574,14 +627,17 @@ for (const lab of pages) {
       }
     });
 
-    test("nenhum experimento aparece como projeto concluído nem a página é provisória", async ({
+    test("só o Rondo aparece como projeto concluído e a página não é provisória", async ({
       page,
     }) => {
       await page.goto(lab.path);
-      const text = await mainText(page);
+      const cards = page.locator("#ai-lab-list > li");
+      const rondo = cards.nth(slugs.length);
 
-      expect(text).not.toContain(lab.notCompleted);
-      expect(text).not.toContain(lab.placeholder);
+      // O tipo "Projeto concluído" é exclusivo do card do Rondo (AIL-RF-06, v0.6.0).
+      await expect(cards.filter({ hasText: lab.notCompleted })).toHaveCount(1);
+      await expect(rondo).toContainText(lab.notCompleted);
+      expect(await mainText(page)).not.toContain(lab.placeholder);
     });
 
     test("os links dos cards têm alvo de toque de pelo menos 44 px", async ({
@@ -820,9 +876,25 @@ for (const lab of pages) {
           await page.goto(detailPath);
           const header = page.getByRole("main").locator("header");
 
-          // Material de estudo sem repositório público: sem "Parte de" nem "Repositório".
           if (!origin || !data.origin) {
+            // Nenhum estudo sem projeto de origem mostra "Parte de".
             await expect(header).not.toContainText(`${lab.labels.partOf}:`);
+
+            // Estudo com repositório público próprio (AIL-RF-20): só o link
+            // "Repositório", com o nome do experimento no nome acessível.
+            if ("repositoryUrl" in data) {
+              const own = header.getByRole("link", {
+                name: new RegExp(`^${lab.labels.repository}`),
+              });
+              await expect(own).toHaveCount(1);
+              await expect(own).toHaveAttribute("href", data.repositoryUrl);
+              await expect(own).toHaveAttribute("target", "_blank");
+              await expect(own).toHaveAttribute("rel", "noopener noreferrer");
+              await expect(own).toContainText(text.name);
+              return;
+            }
+
+            // Material de estudo sem repositório público: sem "Repositório".
             await expect(
               header.getByRole("link", {
                 name: new RegExp(`^${lab.labels.repository}`),
@@ -1024,7 +1096,7 @@ for (const lab of pages) {
   });
 }
 
-test("a fonte de dados lista os oito experimentos com os slugs e estados previstos", () => {
+test("a fonte de dados lista os nove experimentos com os slugs e estados previstos", () => {
   expect(
     aiLabExperiments.map(({ slug, type, state }) => ({ slug, type, state })),
   ).toEqual([
@@ -1039,12 +1111,15 @@ test("a fonte de dados lista os oito experimentos com os slugs e estados previst
     { slug: "approach-and-model-choice", type: "study", state: "concluded" },
     { slug: "prompt-test-framework", type: "study", state: "concluded" },
     { slug: "lora-fine-tuning", type: "study", state: "concluded" },
-    { slug: null, type: "study", state: "concluded" },
+    { slug: "cnn-from-scratch", type: "study", state: "concluded" },
+    { slug: null, type: "completed", state: "concluded" },
   ]);
-  // Nenhum experimento é "Projeto concluído" na v1 (AIL-RF-06).
-  expect(aiLabExperiments.some((item) => item.type === "completed")).toBe(
-    false,
-  );
+  // Só o Rondo é "Projeto concluído" (AIL-RF-06, v0.6.0).
+  expect(
+    aiLabExperiments
+      .filter((item) => item.type === "completed")
+      .map((item) => item.key),
+  ).toEqual(["rondo"]);
 });
 
 test("toda tecnologia do AI Lab existe em Technologies e o projeto de origem existe em Projects", () => {
@@ -1078,6 +1153,11 @@ test("toda tecnologia do AI Lab existe em Technologies e o projeto de origem exi
     expect(experiment.model).toBe(expected.model);
     expect([...experiment.technologies]).toEqual(expected.technologies);
     expect(experiment.origin).toBe(expected.origin);
+    expect(experiment.repositoryUrl).toBe(
+      "repositoryUrl" in expected ? expected.repositoryUrl : undefined,
+    );
+    // Quem tem projeto de origem usa o repositório dele (AIL-RF-20).
+    if (experiment.origin) expect(experiment.repositoryUrl).toBeUndefined();
   }
 });
 
@@ -1149,6 +1229,50 @@ for (const lab of pages) {
         );
         expect(found, slug).toEqual([]);
       }
+    });
+  });
+}
+
+for (const lab of pages) {
+  test.describe(`AI Lab, rede convolucional do zero (${lab.locale})`, () => {
+    test("os resultados são contagens X de Y, sem percentual, e a limitação declara a origem do teste", async ({
+      page,
+    }) => {
+      await page.goto(lab.detailPath("cnn-from-scratch"));
+      const results = (await page.locator("#results").textContent()) ?? "";
+      const limitations =
+        (await page.locator("#limitations").textContent()) ?? "";
+      const ofWord = lab.locale === "en" ? "of" : "de";
+      const counts = new RegExp(`\\d+ ${ofWord} \\d+`, "g");
+
+      // Treino, validação e teste, mais a época da menor perda e as épocas com
+      // acerto estável: ao menos cinco contagens "X de Y" (AIL-RF-07).
+      expect(results.match(counts)?.length ?? 0).toBeGreaterThanOrEqual(5);
+      expect(results).not.toContain("%");
+      // O número de teste não é apresentado como desempenho geral (AIL-RF-21).
+      expect(limitations).toContain(
+        lab.locale === "en" ? "same source" : "mesma fonte",
+      );
+      expect(limitations).toContain(
+        lab.locale === "en"
+          ? "probably optimistic"
+          : "provavelmente é otimista",
+      );
+      expect(results).toContain(
+        lab.locale === "en" ? "describes this set" : "descreve este conjunto",
+      );
+    });
+
+    test("não cita curso, instituição, nome de empresa nem expressões proibidas", async ({
+      page,
+    }) => {
+      await page.goto(lab.detailPath("cnn-from-scratch"));
+      const found = findPhrases(
+        `${await mainText(page)}
+${await page.title()}`,
+        [...companyNames, ...forbiddenPhrases, ...jobSeekingPhrases],
+      );
+      expect(found).toEqual([]);
     });
   });
 }
