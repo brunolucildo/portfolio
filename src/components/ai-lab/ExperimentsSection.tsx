@@ -11,7 +11,9 @@ import { ExperimentTile } from "./ExperimentTile";
 
 /**
  * Largura de cada item na grade de 12 colunas (a partir de 1024 px), na ordem
- * da lista: o destaque ocupa 7 colunas e 2 linhas; os demais, 4, 5 ou 7.
+ * da lista: o destaque ocupa 7 colunas e 2 linhas, ao lado de dois itens de 5;
+ * os demais ocupam 4, em linhas de três. Precisa ter um valor por experimento:
+ * um item sem largura cairia em 1 coluna (há um teste para isso).
  * Entre 768 e 1023 px a grade tem 2 colunas e o destaque ocupa a largura toda.
  */
 const spans = [
@@ -21,8 +23,9 @@ const spans = [
   "lg:col-span-4",
   "lg:col-span-4",
   "lg:col-span-4",
-  "lg:col-span-7",
-  "lg:col-span-5",
+  "lg:col-span-4",
+  "lg:col-span-4",
+  "lg:col-span-4",
 ] as const;
 
 const FILTER_ORDER: ExperimentFilter[] = [

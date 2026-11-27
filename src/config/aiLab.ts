@@ -14,9 +14,14 @@ export type AiLabExperimentKey =
   | "approachAndModelChoice"
   | "promptTestFramework"
   | "loraFineTuning"
+  | "cnnFromScratch"
   | "rondo";
 
-/** "Projeto concluído" existe no vocabulário, mas nenhum experimento o usa na v1. */
+/**
+ * "Projeto concluído" é só o Rondo (SPEC-006 v0.6.0): um projeto de IA com página
+ * em Projects, que o AI Lab aponta sob o filtro "Projects" em vez de apresentar
+ * como estudo.
+ */
 export type ExperimentType = "study" | "proofOfConcept" | "completed";
 
 export type ExperimentState = "inDevelopment" | "concluded" | "planning";
@@ -35,6 +40,12 @@ export type AiLabExperiment = {
   technologies: readonly string[];
   /** Projeto de onde o experimento saiu; `null` quando não há página de origem. */
   origin: Extract<ProjectKey, "football" | "fintalab"> | null;
+  /**
+   * Repositório público do próprio experimento (SPEC-006 v0.6.0, AIL-RF-20), para
+   * o que não nasceu de um projeto de Projects; quem tem `origin` usa o
+   * repositório do projeto e deixa este campo vazio.
+   */
+  repositoryUrl?: string;
   /** Experimento em destaque na lista (SPEC-012, NEU-RF-13). */
   featured?: boolean;
 };
@@ -106,11 +117,23 @@ export const aiLabExperiments: readonly AiLabExperiment[] = [
     technologies: [],
     origin: null,
   },
+  // Estudo com repositório público próprio (SPEC-006 v0.6.0, seção 7.8): rede
+  // convolucional escrita sem biblioteca de aprendizado de máquina.
+  {
+    key: "cnnFromScratch",
+    slug: "cnn-from-scratch",
+    type: "study",
+    state: "concluded",
+    model: "TinyCNN",
+    technologies: ["TypeScript", "Node.js"],
+    origin: null,
+    repositoryUrl: "https://github.com/brunolucildo/neural-network",
+  },
   {
     key: "rondo",
     slug: null,
     projectPage: "rondo",
-    type: "study",
+    type: "completed",
     state: "concluded",
     model: "gpt-4o-mini, OpenAI embeddings",
     technologies: ["TypeScript", "Node.js", "OpenAI API", "PostgreSQL", "RAG"],

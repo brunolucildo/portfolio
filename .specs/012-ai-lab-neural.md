@@ -1,5 +1,7 @@
 # SPEC-012 — AI Lab: Neural Intelligence Environment
 
+> **Atualização de 2026-11-27 (SPEC-006 v0.6.0):** a lista passa de oito para nove itens com o experimento `cnn-from-scratch`, inserido antes do Rondo. Onde esta SPEC diz "oito itens", leia nove; "sete" registros do Research Log, oito (o Rondo continua fora do log: não tem página no AI Lab nem texto de aprendizado); "Showing 6 of 8" na filtragem por Research, "Showing 6 of 9" (o Rondo deixa de ser "Research": ver a SPEC-006 v0.6.0, que o torna "Completed project" e faz aparecer o filtro "Projects" com 1 item); `EXP / 008` é o novo experimento e o Rondo é `EXP / 009`. O restante vale como está.
+
 > **Atualização de 2026-11-12 (SPEC-014):** NEU-RF-15 muda: o card "Em planejamento" (agora Rondo) tem um único link, no nome, para `/projects/rondo` (`/projetos/rondo`); os demais continuam como estão. Vale a SPEC-014.
 
 ## 1. Identificação

@@ -58,7 +58,8 @@ type ExperimentDetailProps = {
 
 /** Página de detalhe de um experimento (AIL-RF-04): cabeçalho e seis seções. */
 export async function ExperimentDetail({ experiment }: ExperimentDetailProps) {
-  const { key, type, state, model, technologies, origin } = experiment;
+  const { key, type, state, model, technologies, origin, repositoryUrl } =
+    experiment;
   const t = await getTranslations("aiLab");
   const tProjects = await getTranslations("projects");
   const tNav = await getTranslations("navigation");
@@ -122,6 +123,22 @@ export async function ExperimentDetail({ experiment }: ExperimentDetailProps) {
                 <span className="sr-only">
                   {" — "}
                   {tProjects(`items.${origin}.name`)} {tNav("newTab")}
+                </span>
+              </a>
+            </div>
+          ) : null}
+          {!origin && repositoryUrl ? (
+            <div className="mt-4">
+              <a
+                href={repositoryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonStyles({ variant: "text", size: "md" })}
+              >
+                {t("labels.repository")}
+                <span className="sr-only">
+                  {" — "}
+                  {t(`experiments.${key}.name`)} {tNav("newTab")}
                 </span>
               </a>
             </div>
